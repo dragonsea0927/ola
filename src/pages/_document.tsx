@@ -7,11 +7,11 @@ import Document, {
   DocumentProps,
   DocumentContext,
 } from 'next/document';
-import { AppType } from 'next/app';
-// import { ServerStyleSheets as JSSServerStyleSheets } from '@mui/material/styles';
 import createEmotionServer from '@emotion/server/create-instance';
+import { AppType } from 'next/app';
 import { theme, createEmotionCache } from '@/config'
 import { MyAppProps } from './_app';
+
 
 interface MyDocumentProps extends DocumentProps {
   emotionStyleTags: JSX.Element[];
@@ -24,11 +24,7 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
         {/* PWA primary color */}
         <meta name="theme-color" content={theme.palette.primary.main} />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-        {/* Inject MUI styles first to match with the prepend: true configuration. */}
+        <meta name="emotion-insertion-point" content="" />
         {emotionStyleTags}
       </Head>
       <body>
@@ -39,65 +35,20 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
   );
 }
 
-let prefixer: any;
-let cleanCSS: any;
-if (process.env.NODE_ENV === 'production') {
-  /* eslint-disable global-require */
-  const postcss = require('postcss');
-  const autoprefixer = require('autoprefixer');
-  const CleanCSS = require('clean-css');
-  /* eslint-enable global-require */
-
-  prefixer = postcss([autoprefixer]);
-  cleanCSS = new CleanCSS();
-}
-
-// `getInitialProps` belongs to `_document` (instead of `_app`),
-// it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  // Resolution order
-  //
-  // On the server:
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. document.getInitialProps
-  // 4. app.render
-  // 5. page.render
-  // 6. document.render
-  //
-  // On the server with error:
-  // 1. document.getInitialProps
-  // 2. app.render
-  // 3. page.render
-  // 4. document.render
-  //
-  // On the client
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. app.render
-  // 4. page.render
-
   const originalRenderPage = ctx.renderPage;
-
-  // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
-  // However, be aware that it can have global side effects.
   const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
-  const jssSheets = new JSSServerStyleSheets();
 
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>) =>
         function EnhanceApp(props) {
-          return jssSheets.collect(<App emotionCache={cache} {...props} />);
+          return <App emotionCache={cache} {...props} />;
         },
     });
 
   const initialProps = await Document.getInitialProps(ctx);
-
-  // Generate style tags for the styles coming from Emotion
-  // This is important. It prevents Emotion from rendering invalid HTML.
-  // See https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style
@@ -108,26 +59,8 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
     />
   ));
 
-  // Generate the css string for the styles coming from jss
-  let css = jssSheets.toString();
-  // It might be undefined, e.g. after an error.
-  if (css && process.env.NODE_ENV === 'production') {
-    const result1 = await prefixer.process(css, { from: undefined });
-    css = result1.css;
-    css = cleanCSS.minify(css).styles;
-  }
-
   return {
     ...initialProps,
-    styles: [
-      ...emotionStyleTags,
-      <style
-        id="jss-server-side"
-        key="jss-server-side"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: css }}
-      />,
-      ...React.Children.toArray(initialProps.styles),
-    ],
+    emotionStyleTags,
   };
 };

@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
@@ -9,7 +10,7 @@ const theme = createTheme({
       main: '#19857b',
     },
     error: {
-      main: '#f44336',
+      main: red.A400,
     },
   },
 });

@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box'
+import { Button, Typography } from '@mui/material'
 
 export default function Home() {
   return (
@@ -13,9 +12,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <div>
-        <Typography sx={{ color: 'error', fontSize: '30px' }}>Something great is coming</Typography>
-      </div>
+      <Box>
+        <Typography variant='h2'>Test run</Typography>
+        <Button variant='contained' color='primary'>Test</Button>
+      </Box>
     </>
   )
 }

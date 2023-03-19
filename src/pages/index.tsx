@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Box from '@mui/material/Box'
 import { Typography } from '@mui/material'
 import { CustomButton, Layout } from '../components'
 
@@ -18,8 +17,20 @@ export default function Home() {
         <CustomButton
           variant='contained'
           color='secondary'
-          size='large'
+          width='200px'
         >Click me</CustomButton>
+
+        <CustomButton
+          variant='outlined'
+          color='secondary'
+          width='160px'
+        >Outlined</CustomButton>
+
+        <CustomButton
+          variant='text'
+          color='secondary'
+          width='160px'
+        >Outlined</CustomButton>
       </Layout>
     </>
   )

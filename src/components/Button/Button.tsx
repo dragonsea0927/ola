@@ -10,10 +10,11 @@ interface ButtonProps {
   color?: "inherit" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
   size?: "small" | "medium" | "large";
   onClick?: () => void;
+  width?: string;
 }
 
 interface StyledButtonProps {
-  theme: any;
+  theme?: any;
   width?: string;
   variant?: "text" | "outlined" | "contained";
   color?: "inherit" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
@@ -21,20 +22,19 @@ interface StyledButtonProps {
 
 const StyledButton = styled(Button)<StyledButtonProps>(({ theme, width, variant, color }) => ({
   width: width || 'auto',
-  height: 'auto',
-  padding: '8px 16px',
-  borderRadius: '4px',
+  height: '45px',
+  padding: '10px 20px',
+  borderRadius: '50px',
   textTransform: 'none',
-  fontWeight: 700,
-  fontSize: '14px',
   lineHeight: '16px',
   letterSpacing: '0.25px',
-  color: color === 'primary' ? theme.palette.primary.main : theme.palette.text.primary,
-  backgroundColor: variant === 'contained' ? theme.palette.primary.main : 'transparent',
+  color: variant === 'outlined' ? theme.text.primary : variant === 'text' ? theme.palette.secondary.main : theme.white.main,
+  backgroundColor: variant === 'contained' ? theme.palette.secondary.main : 'transparent',
   border: variant === 'outlined' ? `1px solid ${theme.palette.primary.main}` : 'none',
   '&:hover': {
-    backgroundColor: variant === 'contained' ? theme.palette.primary.light : 'transparent',
-    border: variant === 'outlined' ? `1px solid ${theme.palette.primary.light}` : 'none',
+    backgroundColor: variant === 'contained' ? theme.white.main : theme.palette.secondary.main,
+    color: variant === 'contained' ? theme.palette.secondary.main : variant === 'outlined' ? theme.white.main : theme.palette.primary.main,
+    border: variant === 'contained' ? `1px solid ${theme.palette.secondary.main}` : 'none',
   },
 }));
 
@@ -44,7 +44,7 @@ export default function CustomButton(props: ButtonProps) {
     color={props.color}
     size={props.size}
     onClick={props.onClick}
-    theme={undefined}
+    width={props.width}
   >
     {props.children}
   </StyledButton>;

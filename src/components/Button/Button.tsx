@@ -1,24 +1,6 @@
-// create a rseuable button component that can be used in any component that needs a button
-
-// import the button component from material ui
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-
-interface ButtonProps {
-  children: React.ReactNode;
-  variant?: "text" | "outlined" | "contained";
-  color?: "inherit" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
-  size?: "small" | "medium" | "large";
-  onClick?: () => void;
-  width?: string;
-}
-
-interface StyledButtonProps {
-  theme?: any;
-  width?: string;
-  variant?: "text" | "outlined" | "contained";
-  color?: "inherit" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
-}
+import { StyledButtonProps, ButtonProps } from "@/types";
 
 const StyledButton = styled(Button)<StyledButtonProps>(({ theme, width, variant, color }) => ({
   width: width || 'auto',

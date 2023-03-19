@@ -13,8 +13,8 @@ export default function Home() {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Box>
-        <Typography variant='h2'>Test run</Typography>
-        <Button variant='contained' color='primary'>Test</Button>
+        <Typography variant='h1'>Test run</Typography>
+        <Button variant='contained' color='secondary'>Test run </Button>
       </Box>
     </>
   )

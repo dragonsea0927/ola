@@ -1,3 +1,4 @@
 import { Projects } from './appTypes'
+import { LayoutProps } from './appTypes'
 
-export default { Projects }
+export type { Projects, LayoutProps }

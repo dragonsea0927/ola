@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Box from '@mui/material/Box'
-import { Button, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
+import { CustomButton, Layout } from '../components'
 
 export default function Home() {
   return (
@@ -12,10 +13,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <Box>
+      <Layout>
         <Typography variant='h1'>Test run</Typography>
-        <Button variant='contained' color='secondary'>Test run </Button>
-      </Box>
+        <CustomButton
+          variant='contained'
+          color='secondary'
+          size='large'
+        >Click me</CustomButton>
+      </Layout>
     </>
   )
 }

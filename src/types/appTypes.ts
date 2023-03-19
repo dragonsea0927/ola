@@ -9,3 +9,7 @@ export type Project = {
 }
 
 export type Projects = Project[]
+
+export type LayoutProps = {
+  children: React.ReactNode,
+}

@@ -5,19 +5,31 @@ declare module '@mui/material/styles' {
   interface Theme {
     white: {
       main: string;
-    };
+    },
+
+    text: {
+      primary: string;
+    }
   }
 
   interface ThemeOptions {
     white?: {
       main?: React.CSSProperties['color'];
-    };
+    },
+
+    text?: {
+      primary?: React.CSSProperties['color'];
+    }
   }
 }
 
 let theme = createTheme({
   white: {
     main: '#ffffff',
+  },
+
+  text: {
+    primary: '#404756',
   },
 
   palette: {
@@ -99,6 +111,7 @@ let theme = createTheme({
       letterSpacing: "0.02857em",
       textTransform: "capitalize",
     },
+
   },
 });
 

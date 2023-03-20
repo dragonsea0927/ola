@@ -10,14 +10,14 @@ export const randomNumberGenerator = () => {
 
 export const navItems: NavItems = [
   { id: 1, title: 'hello', path: '' },
-  { id: 2, title: 'about', path: '/about' },
+  { id: 2, title: 'about', path: '' },
   {
     id: 3,
     title: 'projects',
-    path: '/projects'
+    path: ''
   },
-  { id: 4, title: 'blogs', path: '/blog' },
-  { id: 5, title: 'contact', path: '/contact' }
+  { id: 4, title: 'blogs', path: '' },
+  { id: 5, title: 'contact', path: '' }
 ];
 
 export const navItemsAdmin = [

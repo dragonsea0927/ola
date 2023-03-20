@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Typography } from '@mui/material'
-import { CustomButton, Hero, Layout } from '../components'
+import { Hero, Layout } from '../components'
 
 export default function Home() {
   return (
@@ -13,9 +13,6 @@ export default function Home() {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Layout>
-        <Hero />
-        <Hero />
-        <Hero />
         <Hero />
       </Layout>
     </>

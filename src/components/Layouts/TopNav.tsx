@@ -54,7 +54,7 @@ const TopNav = () => {
 
   return (
     <TopNavContainer>
-      <AppBar component="nav" sx={{ backgroundColor: theme.palette.secondary.main, color: theme.white.main }}>
+      <AppBar component="nav" sx={{ backgroundColor: theme.palette.primary.main, color: theme.text.primary }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -75,7 +75,7 @@ const TopNav = () => {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item.id}>
-                <Link href={item.path} style={{ color: theme.white.main }}>{item.title}</Link>
+                <Link href={item.path} style={{ color: theme.text.dark, textTransform: 'lowercase' }}>{item.title}</Link>
               </Button>
             ))}
           </Box>

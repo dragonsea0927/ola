@@ -11,27 +11,30 @@ const LayoutRoot = styled('div')(({ theme }) => ({
   height: '100%',
   overflow: 'hidden',
   width: '100%',
-  gap: '10px',
+  gap: '40px',
 }));
 
 const LayoutWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
-  // flexDirection: 'column',
+  flexDirection: 'column',
   overflow: 'hidden',
   width: '100%',
   height: '100%',
-  // border: '1px solid red',
 }))
 
 const LayoutContainer = styled('div')({
   display: 'flex',
   overflow: 'hidden',
   padding: '0px 20px',
+  height: '100%',
+  border: '1px solid red',
 });
 
 const LayoutContent = styled('div')({
   height: '100%',
   overflow: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
   flex: '1 1 auto',
 });
 

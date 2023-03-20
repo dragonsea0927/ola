@@ -9,17 +9,19 @@ export const randomNumberGenerator = () => {
 }
 
 export const navItems: NavItems = [
+  { id: 1, title: 'hello', path: '' },
+  { id: 2, title: 'about', path: '/about' },
   {
-    id: randomNumberGenerator(),
-    title: 'Projects',
+    id: 3,
+    title: 'projects',
     path: '/projects'
   },
-  { id: randomNumberGenerator(), title: 'About', path: '/about' },
-  { id: randomNumberGenerator(), title: 'Blogs', path: '/blog' },
-  { id: randomNumberGenerator(), title: 'Contact', path: '/contact' }
+  { id: 4, title: 'blogs', path: '/blog' },
+  { id: 5, title: 'contact', path: '/contact' }
 ];
 
 export const navItemsAdmin = [
+  { title: '_hello', path: '' },
   { title: 'Projects', path: '/projects' },
   { title: 'About', path: '/about' },
   { title: 'Blogs', path: '/blog' },

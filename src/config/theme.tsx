@@ -9,6 +9,7 @@ declare module '@mui/material/styles' {
 
     text: {
       primary: string;
+      dark: string;
     }
   }
 
@@ -19,6 +20,7 @@ declare module '@mui/material/styles' {
 
     text?: {
       primary?: React.CSSProperties['color'];
+      dark?: React.CSSProperties['color'];
     }
   }
 }
@@ -30,6 +32,7 @@ let theme = createTheme({
 
   text: {
     primary: '#404756',
+    dark: '#23272f',
   },
 
   palette: {

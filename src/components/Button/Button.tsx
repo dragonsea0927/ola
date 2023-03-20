@@ -3,10 +3,10 @@ import { styled } from "@mui/material/styles";
 import { StyledButtonProps, ButtonProps } from "@/types";
 
 const StyledButton = styled(Button)<StyledButtonProps>(({ theme, width, variant, color }) => ({
-  width: width || 'auto',
+  width: variant === 'text' ? 'auto' : width,
   height: '45px',
-  padding: '10px 20px',
-  borderRadius: '50px',
+  padding: variant === 'text' ? '0px' : '10px 20px',
+  borderRadius: variant === 'text' ? '0px' : '50px',
   textTransform: 'none',
   lineHeight: '16px',
   letterSpacing: '0.25px',

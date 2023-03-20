@@ -1,6 +1,8 @@
 import React from 'react'
 import { styled } from '@mui/material'
 import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import { CustomButton } from '..'
 
 const GridContainer = styled(Grid)(({ theme }) => ({
   width: '80%',
@@ -59,8 +61,17 @@ const Hero = () => {
   return (
     <GridContainer container spacing={2}>
       <GridItemOne item xs={12} sm={12} md={6}>
-        <h1>Hero</h1>
-        <p>Hero content</p>
+        <Typography variant='h1'>Software Developer.</Typography>
+        <Typography variant='body1'>
+          Hi there! I'm a software developer based in Nigeria. I have a
+          passion for building web applications and I'm always looking for new
+          opportunities to learn and grow.
+        </Typography>
+        <CustomButton
+          variant='text'
+          color='secondary'
+          width='200px'
+        >See my works</CustomButton>
       </GridItemOne>
 
       <GridItemTwo item xs={false} sm={false} md={6}>

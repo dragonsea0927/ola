@@ -6,12 +6,8 @@ import { navItems } from '../../utils';
 import Link from 'next/link'
 
 const TopNavContainer = styled('div')(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
   padding: theme.spacing(2, 3),
-  backgroundColor: theme.palette.primary.main,
-  color: theme.palette.secondary.light,
+  backgroundColor: theme.white.main,
   fontWeight: 400,
   fontSize: '1.1rem',
   letterSpacing: '0.1rem',
@@ -19,7 +15,7 @@ const TopNavContainer = styled('div')(({ theme }) => ({
     color: theme.palette.secondary.light,
     textDecoration: 'none',
     '&:hover': {
-      color: theme.text.primary,
+      color: theme.palette.secondary.main,
       textDecoration: 'none',
     },
   },
@@ -54,7 +50,7 @@ const TopNav = () => {
 
   return (
     <TopNavContainer>
-      <AppBar component="nav" sx={{ backgroundColor: theme.white.main, color: theme.text.primary }}>
+      <AppBar component="nav" sx={{ backgroundColor: theme.white.main, color: theme.text.primary, boxShadow: 'none', border: '1px solid red' }}>
         <Toolbar>
           <IconButton
             color="inherit"

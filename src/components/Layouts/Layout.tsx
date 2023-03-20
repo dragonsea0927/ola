@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material';
 import TopNav from './TopNav';
+import BottomNav from './BottomNav';
 import { LayoutProps } from '@/types';
 
 const LayoutRoot = styled('div')(({ theme }) => ({
@@ -32,7 +33,6 @@ const LayoutContent = styled('div')({
   height: '100%',
   overflow: 'auto',
   flex: '1 1 auto',
-  // height: '100%',
 });
 
 
@@ -45,7 +45,7 @@ export default function Layout(props: LayoutProps) {
           <LayoutContent>{props.children}</LayoutContent>
         </LayoutContainer>
       </LayoutWrapper>
-      <footer>Hello</footer>
+      <BottomNav />
     </LayoutRoot>
   );
 }

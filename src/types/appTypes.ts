@@ -29,3 +29,11 @@ export type StyledButtonProps = {
   variant?: "text" | "outlined" | "contained";
   color?: "inherit" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
 }
+
+export type NavItem = {
+  id: number,
+  title: string;
+  path: string;
+}
+
+export type NavItems = NavItem[]

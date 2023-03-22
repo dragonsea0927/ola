@@ -27,7 +27,7 @@ const LayoutContainer = styled('div')({
   overflow: 'hidden',
   padding: '0px 20px',
   height: '100%',
-  border: '1px solid red',
+  // border: '1px solid red',
 });
 
 const LayoutContent = styled('div')({

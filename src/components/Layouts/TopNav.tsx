@@ -3,7 +3,6 @@ import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListI
 import { useAppTheme } from '@/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
 import { navItems } from '../../utils';
-import Link from 'next/link'
 
 const TopNavContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -13,10 +12,10 @@ const TopNavContainer = styled('div')(({ theme }) => ({
   letterSpacing: '0.1rem',
   '& a': {
     color: theme.palette.secondary.light,
-    textDecoration: 'none',
+    textDecoration: '',
     '&:hover': {
       color: theme.palette.secondary.main,
-      textDecoration: 'none',
+      textDecoration: 'underline',
     },
   },
 }));
@@ -25,6 +24,7 @@ const drawerWidth = 150;
 
 const TopNav = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -50,7 +50,7 @@ const TopNav = () => {
 
   return (
     <TopNavContainer>
-      <AppBar component="nav" sx={{ backgroundColor: theme.white.main, color: theme.text.primary, boxShadow: 'none', border: '1px solid red' }}>
+      <AppBar component="nav" sx={{ backgroundColor: theme.white.main, color: theme.text.primary }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -70,8 +70,11 @@ const TopNav = () => {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item.id}>
-                <Link href={item.path} style={{ color: theme.text.dark, fontWeight: 400, fontSize: '1.1rem', letterSpacing: '0.1rem' }}>{item.title}</Link>
+              <Button key={item.id} sx={{
+                color: theme.text.dark,
+                fontWeight: 500,
+              }}>
+                {item.title}
               </Button>
             ))}
           </Box>

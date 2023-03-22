@@ -68,7 +68,7 @@ const Hero = () => {
           opportunities to learn and grow.
         </Typography>
         <CustomButton
-          variant='text'
+          variant='outlined'
           color='secondary'
           width='200px'
         >See my works</CustomButton>

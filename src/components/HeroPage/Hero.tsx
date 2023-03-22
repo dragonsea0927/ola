@@ -3,13 +3,15 @@ import { styled } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CustomButton } from '..'
+import HeroImg from '../../assets/svg/dev.svg'
+import Image from 'next/image'
 
 const GridContainer = styled(Grid)(({ theme }) => ({
-  width: '80%',
+  width: '90%',
   margin: '100px auto',
   [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column-reverse',
-    margim: '0px',
+    width: '100%',
+    margin: '20px auto'
   },
 
   [theme.breakpoints.up('md')]: {
@@ -26,8 +28,12 @@ const GridContainer = styled(Grid)(({ theme }) => ({
 
 const GridItemOne = styled(Grid)(({ theme }) => ({
   width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '30px',
+  margin: 'auto',
   [theme.breakpoints.down('sm')]: {
-    display: 'block',
+    padding: '16px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -37,11 +43,11 @@ const GridItemOne = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     display: { xs: 'none', sm: 'none', md: 'block' },
   },
-  border: '1px solid blue',
 }))
 
 const GridItemTwo = styled(Grid)(({ theme }) => ({
   width: '100%',
+  paddingLeft: '60px',
   [theme.breakpoints.down('sm')]: {
     display: 'none',
   },
@@ -53,7 +59,7 @@ const GridItemTwo = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     display: 'block',
   },
-  border: '1px solid green',
+  // border: '1px solid green',
 }))
 
 
@@ -70,13 +76,17 @@ const Hero = () => {
         <CustomButton
           variant='outlined'
           color='secondary'
-          width='200px'
+          width='150px'
         >See my works</CustomButton>
       </GridItemOne>
 
       <GridItemTwo item xs={false} sm={false} md={6}>
-        <h1>Hero</h1>
-        <p>Hero content</p>
+        <Image
+          src={HeroImg}
+          alt='hero'
+          width={400}
+          height={400}
+        />
       </GridItemTwo>
     </GridContainer>
   )

@@ -37,3 +37,12 @@ export type NavItem = {
 }
 
 export type NavItems = NavItem[]
+
+type SocialLink = {
+  id: number,
+  title: string;
+  path: string;
+  icon: any;
+}
+
+export type SocialLinks = SocialLink[]

@@ -11,19 +11,29 @@ import { TypeAnimation } from 'react-type-animation';
 
 const GridContainer = styled(Grid)(({ theme }) => ({
   width: '90%',
-  margin: '80px auto',
+  margin: '100px auto',
   padding: '0px 20px',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
-    margin: '20px auto'
+    margin: '20px auto',
+    h1: {
+      fontSize: '30px',
+    }
   },
 
   [theme.breakpoints.up('md')]: {
     flexDirection: 'row',
+    padding: '0px 20px',
+    h1: {
+      fontSize: '38px',
+    }
   },
 
   [theme.breakpoints.up('lg')]: {
     flexDirection: 'row',
+    h1: {
+      fontSize: '55px',
+    }
   },
 
 })

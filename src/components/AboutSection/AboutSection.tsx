@@ -29,7 +29,7 @@ const AboutContent = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   gap: '30px',
   padding: '80px',
-  backgroundColor: theme.palette.primary.dark,
+  backgroundColor: theme.palette.primary.main,
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
   },

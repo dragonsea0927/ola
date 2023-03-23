@@ -34,7 +34,7 @@ const TopNav = () => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Oish
+        OI
       </Typography>
       <Divider />
       <List>
@@ -70,7 +70,7 @@ const TopNav = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontWeight: 700, fontSize: '1.1rem', letterSpacing: '0.1rem' }}
           >
-            Oish
+            Oi
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (

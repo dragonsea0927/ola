@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CustomButton } from '..'
@@ -7,10 +7,12 @@ import HeroImg from '../../assets/svg/dev.svg'
 import Image from 'next/image'
 import { socialLinks } from '../../utils'
 import Link from '@mui/material/Link'
+import { TypeAnimation } from 'react-type-animation';
 
 const GridContainer = styled(Grid)(({ theme }) => ({
   width: '90%',
   margin: '80px auto',
+  padding: '0px 20px',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     margin: '20px auto'
@@ -48,7 +50,7 @@ const GridItemOne = styled(Grid)(({ theme }) => ({
 }))
 
 const GridItemTwo = styled(Grid)(({ theme }) => ({
-  width: '100%',
+  width: '50%',
   paddingLeft: '70px',
   [theme.breakpoints.down('sm')]: {
     display: 'none',
@@ -65,10 +67,10 @@ const GridItemTwo = styled(Grid)(({ theme }) => ({
 
 const SocialMedia = styled('div')(({ theme }) => ({
   display: 'flex',
-  gap: '20px',
+  gap: '15px',
   padding: '0px 0px 16px 16px',
   [theme.breakpoints.down('sm')]: {
-    display: 'none',
+    display: 'flex',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -85,9 +87,17 @@ const Hero = () => {
   return (
     <GridContainer container spacing={2}>
       <GridItemOne item xs={12} sm={6} md={6}>
-        <Typography variant='h1'>Software Developer.</Typography>
+        <Typography variant='h1'>Hello <br />
+          I'm <Box component='span' sx={{ color: 'secondary.main' }}>Ola</Box>,
+          <br />
+          <TypeAnimation
+            cursor={true}
+            sequence={['Software Developer', 500, 'Frontend Developer', 500, 'Backend Developer', 500, 'Technical Writer.', 500]}
+            repeat={Infinity}
+          />
+        </Typography>
         <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '95%' } }}>
-          Hi there! I'm Ola, a software developer based in Nigeria. I have a
+          Hi there! I'm a software developer based in Nigeria. I have a
           passion for building web applications and I'm always looking for new
           opportunities to learn and grow.
         </Typography>

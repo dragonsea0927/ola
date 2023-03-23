@@ -54,7 +54,7 @@ let theme = createTheme({
     fontFamily: ['"Roboto"', '"Helvetica"', '"Arial"', 'sans-serif'].join(','),
 
     h1: {
-      fontSize: '45px',
+      fontSize: '55px',
       fontWeight: 700,
       lineHeight: 1.2,
       letterSpacing: '-0.01562em',

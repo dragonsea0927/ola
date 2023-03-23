@@ -25,9 +25,7 @@ const LayoutWrapper = styled('div')(({ theme }) => ({
 const LayoutContainer = styled('div')({
   display: 'flex',
   overflow: 'hidden',
-  padding: '0px 20px',
   height: '100%',
-  // border: '1px solid red',
 });
 
 const LayoutContent = styled('div')({

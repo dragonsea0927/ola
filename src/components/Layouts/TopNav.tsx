@@ -41,8 +41,8 @@ const TopNav = () => {
         {navItems.map((item) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: 'center', cursor: 'pointer' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                <item.icon sx={{ fontSize: '2rem' }} />
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <item.icon sx={{ fontSize: '1.5rem' }} />
                 {item.title}
               </Box>
             </ListItemButton>

@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { Typography } from '@mui/material'
-import { Hero, Layout } from '../components'
+import { Hero, Layout, AboutSection } from '../components'
 
 export default function Home() {
   return (
@@ -14,6 +13,7 @@ export default function Home() {
       </Head>
       <Layout>
         <Hero />
+        <AboutSection />
       </Layout>
     </>
   )

@@ -5,11 +5,12 @@ import Typography from '@mui/material/Typography'
 import { CustomButton } from '..'
 import HeroImg from '../../assets/svg/dev.svg'
 import Image from 'next/image'
+import { socialLinks } from '../../utils'
+import Link from '@mui/material/Link'
 
 const GridContainer = styled(Grid)(({ theme }) => ({
   width: '90%',
   margin: '80px auto',
-  border: '1px solid red',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     margin: '20px auto'
@@ -60,16 +61,32 @@ const GridItemTwo = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     display: 'block',
   },
-  // border: '1px solid green',
+}))
+
+const SocialMedia = styled('div')(({ theme }) => ({
+  display: 'flex',
+  gap: '20px',
+  padding: '0px 0px 16px 16px',
+  [theme.breakpoints.down('sm')]: {
+    display: 'none',
+  },
+
+  [theme.breakpoints.up('md')]: {
+    display: 'flex',
+  },
+
+  [theme.breakpoints.up('lg')]: {
+    display: 'flex',
+  },
 }))
 
 
 const Hero = () => {
   return (
     <GridContainer container spacing={2}>
-      <GridItemOne item xs={12} sm={12} md={6}>
+      <GridItemOne item xs={12} sm={6} md={6}>
         <Typography variant='h1'>Software Developer.</Typography>
-        <Typography variant='body1'>
+        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '95%' } }}>
           Hi there! I'm Ola, a software developer based in Nigeria. I have a
           passion for building web applications and I'm always looking for new
           opportunities to learn and grow.
@@ -78,10 +95,11 @@ const Hero = () => {
           variant='outlined'
           color='secondary'
           width='150px'
+          onClick={() => { console.log('clicked') }}
         >See my works</CustomButton>
       </GridItemOne>
 
-      <GridItemTwo item xs={false} sm={false} md={6}>
+      <GridItemTwo item xs={false} sm={6} md={6}>
         <Image
           src={HeroImg}
           alt='hero'
@@ -89,6 +107,22 @@ const Hero = () => {
           height={400}
         />
       </GridItemTwo>
+
+      <SocialMedia>
+        {socialLinks.map((link) => (
+          <Link
+            key={link.id}
+            sx={{
+              color: 'text.primary',
+              textTransform: 'capitalize',
+              cursor: 'pointer',
+              textDecoration: 'none', '&:hover': { color: 'secondary.main' }
+            }}
+          >
+            {link.title} </Link>
+        ))}
+      </SocialMedia>
+
     </GridContainer>
   )
 }

@@ -1,4 +1,4 @@
-import { navItems } from './utilities';
+import { navItems, socialLinks } from './utilities';
 
 
-export { navItems };
+export { navItems, socialLinks };

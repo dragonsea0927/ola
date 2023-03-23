@@ -28,6 +28,7 @@ const TopNav = () => {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
   const theme = useAppTheme();
 
   const drawer = (
@@ -39,8 +40,11 @@ const TopNav = () => {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.id} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item.title} sx={{ color: theme.white.main }} />
+            <ListItemButton sx={{ textAlign: 'center', cursor: 'pointer' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <item.icon sx={{ fontSize: '2rem' }} />
+                {item.title}
+              </Box>
             </ListItemButton>
           </ListItem>
         ))}
@@ -90,7 +94,7 @@ const TopNav = () => {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: theme.palette.primary.light, color: theme.text.primary },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: theme.palette.primary.dark, color: theme.text.dark, textTransform: 'capitalize' },
           }}
         >
           {drawer}

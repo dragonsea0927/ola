@@ -34,6 +34,7 @@ export type NavItem = {
   id: number,
   title: string;
   path: string;
+  icon?: any;
 }
 
 export type NavItems = NavItem[]

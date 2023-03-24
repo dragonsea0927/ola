@@ -16,13 +16,13 @@ export const randomNumberGenerator = () => {
 }
 
 export const navItems: NavItems = [
-  { id: 2, title: 'about', path: '', icon: InfoIcon },
   {
-    id: 3,
+    id: 1,
     title: 'projects',
     path: '',
     icon: WorkIcon
   },
+  { id: 2, title: 'about', path: '', icon: InfoIcon },
   { id: 4, title: 'blogs', path: '', icon: RssFeedIcon },
   { id: 5, title: 'contact', path: '', icon: ContactEmergencyIcon }
 ];

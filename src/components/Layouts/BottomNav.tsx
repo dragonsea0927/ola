@@ -1,7 +1,9 @@
 import React from 'react'
-import { styled } from '@mui/material'
+import { Link, styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 import ContactForm from '../Form/ContactForm'
+import { socialLinks } from '@/utils'
 
 const FooterContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -73,15 +75,49 @@ const FooterBottomTop = styled('div')(({ theme }) => ({
   },
 }))
 
+const FooterSocialMedia = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'flex-end',
+  gap: '10px',
+  padding: '20px 0px',
+
+  a: {
+    color: theme.white.main,
+    fontSize: '16px',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    textTransform: 'capitalize',
+    '&:hover': {
+      color: theme.palette.primary.dark,
+    }
+  },
+}))
+
 const FooterBottomBottom = styled('div')(({ theme }) => ({
   width: '100%',
-  height: '100%',
   display: 'flex',
-  alignItems: 'flex-start',
   gap: '10px',
   padding: '20px',
-  border: '1px solid red',
+  // border: '1px solid red',
 }))
+
+const MediaBox = styled('div')(({ theme }) => ({
+  width: '100%',
+  display: 'flex',
+  alignItems: 'flex-end',
+  flexDirection: 'column',
+  gap: '10px',
+  padding: '20px',
+  // border: '1px solid red',
+
+  a: {
+    fontSize: '16px',
+    fontWeight: 500,
+    color: theme.white.main,
+    textDecoration: 'none',
+  },
+}))
+
 
 const BottomNav = () => {
   return (
@@ -118,6 +154,16 @@ const BottomNav = () => {
 
         <FooterBottomBottom>
           <ContactForm />
+          <MediaBox>
+            <FooterSocialMedia>
+              {socialLinks.map((link, index) => (
+                <Link key={link.id}>{link.title}</Link>
+              ))}
+            </FooterSocialMedia>
+            <Link href='mailto:olaishola@hotmail.co.uk'>
+              olaishola@hotmail.co.uk
+            </Link>
+          </MediaBox>
         </FooterBottomBottom>
       </FooterBottom>
     </FooterContainer>

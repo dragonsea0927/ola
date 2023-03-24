@@ -20,10 +20,8 @@ const FormContainer = styled('div')(({ theme }) => ({
 }));
 
 const Form = styled(Box)(({ theme }) => ({
-  width: '45%',
   display: 'flex',
   flexDirection: 'column',
-  border: '1px solid white',
   '& > :not(style)': {
     width: '100%',
     margin: theme.spacing(1),

@@ -10,9 +10,11 @@ import Link from '@mui/material/Link'
 import { TypeAnimation } from 'react-type-animation';
 
 const GridContainer = styled(Grid)(({ theme }) => ({
-  width: '90%',
+  // width: '90%',
   margin: '100px auto',
   padding: '0px 20px',
+  gap: '30px',
+  // border: '1px solid red',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     margin: '20px auto',
@@ -30,9 +32,10 @@ const GridContainer = styled(Grid)(({ theme }) => ({
   },
 
   [theme.breakpoints.up('lg')]: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    margin: '50px auto',
     h1: {
-      fontSize: '55px',
+      fontSize: '120px',
     }
   },
 
@@ -40,7 +43,7 @@ const GridContainer = styled(Grid)(({ theme }) => ({
 
 )
 
-const GridItemOne = styled(Grid)(({ theme }) => ({
+const GridItem = styled(Grid)(({ theme }) => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -52,26 +55,46 @@ const GridItemOne = styled(Grid)(({ theme }) => ({
 
   [theme.breakpoints.up('md')]: {
     display: { xs: 'none', sm: 'none', md: 'block' },
+    width: '90%',
+    h1: {
+      textAlign: 'center',
+    },
+    p: {
+      textAlign: 'center',
+      margin: 'auto',
+    }
   },
 
   [theme.breakpoints.up('lg')]: {
     display: { xs: 'none', sm: 'none', md: 'block' },
+    width: '90%',
+    h1: {
+      textAlign: 'center',
+    },
+    p: {
+      textAlign: 'center',
+      padding: '10px 16px',
+    }
   },
 }))
 
-const GridItemTwo = styled(Grid)(({ theme }) => ({
-  width: '50%',
-  paddingLeft: '70px',
+const ButtonContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  gap: '20px',
   [theme.breakpoints.down('sm')]: {
-    display: 'none',
+    display: 'flex',
+    justifyContent: 'center',
   },
 
   [theme.breakpoints.up('md')]: {
-    display: 'block',
+    display: 'flex',
+    justifyContent: 'center',
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: 'block',
+    display: 'flex',
+    justifyContent: 'center',
   },
 }))
 
@@ -96,8 +119,8 @@ const SocialMedia = styled('div')(({ theme }) => ({
 const Hero = () => {
   return (
     <GridContainer container spacing={2}>
-      <GridItemOne item xs={12} sm={6} md={6}>
-        <Typography variant='h1'>Hello <br />
+      <GridItem item xs={12} sm={12} md={12}>
+        <Typography variant='h1'>Hello
           I'm <Box component='span' sx={{ color: 'secondary.main' }}>Ola</Box>,
           <br />
           <TypeAnimation
@@ -106,28 +129,26 @@ const Hero = () => {
             repeat={Infinity}
           />
         </Typography>
-        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '95%' } }}>
+        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '50%', } }}>
           Hi there! I'm a software developer based in Nigeria. I have a
           passion for building web applications and I'm always looking for new
           opportunities to learn and grow.
         </Typography>
-        <CustomButton
-          variant='outlined'
-          color='secondary'
-          width='150px'
-          onClick={() => { console.log('clicked') }}
-        >See my works</CustomButton>
-      </GridItemOne>
-
-      <GridItemTwo item xs={false} sm={6} md={6}>
-        <Image
-          src={HeroImg}
-          alt='hero'
-          width={400}
-          height={400}
-        />
-      </GridItemTwo>
-
+        <ButtonContainer>
+          <CustomButton
+            variant='outlined'
+            color='secondary'
+            width='150px'
+            onClick={() => { console.log('clicked') }}
+          >See my works</CustomButton>
+          <CustomButton
+            variant='contained'
+            color='secondary'
+            width='150px'
+            onClick={() => { console.log('clicked') }}
+          >Hire me</CustomButton>
+        </ButtonContainer>
+      </GridItem>
       <SocialMedia>
         {socialLinks.map((link) => (
           <Link

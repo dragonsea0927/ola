@@ -77,6 +77,7 @@ const TopNav = () => {
               <Button key={item.id} sx={{
                 color: theme.text.dark,
                 fontWeight: 500,
+                fontSize: '15px',
               }}>
                 {item.title}
               </Button>

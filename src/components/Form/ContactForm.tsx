@@ -6,8 +6,12 @@ import { CustomButton } from '../../components';
 const FormContainer = styled('div')(({ theme }) => ({
   width: '100%',
   height: '100%',
+
   [theme.breakpoints.down('sm')]: {
-    height: '100%',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -65,7 +69,7 @@ const ContactForm = () => {
       <Form
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: '50ch' },
+          '& > :not(style)': { m: 1, width: { xs: '38ch', md: '50ch', } },
         }}
       >
         <Input

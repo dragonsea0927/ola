@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
-// import ContactForm from '../Form/ContactForm'
 import { socialLinks } from '@/utils'
 import { Copyright, ContactForm } from '@/components'
 
@@ -12,6 +11,8 @@ const FooterContainer = styled('div')(({ theme }) => ({
   color: theme.white.main,
   [theme.breakpoints.down('sm')]: {
     height: '100%',
+    backgroundColor: theme.palette.primary.main,
+    color: theme.text.dark,
   },
 }))
 
@@ -33,7 +34,11 @@ const FooterTop = styled('div')(({ theme }) => ({
     textAlign: 'center',
   },
   [theme.breakpoints.down('sm')]: {
-    height: '200px',
+    height: '100%',
+    blockquote: {
+      fontSize: '30px',
+      color: theme.text.dark,
+    },
   },
 }))
 
@@ -46,7 +51,10 @@ const FooterBottom = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   margin: '40px auto',
   [theme.breakpoints.down('sm')]: {
-    height: '50px',
+    width: '100%',
+    height: '100%',
+    margin: '20px auto',
+    backgroundColor: theme.palette.primary.main,
   },
 }))
 
@@ -71,7 +79,16 @@ const FooterBottomTop = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    height: '50px',
+    height: '100%',
+    h1: {
+      fontSize: '25px',
+      color: theme.text.dark,
+    },
+
+    p: {
+      fontSize: '16px',
+      color: theme.text.dark,
+    },
   },
 }))
 
@@ -79,7 +96,6 @@ const FooterSocialMedia = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'flex-end',
   gap: '10px',
-  // padding: '20px 0px',
 
   a: {
     color: theme.white.main,
@@ -98,7 +114,11 @@ const FooterBottomBottom = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: '10px',
   padding: '20px',
-  // border: '1px solid red',
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }))
 
 const MediaBox = styled('div')(({ theme }) => ({
@@ -108,8 +128,6 @@ const MediaBox = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   gap: '10px',
   padding: '20px',
-  // border: '1px solid red',
-
   a: {
     fontSize: '16px',
     fontWeight: 500,

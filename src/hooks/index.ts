@@ -1,3 +1,4 @@
 import useAppTheme from "./useTheme";
+import useNavigation from "./useNavigation";
 
-export { useAppTheme };
+export { useAppTheme, useNavigation };

@@ -3,6 +3,7 @@ import { Link, styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { socialLinks } from '@/utils'
 import { Copyright, ContactForm } from '@/components'
+import { useNavigation } from '@/hooks'
 
 const FooterContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -139,8 +140,13 @@ const MediaBox = styled('div')(({ theme }) => ({
   },
 }))
 
-
 const BottomNav = () => {
+  const { navigate } = useNavigation()
+
+  const handleLinkClick = (path: string) => {
+    navigate(path)
+  }
+
   return (
     <FooterContainer>
       <FooterTop>
@@ -178,7 +184,11 @@ const BottomNav = () => {
           <MediaBox>
             <FooterSocialMedia>
               {socialLinks.map((link, index) => (
-                <Link key={link.id}>{link.title}</Link>
+                <Link key={link.id}
+                  onClick={() => handleLinkClick(link.path)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >{link.title}</Link>
               ))}
             </FooterSocialMedia>
             <Link href='mailto:olaishola@hotmail.co.uk'>

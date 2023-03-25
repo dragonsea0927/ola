@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconButton } from '@mui/material'
+import CustomIcon from './CustomIcon'
 
 interface IconProps {
   link: {
@@ -10,9 +11,7 @@ interface IconProps {
   }
 }
 
-const CustomIcon = ({ icon: IconComponent }: { icon: React.ElementType }) => {
-  return <IconComponent sx={{ fontSize: '1.1rem', color: 'white' }} style={{ color: 'white', fontSize: '1.1rem', }} />;
-};
+
 
 const Icons = ({ link }: IconProps) => {
   const { icon: IconComponent } = link;

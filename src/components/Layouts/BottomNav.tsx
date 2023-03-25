@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import ContactForm from '../Form/ContactForm'
+// import ContactForm from '../Form/ContactForm'
 import { socialLinks } from '@/utils'
+import { Copyright, ContactForm } from '@/components'
 
 const FooterContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -44,7 +44,7 @@ const FooterBottom = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
-  margin: '100px auto',
+  margin: '40px auto',
   [theme.breakpoints.down('sm')]: {
     height: '50px',
   },
@@ -79,7 +79,7 @@ const FooterSocialMedia = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'flex-end',
   gap: '10px',
-  padding: '20px 0px',
+  // padding: '20px 0px',
 
   a: {
     color: theme.white.main,
@@ -166,6 +166,7 @@ const BottomNav = () => {
           </MediaBox>
         </FooterBottomBottom>
       </FooterBottom>
+      <Copyright />
     </FooterContainer>
   )
 }

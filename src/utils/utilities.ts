@@ -6,13 +6,10 @@ import InfoIcon from '@mui/icons-material/Info';
 import WorkIcon from '@mui/icons-material/Work';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
+import { FaMedium } from 'react-icons/fa'
 
 export const getFormattedDate = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-}
-
-export const randomNumberGenerator = () => {
-  return Math.floor(Math.random() * (20 - 1) + 1);
 }
 
 export const navItems: NavItems = [
@@ -31,26 +28,26 @@ export const socialLinks: SocialLinks = [
   {
     id: 1,
     title: 'github',
-    path: '',
+    path: 'https://github.com/netman5',
     icon: GitHubIcon
   },
   {
     id: 2,
     title: 'linkedin',
-    path: '',
+    path: 'https://www.linkedin.com/in/ola-ishola/',
     icon: LinkedInIcon
   },
 
   {
     id: 3,
     title: 'twitter',
-    path: '',
+    path: 'https://twitter.com/Orlaish',
     icon: TwitterIcon
   },
   {
     id: 4,
     title: 'Medium',
-    path: '',
-    icon: ''
+    path: 'https://medium.com/@olaishola',
+    icon: FaMedium
   }
 ];

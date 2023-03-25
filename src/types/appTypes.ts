@@ -43,7 +43,7 @@ export type SocialLink = {
   id: number,
   title: string;
   path: string;
-  icon: any;
+  icon?: any;
 }
 
 export type SocialLinks = SocialLink[]

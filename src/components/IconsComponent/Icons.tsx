@@ -11,18 +11,16 @@ interface IconProps {
   }
 }
 
-
-
 const Icons = ({ link }: IconProps) => {
   const { icon: IconComponent } = link;
   return (
-    <div>
+    <>
       <IconButton
         key={link.id}
       >
         <CustomIcon icon={IconComponent} />
       </IconButton>
-    </div>
+    </>
   )
 }
 

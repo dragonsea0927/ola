@@ -12,10 +12,24 @@ const IconContainer = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   gap: '8px',
-  marginBottom: '20px',
+  marginBottom: '10px',
   [theme.breakpoints.down('sm')]: {
     gap: '5px',
+    flexDirection: 'column-reverse',
+
+    p: {
+      color: theme.text.dark,
+    }
   },
+}));
+
+const SocialIcons = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  [theme.breakpoints.down('sm')]: {
+    gap: '5px',
+  }
 }));
 
 export default function Copyright() {
@@ -33,11 +47,15 @@ export default function Copyright() {
         </Link>{' '}
         {new Date().getFullYear()}
       </Typography>
-      |{' '}
+      <Typography variant="body2" color="white" align="center" sx={{ display: { xs: 'none', md: 'block' } }}>
+        |
+      </Typography>
 
-      {socialLinks.map((link) => (
-        <Icons link={link} key={link.id} />
-      ))}
+      <SocialIcons>
+        {socialLinks.map((link) => (
+          <Icons link={link} key={link.id} />
+        ))}
+      </SocialIcons>
     </IconContainer>
   );
 }

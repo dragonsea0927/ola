@@ -134,6 +134,9 @@ const MediaBox = styled('div')(({ theme }) => ({
     color: theme.white.main,
     textDecoration: 'none',
   },
+  [theme.breakpoints.down('sm')]: {
+    display: 'none',
+  },
 }))
 
 

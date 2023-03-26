@@ -19,7 +19,9 @@ const IconContainer = styled('div')(({ theme }) => ({
 
     p: {
       color: theme.text.dark,
-    }
+      gap: '5px',
+    },
+
   },
 }));
 
@@ -28,7 +30,7 @@ const SocialIcons = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   [theme.breakpoints.down('sm')]: {
-    gap: '5px',
+    gap: '2px',
   }
 }));
 

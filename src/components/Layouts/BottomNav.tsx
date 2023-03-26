@@ -46,7 +46,6 @@ const FooterTop = styled('div')(({ theme }) => ({
 const FooterBottom = styled('div')(({ theme }) => ({
   width: '80%',
   height: '100%',
-  backgroundColor: 'black',
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',

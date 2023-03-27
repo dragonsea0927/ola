@@ -5,7 +5,6 @@ import BottomNav from './BottomNav';
 import { LayoutProps } from '@/types';
 
 const LayoutRoot = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
   display: 'flex',
   flexDirection: 'column',
   height: '100%',

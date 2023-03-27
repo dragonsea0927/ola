@@ -26,5 +26,8 @@
     "react-icons": "^4.8.0",
     "react-type-animation": "^3.0.1",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "sass": "^1.60.0"
   }
 }

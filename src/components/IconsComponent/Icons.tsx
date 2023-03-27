@@ -20,7 +20,7 @@ const Icons = ({ link }: IconProps) => {
       <IconButton
         key={link.id}
         onClick={() => navigate(link.path)}
-        sx={{ color: { md: 'white' }, fontSize: '1.1rem', padding: '5px', }}
+        sx={{ color: { md: 'white', lg: 'white' }, fontSize: '1.1rem', padding: '5px', }}
       >
         <CustomIcon icon={IconComponent} />
       </IconButton>

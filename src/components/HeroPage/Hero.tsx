@@ -12,6 +12,7 @@ const GridContainer = styled(Grid)(({ theme }) => ({
   padding: '0px 20px',
   gap: '30px',
   position: 'relative',
+  borderBottom: '1px solid #fff',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     margin: '20px auto',

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Hero, Layout, AboutSection } from '../components'
+import { Hero, Layout, ProjectSection } from '../components'
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <Layout>
         <Hero />
-        <AboutSection />
+        <ProjectSection />
       </Layout>
     </>
   )

@@ -3,6 +3,7 @@ import { styled } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CustomCard } from '..'
+import ProjectImage from '../../assets/images/portfolio.jpg'
 
 
 const ProjectContainer = styled(Grid)(({ theme }) => ({
@@ -53,13 +54,15 @@ const ProjectSection = () => {
     <ProjectContainer>
       <Typography variant='h2'>My Recents Works</Typography>
       <Projects>
-        <CustomCard
-          image='/assets/images/portfolio.jpg'
-          name='Cuxtomer App'
-          role='Frontend Developer'
-          description='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-          vitae semper nisl. Sed euismod, nisl vel ultricies lacinia, nunc'
-        />
+        {[1, 2, 3, 4, 5, 6].map((item) => (
+          <CustomCard
+            key={item}
+            image={ProjectImage}
+            name='Cuxtomer'
+            role='Frontend Developer'
+            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          />
+        ))}
       </Projects>
     </ProjectContainer>
   )

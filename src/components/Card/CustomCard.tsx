@@ -8,10 +8,11 @@ import { CustomButton } from '..'
 import Image from 'next/image'
 
 const CardContainer = styled(Card)(({ theme }) => ({
-  width: '100%',
+  width: '451px',
+  height: '451px',
   display: 'flex',
   flexDirection: 'column',
-  gap: '30px',
+  gap: '10px',
   boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
   borderRadius: '20px',
   padding: '30px',
@@ -33,7 +34,8 @@ const CardContainer = styled(Card)(({ theme }) => ({
 const CardContentContainer = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: '30px',
+  padding: '0px',
+  border: '1px solid red',
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
   },
@@ -49,10 +51,33 @@ const CardContentContainer = styled(CardContent)(({ theme }) => ({
 }))
 
 const CardMediaContainer = styled(CardMedia)(({ theme }) => ({
+  width: '100%',
+  margin: 'auto',
+  borderRadius: '20px',
+
+  img: {
+    borderRadius: '10px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '16px',
+  },
+
+  [theme.breakpoints.up('md')]: {
+    display: { xs: 'none', sm: 'none', md: 'block' },
+  },
+
+  [theme.breakpoints.up('lg')]: {
+    display: { xs: 'none', sm: 'none', md: 'block' },
+  },
+
+}))
+
+const CardMediaTop = styled('div')(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'column',
-  gap: '30px',
-  padding: '80px',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  border: '1px solid red',
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
   },
@@ -68,7 +93,7 @@ const CardMediaContainer = styled(CardMedia)(({ theme }) => ({
 }))
 
 interface CustomCardProps {
-  image: string
+  image: any
   name: string
   description: string
   role?: string
@@ -79,15 +104,17 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
   return (
     <CardContainer>
       <CardMediaContainer>
-        <Image src={image} alt={name} width={300} height={300} />
+        <Image src={image} alt={name} width={400} height={300} />
       </CardMediaContainer>
       <CardContentContainer>
-        <Typography gutterBottom variant='h5' component='div'>
-          {name}
-        </Typography>
-        <Typography gutterBottom variant='h5' component='div'>
-          {otherProps?.role}
-        </Typography>
+        <CardMediaTop>
+          <Typography variant='body1' component='div'>
+            {name}
+          </Typography>
+          <Typography variant='body1' component='div'>
+            {otherProps?.role}
+          </Typography>
+        </CardMediaTop>
         <Typography variant='body2' color='text.secondary'>
           {description}
         </Typography>

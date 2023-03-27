@@ -11,7 +11,6 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '30px',
-  padding: '80px',
   h2: {
     fontSize: '60px',
     textAlign: 'center',
@@ -30,21 +29,23 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
 
 }))
 
-const Projects = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '30px',
+const Projects = styled(Grid)(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: '20px',
   padding: '80px',
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    padding: '10px',
+    gap: '30px'
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+    gap: '30px',
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+
   },
 
 }))
@@ -59,7 +60,7 @@ const ProjectSection = () => {
             key={item}
             image={ProjectImage}
             name='Cuxtomer'
-            role='Frontend Developer'
+            role='Frontend'
             description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
           />
         ))}

@@ -5,19 +5,34 @@ declare module '@mui/material/styles' {
   interface Theme {
     white: {
       main: string;
-    };
+    },
+
+    text: {
+      primary: string;
+      dark: string;
+    }
   }
 
   interface ThemeOptions {
     white?: {
       main?: React.CSSProperties['color'];
-    };
+    },
+
+    text?: {
+      primary?: React.CSSProperties['color'];
+      dark?: React.CSSProperties['color'];
+    }
   }
 }
 
 let theme = createTheme({
   white: {
     main: '#ffffff',
+  },
+
+  text: {
+    primary: '#404756',
+    dark: '#23272f',
   },
 
   palette: {
@@ -39,9 +54,9 @@ let theme = createTheme({
     fontFamily: ['"Roboto"', '"Helvetica"', '"Arial"', 'sans-serif'].join(','),
 
     h1: {
-      fontSize: '52px',
+      fontSize: '55px',
       fontWeight: 700,
-      lineHeight: 1.5,
+      lineHeight: 1.2,
       letterSpacing: '-0.01562em',
       color: '#23272f',
       fontStyle: 'normal',
@@ -99,6 +114,7 @@ let theme = createTheme({
       letterSpacing: "0.02857em",
       textTransform: "capitalize",
     },
+
   },
 });
 

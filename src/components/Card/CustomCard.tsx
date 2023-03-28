@@ -16,25 +16,17 @@ const CardContainer = styled(Card)(({ theme }) => ({
   borderRadius: '20px',
   padding: '20px',
   backgroundColor: '#ecf0f3',
-  button: {
-    display: 'none',
-    alignSelf: 'center',
-  },
-
+  position: 'relative',
   '&:hover': {
+    '.overlay': {
+      opacity: 1,
+      transform: 'scale(1)',
+    },
 
     img: {
       transform: 'scale(1.01)',
     },
-
-    div: {
-      color: 'red',
-      cursor: 'pointer',
-    },
-
-    button: {
-      display: 'flex',
-    },
+    cursor: 'pointer',
   },
 
   [theme.breakpoints.down('sm')]: {
@@ -133,6 +125,33 @@ interface CustomCardProps {
   onClick?: () => void
 }
 
+const OverlayDiv = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  opacity: 0,
+  transition: '.3s ease',
+  backgroundColor: theme.palette.primary.dark,
+
+  button: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    '-ms-transform': 'translate(-50%, -50%)',
+    fontSize: '16px',
+    padding: '12px 24px',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    transition: '0.3s',
+  },
+}))
+
 const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps) => {
   return (
     <CardContainer>
@@ -151,12 +170,12 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
         <Typography variant='body2' color='text.dark' component='div'>
           {description}
         </Typography>
-        <CustomButton variant='text' color='secondary' width='130px'
-          onClick={otherProps?.onClick}
-        >
-          Show More
-        </CustomButton>
       </CardContentContainer>
+      <OverlayDiv className='overlay'>
+        <CustomButton onClick={otherProps?.onClick} variant='outlined' color='secondary'>
+          View Project
+        </CustomButton>
+      </OverlayDiv>
     </CardContainer>
   )
 }

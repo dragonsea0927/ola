@@ -3,6 +3,8 @@ import { CustomButton, CustomModal } from '..'
 import { styled, Grid, Typography } from '@mui/material'
 import ModalImg from '../../assets/images/modalpic.jpeg'
 import Image from 'next/image'
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkIcon from '@mui/icons-material/Link';
 
 interface ProjectModalProps {
   open: boolean
@@ -18,7 +20,6 @@ const ProjsctContent = styled(Grid)(({ theme }) => ({
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: 10,
   [theme.breakpoints.down('sm')]: {
-    // padding: '16px',
     gridTemplateColumns: 'repeat(1, 1fr)',
   },
 
@@ -130,19 +131,19 @@ const ProjectModal = ({ open, handleClose }: ProjectModalProps) => {
             <CustomButton
               variant='contained'
               color='primary'
-              width='130px'
+              width='180px'
               onClick={() => { }}
             >
-              Live Demo
+              Live Demo <LinkIcon />
             </CustomButton>
 
             <CustomButton
               variant='outlined'
               color='primary'
-              width='150px'
+              width='180px'
               onClick={() => { }}
             >
-              Source Code
+              Source Code <GitHubIcon />
             </CustomButton>
           </div>
         </ProjectDetails>

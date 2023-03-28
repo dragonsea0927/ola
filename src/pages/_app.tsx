@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { theme, createEmotionCache } from '@/config'
 import '../styles/globals.scss'
+import { Layout } from '@/components'
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -53,8 +54,8 @@ export default function App(props: MyAppProps) {
           <div className="particle"></div>
           <div className="particle"></div>
           <div className="particle"></div>
+          <Component {...pageProps} />
         </div>
-        <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>
   );

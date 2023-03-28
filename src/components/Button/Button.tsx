@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { StyledButtonProps, ButtonProps } from "@/types";
 
 const StyledButton = styled(Button)<StyledButtonProps>(({ theme, width, variant }) => ({
-  width: variant === 'text' ? 'auto' : width,
+  width: variant === 'text' ? width : width,
   height: '45px',
   padding: '10px 20px',
   borderRadius: '50px',
@@ -16,7 +16,7 @@ const StyledButton = styled(Button)<StyledButtonProps>(({ theme, width, variant 
   '&:hover': {
     backgroundColor: variant === 'contained' ? theme.white.main : '',
     color: theme.palette.secondary.main,
-    border: variant === 'contained' ? `1px solid ${theme.palette.secondary.main}` : variant === 'text' ? `1px solid ${theme.palette.secondary.main}` : 'none',
+    border: variant === 'contained' ? `1px solid ${theme.palette.secondary.main}` : 'none',
   },
 }));
 

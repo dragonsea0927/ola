@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
+import { CustomButton } from '..'
 
 const CardContainer = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -15,6 +16,9 @@ const CardContainer = styled(Card)(({ theme }) => ({
   borderRadius: '20px',
   padding: '20px',
   backgroundColor: '#ecf0f3',
+  button: {
+    display: 'none',
+  },
   '&:hover': {
 
     img: {
@@ -24,6 +28,11 @@ const CardContainer = styled(Card)(({ theme }) => ({
     div: {
       color: 'red',
       cursor: 'pointer',
+    },
+
+    button: {
+      display: 'block',
+      alignSelf: 'center',
     },
   },
 
@@ -45,6 +54,7 @@ const CardContentContainer = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   padding: '0px',
+  gap: '6px',
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
   },
@@ -97,7 +107,7 @@ const CardMediaTop = styled('div')(({ theme }) => ({
   },
 
   p: {
-    color: theme.text.dark,
+    color: theme.palette.secondary.main,
   },
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
@@ -119,6 +129,7 @@ interface CustomCardProps {
   description: string
   role?: string
   duration?: string
+  onClick?: () => void
 }
 
 const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps) => {
@@ -139,6 +150,11 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
         <Typography variant='body2' color='text.dark' component='div'>
           {description}
         </Typography>
+        <CustomButton variant='text' color='secondary' width='130px'
+          onClick={otherProps?.onClick}
+        >
+          Show More
+        </CustomButton>
       </CardContentContainer>
     </CardContainer>
   )

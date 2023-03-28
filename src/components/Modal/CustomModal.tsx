@@ -35,12 +35,13 @@ const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChild
   height: height || '500px',
   backgroundColor: '#ECF0F3',
   borderRadius: '10px',
-  padding: 30,
+  padding: 45,
+  position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   gap: '5px',
 
-  button: {
+  span: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -57,6 +58,10 @@ const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChild
     boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
     padding: '20px',
     zIndex: 1,
+    position: 'absolute',
+    top: '20px',
+    right: '20px',
+
     '&:hover': {
       backgroundColor: '#FF024F',
       color: '#fff',
@@ -75,26 +80,6 @@ const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChild
   },
 
 }))
-
-const ModalContent = styled(Box)(({ theme }) => ({
-  width: '100%',
-  height: '100%',
-  backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
-  padding: 5,
-  [theme.breakpoints.down('sm')]: {
-    padding: '16px',
-  },
-
-  [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
-  },
-
-  [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
-  },
-
-}))
-
 interface CustomModalProps {
   open: boolean
   handleClose: () => void
@@ -115,12 +100,12 @@ const CustomModal = ({ open, handleClose, children, ...props }: CustomModalProps
           width={props.width}
           height={props.height}
         >
-          <button>
+          <span
+            onClick={handleClose}
+          >
             X
-          </button>
-          <ModalContent>
-            {children}
-          </ModalContent>
+          </span>
+          {children}
         </ModalChildrenContainer>
       </Fade>
     </CustomModalContainer>

@@ -4,8 +4,6 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CustomCard } from '..'
 import ProjectImage from '../../assets/images/portfolio.jpg'
-import { useToggle } from '@/hooks'
-
 
 const ProjectContainer = styled(Grid)(({ theme }) => ({
   width: '100%',
@@ -51,16 +49,13 @@ const Projects = styled(Grid)(({ theme }) => ({
 
 }))
 
+interface ProjectSectionProps {
+  handleOpenModal: () => void
+}
 
-const ProjectSection = () => {
-  const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
-
-  const handleOpenModal = () => {
-    setOpenModal()
-  }
+const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
   return (
     <ProjectContainer>
-      {openModal && <div>Modal</div>}
       <Typography variant='h2'>My Recents Works</Typography>
       <Projects>
         {[1, 2, 3, 4, 5, 6].map((item) => (

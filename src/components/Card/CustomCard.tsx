@@ -18,11 +18,13 @@ const CardContainer = styled(Card)(({ theme }) => ({
   backgroundColor: '#ecf0f3',
   button: {
     display: 'none',
+    alignSelf: 'center',
   },
+
   '&:hover': {
 
     img: {
-      transform: 'scale(1.04)',
+      transform: 'scale(1.01)',
     },
 
     div: {
@@ -31,8 +33,7 @@ const CardContainer = styled(Card)(({ theme }) => ({
     },
 
     button: {
-      display: 'block',
-      alignSelf: 'center',
+      display: 'flex',
     },
   },
 

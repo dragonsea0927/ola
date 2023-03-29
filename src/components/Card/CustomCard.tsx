@@ -140,7 +140,7 @@ const OverlayDiv = styled('div')(({ theme }) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    '-ms-transform': 'translate(-50%, -50%)',
+    'msTransform': 'translate(-50%, -50%)',
     fontSize: '16px',
     padding: '12px 24px',
     cursor: 'pointer',

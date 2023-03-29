@@ -8,5 +8,6 @@ import Icons from "./IconsComponent/Icons";
 import CustomCard from "./Card/CustomCard";
 import CustomModal from "./Modal/CustomModal";
 import ProjectModal from "./Modal/ProjectModal";
+import BlogSection from "./Blogs/BlogSection";
 
-export { Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal };
+export { Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection };

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Hero, Layout, ProjectSection, ProjectModal } from '@/components'
+import { Hero, Layout, ProjectSection, ProjectModal, BlogSection } from '@/components'
 import { useToggle } from '@/hooks'
 
 export default function Home() {
@@ -21,6 +21,7 @@ export default function Home() {
       <Layout>
         <Hero />
         <ProjectSection handleOpenModal={handleOpenModal} />
+        <BlogSection />
       </Layout>
     </>
   )

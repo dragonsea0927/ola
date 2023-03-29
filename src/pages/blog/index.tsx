@@ -4,7 +4,7 @@ import { Layout } from '@/components'
 const Blog = () => {
   return (
     <Layout>
-      {/* <div>Coming Soon.</div> */}
+      <div>Coming Soon.</div>
     </Layout>
   )
 }

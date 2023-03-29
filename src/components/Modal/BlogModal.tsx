@@ -37,9 +37,11 @@ const BlogImage = styled('div')(({ theme }) => ({
   display: 'grid',
   gap: '15px',
   img: {
-    width: 850,
+    width: 880,
     height: 500,
     borderRadius: '10px',
+    objectFit: 'cover',
+    justifySelf: 'center',
   },
   [theme.breakpoints.down('sm')]: {
     padding: '16px',

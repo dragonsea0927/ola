@@ -3,6 +3,7 @@ import { styled, Grid, Typography } from '@mui/material'
 import { CustomCard } from '..'
 import ProjectImage from '../../assets/images/portfolio.jpg'
 import Link from 'next/link'
+import { useFetch } from '@/hooks'
 
 const BlogMainContainer = styled(Grid)(({ theme }) => ({
   width: '100%',
@@ -69,6 +70,9 @@ interface BlogSectionProps {
 }
 
 const BlogSection = ({ handleOpenBlogModal }: BlogSectionProps) => {
+  const { data, isLoading, isError } = useFetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@olaishola')
+
+  console.log(data)
   return (
     <BlogMainContainer
     >

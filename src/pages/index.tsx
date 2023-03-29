@@ -1,9 +1,16 @@
 import Head from 'next/head'
-import { Hero, Layout, ProjectSection } from '../components'
+import { Hero, Layout, ProjectSection, ProjectModal, BlogSection } from '@/components'
+import { useToggle } from '@/hooks'
 
 export default function Home() {
+  const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
+
+  const handleOpenModal = () => {
+    setOpenModal()
+  }
   return (
     <>
+      {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} />}
       <Head>
         <title>Ola Ishola</title>
         <meta name="description" content="Personal website built with NextJS, MongoDB and Material UI" />
@@ -13,7 +20,8 @@ export default function Home() {
       </Head>
       <Layout>
         <Hero />
-        <ProjectSection />
+        <ProjectSection handleOpenModal={handleOpenModal} />
+        <BlogSection />
       </Layout>
     </>
   )

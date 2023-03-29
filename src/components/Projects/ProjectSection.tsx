@@ -8,6 +8,7 @@ import ProjectImage from '../../assets/images/portfolio.jpg'
 const ProjectContainer = styled(Grid)(({ theme }) => ({
   width: '100vw',
   height: '100%',
+  padding: '20px',
   h2: {
     fontSize: '60px',
     textAlign: 'center',

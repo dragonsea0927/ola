@@ -2,11 +2,12 @@ import React from 'react'
 import { styled, Grid, Typography } from '@mui/material'
 import { CustomCard } from '..'
 import ProjectImage from '../../assets/images/portfolio.jpg'
+import Link from 'next/link'
 
 const BlogMainContainer = styled(Grid)(({ theme }) => ({
   width: '100%',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
-  border: '1px solid goldenrod',
+  padding: '20px',
 
   h1: {
     fontSize: '60px',
@@ -18,6 +19,11 @@ const BlogMainContainer = styled(Grid)(({ theme }) => ({
     textAlign: 'center',
     color: 'gray',
     textTransform: 'uppercase',
+  },
+
+  '.blogs': {
+    fontSize: '18px',
+    color: theme.text.dark,
   },
   [theme.breakpoints.down('sm')]: {
     display: 'flex',
@@ -59,28 +65,30 @@ const BlogsContents = styled(Grid)(({ theme }) => ({
 }))
 
 interface BlogSectionProps {
-  handleOpenModal: () => void
+  handleOpenBlogModal: () => void
 }
 
-const BlogSection = ({ handleOpenModal }: BlogSectionProps) => {
+const BlogSection = ({ handleOpenBlogModal }: BlogSectionProps) => {
   return (
     <BlogMainContainer
     >
       <Typography variant='body1' className='blog-info'>Check some of my Technical articles</Typography>
-      <Typography variant='h1'>Blog Section</Typography>
+      <Typography variant='h1'>Recent Articles</Typography>
       <BlogsContents>
         {[1, 2, 3].map((item, index) => (
           <CustomCard
             key={item}
             image={ProjectImage}
             overlayText='Read More'
-            name='Cuxtomer'
-            role='Frontend'
+            name='Blog Title'
+            duration='2 min read'
             description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            onClick={handleOpenModal}
+            onClick={handleOpenBlogModal}
           />
         ))}
       </BlogsContents>
+      <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='https://dev.to/'>here</Link>
+      </Typography>
     </BlogMainContainer>
   )
 }

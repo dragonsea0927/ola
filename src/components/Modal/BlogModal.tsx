@@ -3,7 +3,6 @@ import { CustomButton, CustomModal } from '..'
 import { styled, Grid, Typography } from '@mui/material'
 import ModalImg from '../../assets/images/modalpic.jpeg'
 import Image from 'next/image'
-import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 
 interface ProjectModalProps {
@@ -11,11 +10,11 @@ interface ProjectModalProps {
   handleClose: () => void
 }
 
-const ProjsctContent = styled(Grid)(({ theme }) => ({
+const BlogContent = styled(Grid)(({ theme }) => ({
   width: '100%',
   height: '100%',
   display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
+  gridTemplateColumns: '1fr',
   gap: '20px',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: 10,
@@ -33,10 +32,13 @@ const ProjsctContent = styled(Grid)(({ theme }) => ({
 
 }))
 
-const ProjectImage = styled('div')(({ theme }) => ({
+const BlogImage = styled('div')(({ theme }) => ({
+  paddingTop: '10px',
+  display: 'grid',
+  gap: '15px',
   img: {
-    width: 545,
-    height: 408,
+    width: 850,
+    height: 500,
     borderRadius: '10px',
   },
   [theme.breakpoints.down('sm')]: {
@@ -53,10 +55,10 @@ const ProjectImage = styled('div')(({ theme }) => ({
 
 }))
 
-const ProjectDetails = styled('div')(({ theme }) => ({
+const BlogDetails = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  // gap: '15px',
+  gap: '15px',
   padding: '10px',
 
   h4: {
@@ -65,12 +67,11 @@ const ProjectDetails = styled('div')(({ theme }) => ({
     marginBottom: '18px',
   },
   button: {
-    '&:hover': {
-      transition: '0.4s',
-      transform: 'scale(1.04)',
-      zIndex: 1,
-      boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
-    },
+    border: 'none',
+    boxShadow: 'none',
+    padding: '0px',
+    color: '#FF024F',
+    textAlign: 'left',
   },
 
   p: {
@@ -106,39 +107,42 @@ const ProjectModal = ({ open, handleClose }: ProjectModalProps) => {
     <CustomModal
       open={open}
       handleClose={handleClose}
-      width='1230px'
-      height='518px'
+      width='1000px'
+      height='700px'
     >
-      <ProjsctContent>
-        <ProjectImage>
+      <BlogContent>
+        <BlogImage>
           <Image src={ModalImg} alt='modal' />
-        </ProjectImage>
-        <ProjectDetails>
-          <Typography variant='h6'>Frontend</Typography>
+          <Typography variant='body1'>
+            12th July 2021
+          </Typography>
+        </BlogImage>
+        <BlogDetails>
           <Typography variant='h4'>Coral Task Manager</Typography>
           <Typography variant='body1'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.
+            Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
           </Typography>
 
           <Typography variant='body1'>
-            Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!
+            Mauris tempor, orci id pellentesque convallis, massa mi congue eros, sed posuere massa nunc quis dui. Integer ornare varius mi, in vehicula orci scelerisque sed. Fusce a massa nisi. Curabitur sit amet suscipit nisl. Sed eget nisl laoreet, suscipit enim nec, viverra eros. Nunc imperdiet risus leo, in rutrum erat dignissim id.
+
+            Ut rhoncus vestibulum facilisis. Duis et lorem vitae ligula cursus venenatis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc vitae nisi tortor. Morbi leo nulla, posuere vel lectus a, egestas posuere lacus. Fusce eleifend hendrerit bibendum. Morbi nec efficitur ex.
           </Typography>
 
           <Typography variant='body1'>
-            Tech Stacks: React, Redux, Material UI, Next JS, TypeScript, Firebase
+            Nulla non ligula vel nisi blandit egestas vel eget leo. Praesent fringilla dapibus dignissim. Pellentesque quis quam enim. Vestibulum ultrices, leo id suscipit efficitur, odio lorem rhoncus dolor, a facilisis neque mi ut ex. Quisque tempor urna a nisi pretium, a pretium massa tristique. Nullam in aliquam diam. Maecenas at nibh gravida, ornare eros non, commodo ligula. Sed efficitur sollicitudin auctor. Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum et.
           </Typography>
-          <div>
-            <CustomButton
-              variant='contained'
-              color='primary'
-              width='180px'
-              onClick={() => { }}
-            >
-              Live Demo <LinkIcon />
-            </CustomButton>
-          </div>
-        </ProjectDetails>
-      </ProjsctContent>
+
+          <CustomButton
+            variant='text'
+            color='primary'
+            width='190px'
+            onClick={() => { }}
+          >
+            Continue Reading...<LinkIcon />
+          </CustomButton>
+        </BlogDetails>
+      </BlogContent>
     </CustomModal>
   )
 }

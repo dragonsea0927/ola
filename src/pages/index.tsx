@@ -4,14 +4,19 @@ import { useToggle } from '@/hooks'
 
 export default function Home() {
   const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
+  const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)
 
   const handleOpenModal = () => {
     setOpenModal()
   }
+
+  const handleOpenBlogModal = () => {
+    setOpenBlogModal()
+  }
   return (
     <>
       {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} />}
-      {openModal && <BlogModal open={openModal} handleClose={handleOpenModal} />}
+      {openBlogModal && <BlogModal open={openBlogModal} handleClose={handleOpenBlogModal} />}
       <Head>
         <title>Ola Ishola</title>
         <meta name="description" content="Personal website built with NextJS, MongoDB and Material UI" />
@@ -22,7 +27,7 @@ export default function Home() {
       <Layout>
         <Hero />
         <ProjectSection handleOpenModal={handleOpenModal} />
-        <BlogSection handleOpenModal={handleOpenModal} />
+        <BlogSection handleOpenBlogModal={handleOpenBlogModal} />
       </Layout>
     </>
   )

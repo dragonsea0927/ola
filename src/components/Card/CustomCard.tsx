@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import { CustomButton } from '..'
+import AccessTimeSharpIcon from '@mui/icons-material/AccessTimeSharp';
 
 const CardContainer = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -102,6 +103,13 @@ const CardMediaTop = styled('div')(({ theme }) => ({
   p: {
     color: theme.palette.secondary.main,
   },
+
+  '.duration': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
+  },
+
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
   },
@@ -121,7 +129,7 @@ interface CustomCardProps {
   name: string
   description: string
   role?: string
-  date?: string
+  duration?: string
   overlayText?: string
   onClick?: () => void
 }
@@ -164,11 +172,15 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
           <Typography variant='h6' component='h6'>
             {name}
           </Typography>
-          <Typography variant='body1'>
-            {otherProps?.role}
+          <Typography variant='body1' component='div'>
+            {otherProps?.duration ? <div className='duration'>
+              <AccessTimeSharpIcon fontSize='small' />
+              {otherProps?.duration}
+
+            </div> : otherProps?.role}
           </Typography>
         </CardMediaTop>
-        <Typography variant='body2' color='text.dark' component='div'>
+        <Typography variant={otherProps?.duration ? 'h6' : 'body1'} color='text.dark' component='div'>
           {description}
         </Typography>
       </CardContentContainer>

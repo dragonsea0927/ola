@@ -40,6 +40,7 @@ const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChild
   display: 'flex',
   flexDirection: 'column',
   gap: '5px',
+  overflowX: 'auto',
 
   span: {
     display: 'flex',

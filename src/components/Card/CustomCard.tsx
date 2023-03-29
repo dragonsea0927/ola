@@ -121,7 +121,8 @@ interface CustomCardProps {
   name: string
   description: string
   role?: string
-  duration?: string
+  date?: string
+  overlayText?: string
   onClick?: () => void
 }
 
@@ -173,7 +174,7 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
       </CardContentContainer>
       <OverlayDiv className='overlay'>
         <CustomButton onClick={otherProps?.onClick} variant='outlined' color='secondary'>
-          View Project
+          {otherProps?.overlayText}
         </CustomButton>
       </OverlayDiv>
     </CardContainer>

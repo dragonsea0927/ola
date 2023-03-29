@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Hero, Layout, ProjectSection, ProjectModal, BlogSection } from '@/components'
+import { Hero, Layout, ProjectSection, ProjectModal, BlogSection, CustomModal, BlogModal } from '@/components'
 import { useToggle } from '@/hooks'
 
 export default function Home() {
@@ -11,6 +11,7 @@ export default function Home() {
   return (
     <>
       {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} />}
+      {openModal && <BlogModal open={openModal} handleClose={handleOpenModal} />}
       <Head>
         <title>Ola Ishola</title>
         <meta name="description" content="Personal website built with NextJS, MongoDB and Material UI" />
@@ -21,7 +22,7 @@ export default function Home() {
       <Layout>
         <Hero />
         <ProjectSection handleOpenModal={handleOpenModal} />
-        <BlogSection />
+        <BlogSection handleOpenModal={handleOpenModal} />
       </Layout>
     </>
   )

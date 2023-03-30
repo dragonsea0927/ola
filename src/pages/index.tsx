@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import { Hero, Layout, ProjectSection, ProjectModal, BlogSection, CustomModal, BlogModal } from '@/components'
-import { useToggle } from '@/hooks'
+import { useFetch, useToggle } from '@/hooks'
 
 export default function Home() {
   const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
   const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)
+  const url = process.env.NEXT_PUBLIC_MEDIUM_API_URL || ''
+  const { data, isLoading, isError } = useFetch(url)
 
   const handleOpenModal = () => {
     setOpenModal()
@@ -16,7 +18,8 @@ export default function Home() {
   return (
     <>
       {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} />}
-      {openBlogModal && <BlogModal open={openBlogModal} handleClose={handleOpenBlogModal} />}
+      {openBlogModal && <BlogModal open={openBlogModal} handleClose={handleOpenBlogModal}
+      />}
       <Head>
         <title>Ola Ishola</title>
         <meta name="description" content="Personal website built with NextJS, MongoDB and Material UI" />
@@ -27,7 +30,7 @@ export default function Home() {
       <Layout>
         <Hero />
         <ProjectSection handleOpenModal={handleOpenModal} />
-        <BlogSection handleOpenBlogModal={handleOpenBlogModal} />
+        <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} />
       </Layout>
     </>
   )

@@ -3,7 +3,7 @@ import { styled, Grid, Typography } from '@mui/material'
 import { CustomCard } from '..'
 import ProjectImage from '../../assets/images/portfolio.jpg'
 import Link from 'next/link'
-import { useFetch } from '@/hooks'
+
 import { randomItemFromArray } from '@/utils'
 
 const BlogMainContainer = styled(Grid)(({ theme }) => ({
@@ -68,17 +68,11 @@ const BlogsContents = styled(Grid)(({ theme }) => ({
 
 interface BlogSectionProps {
   handleOpenBlogModal: () => void
+  data: any
 }
 
-const BlogSection = ({ handleOpenBlogModal }: BlogSectionProps) => {
-  const url = process.env.NEXT_PUBLIC_MEDIUM_API_URL || ''
-  const { data, isLoading, isError } = useFetch(url)
-
-
-  if (isLoading) return <div>Loading...</div>
-  if (isError) return <div>Something went wrong...</div>
-
-  const sliceData = data.items ? data.items.slice(0, 3) : []
+const BlogSection = ({ handleOpenBlogModal, data }: BlogSectionProps) => {
+  const sliceData = data?.items ? data.items.slice(0, 3) : []
 
   return (
     <BlogMainContainer
@@ -91,7 +85,7 @@ const BlogSection = ({ handleOpenBlogModal }: BlogSectionProps) => {
           return (
             < CustomCard
               key={item.guid}
-              image={ProjectImage}
+              image={item.thumbnail || ProjectImage}
               overlayText='Read More'
               name={tags || 'No tags'}
               duration={item.duration || '5+ min'}

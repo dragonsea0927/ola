@@ -71,7 +71,8 @@ const CardMediaContainer = styled(CardMedia)(({ theme }) => ({
   img: {
     borderRadius: '10px',
     width: '100%',
-    height: '100%',
+    height: '200px',
+    // height: '100%',
     objectFit: 'cover',
     transition: 'tranform 0s'
   },
@@ -165,7 +166,7 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
   return (
     <CardContainer>
       <CardMediaContainer>
-        <Image src={image} alt={name} />
+        <Image src={image} alt={name} width={500} height={100} />
       </CardMediaContainer>
       <CardContentContainer>
         <CardMediaTop>

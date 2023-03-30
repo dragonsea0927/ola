@@ -28,7 +28,7 @@ export const getFormattedDateFromISOWithTime = (iso: string) => {
 }
 
 export const randomItemFromArray = (arr: any[], n: number) => {
-  arr ? arr[Math.floor(Math.random() * n)] : null;
+  return arr[Math.floor(Math.random() * n)];
 };
 
 export const navItems: NavItems = [

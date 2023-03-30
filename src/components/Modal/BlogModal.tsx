@@ -105,7 +105,6 @@ const BlogDetails = styled('div')(({ theme }) => ({
 
 const ProjectModal = ({ open, handleClose }: ProjectModalProps) => {
   return (
-
     <CustomModal
       open={open}
       handleClose={handleClose}

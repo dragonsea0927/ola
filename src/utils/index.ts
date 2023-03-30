@@ -1,4 +1,4 @@
-import { navItems, socialLinks } from './utilities';
+import { navItems, socialLinks, randomItemFromArray } from './utilities';
 
 
-export { navItems, socialLinks };
+export { navItems, socialLinks, randomItemFromArray };

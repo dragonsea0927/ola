@@ -12,6 +12,25 @@ export const getFormattedDate = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
+export const getFormattedDateFromTimestamp = (timestamp: number) => {
+  const date = new Date(timestamp);
+  return getFormattedDate(date);
+}
+
+export const getFormattedDateFromISO = (iso: string) => {
+  const date = new Date(iso);
+  return getFormattedDate(date);
+}
+
+export const getFormattedDateFromISOWithTime = (iso: string) => {
+  const date = new Date(iso);
+  return `${getFormattedDate(date)} ${date.getHours()}:${date.getMinutes()}`;
+}
+
+export const randomItemFromArray = (arr: any[], n: number) => {
+  arr ? arr[Math.floor(Math.random() * n)] : null;
+};
+
 export const navItems: NavItems = [
   {
     id: 1,

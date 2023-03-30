@@ -71,8 +71,7 @@ const CardMediaContainer = styled(CardMedia)(({ theme }) => ({
   img: {
     borderRadius: '10px',
     width: '100%',
-    height: '200px',
-    // height: '100%',
+    height: '230px',
     objectFit: 'cover',
     transition: 'tranform 0s'
   },

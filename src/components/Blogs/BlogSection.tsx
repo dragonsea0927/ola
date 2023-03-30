@@ -67,7 +67,7 @@ const BlogsContents = styled(Grid)(({ theme }) => ({
 }))
 
 interface BlogSectionProps {
-  handleOpenBlogModal: () => void
+  handleOpenBlogModal: any
   data: any
 }
 
@@ -90,7 +90,7 @@ const BlogSection = ({ handleOpenBlogModal, data }: BlogSectionProps) => {
               name={tags || 'No tags'}
               duration={item.duration || '5+ min'}
               description={item.title}
-              onClick={handleOpenBlogModal}
+              onClick={() => handleOpenBlogModal(item)}
             />
           )
         })}

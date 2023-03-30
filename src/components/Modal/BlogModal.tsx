@@ -4,10 +4,12 @@ import { styled, Grid, Typography } from '@mui/material'
 import ModalImg from '../../assets/images/modalpic.jpeg'
 import Image from 'next/image'
 import LinkIcon from '@mui/icons-material/Link';
+import { useFetch } from '@/hooks'
 
-interface ProjectModalProps {
+interface BlogModalProps {
   open: boolean
-  handleClose: () => void
+  handleClose: any
+  blogItem: any
 }
 
 const BlogContent = styled(Grid)(({ theme }) => ({
@@ -103,7 +105,11 @@ const BlogDetails = styled('div')(({ theme }) => ({
 
 }))
 
-const ProjectModal = ({ open, handleClose }: ProjectModalProps) => {
+const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
+
+  const { title, thumbnail, categories, pubDate, link, content } = blogItem
+  console.log(blogItem);
+
   return (
     <CustomModal
       open={open}
@@ -113,13 +119,13 @@ const ProjectModal = ({ open, handleClose }: ProjectModalProps) => {
     >
       <BlogContent>
         <BlogImage>
-          <Image src={ModalImg} alt='modal' />
+          <Image src={thumbnail} alt='modal' width={100} height={100} />
           <Typography variant='body1'>
-            12th July 2021
+            {pubDate}
           </Typography>
         </BlogImage>
         <BlogDetails>
-          <Typography variant='h4'>Coral Task Manager</Typography>
+          <Typography variant='h4'>{title}</Typography>
           <Typography variant='body1'>
             Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
           </Typography>

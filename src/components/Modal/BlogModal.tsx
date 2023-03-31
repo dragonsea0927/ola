@@ -1,6 +1,6 @@
 import React from 'react'
 import { CustomButton, CustomModal } from '..'
-import { styled, Grid, Typography } from '@mui/material'
+import { styled, Grid, Typography, Box } from '@mui/material'
 import ModalImg from '../../assets/images/modalpic.jpeg'
 import Image from 'next/image'
 import LinkIcon from '@mui/icons-material/Link';
@@ -64,6 +64,8 @@ const BlogDetails = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   gap: '15px',
   padding: '10px',
+  // width: '100%',
+  border: '1px solid #e2e8ec',
 
   h4: {
     fontSize: '35px',
@@ -85,10 +87,21 @@ const BlogDetails = styled('div')(({ theme }) => ({
     marginBottom: '18px',
   },
 
+
   div: {
     display: 'flex',
-    flexDirection: 'row',
-    gap: '20px',
+    flexDirection: 'column',
+    width: '100%',
+    border: '1px solid red',
+    padding: '10px',
+    color: theme.text.dark,
+
+    img: {
+      width: '100%',
+      height: '100%',
+      borderRadius: '10px',
+      objectFit: 'cover',
+    }
   },
 
   [theme.breakpoints.down('sm')]: {
@@ -107,7 +120,7 @@ const BlogDetails = styled('div')(({ theme }) => ({
 
 const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
 
-  const { title, thumbnail, categories, pubDate, link, content } = blogItem
+  const { title, thumbnail, categories, pubDate, link, content, description } = blogItem
   console.log(blogItem);
 
   return (
@@ -118,28 +131,15 @@ const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
       height='700px'
     >
       <BlogContent>
-        <BlogImage>
+        {/* <BlogImage>
           <Image src={thumbnail} alt='modal' width={100} height={100} />
-          <Typography variant='body1'>
-            {pubDate}
-          </Typography>
-        </BlogImage>
+        </BlogImage> */}
         <BlogDetails>
           <Typography variant='h4'>{title}</Typography>
           <Typography variant='body1'>
-            Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+            {pubDate}
           </Typography>
-
-          <Typography variant='body1'>
-            Mauris tempor, orci id pellentesque convallis, massa mi congue eros, sed posuere massa nunc quis dui. Integer ornare varius mi, in vehicula orci scelerisque sed. Fusce a massa nisi. Curabitur sit amet suscipit nisl. Sed eget nisl laoreet, suscipit enim nec, viverra eros. Nunc imperdiet risus leo, in rutrum erat dignissim id.
-
-            Ut rhoncus vestibulum facilisis. Duis et lorem vitae ligula cursus venenatis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc vitae nisi tortor. Morbi leo nulla, posuere vel lectus a, egestas posuere lacus. Fusce eleifend hendrerit bibendum. Morbi nec efficitur ex.
-          </Typography>
-
-          <Typography variant='body1'>
-            Nulla non ligula vel nisi blandit egestas vel eget leo. Praesent fringilla dapibus dignissim. Pellentesque quis quam enim. Vestibulum ultrices, leo id suscipit efficitur, odio lorem rhoncus dolor, a facilisis neque mi ut ex. Quisque tempor urna a nisi pretium, a pretium massa tristique. Nullam in aliquam diam. Maecenas at nibh gravida, ornare eros non, commodo ligula. Sed efficitur sollicitudin auctor. Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum et.
-          </Typography>
-
+          <Box dangerouslySetInnerHTML={{ __html: content }} />
           <CustomButton
             variant='text'
             color='primary'

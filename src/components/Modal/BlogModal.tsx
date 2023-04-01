@@ -37,13 +37,11 @@ const BlogDetails = styled('div')(({ theme }) => ({
   padding: '10px',
 
   h4: {
-    fontSize: '23px',
-    fontWeight: 600,
-    marginBottom: '18px',
-    alignText: 'center',
+    fontWeight: 700,
+    color: theme.text.dark,
   },
 
-  a: {
+  '.link': {
     padding: '0px',
     color: '#FF024F',
     textAlign: 'left',
@@ -79,7 +77,6 @@ const BlogDetails = styled('div')(({ theme }) => ({
       height: '510px',
       borderRadius: '10px',
       objectFit: 'cover',
-      border: '1px solid red',
     },
 
     li: {
@@ -125,7 +122,7 @@ const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
         <BlogDetails>
           <Typography variant='h4'>{title}</Typography>
           <Typography variant='body1'>
-            {pubDate}
+            Published: {pubDate}
           </Typography>
           <Box dangerouslySetInnerHTML={{ __html: content }} />
 
@@ -145,7 +142,7 @@ const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
               </Box>
             ))}
           </Box>
-          <Link href='https://medium.com/@olaishola' target='_blank' rel='noopener'>
+          <Link className='link' href='https://medium.com/@olaishola' target='_blank' rel='noopener'>
             Continue to other articles...<LinkIcon />
           </Link>
         </BlogDetails>

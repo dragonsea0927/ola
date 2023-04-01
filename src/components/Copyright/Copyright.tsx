@@ -37,7 +37,7 @@ const SocialIcons = styled('div')(({ theme }) => ({
 export default function Copyright() {
   return (
     <IconContainer>
-      <Typography variant="body2" color="white" align="center">
+      <Typography variant="body2" align="center">
         {'Copyright © '}
         <Link href="https://www.linkedin.com/in/ola-ishola/"
           color="inherit"
@@ -49,7 +49,7 @@ export default function Copyright() {
         </Link>{' '}
         {new Date().getFullYear()}
       </Typography>
-      <Typography variant="body2" color="white" align="center" sx={{ display: { xs: 'none', md: 'block' } }}>
+      <Typography variant="body2" align="center" sx={{ display: { xs: 'none', md: 'block' } }}>
         |
       </Typography>
 

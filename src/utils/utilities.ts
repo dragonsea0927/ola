@@ -35,12 +35,12 @@ export const navItems: NavItems = [
   {
     id: 1,
     title: 'projects',
-    path: '',
+    path: '/',
     icon: WorkIcon
   },
-  { id: 2, title: 'about', path: '', icon: InfoIcon },
-  { id: 4, title: 'blogs', path: '', icon: RssFeedIcon },
-  { id: 5, title: 'contact', path: '', icon: ContactEmergencyIcon }
+  { id: 2, title: 'about', path: '/about', icon: InfoIcon },
+  { id: 4, title: 'blogs', path: '#blog', icon: RssFeedIcon },
+  { id: 5, title: 'contact', path: '#contact', icon: ContactEmergencyIcon }
 ];
 
 export const socialLinks: SocialLinks = [

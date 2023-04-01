@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, styled, Toolbar, Typography } from '@mui/material';
-import { useAppTheme } from '@/hooks';
+import { useAppTheme, useNavigation } from '@/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
 import { navItems } from '../../utils';
 
@@ -24,6 +24,17 @@ const drawerWidth = 150;
 
 const TopNav = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { navigate } = useNavigation();
+  const [activeLink, setActiveLink] = React.useState('');
+
+  React.useEffect(() => {
+    const path = window.location.pathname;
+    setActiveLink(path);
+  }, []);
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -40,7 +51,9 @@ const TopNav = () => {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.id} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center', cursor: 'pointer' }}>
+            <ListItemButton sx={{ textAlign: 'center', cursor: 'pointer' }}
+              onClick={() => handleNavigation(item.path)}
+            >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <item.icon sx={{ fontSize: '1.5rem' }} />
                 {item.title}
@@ -75,10 +88,21 @@ const TopNav = () => {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item.id} sx={{
-                color: theme.text.dark,
+                color: activeLink === item.path ? theme.palette.secondary.main : theme.text.primary,
                 fontWeight: 500,
                 fontSize: '15px',
-              }}>
+                letterSpacing: '0.1rem',
+                textTransform: 'capitalize',
+                '&:hover': {
+                  color: theme.palette.secondary.main,
+                  textDecoration: 'underline',
+                  pddingBottom: '5px',
+                },
+
+                textDecoration: activeLink === item.path ? 'underline' : 'none',
+              }}
+                onClick={() => handleNavigation(item.path)}
+              >
                 {item.title}
               </Button>
             ))}

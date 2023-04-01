@@ -8,8 +8,6 @@ import { useNavigation } from '@/hooks'
 const FooterContainer = styled('div')(({ theme }) => ({
   width: '100%',
   height: '100%',
-  backgroundColor: 'black',
-  color: theme.white.main,
   [theme.breakpoints.down('sm')]: {
     height: '100%',
     backgroundColor: theme.palette.primary.main,
@@ -69,13 +67,11 @@ const FooterBottomTop = styled('div')(({ theme }) => ({
   h1: {
     fontSize: '45px',
     fontWeight: 700,
-    color: theme.white.main,
   },
 
   p: {
     fontSize: '18px',
     fontWeight: 500,
-    color: theme.white.main,
   },
 
   [theme.breakpoints.down('sm')]: {
@@ -98,7 +94,6 @@ const FooterSocialMedia = styled('div')(({ theme }) => ({
   gap: '10px',
 
   a: {
-    color: theme.white.main,
     fontSize: '16px',
     textDecoration: 'none',
     cursor: 'pointer',
@@ -131,7 +126,7 @@ const MediaBox = styled('div')(({ theme }) => ({
   a: {
     fontSize: '16px',
     fontWeight: 500,
-    color: theme.white.main,
+    color: theme.text.dark,
     textDecoration: 'none',
   },
   [theme.breakpoints.down('sm')]: {

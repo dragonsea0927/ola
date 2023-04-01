@@ -9,5 +9,6 @@ import CustomCard from "./Card/CustomCard";
 import CustomModal from "./Modal/CustomModal";
 import ProjectModal from "./Modal/ProjectModal";
 import BlogSection from "./Blogs/BlogSection";
+import BlogModal from "./Modal/BlogModal";
 
-export { Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection };
+export { Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal };

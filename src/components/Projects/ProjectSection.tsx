@@ -6,13 +6,19 @@ import { CustomCard } from '..'
 import ProjectImage from '../../assets/images/portfolio.jpg'
 
 const ProjectContainer = styled(Grid)(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-
+  width: '100vw',
+  height: '100%',
+  padding: '20px',
   h2: {
     fontSize: '60px',
     textAlign: 'center',
+  },
+
+  '.info': {
+    fontSize: '16px',
+    textAlign: 'center',
+    color: 'gray',
+    textTransform: 'uppercase',
   },
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
@@ -56,12 +62,14 @@ interface ProjectSectionProps {
 const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
   return (
     <ProjectContainer>
+      <Typography variant='body1' className='info'>Visit my portfolio for my latest projects</Typography>
       <Typography variant='h2'>My Recents Works</Typography>
       <Projects>
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <CustomCard
             key={item}
             image={ProjectImage}
+            overlayText='View Project'
             name='Cuxtomer'
             role='Frontend'
             description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'

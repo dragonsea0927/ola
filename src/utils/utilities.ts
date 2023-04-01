@@ -12,16 +12,35 @@ export const getFormattedDate = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
+export const getFormattedDateFromTimestamp = (timestamp: number) => {
+  const date = new Date(timestamp);
+  return getFormattedDate(date);
+}
+
+export const getFormattedDateFromISO = (iso: string) => {
+  const date = new Date(iso);
+  return getFormattedDate(date);
+}
+
+export const getFormattedDateFromISOWithTime = (iso: string) => {
+  const date = new Date(iso);
+  return `${getFormattedDate(date)} ${date.getHours()}:${date.getMinutes()}`;
+}
+
+export const randomItemFromArray = (arr: any[], n: number) => {
+  return arr[Math.floor(Math.random() * n)];
+};
+
 export const navItems: NavItems = [
   {
     id: 1,
     title: 'projects',
-    path: '',
+    path: '/',
     icon: WorkIcon
   },
-  { id: 2, title: 'about', path: '', icon: InfoIcon },
-  { id: 4, title: 'blogs', path: '', icon: RssFeedIcon },
-  { id: 5, title: 'contact', path: '', icon: ContactEmergencyIcon }
+  { id: 2, title: 'about', path: '/about', icon: InfoIcon },
+  { id: 4, title: 'blogs', path: '#blog', icon: RssFeedIcon },
+  { id: 5, title: 'contact', path: '#contact', icon: ContactEmergencyIcon }
 ];
 
 export const socialLinks: SocialLinks = [

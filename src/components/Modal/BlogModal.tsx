@@ -1,10 +1,9 @@
 import React from 'react'
 import { CustomButton, CustomModal } from '..'
 import { styled, Grid, Typography, Box } from '@mui/material'
-import ModalImg from '../../assets/images/modalpic.jpeg'
-import Image from 'next/image'
 import LinkIcon from '@mui/icons-material/Link';
-import { useFetch } from '@/hooks'
+import DOMPurify from 'dompurify';
+import Link from 'next/link';
 
 interface BlogModalProps {
   open: boolean
@@ -34,50 +33,31 @@ const BlogContent = styled(Grid)(({ theme }) => ({
 
 }))
 
-const BlogImage = styled('div')(({ theme }) => ({
-  paddingTop: '10px',
-  display: 'grid',
-  gap: '15px',
-  img: {
-    width: 880,
-    height: 500,
-    borderRadius: '10px',
-    objectFit: 'cover',
-    justifySelf: 'center',
-  },
-  [theme.breakpoints.down('sm')]: {
-    padding: '16px',
-  },
-
-  [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
-  },
-
-  [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
-  },
-
-}))
-
 const BlogDetails = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '15px',
   padding: '10px',
-  // width: '100%',
-  border: '1px solid #e2e8ec',
 
   h4: {
-    fontSize: '35px',
+    fontSize: '23px',
     fontWeight: 600,
     marginBottom: '18px',
+    alignText: 'center',
   },
-  button: {
-    border: 'none',
-    boxShadow: 'none',
+
+  a: {
     padding: '0px',
     color: '#FF024F',
     textAlign: 'left',
+    textDecoration: 'none',
+    fontSize: '18px',
+    lineHeight: '25px',
+    fontWeight: 400,
+    display: 'flex',
+    alignItems: 'center',
+
+    '&:hover': {
+      color: theme.palette.secondary.main,
+      textDecoration: 'none',
+    },
   },
 
   p: {
@@ -91,17 +71,30 @@ const BlogDetails = styled('div')(({ theme }) => ({
   div: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
-    border: '1px solid red',
     padding: '10px',
     color: theme.text.dark,
 
     img: {
       width: '100%',
-      height: '100%',
+      height: '510px',
       borderRadius: '10px',
       objectFit: 'cover',
-    }
+      border: '1px solid red',
+    },
+
+    li: {
+      fontSize: '18px',
+      lineHeight: '25px',
+      fontWeight: 400,
+      marginBottom: '18px',
+    },
+  },
+
+  '.tags': {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: '10px',
   },
 
   [theme.breakpoints.down('sm')]: {
@@ -120,9 +113,7 @@ const BlogDetails = styled('div')(({ theme }) => ({
 
 const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
 
-  const { title, thumbnail, categories, pubDate, link, content, description } = blogItem
-  console.log(blogItem);
-
+  const { title, categories, pubDate, content } = blogItem
   return (
     <CustomModal
       open={open}
@@ -131,23 +122,32 @@ const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
       height='700px'
     >
       <BlogContent>
-        {/* <BlogImage>
-          <Image src={thumbnail} alt='modal' width={100} height={100} />
-        </BlogImage> */}
         <BlogDetails>
           <Typography variant='h4'>{title}</Typography>
           <Typography variant='body1'>
             {pubDate}
           </Typography>
           <Box dangerouslySetInnerHTML={{ __html: content }} />
-          <CustomButton
-            variant='text'
-            color='primary'
-            width='190px'
-            onClick={() => { }}
-          >
-            Continue Reading...<LinkIcon />
-          </CustomButton>
+
+          <Box className='tags'>
+            {categories.map((category: string) => (
+              <Box key={category}
+                sx={{
+                  listStyle: 'none',
+                  width: 'fit-content',
+                  padding: '5px 10px',
+                  borderRadius: '5px',
+                  backgroundColor: '#FF024F',
+                  color: 'white',
+                  fontSize: '16px',
+                }} component='li'>
+                {category}
+              </Box>
+            ))}
+          </Box>
+          <Link href='https://medium.com/@olaishola' target='_blank' rel='noopener'>
+            Continue to other articles...<LinkIcon />
+          </Link>
         </BlogDetails>
       </BlogContent>
     </CustomModal>

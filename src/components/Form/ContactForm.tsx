@@ -69,23 +69,45 @@ const ContactForm = () => {
       <Form
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: { xs: '38ch', md: '50ch', } },
+          '& > :not(style)': { m: 1, width: { xs: '38ch', md: '60ch', } },
         }}
       >
-        <Input
-          id="outlined-basic"
-          label="Name"
-          variant="outlined"
-          size='small'
-          placeholder='e.g John Smith'
-          required
-        />
+        <Box sx={{ display: 'flex', gap: '10px' }}>
+          <Input
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+            size='medium'
+            placeholder='e.g John Smith'
+            required
+            sx={{ width: { xs: '38ch', md: '30ch', } }}
+          />
+
+          <Input
+            id="outlined-basic"
+            label='Number'
+            variant="outlined"
+            size='medium'
+            placeholder='e.g 08012345678'
+            required
+            sx={{ width: { xs: '38ch', md: '30ch', } }}
+          />
+        </Box>
         <Input
           id="outlined-basic"
           label="Email"
           variant="outlined"
-          size='small'
+          size='medium'
           placeholder='youremail@something.com'
+          required
+        />
+
+        <Input
+          id="outlined-basic"
+          label="Subject"
+          variant="outlined"
+          size='medium'
+          placeholder='e.g I want to work with you'
           required
         />
         <Input

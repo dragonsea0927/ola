@@ -2,8 +2,10 @@ import React from 'react'
 import { Link, styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { socialLinks } from '@/utils'
-import { Copyright, ContactForm } from '@/components'
+import { Copyright, ContactForm, Icons } from '@/components'
 import { useNavigation } from '@/hooks'
+import Image from 'next/image'
+import ContactImage from '@/assets/images/contact1.png'
 
 const FooterContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -42,7 +44,7 @@ const FooterTop = styled('div')(({ theme }) => ({
 }))
 
 const FooterBottom = styled('div')(({ theme }) => ({
-  width: '80%',
+  width: '85%',
   height: '100%',
   display: 'flex',
   alignItems: 'center',
@@ -92,23 +94,24 @@ const FooterSocialMedia = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'flex-end',
   gap: '10px',
+  paddingTop: '20px',
 
-  a: {
-    fontSize: '16px',
-    textDecoration: 'none',
-    cursor: 'pointer',
-    textTransform: 'capitalize',
-    '&:hover': {
-      color: theme.palette.primary.dark,
-    }
+  icon: {
+    fontSize: '100px',
+    color: theme.text.dark,
+    border: '1px solid #000',
+  },
+  [theme.breakpoints.down('sm')]: {
+    gap: '5px',
   },
 }))
 
 const FooterBottomBottom = styled('div')(({ theme }) => ({
   width: '100%',
   display: 'flex',
-  gap: '10px',
-  padding: '20px',
+  flexDirection: 'row-reverse',
+  paddingTop: '20px',
+  gap: '40px',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -117,20 +120,63 @@ const FooterBottomBottom = styled('div')(({ theme }) => ({
 }))
 
 const MediaBox = styled('div')(({ theme }) => ({
-  width: '100%',
   display: 'flex',
-  alignItems: 'flex-end',
   flexDirection: 'column',
   gap: '10px',
   padding: '20px',
+  boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
+  backgroundColor: theme.white.main,
+  borderRadius: '10px',
   a: {
     fontSize: '16px',
     fontWeight: 500,
     color: theme.text.dark,
     textDecoration: 'none',
+
   },
   [theme.breakpoints.down('sm')]: {
     display: 'none',
+  },
+}))
+
+const ContactLeft = styled('div')(({ theme }) => ({
+  width: '526px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  borderRadius: '10px',
+  padding: '15px 7px',
+  img: {
+    objectFit: 'cover',
+    borderRadius: '10px',
+    alignSelf: 'center',
+  },
+
+  '.contact-inner': {
+    width: '460px',
+    alignSelf: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  '.contact-inner-text': {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px',
+
+    h4: {
+      fontSize: '29px',
+    },
+
+    p: {
+      fontSize: '18px',
+      letterSpacing: 'normal',
+    }
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    padding: '20px',
   },
 }))
 
@@ -176,18 +222,35 @@ const BottomNav = () => {
         <FooterBottomBottom>
           <ContactForm />
           <MediaBox>
-            <FooterSocialMedia>
-              {socialLinks.map((link, index) => (
-                <Link key={link.id}
-                  onClick={() => handleLinkClick(link.path)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >{link.title}</Link>
-              ))}
-            </FooterSocialMedia>
-            <Link href='mailto:olaishola@hotmail.co.uk'>
-              olaishola@hotmail.co.uk
-            </Link>
+            <ContactLeft>
+              <Image src={ContactImage} alt='contact image' width={460} height={200} />
+              <div className='contact-inner'>
+                <div className='contact-inner-text'>
+                  <Typography variant='h4'>
+                    Ola Ishola
+                    <br />
+                    <Typography variant='body1'>
+                      Software Developer
+                    </Typography>
+                  </Typography>
+
+                  <Typography variant='body1'>
+                    I am available for freelance work. Connect with me on social media or send me an email.
+                  </Typography>
+
+                  <Typography variant='body1'>
+                    Phone: +234 813 000 0000
+                    <br />
+                    Email: olaishola@hotmail.co.uk
+                  </Typography>
+                </div>
+                <FooterSocialMedia>
+                  {socialLinks.map((link) => (
+                    <Icons link={link} key={link.id} />
+                  ))}
+                </FooterSocialMedia>
+              </div>
+            </ContactLeft>
           </MediaBox>
         </FooterBottomBottom>
       </FooterBottom>

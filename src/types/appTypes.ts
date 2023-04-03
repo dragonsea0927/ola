@@ -21,6 +21,7 @@ export type ButtonProps = {
   size?: "small" | "medium" | "large";
   onClick?: () => void;
   width?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 export type StyledButtonProps = {

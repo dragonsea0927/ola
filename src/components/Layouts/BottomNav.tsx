@@ -3,7 +3,6 @@ import { Link, styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { socialLinks } from '@/utils'
 import { Copyright, ContactForm, Icons } from '@/components'
-import { useNavigation } from '@/hooks'
 import Image from 'next/image'
 import ContactImage from '@/assets/images/contact1.png'
 
@@ -93,13 +92,34 @@ const FooterBottomTop = styled('div')(({ theme }) => ({
 const FooterSocialMedia = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'flex-end',
-  gap: '10px',
+  gap: '20px',
   paddingTop: '20px',
 
-  icon: {
-    fontSize: '100px',
-    color: theme.text.dark,
-    border: '1px solid #000',
+  div: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '5px',
+    width: '55px',
+    height: '55px',
+    boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
+    borderRadius: '6px',
+    backgroundColor: 'linear-gradient(45deg, #ff014f, #ff014f)',
+
+    '&:hover': {
+      backgroundColor: '#ff014f',
+      color: theme.white.main,
+      cursor: 'pointer',
+
+      svg: {
+        color: theme.white.main,
+      },
+    },
+
+    svg: {
+      fontSize: '25px',
+      color: theme.text.dark,
+    },
   },
   [theme.breakpoints.down('sm')]: {
     gap: '5px',
@@ -111,7 +131,8 @@ const FooterBottomBottom = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row-reverse',
   paddingTop: '20px',
-  gap: '40px',
+  gap: '90px',
+  justifyContent: 'space-between',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -140,12 +161,11 @@ const MediaBox = styled('div')(({ theme }) => ({
 }))
 
 const ContactLeft = styled('div')(({ theme }) => ({
-  width: '526px',
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
   borderRadius: '10px',
-  padding: '15px 7px',
+  padding: '10px 7px',
   img: {
     objectFit: 'cover',
     borderRadius: '10px',
@@ -153,7 +173,6 @@ const ContactLeft = styled('div')(({ theme }) => ({
   },
 
   '.contact-inner': {
-    width: '460px',
     alignSelf: 'center',
     display: 'flex',
     flexDirection: 'column',
@@ -167,6 +186,8 @@ const ContactLeft = styled('div')(({ theme }) => ({
 
     h4: {
       fontSize: '29px',
+      fontWeight: 700,
+      color: theme.text.dark,
     },
 
     p: {
@@ -181,12 +202,6 @@ const ContactLeft = styled('div')(({ theme }) => ({
 }))
 
 const BottomNav = () => {
-  const { navigate } = useNavigation()
-
-  const handleLinkClick = (path: string) => {
-    navigate(path)
-  }
-
   return (
     <FooterContainer>
       <FooterTop>
@@ -239,14 +254,16 @@ const BottomNav = () => {
                   </Typography>
 
                   <Typography variant='body1'>
-                    Phone: +234 813 000 0000
+                    Phone: +234 8110837448
                     <br />
                     Email: olaishola@hotmail.co.uk
                   </Typography>
                 </div>
                 <FooterSocialMedia>
                   {socialLinks.map((link) => (
-                    <Icons link={link} key={link.id} />
+                    <div key={link.id}>
+                      <Icons link={link} key={link.id} />
+                    </div>
                   ))}
                 </FooterSocialMedia>
               </div>

@@ -129,10 +129,11 @@ const ContactForm = () => {
             {...register('email', {
               required: true,
               validate: {
-                maxLenght: (v) => v.length <= 50 || "The email should have at most 50 characters",
+                maxLenght: (v) => v.length <= 50 || "The email should not be more than 50 characters",
                 matchPattern: (value) => /^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+$/.test(value) || "The email should be in the format of johndoe@email.com",
               },
             })}
+            sx={{ width: { xs: '38ch', md: '60ch', } }}
           />
           {errors.email?.message && <Box sx={{ color: 'red' }}>{errors.email.message}</Box>}
         </Box>
@@ -144,7 +145,14 @@ const ContactForm = () => {
           size='medium'
           placeholder='e.g I want to work with you'
           required
-          {...register('subject', { required: true })}
+          {...register('subject', {
+            required: true,
+            validate: {
+              minLength: (value) => value.length > 3 || "The subject should be at least 3 characters long",
+              maxLength: (value) => value.length < 50 || "The subject should be less than 20 characters long",
+              matchPattern: (value) => /^[a-zA-Z0-9_]+$/.test(value) || "The subject should be alphanumeric",
+            }
+          })}
         />
         <Input
           id="outlined-multiline-static"

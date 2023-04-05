@@ -22,6 +22,7 @@ export type ButtonProps = {
   onClick?: () => void;
   width?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export type StyledButtonProps = {

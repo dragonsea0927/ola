@@ -1,8 +1,10 @@
+import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { CustomButton } from '@/components';
 import { useForm, Resolver } from 'react-hook-form';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const FormContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -75,34 +77,27 @@ type FormValues = {
   message: string;
 }
 
-const resolver: Resolver<FormValues> = async (values) => {
-  return {
-    values: {
-      name: values.name ? values.name : {},
-      number: values.number ? values.number : {},
-      email: values.email ? values.email : {},
-      subject: values.subject ? values.subject : {},
-      message: values.message ? values.message : {},
-    },
-
-    errors: {
-      name: !values.name ? { type: 'required', message: 'Name is required' } : {},
-      number: !values.number ? { type: 'required', message: 'Number is required' } : {},
-      email: !values.email ? { type: 'required', message: 'Email is required' } : {},
-      subject: !values.subject ? { type: 'required', message: 'Subject is required' } : {},
-      message: !values.message ? { type: 'required', message: 'Message is required' } : {},
-
-    }
-  }
-
-};
-
 const ContactForm = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({
-    mode: 'onChange',
-    resolver,
+  const { register, handleSubmit, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<FormValues>({
+    mode: 'onBlur',
+    defaultValues: {
+      name: '',
+      number: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
   });
 
+  const onSubmit = (data: FormValues) => {
+    // console.log(data);
+  };
+
+  React.useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
 
   return (
@@ -112,10 +107,7 @@ const ContactForm = () => {
         sx={{
           '& > :not(style)': { m: 1, width: { xs: '38ch', md: '60ch', } },
         }}
-        onClick={handleSubmit((data) => {
-          console.log(data);
-          watch();
-        })}
+        onClick={handleSubmit(onSubmit)}
       >
         <>
           <Box sx={{ display: 'flex', gap: '5px' }}>
@@ -125,7 +117,6 @@ const ContactForm = () => {
               variant="outlined"
               size='medium'
               placeholder='e.g John Smith'
-              value={watch('name')}
               sx={{ width: { xs: '38ch', md: '30ch', } }}
               {...register('name', {
                 required: true,
@@ -143,13 +134,12 @@ const ContactForm = () => {
               variant="outlined"
               size='medium'
               placeholder='e.g +2348012345678'
-              value={watch('number')}
               sx={{ width: { xs: '38ch', md: '30ch', } }}
               {...register('number', {
                 required: true,
                 validate: {
-                  minLength: (value) => value.length > 11 || "The number should be at least 11 characters long",
-                  maxLength: (value) => value.length < 12 || "The number should be less than 15 characters long",
+                  minLength: (value) => value.length > 6 || "The number should be at least 6 characters long",
+                  maxLength: (value) => value.length < 12 || "The number should be less than 12 characters long",
                   matchPattern: (value) => /\+?[1-9][0-9]{7,14}/g.test(value) || "The number should be in the format of +2348012345678",
                 },
               })}
@@ -164,7 +154,6 @@ const ContactForm = () => {
           variant="outlined"
           size='medium'
           placeholder='youremail@something.com'
-          value={watch('email')}
           {...register('email', {
             required: true,
             validate: {
@@ -183,7 +172,6 @@ const ContactForm = () => {
           variant="outlined"
           size='medium'
           placeholder='e.g I want to work with you'
-          value={watch('subject')}
           {...register('subject', {
             required: true,
             validate: {
@@ -200,7 +188,6 @@ const ContactForm = () => {
           rows={8}
           variant="outlined"
           placeholder='Say hello!'
-          value={watch('message')}
           {...register('message', {
             required: true,
             validate: {
@@ -215,7 +202,7 @@ const ContactForm = () => {
           width='50%'
           type='submit'
         >
-          Send
+          {isSubmitting ? <CircularProgress size={24} /> : 'Send'}
         </CustomButton>
       </Form>
     </FormContainer>

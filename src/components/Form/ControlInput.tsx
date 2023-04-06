@@ -54,7 +54,7 @@ const ControlInput = ({ name, control, label, width, placeholder, ...otherProps 
           placeholder={placeholder}
           sx={{ width: width }}
           onChange={onChange}
-          // onBlur={onBlur}
+          onBlur={onBlur}
           value={value}
           {...otherProps}
         />}

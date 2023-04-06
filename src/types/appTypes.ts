@@ -49,3 +49,11 @@ export type SocialLink = {
 }
 
 export type SocialLinks = SocialLink[]
+
+export type FormValues = {
+  name: string;
+  number: string;
+  email: string;
+  subject: string;
+  message: string;
+}

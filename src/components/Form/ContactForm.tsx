@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { yupResolver } from "@hookform/resolvers/yup";
 import ControlInput from './ControlInput';
 import { contactSchema as schema } from '@/utils';
+import { FormValues } from '@/types';
 
 
 const FormContainer = styled('div')(({ theme }) => ({
@@ -51,14 +52,6 @@ const Form = styled(Box)(({ theme }) => ({
     },
   },
 }));
-
-type FormValues = {
-  name: string;
-  number: string;
-  email: string;
-  subject: string;
-  message: string;
-}
 
 const formValidation = yupResolver(schema);
 

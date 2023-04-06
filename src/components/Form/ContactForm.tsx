@@ -1,7 +1,14 @@
+import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { CustomButton } from '../../components';
+import { CustomButton } from '@/components';
+import { useForm } from 'react-hook-form';
+import CircularProgress from '@mui/material/CircularProgress';
+import { yupResolver } from "@hookform/resolvers/yup";
+import ControlInput from './ControlInput';
+import { contactSchema as schema } from '@/utils';
+import { FormValues } from '@/types';
+
 
 const FormContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -26,6 +33,9 @@ const FormContainer = styled('div')(({ theme }) => ({
 const Form = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
+  small: {
+    color: 'red',
+  },
   '& > :not(style)': {
     width: '100%',
     margin: theme.spacing(1),
@@ -43,67 +53,100 @@ const Form = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Input = styled(TextField)(({ theme }) => ({
-  backgroundColor: theme.white.main,
-  borderRadius: '8px',
-  '& .MuiInputBase-input': {
-    color: theme.text.primary,
-  },
-  '& .MuiInput-underline:before': {
-    borderBottomColor: theme.white.main,
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: theme.white.main,
-  },
-  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-    borderBottomColor: theme.white.main,
-  },
-  '& .MuiFormLabel-root': {
-    color: theme.text.primary,
-  },
-}));
+const formValidation = yupResolver(schema);
 
 const ContactForm = () => {
+  const { register, handleSubmit, control, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<FormValues>({
+    mode: 'onBlur',
+    defaultValues: {
+      name: '',
+      number: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+    resolver: formValidation,
+  });
+
+  const onSubmit = (data: FormValues) => {
+    // console.log(data);
+  };
+
+  React.useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
+
+
   return (
     <FormContainer>
       <Form
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: { xs: '38ch', md: '50ch', } },
+          '& > :not(style)': { m: 1, width: { xs: '38ch', md: '60ch', } },
         }}
+
       >
-        <Input
-          id="outlined-basic"
-          label="Name"
-          variant="outlined"
-          size='small'
-          placeholder='e.g John Smith'
-          required
-        />
-        <Input
-          id="outlined-basic"
+        <Box>
+          <Box sx={{ display: 'flex', gap: '5px' }}>
+            <ControlInput
+              control={control}
+              name="name"
+              label="Name"
+              placeholder="e.g John Doe"
+              inputProps={register('name')}
+              width={{ xs: '38ch', md: '30ch' }}
+            />
+            <ControlInput
+              control={control}
+              name="number"
+              label="Number"
+              placeholder="e.g +2348012345678"
+              inputProps={register('number')}
+              width={{ xs: '38ch', md: '30ch' }}
+            />
+          </Box>
+          {errors.number?.message ? <small>{`${errors.number.message}`}</small> : null}
+          {errors.name?.message ? <small>{`${errors.name.message}`}</small> : null}
+        </Box>
+
+        <ControlInput
+          control={control}
+          name="email"
           label="Email"
-          variant="outlined"
-          size='small'
-          placeholder='youremail@something.com'
-          required
+          placeholder="e.g youremail@something.com"
+          inputProps={register('email')}
         />
-        <Input
-          id="outlined-multiline-static"
+        {errors.email?.message && <small>{`${errors.email.message}`}</small>}
+
+
+        <ControlInput
+          control={control}
+          name="subject"
+          label="Subject"
+          placeholder="e.g I want to hire you"
+          inputProps={register('subject')}
+        />
+        {errors.subject?.message && <small>{`${errors.subject.message}`}</small>}
+
+        <ControlInput
+          control={control}
+          name="message"
           label="Message"
+          placeholder='Say hello!'
+          inputProps={register('message')}
           multiline
           rows={8}
-          variant="outlined"
-          placeholder='Say hello!'
-          required
         />
-
+        {errors.message?.message && <small>{`${errors.message.message}`}</small>}
         <CustomButton
           variant='contained'
           width='50%'
-          onClick={() => { }}
+          type='submit'
+          onClick={handleSubmit(onSubmit)}
         >
-          Send
+          {isSubmitting ? <CircularProgress size={24} /> : 'Send'}
         </CustomButton>
       </Form>
     </FormContainer>

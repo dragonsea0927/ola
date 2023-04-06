@@ -21,6 +21,8 @@ export type ButtonProps = {
   size?: "small" | "medium" | "large";
   onClick?: () => void;
   width?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export type StyledButtonProps = {
@@ -47,3 +49,11 @@ export type SocialLink = {
 }
 
 export type SocialLinks = SocialLink[]
+
+export type FormValues = {
+  name: string;
+  number: string;
+  email: string;
+  subject: string;
+  message: string;
+}

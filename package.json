@@ -12,6 +12,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^3.0.1",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
     "@types/node": "18.15.3",
@@ -29,7 +30,8 @@
     "react-icons": "^4.8.0",
     "react-type-animation": "^3.0.1",
     "swr": "^2.1.1",
-    "typescript": "5.0.2"
+    "typescript": "5.0.2",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.0",

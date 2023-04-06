@@ -3,8 +3,11 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { CustomButton } from '@/components';
-import { useForm, Resolver } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import CircularProgress from '@mui/material/CircularProgress';
+import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup";
+
 
 const FormContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -77,8 +80,46 @@ type FormValues = {
   message: string;
 }
 
+const schema = yup.object().shape({
+  name: yup
+    .string()
+    .required('Name is required')
+    .min(3, 'Name should be at least 3 characters long')
+    .max(20, 'Name should be less than 20 characters long')
+    .matches(/^[a-zA-Z]+$/, 'Name should be alphabetic'),
+
+  number: yup
+    .string()
+    .required('Number is required')
+    .min(10, 'Number should be at least 10 characters long')
+    .max(11, 'Number should be less than 10 characters long')
+    .matches(/^[0-9]+$/, 'Number should be numeric'),
+
+  email:
+    yup.string()
+      .required('Email is required')
+      .email('Email is invalid')
+      .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Email is invalid'),
+
+  subject: yup
+    .string()
+    .required('Subject is required')
+    .min(3, 'Subject should be at least 3 characters long')
+    .max(20, 'Subject should be less than 20 characters long')
+    .matches(/^[a-zA-Z]/, 'Subject should be alphanumeric'),
+
+  message: yup
+    .string()
+    .required('Message is required')
+    .min(3, 'Message should be at least 3 characters long')
+    .max(500, 'Message should be less than 100 characters long')
+    .matches(/^[a-zA-Z0-9_]+$/, 'Message should be alphanumeric'),
+});
+
+const formValidation = yupResolver(schema);
+
 const ContactForm = () => {
-  const { register, handleSubmit, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<FormValues>({
+  const { register, handleSubmit, control, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<FormValues>({
     mode: 'onBlur',
     defaultValues: {
       name: '',
@@ -87,10 +128,11 @@ const ContactForm = () => {
       subject: '',
       message: '',
     },
+    resolver: formValidation,
   });
 
   const onSubmit = (data: FormValues) => {
-    // console.log(data);
+    console.log(data);
   };
 
   React.useEffect(() => {
@@ -109,46 +151,48 @@ const ContactForm = () => {
         }}
         onClick={handleSubmit(onSubmit)}
       >
-        <>
-          <Box sx={{ display: 'flex', gap: '5px' }}>
-            <Input
-              id="outlined-basic"
-              label="Name"
-              variant="outlined"
-              size='medium'
-              placeholder='e.g John Smith'
-              sx={{ width: { xs: '38ch', md: '30ch', } }}
-              {...register('name', {
-                required: true,
-                validate: {
-                  minLength: (value) => value.length > 3 || "The name should be at least 3 characters long",
-                  maxLength: (value) => value.length < 20 || "The name should be less than 20 characters long",
-                  matchPattern: (value) => /^[a-zA-Z0-9_]+$/.test(value) || "The name should be alphanumeric",
-                }
-              })}
-            />
+        {/* <> */}
+        <Box sx={{ display: 'flex', gap: '5px' }}>
+          <Controller
+            control={control}
+            name="name"
+            rules={{ required: true }}
+            render={({
+              field: { onChange, onBlur, value, ref },
+              fieldState: { invalid, isTouched, isDirty, error },
+              formState,
+            }) =>
+              <Input
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                size='medium'
+                placeholder='e.g John Smith'
+                sx={{ width: { xs: '38ch', md: '30ch', } }}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                // inputRef={ref}
 
-            <Input
+                inputProps={register('name')}
+              />}
+          />
+          {errors.name?.message ? <small>{`${errors.name.message}`}</small> : null}
+        </Box>
+        {/* <Input
               id="outlined-basic"
               label='Number'
               variant="outlined"
               size='medium'
               placeholder='e.g +2348012345678'
               sx={{ width: { xs: '38ch', md: '30ch', } }}
-              {...register('number', {
-                required: true,
-                validate: {
-                  minLength: (value) => value.length > 6 || "The number should be at least 6 characters long",
-                  maxLength: (value) => value.length < 12 || "The number should be less than 12 characters long",
-                  matchPattern: (value) => /\+?[1-9][0-9]{7,14}/g.test(value) || "The number should be in the format of +2348012345678",
-                },
-              })}
+              inputProps={register('number')}
             />
           </Box>
-          {errors.number?.message && <small>{`${errors.number.message}`}</small>}
-          {errors.name?.message && <small>{`${errors.name.message}`}</small>}
-        </>
-        <Input
+          {errors.number?.message ? <small>{`${errors.number.message}`}</small> : null} */}
+        {/* {errors.name?.message ? <small>{`${errors.name.message}`}</small> : null} */}
+        {/* </> */}
+        {/* <Input
           id="outlined-basic"
           label="Email"
           variant="outlined"
@@ -156,15 +200,10 @@ const ContactForm = () => {
           placeholder='youremail@something.com'
           {...register('email', {
             required: true,
-            validate: {
-              maxLenght: (v) => v.length <= 50 || "The email should not be more than 50 characters",
-              matchPattern: (value) => /^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+$/.test(value) || "The email should be in the format of johndoe@email.com",
-            },
           })}
           sx={{ width: { xs: '38ch', md: '60ch', } }}
         />
         {errors.email?.message && <small>{`${errors.email.message}`}</small>}
-
 
         <Input
           id="outlined-basic"
@@ -173,11 +212,7 @@ const ContactForm = () => {
           size='medium'
           placeholder='e.g I want to work with you'
           {...register('subject', {
-            required: true,
-            validate: {
-              minLength: (value) => value.length > 3 || "The subject should be at least 3 characters long",
-              maxLength: (value) => value.length < 50 || "The subject should be less than 20 characters long",
-            }
+            required: true
           })}
         />
         {errors.subject?.message && <small>{`${errors.subject.message}`}</small>}
@@ -189,14 +224,10 @@ const ContactForm = () => {
           variant="outlined"
           placeholder='Say hello!'
           {...register('message', {
-            required: true,
-            validate: {
-              minLength: (value) => value.length > 3 || "The message should be at least 3 characters long",
-              maxLength: (value) => value.length < 500 || "The message should be less than 500 characters long",
-            }
+            required: true
           })}
         />
-        {errors.message?.message && <small>{`${errors.message.message}`}</small>}
+        {errors.message?.message && <small>{`${errors.message.message}`}</small>} */}
         <CustomButton
           variant='contained'
           width='50%'

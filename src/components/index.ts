@@ -10,5 +10,12 @@ import CustomModal from "./Modal/CustomModal";
 import ProjectModal from "./Modal/ProjectModal";
 import BlogSection from "./Blogs/BlogSection";
 import BlogModal from "./Modal/BlogModal";
+import TabPanel from "./Tabs/Tab";
+import AllProjects from "./Projects/AllProjects";
+import BackendProjects from "./Projects/Backends";
+import FrontendProjects from "./Projects/Frontends";
+import FullstackProjects from "./Projects/Fullstacks";
 
-export { Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal };
+export {
+  Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects
+};

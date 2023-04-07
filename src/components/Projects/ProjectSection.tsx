@@ -4,6 +4,10 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CustomCard } from '..'
 import ProjectImage from '../../assets/images/portfolio.jpg'
+import { TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects } from '@/components'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import { tabs } from '@/utils'
 
 const ProjectContainer = styled(Grid)(({ theme }) => ({
   width: '100vw',
@@ -60,25 +64,79 @@ interface ProjectSectionProps {
 }
 
 const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
+  const [activeTab, setActiveTab] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setActiveTab(newValue);
+  };
+
+  const switchComponent = (value: string) => {
+    switch (value) {
+      case 'all':
+        return <AllProjects />
+      case 'frontend':
+        return <FrontendProjects />
+      case 'backend':
+        return <BackendProjects />
+      case 'fullstack':
+        return <FullstackProjects />
+      default:
+        return null
+    }
+  };
+
   return (
     <ProjectContainer>
       <Typography variant='body1' className='info'>Visit my portfolio for my latest projects</Typography>
       <Typography variant='h2'>My Recents Works</Typography>
-      <Projects>
-        {[1, 2, 3, 4, 5, 6].map((item) => (
-          <CustomCard
-            key={item}
-            image={ProjectImage}
-            overlayText='View Project'
-            name='Cuxtomer'
-            role='Frontend'
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            onClick={handleOpenModal}
+
+      <Tabs
+        value={activeTab}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="secondary"
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="scrollable auto tabs example"
+      >
+        {tabs.map((tab) => (
+          <Tab
+            key={tab.label}
+            label={tab.label}
+            id={`scrollable-auto-tab-${tab.value}`}
+            aria-controls={`scrollable-auto-tabpanel-${tab.value}`}
           />
         ))}
-      </Projects>
-    </ProjectContainer>
+      </Tabs>
+
+      {tabs.map((tab, index) => {
+        const { label, value } = tab
+        return (
+          <TabPanel key={label} value={activeTab} index={index}>
+            {switchComponent(value)}
+          </TabPanel>
+        )
+      }
+
+      )}
+
+    </ProjectContainer >
   )
 }
 
 export default ProjectSection
+
+
+  // <Projects>
+  //   {[1, 2, 3, 4, 5, 6].map((item) => (
+  //     <CustomCard
+  //       key={item}
+  //       image={ProjectImage}
+  //       overlayText='View Project'
+  //       name='Cuxtomer'
+  //       role='Frontend'
+  //       description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+  //       onClick={handleOpenModal}
+  //     />
+  //   ))}
+  // </Projects>

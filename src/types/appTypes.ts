@@ -57,3 +57,11 @@ export type FormValues = {
   subject: string;
   message: string;
 }
+
+export type Tabs = {
+  label: string;
+  value: string;
+  element?: React.FC
+}
+
+export type TabArray = Tabs[]

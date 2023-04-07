@@ -1,5 +1,5 @@
-import { navItems, socialLinks, randomItemFromArray } from './utilities';
+import { navItems, socialLinks, randomItemFromArray, tabs } from './utilities';
 import { contactSchema } from './validations';
 
 
-export { navItems, socialLinks, randomItemFromArray, contactSchema };
+export { navItems, socialLinks, randomItemFromArray, contactSchema, tabs };

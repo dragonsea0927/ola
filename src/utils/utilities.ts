@@ -1,4 +1,4 @@
-import { NavItems, SocialLinks } from "@/types";
+import { NavItems, SocialLinks, TabArray } from "@/types";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -70,3 +70,25 @@ export const socialLinks: SocialLinks = [
     icon: FaMedium
   }
 ];
+
+export const tabs: TabArray = [
+  {
+    label: 'All Projects',
+    value: 'all',
+
+  },
+  {
+    label: 'Frontend',
+    value: 'frontend',
+  },
+
+  {
+    label: 'Backend',
+    value: 'backend',
+  },
+
+  {
+    label: 'Fullstack',
+    value: 'fullstack',
+  },
+]

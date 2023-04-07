@@ -65,3 +65,9 @@ export type Tabs = {
 }
 
 export type TabArray = Tabs[]
+
+export type TabPanelProps = {
+  children: React.ReactNode
+  index: number
+  value: number
+}

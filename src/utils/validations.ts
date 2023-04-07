@@ -33,5 +33,4 @@ export const contactSchema = yup.object().shape({
     .required('Message is required')
     .min(3, 'Message should be at least 3 characters long')
     .max(500, 'Message should be less than 100 characters long')
-    .matches(/^[a-zA-Z]+$/, 'Message should be alphabetic'),
 });

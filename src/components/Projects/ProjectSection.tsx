@@ -37,12 +37,7 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
 }))
 
 
-
-interface ProjectSectionProps {
-  handleOpenModal: () => void
-}
-
-const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
+const ProjectSection = ({ handleOpenModal }: { handleOpenModal: () => void }) => {
   const [activeTab, setActiveTab] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -81,7 +76,6 @@ const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
           display: { xs: 'none', sm: 'none', md: 'block' },
           width: '95%',
           margin: '20px auto',
-          // m: 3,
         }}
       >
         {tabs.map((tab, index) => (
@@ -97,6 +91,12 @@ const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
               backgroundColor: activeTab === index ? 'secondary.main' : 'transparent',
               color: activeTab === index ? 'white' : 'secondary.main',
               padding: '5px 10px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              textTransform: 'capitalize',
+              '&:hover': {
+                color: 'text.primary',
+              }
             }}
           />
         ))}

@@ -2,8 +2,6 @@ import React from 'react'
 import { styled } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import { CustomCard } from '..'
-import ProjectImage from '../../assets/images/portfolio.jpg'
 import { TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects } from '@/components'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -38,26 +36,7 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
 
 }))
 
-const Projects = styled(Grid)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gap: '20px',
-  padding: '80px',
-  [theme.breakpoints.down('sm')]: {
-    gridTemplateColumns: 'repeat(1, 1fr)',
-    padding: '10px',
-    gap: '30px'
-  },
 
-  [theme.breakpoints.up('md')]: {
-    gap: '30px',
-  },
-
-  [theme.breakpoints.up('lg')]: {
-
-  },
-
-}))
 
 interface ProjectSectionProps {
   handleOpenModal: () => void
@@ -73,7 +52,7 @@ const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
   const switchComponent = (value: string) => {
     switch (value) {
       case 'all':
-        return <AllProjects />
+        return <AllProjects handleOpenModal={handleOpenModal} />
       case 'frontend':
         return <FrontendProjects />
       case 'backend':
@@ -94,17 +73,31 @@ const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
         value={activeTab}
         onChange={handleChange}
         indicatorColor="primary"
-        textColor="secondary"
+        textColor="inherit"
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
+        sx={{
+          display: { xs: 'none', sm: 'none', md: 'block' },
+          width: '95%',
+          margin: '20px auto',
+          // m: 3,
+        }}
       >
-        {tabs.map((tab) => (
+        {tabs.map((tab, index) => (
           <Tab
             key={tab.label}
             label={tab.label}
             id={`scrollable-auto-tab-${tab.value}`}
             aria-controls={`scrollable-auto-tabpanel-${tab.value}`}
+            sx={{
+              width: '200px',
+              minWidth: '100px',
+              borderRadius: activeTab === index ? '5px' : '0px',
+              backgroundColor: activeTab === index ? 'secondary.main' : 'transparent',
+              color: activeTab === index ? 'white' : 'secondary.main',
+              padding: '5px 10px',
+            }}
           />
         ))}
       </Tabs>
@@ -112,7 +105,11 @@ const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
       {tabs.map((tab, index) => {
         const { label, value } = tab
         return (
-          <TabPanel key={label} value={activeTab} index={index}>
+          <TabPanel
+            key={label}
+            value={activeTab}
+            index={index}
+          >
             {switchComponent(value)}
           </TabPanel>
         )
@@ -125,18 +122,3 @@ const ProjectSection = ({ handleOpenModal }: ProjectSectionProps) => {
 }
 
 export default ProjectSection
-
-
-  // <Projects>
-  //   {[1, 2, 3, 4, 5, 6].map((item) => (
-  //     <CustomCard
-  //       key={item}
-  //       image={ProjectImage}
-  //       overlayText='View Project'
-  //       name='Cuxtomer'
-  //       role='Frontend'
-  //       description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  //       onClick={handleOpenModal}
-  //     />
-  //   ))}
-  // </Projects>

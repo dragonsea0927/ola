@@ -1,10 +1,11 @@
 import React from 'react'
+import { Projects } from './AllProjects'
 
 const FullstackProjects = () => {
   return (
-    <div>
+    <Projects>
       <h1>Fullstack Projects</h1>
-    </div>
+    </Projects>
 
   )
 }

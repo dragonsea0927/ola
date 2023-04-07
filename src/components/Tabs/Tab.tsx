@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled } from '@mui/material'
+import { styled, Box } from '@mui/material'
 
 interface TabPanelProps {
   children?: any
@@ -11,7 +11,8 @@ interface TabPanelProps {
 
 const TabPanel = ({ children, value, index, ...others }: TabPanelProps) => {
   return (
-    <div
+    <Box
+      sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 1 }}
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -19,7 +20,7 @@ const TabPanel = ({ children, value, index, ...others }: TabPanelProps) => {
       {...others}
     >
       {children}
-    </div>
+    </Box>
   )
 }
 

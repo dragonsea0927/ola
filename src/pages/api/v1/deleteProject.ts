@@ -16,8 +16,21 @@ export default async function handler(
       .collection('projects')
       .deleteOne({ _id: new ObjectId(id as string) })
 
-    res.status(200).json(result)
+    if (result.deletedCount === 0) {
+      res.status(404).json({
+        status: 'error',
+        message: 'Project not found'
+      })
+    } else {
+      res.status(200).json({
+        status: 'success',
+        message: `Project deleted successfully with id: ${id}`
+      })
+    }
   } catch (error) {
-    res.status(500).json({ error: error })
+    res.status(500).json({
+      error: error,
+      message: `Error deleting project from database ${error}`
+    })
   }
 }

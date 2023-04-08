@@ -1,11 +1,12 @@
 export type Project = {
-  _id: string,
   name: string,
   description: string,
   stacks: string[],
   github: string,
   url: string,
-  image: string,
+  modalImg: string,
+  coverImg: string,
+  tag: string,
 }
 
 export type Projects = Project[]

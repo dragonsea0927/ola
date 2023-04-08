@@ -37,6 +37,40 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
 }))
 
 
+const TabsStyle = styled(Tabs)(({ theme }) => ({
+  width: '65%',
+  margin: '30px auto',
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
+
+  [theme.breakpoints.up('md')]: {
+    display: { xs: 'none', sm: 'none', md: 'block' },
+  },
+
+  [theme.breakpoints.up('lg')]: {
+    display: { xs: 'none', sm: 'none', md: 'block' },
+  },
+}))
+
+const TabStyle = styled(Tab)(({ theme }) => ({
+  width: '220px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minWidth: '100px',
+  borderRadius: '5px',
+  backgroundColor: 'secondary.main',
+  padding: '5px 10px',
+  fontSize: '18px',
+  fontWeight: 'bold',
+  textTransform: 'capitalize',
+  '&:hover': {
+    color: 'text.primary',
+  }
+}))
+
+
 const ProjectSection = ({ handleOpenModal }: { handleOpenModal: () => void }) => {
   const [activeTab, setActiveTab] = React.useState(0);
 
@@ -64,7 +98,7 @@ const ProjectSection = ({ handleOpenModal }: { handleOpenModal: () => void }) =>
       <Typography variant='body1' className='info'>Visit my portfolio for my latest projects</Typography>
       <Typography variant='h2'>My Recents Works</Typography>
 
-      <Tabs
+      <TabsStyle
         value={activeTab}
         onChange={handleChange}
         indicatorColor="primary"
@@ -72,35 +106,21 @@ const ProjectSection = ({ handleOpenModal }: { handleOpenModal: () => void }) =>
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
-        sx={{
-          display: { xs: 'none', sm: 'none', md: 'block' },
-          width: '95%',
-          margin: '20px auto',
-        }}
       >
         {tabs.map((tab, index) => (
-          <Tab
+          <TabStyle
             key={tab.label}
             label={tab.label}
             id={`scrollable-auto-tab-${tab.value}`}
             aria-controls={`scrollable-auto-tabpanel-${tab.value}`}
             sx={{
-              width: '200px',
-              minWidth: '100px',
               borderRadius: activeTab === index ? '5px' : '0px',
               backgroundColor: activeTab === index ? 'secondary.main' : 'transparent',
               color: activeTab === index ? 'white' : 'secondary.main',
-              padding: '5px 10px',
-              fontSize: '18px',
-              fontWeight: 'bold',
-              textTransform: 'capitalize',
-              '&:hover': {
-                color: 'text.primary',
-              }
             }}
           />
         ))}
-      </Tabs>
+      </TabsStyle>
 
       {tabs.map((tab, index) => {
         const { label, value } = tab

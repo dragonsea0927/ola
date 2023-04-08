@@ -27,12 +27,10 @@ export async function connectToDatabase() {
     throw new Error("Define the MONGODB_DB environmental variable");
   }
 
-  // Connect to cluster
   let client = new MongoClient(MONGODB_URI);
   await client.connect();
   let db = client.db(MONGODB_DB);
 
-  // set cache
   cachedClient = client;
   cachedDb = db;
 

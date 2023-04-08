@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.0",
+    "prisma": "^4.12.0",
     "sass": "^1.60.0"
   }
 }

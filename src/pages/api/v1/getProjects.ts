@@ -9,7 +9,7 @@ export default async function handler(
     const { client } = await connectToDatabase();
     const db = client.db("projects");
 
-    const result = await db.collection("projects").find().toArray();
+    const result = await db.collection("projects").find({}).toArray();
     res.status(200).json({
       status: "success",
       data: result,

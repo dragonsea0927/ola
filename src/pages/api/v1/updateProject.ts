@@ -8,8 +8,8 @@ export default async function handler(
 ) {
   try {
     const { client } = await connectToDatabase()
+    const { id } = req.query
     const db = client.db('projects')
-    const { id, name, description, stacks, github, url, coverImg, modalImg, tag } = req.body
 
     const projectExist = await db.collection('projects').findOne({
       _id: new ObjectId(id as string)
@@ -25,14 +25,7 @@ export default async function handler(
       { _id: new ObjectId(id as string) },
       {
         $set: {
-          name,
-          description,
-          stacks,
-          github,
-          url,
-          coverImg,
-          modalImg,
-          tag,
+          ...req.body,
         },
       }
     )

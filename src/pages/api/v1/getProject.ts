@@ -11,12 +11,31 @@ export default async function handler(
     const db = client.db('projects')
 
     const { id } = req.query
+
+    const projectExist = await db.collection('projects').findOne({
+      _id: new ObjectId(id as string)
+    })
+
+    if (!projectExist) {
+      res.status(404).json({
+        status: 'error',
+        message: 'Project not found'
+      })
+    }
+
     const result = await db
       .collection('projects')
       .findOne({ _id: new ObjectId(id as string) })
 
-    res.status(200).json(result)
+    res.status(200).json({
+      status: 'success',
+      message: 'Project found successful',
+      data: result
+    })
   } catch (error) {
-    res.status(500).json({ error: error })
+    res.status(500).json({
+      error: error,
+      message: `Error getting project ${error}`
+    })
   }
 }

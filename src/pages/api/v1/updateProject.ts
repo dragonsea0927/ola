@@ -1,18 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import connectToDatabase from '../../../lib'
-import { ObjectId } from "mongodb";
+import prisma from '@/lib/prisma'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const { id } = req.query
   try {
-    const { client } = await connectToDatabase()
-    const { id } = req.query
-    const db = client.db('projects')
-
-    const projectExist = await db.collection('projects').findOne({
-      _id: new ObjectId(id as string)
+    const projectExist = await prisma.project.findUnique({
+      where: {
+        id: id as string
+      }
     })
 
     if (!projectExist) {
@@ -21,14 +19,12 @@ export default async function handler(
         message: 'Project not found'
       })
     }
-    const project = await db.collection('projects').updateOne(
-      { _id: new ObjectId(id as string) },
-      {
-        $set: {
-          ...req.body,
-        },
-      }
-    )
+    const project = await prisma.project.update({
+      where: {
+        id: id as string
+      },
+      data: req.body
+    })
 
     res.status(200).json({
       status: 'success',

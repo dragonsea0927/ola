@@ -34,6 +34,7 @@ export default async function handler(
       },
     })
     res.status(200).json({
+      nHits: result.length,
       status: "success",
       data: result,
       message: "Projects fetched successfully",

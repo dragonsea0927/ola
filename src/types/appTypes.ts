@@ -2,11 +2,15 @@ export type Project = {
   name: string,
   description: string,
   stacks: string[],
-  github: string,
-  url: string,
-  modalImg: string,
-  coverImg: string,
+  githubUrl: string,
+  liveUrl: string,
+  modalImgUrl: string,
+  coverImgUrl: string,
   tag: string,
+  createdAt: string,
+  updatedAt: string,
+  deletedAt: string,
+  published: boolean,
 }
 
 export type Projects = Project[]

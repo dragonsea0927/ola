@@ -13,6 +13,10 @@ const AdminRoutes = ({ session, isActive, signOut }: AdminRoutesProps) => {
       <p>
         {session?.user?.name} ({session?.user?.email})
       </p>
+      <Link href="/">
+        <a data-active={isActive('/')}>Project</a>
+      </Link>
+
       <Link href="/create">
         <a data-active={isActive('/create')}>Create Project</a>
       </Link>

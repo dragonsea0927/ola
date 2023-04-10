@@ -143,7 +143,7 @@ const TopNav = () => {
               >
                 {session && status === 'authenticated' ? (
                   <>
-                    {adminRoutes}
+                    {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
                   </>
                 ) : (
                   <>

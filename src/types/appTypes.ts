@@ -1,11 +1,16 @@
 export type Project = {
-  _id: string,
   name: string,
   description: string,
   stacks: string[],
-  github: string,
-  url: string,
-  image: string,
+  githubUrl: string,
+  liveUrl: string,
+  modalImgUrl: string,
+  coverImgUrl: string,
+  tag: string,
+  createdAt: string,
+  updatedAt: string,
+  deletedAt: string,
+  published: boolean,
 }
 
 export type Projects = Project[]
@@ -56,4 +61,18 @@ export type FormValues = {
   email: string;
   subject: string;
   message: string;
+}
+
+export type Tabs = {
+  label: string;
+  value: string;
+  element?: React.FC
+}
+
+export type TabArray = Tabs[]
+
+export type TabPanelProps = {
+  children: React.ReactNode
+  index: number
+  value: number
 }

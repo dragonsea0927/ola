@@ -1,21 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import connectToDatabase from '../../../lib'
 import { Project } from '../../../types/appTypes'
+import prisma from '@/lib/prisma'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const { client } = await connectToDatabase();
-    const db = client.db("projects");
+    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag }: Project = req.body;
+    const project = { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag };
+    const result = await prisma.project.create({
+      data: project,
+    });
 
-    const { name, description, stacks, github, url, image } = req.body;
-    const project = { name, description, stacks, github, url, image };
-    const result = await db.collection("projects").insertOne(project);
-
-    res.status(200).json(result);
+    res.status(200).json({
+      status: "success",
+      data: result,
+      message: "Project added successfully",
+    });
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({
+      status: "error",
+      error: error,
+      message: `Error adding project to database ${error}`,
+    });
   }
 }

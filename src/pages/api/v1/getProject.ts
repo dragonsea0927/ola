@@ -5,8 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const { id } = req.query
   try {
-    const { id } = req.query
     const project = await prisma.project.findUnique({
       where: {
         id: id as string
@@ -20,20 +20,15 @@ export default async function handler(
       })
     }
 
-    await prisma.project.delete({
-      where: {
-        id: id as string
-      }
-    })
     res.status(200).json({
       status: 'success',
-      message: `Project deleted successfully with id: ${id}`
+      message: 'Project found successful',
+      data: project
     })
-
   } catch (error) {
     res.status(500).json({
       error: error,
-      message: `Error deleting project from database ${error}`
+      message: `Error getting project ${error}`
     })
   }
 }

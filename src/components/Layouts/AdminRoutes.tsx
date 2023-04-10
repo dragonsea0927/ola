@@ -1,11 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
+import { AdminRoutesProps } from '@/types'
 
-interface AdminRoutesProps {
-  session: any;
-  isActive: (pathname: string) => boolean;
-  signOut: () => void;
-}
+// interface AdminRoutesProps {
+//   session: any;
+//   isActive: (pathname: string) => boolean;
+//   signOut: () => void;
+// }
 
 const AdminRoutes = ({ session, isActive, signOut }: AdminRoutesProps) => {
   return (

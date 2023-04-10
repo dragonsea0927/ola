@@ -8,8 +8,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag }: Project = req.body;
-    const project = { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag };
+    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, userId }: Project = req.body;
+    const project = { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, userId };
     const result = await prisma.project.create({
       data: project,
     });

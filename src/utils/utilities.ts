@@ -92,3 +92,15 @@ export const tabs: TabArray = [
     value: 'fullstack',
   },
 ]
+
+export const adminNavItems: NavItems = [
+  {
+    id: 1,
+    title: 'projects',
+    path: '/admin/projects',
+    icon: WorkIcon
+  },
+
+  { id: 2, title: 'blogs', path: '/admin/blogs', icon: RssFeedIcon },
+  { id: 3, title: 'contact', path: '/admin/contact', icon: ContactEmergencyIcon }
+];

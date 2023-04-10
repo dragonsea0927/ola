@@ -11,6 +11,7 @@ export type Project = {
   updatedAt: string,
   deletedAt: string,
   published: boolean,
+  userId: string,
 }
 
 export type Projects = Project[]

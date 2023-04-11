@@ -69,9 +69,10 @@ const BlogsContents = styled(Grid)(({ theme }) => ({
 interface BlogSectionProps {
   handleOpenBlogModal: any
   data: any
+  isLoading: boolean
 }
 
-const BlogSection = ({ handleOpenBlogModal, data }: BlogSectionProps) => {
+const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps) => {
   const sliceData = data?.items ? data.items.slice(0, 3) : []
 
   return (

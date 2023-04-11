@@ -56,14 +56,16 @@ model Session {
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  name      String?
-  email     String?   @unique
-  createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  projects  Project[]
-  accounts  Account[]
-  sessions  Session[]
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  image         String?
+  emailVerified DateTime? @map(name: "email_verified")
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  projects      Project[]
+  accounts      Account[]
+  sessions      Session[]
 
   @@map(name: "users")
 }

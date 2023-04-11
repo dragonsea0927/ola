@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Hero, Layout, ProjectSection, ProjectModal, BlogSection, CustomModal, BlogModal } from '@/components'
+import { Hero, Layout, ProjectSection, ProjectModal, BlogSection, BlogModal } from '@/components'
 import { useFetch, useToggle } from '@/hooks'
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
       <Layout>
         <Hero />
         <ProjectSection handleOpenModal={handleOpenModal} />
-        <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} />
+        <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} isLoading={isLoading} />
       </Layout>
     </>
   )

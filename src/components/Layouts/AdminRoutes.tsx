@@ -1,26 +1,43 @@
 import React from 'react'
 import Link from 'next/link'
 import { AdminRoutesProps } from '@/types'
+import { styled } from '@mui/material'
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  padding: theme.spacing(1, 1),
+  color: theme.text.primary + ' !important',
+  textDecoration: 'none',
+  fontSize: '1rem',
+  '&:hover': {
+    color: theme.palette.secondary.main + ' !important',
+    textDecoration: 'underline',
+  },
+  '&[data-active="true"]': {
+    color: theme.palette.secondary.main,
+    textDecoration: 'underline',
+  },
+}))
+
 
 const AdminRoutes = ({ session, isActive, signOut }: AdminRoutesProps) => {
   return (
     <>
-      <p>
-        {session?.user?.name} ({session?.user?.email})
-      </p>
-      <Link href="/" data-active={isActive('/')}>
-        Project
-      </Link>
+      <small>
+        Welcome, {session?.user?.name} ({session?.user?.email})
+      </small>
+      <StyledLink href="/" data-active={isActive('/')}>
+        Home
+      </StyledLink>
 
-      <Link href="/create" data-active={isActive('/create')}>
-        Create Project
-      </Link>
+      <StyledLink href="/create" data-active={isActive('/create')}>
+        New Project
+      </StyledLink>
 
-      <Link href="/profile" data-active={isActive('/profile')}>
-        Profile
-      </Link>
+      <StyledLink href="/projects" data-active={isActive('/projects')}>
+        Projects
+      </StyledLink>
 
-      <Link href="/api/auth/signout"
+      <StyledLink href="/api/auth/signout"
         onClick={(e) => {
           e.preventDefault();
           signOut();
@@ -28,7 +45,7 @@ const AdminRoutes = ({ session, isActive, signOut }: AdminRoutesProps) => {
         data-active={isActive('/api/auth/signout')}
       >
         Sign Out
-      </Link>
+      </StyledLink>
     </>
   )
 }

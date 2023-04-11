@@ -47,30 +47,7 @@ const TopNav = () => {
 
   const theme = useAppTheme();
 
-  // const adminRoutes = (
-  //   <>
-  //     <p>
-  //       {session?.user?.name} ({session?.user?.email})
-  //     </p>
-  //     <Link href="/create">
-  //       <a data-active={isActive('/create')}>Create Project</a>
-  //     </Link>
-
-  //     <Link href="/profile">
-  //       <a data-active={isActive('/profile')}>Profile</a>
-  //     </Link>
-
-  //     <Link href="/api/auth/signout"
-  //       onClick={(e) => {
-  //         e.preventDefault();
-  //         signOut();
-  //       }}
-  //     >
-  //       <a data-active={isActive('/api/auth/signout')}>Sign Out</a>
-  //     </Link>
-  //   </>
-  // );
-
+  const loading = status === "loading"
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -124,7 +101,12 @@ const TopNav = () => {
             Oi
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
+            {session && status === 'authenticated' && (
+              <>
+                {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
+              </>
+            )}
+            {!session && navItems.map((item) => (
               <Button key={item.id} sx={{
                 color: activeLink === item.path ? theme.palette.secondary.main : theme.text.primary,
                 fontWeight: 500,
@@ -141,15 +123,7 @@ const TopNav = () => {
               }}
                 onClick={() => handleNavigation(item.path)}
               >
-                {session && status === 'authenticated' ? (
-                  <>
-                    {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
-                  </>
-                ) : (
-                  <>
-                    {item.title}
-                  </>
-                )}
+                {item.title}
               </Button>
             ))}
           </Box>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { AdminRoutesProps } from '@/types'
+import { useNavigation } from '@/hooks';
 import { styled } from '@mui/material'
 
 const StyledLink = styled(Link)(({ theme }) => ({
@@ -20,6 +21,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
 
 
 const AdminRoutes = ({ session, isActive, signOut }: AdminRoutesProps) => {
+  const { navigate } = useNavigation();
   return (
     <>
       <small>
@@ -37,12 +39,12 @@ const AdminRoutes = ({ session, isActive, signOut }: AdminRoutesProps) => {
         Projects
       </StyledLink>
 
-      <StyledLink href="/api/auth/signout"
+      <StyledLink href="/"
         onClick={(e) => {
           e.preventDefault();
           signOut();
+          navigate('/');
         }}
-        data-active={isActive('/api/auth/signout')}
       >
         Sign Out
       </StyledLink>

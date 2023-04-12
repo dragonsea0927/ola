@@ -47,8 +47,6 @@ const TopNav = () => {
 
   const theme = useAppTheme();
 
-  const loading = status === "loading"
-
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>

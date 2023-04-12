@@ -7,13 +7,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const session = await getSession({ req });
   try {
-    const session = await getSession({ req });
     const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, userId }: Project = req.body;
     const project = {
       name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag,
       userId
     };
+
+    console.log(session?.user?.email)
 
     if (!session?.user?.email) {
       res.status(401).json({
@@ -27,13 +29,10 @@ export default async function handler(
       data: {
         ...project,
         user: {
-          connect: {
-            email: session?.user?.email,
-          },
-        },
+          connect: { id: userId },
+        }
       },
     });
-
 
     res.status(200).json({
       status: "success",

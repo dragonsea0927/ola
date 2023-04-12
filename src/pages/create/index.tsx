@@ -4,8 +4,8 @@ import { styled } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import { useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
-import { Project } from '@/types'
 import { useRouter } from 'next/router'
+import { sendDataToBackend } from '@/utils';
 
 const FormContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -29,6 +29,14 @@ const FormStyles = styled('form')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(2),
+
+  '.buttons': {
+    width: '100%',
+    display: 'flex',
+    gap: theme.spacing(2),
+    justifyContent: 'center',
+  },
+
   '& button': {
     width: '30%',
     padding: theme.spacing(2, 2),
@@ -38,13 +46,19 @@ const FormStyles = styled('form')(({ theme }) => ({
     borderRadius: '5px',
     alignSelf: 'center',
     fontSize: '1.1rem',
-    '& placeholder': {
-      fontSize: '1rem',
-      fontStyle: 'italic',
-    },
     '&:hover': {
       cursor: 'pointer',
       backgroundColor: theme.palette.secondary.light,
+    },
+  },
+
+  '.cancel': {
+    backgroundColor: theme.white.main,
+    color: theme.palette.secondary.main,
+    border: `1px solid ${theme.palette.secondary.main}`,
+    '&:hover': {
+      backgroundColor: theme.white.main,
+      color: theme.palette.secondary.light,
     },
   },
 }));
@@ -69,7 +83,7 @@ const InputBoxStyles = styled('div')(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-const CreateHomePage = (props) => {
+const CreateHomePage = () => {
   const { data: session, status } = useSession();
   const router = useRouter()
   const [project, setProject] = useState({
@@ -83,6 +97,13 @@ const CreateHomePage = (props) => {
     tag: '',
   })
 
+  const [stacks, setStacks] = useState<string[]>([])
+
+  const handleStacks = (e) => {
+    const { value } = e.target;
+    setStacks(value.split(',').map((item: string) => item.trim()))
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProject({
@@ -91,9 +112,36 @@ const CreateHomePage = (props) => {
     });
   }
 
+  const projectData = {
+    name: project.name,
+    description: project.description,
+    githubUrl: project.githubUrl,
+    liveUrl: project.liveUrl,
+    stacks: stacks,
+    coverImgUrl: project.coverImgUrl,
+    modalImgUrl: project.modalImgUrl,
+    tag: project.tag,
+  }
+
+  const handleReset = () => {
+    setProject({
+      name: '',
+      description: '',
+      githubUrl: '',
+      liveUrl: '',
+      stacks: [],
+      coverImgUrl: '',
+      modalImgUrl: '',
+      tag: '',
+    })
+
+    setStacks([])
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(project)
+    sendDataToBackend(projectData, '/api/v1/post')
+    handleReset()
   }
 
   const loading = status === 'loading';
@@ -106,7 +154,6 @@ const CreateHomePage = (props) => {
       <FormContainer>
         <FormStyles
           onSubmit={(e) => handleSubmit(e)}
-        // component="form"
         >
           <InputBoxStyles>
             <InputStyles
@@ -198,8 +245,8 @@ const CreateHomePage = (props) => {
             placeholder='e.g React, Node, Express, MongoDB, etc'
             color='secondary'
             size='small'
-            value={project.stacks}
-            onChange={(e) => handleChange(e)}
+            value={stacks}
+            onChange={(e) => handleStacks(e)}
           />
 
           <InputStyles
@@ -216,8 +263,18 @@ const CreateHomePage = (props) => {
             onChange={(e) => handleChange(e)}
           />
 
-          <button type="submit"
-          >Create Project</button>
+          <div className='buttons'>
+            <button
+              type="submit">
+              Create
+            </button>
+
+            <button
+              type='button'
+              className='cancel'
+              onClick={() => handleReset()}
+            >Cancel</button>
+          </div>
         </FormStyles>
       </FormContainer>
     </Layout>

@@ -6,8 +6,6 @@ import { useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
 import { useRouter } from 'next/router'
 import { sendDataToBackend } from '@/utils';
-import { getServerSession } from "next-auth/next"
-import authHandler from '@/pages/api/auth/[...nextauth]';
 
 const FormContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -85,7 +83,7 @@ const InputBoxStyles = styled('div')(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-const CreateHomePage: React.FC = () => {
+const CreateHomePage: React.FC = (props) => {
   const { data: session, status } = useSession();
   const router = useRouter()
   const [project, setProject] = useState({
@@ -123,6 +121,7 @@ const CreateHomePage: React.FC = () => {
     coverImgUrl: project.coverImgUrl,
     modalImgUrl: project.modalImgUrl,
     tag: project.tag,
+    user: session?.user
   }
 
   const handleReset = () => {
@@ -281,24 +280,6 @@ const CreateHomePage: React.FC = () => {
       </FormContainer>
     </Layout>
   )
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getServerSession(context.req, context.res, authHandler)
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-  return {
-    props: {
-      session,
-    },
-  }
 }
 
 export default CreateHomePage

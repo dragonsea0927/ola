@@ -6,6 +6,16 @@ import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Session, User } from "next-auth";
 
+interface Options {
+  providers: any;
+  adapter: any;
+  secret: string;
+  callbacks: {
+    session: (session: Session, user: User) => Promise<Session>;
+  };
+}
+
+
 const authHandler: NextApiHandler = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
 export default authHandler;
 
@@ -19,14 +29,9 @@ const options = {
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   callbacks: {
-    session: async ({ session, user }: { session: Session; user: User }) => ({
-      ...session,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        image: user.image
-      },
-    }),
+    session: async ({ session, user }: { session: Session; user: User }) => {
+      session.userId = user.id;
+      return Promise.resolve(session);
+    },
   }
 };

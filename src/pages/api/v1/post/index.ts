@@ -1,24 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Project } from '../../../../types/appTypes'
 import prisma from '@/lib/prisma'
-import { getServerSession } from "next-auth/next"
-import authHandler from '@/pages/api/auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authHandler)
-
-  if (!session) {
-    res.status(401).json({
-      status: "error",
-      message: "You must be logged in to add a project",
-    });
-
-    console.log(session)
-    return;
-  }
 
   try {
     const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, userId }: Project = req.body;
@@ -27,23 +14,25 @@ export default async function handler(
       userId
     };
 
-    console.log(session)
+    const loggedInUser = await prisma.user.findUnique({
+      where: {
+        email: req.body.user.email
+      }
+    })
 
-    // if (!session || !session.user || session === null) {
-    //   res.status(401).json({
-    //     status: "error",
-    //     message: "You must be logged in to add a project",
-    //   });
-    //   return;
-    // }
+    if (!loggedInUser) {
+      return res.status(401).json({
+        status: "error",
+        message: "You are not authorized to perform this action"
+      })
+
+    }
 
     const result = await prisma.project.create({
       data: {
         ...project,
-        user: {
-          connect: { id: userId },
-        }
-      },
+        userId: loggedInUser.id
+      }
     });
 
     res.status(200).json({

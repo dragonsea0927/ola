@@ -33,6 +33,8 @@ interface Props {
   multiline?: boolean;
   rows?: number;
   inputProps?: any;
+  size?: any;
+  sx?: any;
 }
 
 const ControlInput = ({ name, control, label, width, placeholder, ...otherProps }: Props) => {

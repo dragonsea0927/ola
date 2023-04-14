@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Layout } from '@/components'
 import { styled } from '@mui/material'
 import TextField from '@mui/material/TextField';
@@ -6,6 +6,10 @@ import { useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
 import { useRouter } from 'next/router'
 import { sendDataToBackend } from '@/utils';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Project } from '@/types';
+import { ControllInput } from '@/components';
 
 const FormContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -83,49 +87,12 @@ const InputBoxStyles = styled('div')(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-const CreateHomePage: React.FC = (props) => {
+const CreateHomePage: React.FC = () => {
   const { data: session, status } = useSession();
   const router = useRouter()
-  const [project, setProject] = useState({
-    name: '',
-    description: '',
-    githubUrl: '',
-    liveUrl: '',
-    stacks: [],
-    coverImgUrl: '',
-    modalImgUrl: '',
-    tag: '',
-  })
-
-  const [stacks, setStacks] = useState<string[]>([])
-
-  const handleStacks = (e) => {
-    const { value } = e.target;
-    setStacks(value.split(',').map((item: string) => item.trim()))
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProject({
-      ...project,
-      [name]: value
-    });
-  }
-
-  const projectData = {
-    name: project.name,
-    description: project.description,
-    githubUrl: project.githubUrl,
-    liveUrl: project.liveUrl,
-    stacks: stacks,
-    coverImgUrl: project.coverImgUrl,
-    modalImgUrl: project.modalImgUrl,
-    tag: project.tag,
-    user: session?.user
-  }
-
-  const handleReset = () => {
-    setProject({
+  const { register, handleSubmit, control, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<Project>({
+    mode: 'onBlur',
+    defaultValues: {
       name: '',
       description: '',
       githubUrl: '',
@@ -134,16 +101,67 @@ const CreateHomePage: React.FC = (props) => {
       coverImgUrl: '',
       modalImgUrl: '',
       tag: '',
-    })
+    },
+  })
+  // const [project, setProject] = useState({
+  //   name: '',
+  //   description: '',
+  //   githubUrl: '',
+  //   liveUrl: '',
+  //   stacks: [],
+  //   coverImgUrl: '',
+  //   modalImgUrl: '',
+  //   tag: '',
+  // })
 
-    setStacks([])
+  const [stacks, setStacks] = useState<string[]>([])
+
+  const handleStacks = (e) => {
+    const { value } = e.target;
+    setStacks(value.split(',').map((item: string) => item.trim()))
   }
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    sendDataToBackend(projectData, '/api/v1/post')
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setProject({
+  //     ...project,
+  //     [name]: value
+  //   });
+  // }
+
+  // const projectData = {
+  //   name: project.name,
+  //   description: project.description,
+  //   githubUrl: project.githubUrl,
+  //   liveUrl: project.liveUrl,
+  //   stacks: stacks,
+  //   coverImgUrl: project.coverImgUrl,
+  //   modalImgUrl: project.modalImgUrl,
+  //   tag: project.tag,
+  //   user: session?.user
+  // }
+
+  const handleReset = useCallback(() => {
+    reset();
+    setStacks([])
+  }, [reset])
+
+  const onSubmit = (data: Project) => {
+    const newData = {
+      ...data,
+      stacks: stacks,
+      user: session?.user?.email,
+    }
+    sendDataToBackend(newData, '/api/v1/post')
+    // console.log(newData)
     handleReset()
   }
+
+  React.useEffect(() => {
+    if (isSubmitSuccessful) {
+      handleReset();
+    }
+  }, [isSubmitSuccessful, reset, handleReset]);
 
   const loading = status === 'loading';
   if (router.pathname !== 'undefined' && loading) return null;
@@ -153,121 +171,99 @@ const CreateHomePage: React.FC = (props) => {
   return (
     <Layout>
       <FormContainer>
+        {isSubmitSuccessful && <p>Project Created Successfully</p>}
         <FormStyles
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <InputBoxStyles>
-            <InputStyles
-              id="outlined-basic"
-              label="Project Name"
+            <ControllInput
+              control={control}
               name='name'
-              variant="outlined"
               placeholder='Project Name'
-              color='secondary'
-              size='small'
+              label='Project Name'
               sx={{ width: '100%' }}
-              value={project.name}
-              onChange={(e) => handleChange(e)}
+              size='small'
+              inputProps={register('name')}
             />
-            <InputStyles
-              id="outlined-basic"
+            <ControllInput
+              control={control}
               label="Tag"
               name='tag'
-              variant="outlined"
               placeholder='e.g frontend, backend, fullstack, etc'
-              color='secondary'
               size='small'
               sx={{ width: '100%' }}
-              value={project.tag}
-              onChange={(e) => handleChange(e)}
+              inputProps={register('tag')}
             />
           </InputBoxStyles>
           <InputBoxStyles>
-            <InputStyles
-              id="outlined-basic"
+            <ControllInput
+              control={control}
               label="Github URL"
               name='githubUrl'
-              variant="outlined"
               placeholder='Github URL'
-              color='secondary'
               size='small'
               sx={{ width: '100%' }}
-              value={project.githubUrl}
-              onChange={(e) => handleChange(e)}
+              inputProps={register('githubUrl')}
             />
 
-            <InputStyles
-              id="outlined-basic"
+            <ControllInput
+              control={control}
               label="Live URL"
               name='liveUrl'
-              variant="outlined"
               placeholder='Live URL'
-              color='secondary'
               size='small'
               sx={{ width: '100%' }}
-              value={project.liveUrl}
-              onChange={(e) => handleChange(e)}
+              inputProps={register('liveUrl')}
             />
 
           </InputBoxStyles>
 
           <InputBoxStyles>
-            <InputStyles
-              id="outlined-basic"
+            <ControllInput
+              control={control}
               label="cover image URL"
               name='coverImgUrl'
-              variant="outlined"
               placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
-              color='secondary'
               size='small'
               sx={{ width: '100%' }}
-              value={project.coverImgUrl}
-              onChange={(e) => handleChange(e)}
+              inputProps={register('coverImgUrl')}
             />
 
-            <InputStyles
-              id="outlined-basic"
+            <ControllInput
+              control={control}
               label="Modal image URL"
               name='modalImgUrl'
-              variant="outlined"
               placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
-              color='secondary'
               size='small'
               sx={{ width: '100%' }}
-              value={project.modalImgUrl}
-              onChange={(e) => handleChange(e)}
+              inputProps={register('modalImgUrl')}
             />
           </InputBoxStyles>
-          <InputStyles
-            id="outlined-basic"
+          <ControllInput
+            control={control}
             label="Stacks"
-            variant="outlined"
             name='stacks'
             placeholder='e.g React, Node, Express, MongoDB, etc'
-            color='secondary'
             size='small'
-            value={stacks}
-            onChange={(e) => handleStacks(e)}
+            inputProps={register('stacks')}
           />
 
-          <InputStyles
-            id="outlined-basic"
+          <ControllInput
+            control={control}
             label="Description"
-            variant="outlined"
             placeholder='e.g Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-            color='secondary'
             size='small'
             name='description'
             multiline
             rows={8}
-            value={project.description}
-            onChange={(e) => handleChange(e)}
           />
 
           <div className='buttons'>
             <button
-              type="submit">
-              Create
+              type="submit"
+              disabled={!register}
+            >
+              {isSubmitting ? 'Submitting...' : 'Create'}
             </button>
 
             <button

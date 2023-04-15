@@ -5,6 +5,9 @@ import { GetServerSideProps } from 'next';
 import prisma from '@/lib/prisma';
 import { Project } from '@/types';
 import Link from 'next/link';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
@@ -43,12 +46,30 @@ type Props = {
 
 const Noprojects: React.FC = (props) => {
   return (
-    <>
-      <p>You have no project drafts.</p>
-      <button>
-        <Link href="/create">Create New Project</Link>
-      </button>
-    </>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '20px',
+      }}
+    >
+      <Typography variant='body1'>You have no project drafts.</Typography>
+      <Button variant='contained'
+        color='secondary'
+        size='large'
+        sx={{
+          width: '200px',
+          color: 'white',
+          height: '50px',
+        }}
+        component={Link}
+        href='/create'
+      >
+        Create New Project
+      </Button>
+    </Box>
   )
 }
 
@@ -68,7 +89,13 @@ const Projects: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div>
-        <h1>Project Drafts</h1>
+        <Typography variant='h1'
+          gutterBottom
+          sx={{
+            textAlign: 'center',
+            marginTop: '20px',
+          }}
+        >Project Drafts</Typography>
         {props.projects.length === 0 && <Noprojects />}
         {props.projects.map((project: Project) => (
           <div key={project?.id}>

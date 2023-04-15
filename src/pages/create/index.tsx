@@ -135,10 +135,16 @@ const CreateHomePage: React.FC = () => {
   return (
     <Layout>
       <FormContainer>
-        {response && <p style={{ textAlign: 'center', color: 'green' }}>Project Created Successfully</p>}
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography
+          variant="h1"
+          component="h1"
+          gutterBottom
+          sx={{ textAlign: 'center' }}
+        >
           Create Project
         </Typography>
+
+        {response && <p style={{ textAlign: 'center', color: 'green' }}>Project Created Successfully</p>}
         <FormStyles
           onSubmit={handleSubmit(onSubmit)}
         >

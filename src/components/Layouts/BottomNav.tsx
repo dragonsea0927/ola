@@ -206,7 +206,7 @@ const BottomNav = () => {
   const { router } = useNavigation()
   return (
     <FooterContainer>
-      {router.pathname === '/about' || router.pathname === '/' && (
+      {router.pathname === '/create' || router.pathname === '/projects' ? '' : (
         <>
           <FooterTop>
             <Typography variant='h1'>

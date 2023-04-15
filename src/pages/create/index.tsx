@@ -2,12 +2,12 @@ import React, { useCallback, useState } from 'react'
 import { Layout } from '@/components'
 import { styled } from '@mui/material'
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
 import { useRouter } from 'next/router'
 import { sendDataToBackend } from '@/utils';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Project } from '@/types';
 import { ControllInput } from '@/components';
 
@@ -89,6 +89,7 @@ const InputBoxStyles = styled('div')(({ theme }) => ({
 
 const CreateHomePage: React.FC = () => {
   const { data: session, status } = useSession();
+  const [response, setResponse] = useState<any>(false);
   const router = useRouter()
   const { register, handleSubmit, control, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<Project>({
     mode: 'onBlur',
@@ -103,65 +104,28 @@ const CreateHomePage: React.FC = () => {
       tag: '',
     },
   })
-  // const [project, setProject] = useState({
-  //   name: '',
-  //   description: '',
-  //   githubUrl: '',
-  //   liveUrl: '',
-  //   stacks: [],
-  //   coverImgUrl: '',
-  //   modalImgUrl: '',
-  //   tag: '',
-  // })
-
-  const [stacks, setStacks] = useState<string[]>([])
-
-  const handleStacks = (e) => {
-    const { value } = e.target;
-    setStacks(value.split(',').map((item: string) => item.trim()))
-  }
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setProject({
-  //     ...project,
-  //     [name]: value
-  //   });
-  // }
-
-  // const projectData = {
-  //   name: project.name,
-  //   description: project.description,
-  //   githubUrl: project.githubUrl,
-  //   liveUrl: project.liveUrl,
-  //   stacks: stacks,
-  //   coverImgUrl: project.coverImgUrl,
-  //   modalImgUrl: project.modalImgUrl,
-  //   tag: project.tag,
-  //   user: session?.user
-  // }
 
   const handleReset = useCallback(() => {
     reset();
-    setStacks([])
   }, [reset])
 
-  const onSubmit = (data: Project) => {
+  const onSubmit = async (data: Project) => {
     const newData = {
       ...data,
-      stacks: stacks,
+      stacks: data.stacks.split(',').map((item: string) => item.trim()),
       user: session?.user?.email,
     }
-    sendDataToBackend(newData, '/api/v1/post')
-    // console.log(newData)
-    handleReset()
+    const res = await sendDataToBackend(newData, '/api/v1/post')
+    if (res.status === 200) {
+      setResponse(!response)
+    }
   }
 
   React.useEffect(() => {
-    if (isSubmitSuccessful) {
+    if (response) {
       handleReset();
     }
-  }, [isSubmitSuccessful, reset, handleReset]);
+  }, [response, reset, handleReset]);
 
   const loading = status === 'loading';
   if (router.pathname !== 'undefined' && loading) return null;
@@ -171,7 +135,10 @@ const CreateHomePage: React.FC = () => {
   return (
     <Layout>
       <FormContainer>
-        {isSubmitSuccessful && <p>Project Created Successfully</p>}
+        {response && <p style={{ textAlign: 'center', color: 'green' }}>Project Created Successfully</p>}
+        <Typography variant="h4" component="h1" gutterBottom>
+          Create Project
+        </Typography>
         <FormStyles
           onSubmit={handleSubmit(onSubmit)}
         >

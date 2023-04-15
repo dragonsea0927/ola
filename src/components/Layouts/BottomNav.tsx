@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link, styled } from '@mui/material'
+import { styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { socialLinks } from '@/utils'
 import { Copyright, ContactForm, Icons } from '@/components'
 import Image from 'next/image'
 import ContactImage from '@/assets/images/contact1.png'
+import { useNavigation } from '@/hooks'
 
 const FooterContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -202,76 +203,86 @@ const ContactLeft = styled('div')(({ theme }) => ({
 }))
 
 const BottomNav = () => {
+  const { router } = useNavigation()
   return (
     <FooterContainer>
-      <FooterTop>
-        <Typography variant='h1'>
-          <blockquote>
-            <p>
-              <strong>“</strong>
-              <em>
-                Choose a job you love, and you will never have to work a day in your life.
-              </em>
-              <strong>”</strong>
+      {router.pathname === '/about' || router.pathname === '/' && (
+        <>
+          <FooterTop>
+            <Typography variant='h1'>
+              <blockquote>
+                <p>
+                  <strong>“</strong>
+                  <em>
+                    Choose a job you love, and you will never have to work a day in your life.
+                  </em>
+                  <strong>”</strong>
 
-              <br />
-              <br />
-              <em>
-                - Confucius
-              </em>
-            </p>
-          </blockquote>
-        </Typography>
-      </FooterTop>
-      <FooterBottom>
-        <FooterBottomTop>
-          <Typography variant='h1'>
-            Let's work together.
-          </Typography>
+                  <br />
+                  <br />
+                  <em>
+                    - Confucius
+                  </em>
+                </p>
+              </blockquote>
+            </Typography>
+          </FooterTop>
+        </>
+      )}
 
-          <Typography variant='body1'>
-            Let's work together to build something great.
-          </Typography>
-        </FooterBottomTop>
+      {router.pathname === '/create' || router.pathname === '/projects' ? '' : (
+        <>
+          <FooterBottom>
+            <FooterBottomTop>
+              <Typography variant='h1'>
+                Let's work together.
+              </Typography>
 
-        <FooterBottomBottom>
-          <ContactForm />
-          <MediaBox>
-            <ContactLeft>
-              <Image src={ContactImage} alt='contact image' width={460} height={200} />
-              <div className='contact-inner'>
-                <div className='contact-inner-text'>
-                  <Typography variant='h4'>
-                    Ola Ishola
-                    <br />
-                    <Typography variant='body1'>
-                      Software Developer
-                    </Typography>
-                  </Typography>
+              <Typography variant='body1'>
+                Let's work together to build something great.
+              </Typography>
+            </FooterBottomTop>
 
-                  <Typography variant='body1'>
-                    I am available for freelance work. Connect with me on social media or send me an email.
-                  </Typography>
+            <FooterBottomBottom>
+              <ContactForm />
+              <MediaBox>
+                <ContactLeft>
+                  <Image src={ContactImage} alt='contact image' width={460} height={200} />
+                  <div className='contact-inner'>
+                    <div className='contact-inner-text'>
+                      <Typography variant='h4'>
+                        Ola Ishola
+                        <br />
+                        <Typography variant='body1'>
+                          Software Developer
+                        </Typography>
+                      </Typography>
 
-                  <Typography variant='body1'>
-                    Phone: +234 8110837448
-                    <br />
-                    Email: olaishola@hotmail.co.uk
-                  </Typography>
-                </div>
-                <FooterSocialMedia>
-                  {socialLinks.map((link) => (
-                    <div key={link.id}>
-                      <Icons link={link} key={link.id} />
+                      <Typography variant='body1'>
+                        I am available for freelance work. Connect with me on social media or send me an email.
+                      </Typography>
+
+                      <Typography variant='body1'>
+                        Phone: +234 8110837448
+                        <br />
+                        Email: olaishola@hotmail.co.uk
+                      </Typography>
                     </div>
-                  ))}
-                </FooterSocialMedia>
-              </div>
-            </ContactLeft>
-          </MediaBox>
-        </FooterBottomBottom>
-      </FooterBottom>
-      <Copyright />
+                    <FooterSocialMedia>
+                      {socialLinks.map((link) => (
+                        <div key={link.id}>
+                          <Icons link={link} key={link.id} />
+                        </div>
+                      ))}
+                    </FooterSocialMedia>
+                  </div>
+                </ContactLeft>
+              </MediaBox>
+            </FooterBottomBottom>
+          </FooterBottom>
+          <Copyright />
+        </>
+      )}
     </FooterContainer>
   )
 }

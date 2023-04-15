@@ -107,10 +107,14 @@ export const adminNavItems: NavItems = [
 ];
 
 export const sendDataToBackend = async (data: any, url: string) => {
-  const res = await axios.post(url, data, {
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  });
-  return res;
+  try {
+    const res = await axios.post(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log(error?.response?.data?.message || error?.message || error);
+  }
 }

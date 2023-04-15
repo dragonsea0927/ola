@@ -31,7 +31,12 @@ export default async function handler(
     const result = await prisma.project.create({
       data: {
         ...project,
-        userId: loggedInUser.id
+        userId: loggedInUser.id,
+        user: {
+          connect: {
+            id: loggedInUser.id
+          }
+        }
       }
     });
 

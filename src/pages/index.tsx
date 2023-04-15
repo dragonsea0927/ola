@@ -1,7 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import { Hero, Layout, ProjectSection, ProjectModal, BlogSection, CustomModal, BlogModal } from '@/components'
+import { Hero, Layout, ProjectSection, ProjectModal, BlogSection, BlogModal } from '@/components'
 import { useFetch, useToggle } from '@/hooks'
+import { getServerSession } from 'next-auth/next'
 
 export default function Home() {
   const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
@@ -34,7 +35,7 @@ export default function Home() {
       <Layout>
         <Hero />
         <ProjectSection handleOpenModal={handleOpenModal} />
-        <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} />
+        <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} isLoading={isLoading} />
       </Layout>
     </>
   )

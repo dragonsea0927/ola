@@ -3,9 +3,11 @@ import {
   LayoutProps,
   ButtonProps, StyledButtonProps, NavItems, NavItem, SocialLinks, SocialLink, FormValues,
   TabArray,
-  TabPanelProps
+  TabPanelProps,
+  AdminRoutesProps,
+  Project
 } from './appTypes'
 
 export type {
-  Projects, LayoutProps, ButtonProps, StyledButtonProps, NavItems, NavItem, SocialLinks, SocialLink, FormValues, TabArray, TabPanelProps
+  Projects, LayoutProps, ButtonProps, StyledButtonProps, NavItems, NavItem, SocialLinks, SocialLink, FormValues, TabArray, TabPanelProps, AdminRoutesProps, Project
 }

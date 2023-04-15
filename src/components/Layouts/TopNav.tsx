@@ -2,7 +2,9 @@ import React from 'react'
 import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, styled, Toolbar, Typography } from '@mui/material';
 import { useAppTheme, useNavigation } from '@/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
-import { navItems } from '../../utils';
+import { navItems } from '@/utils';
+import { signOut, useSession } from 'next-auth/react';
+import AdminRoutes from './AdminRoutes';
 
 const TopNavContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -24,8 +26,11 @@ const drawerWidth = 150;
 
 const TopNav = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { navigate } = useNavigation();
+  const { navigate, router } = useNavigation();
   const [activeLink, setActiveLink] = React.useState('');
+  const isActive = (pathname: string) => router.pathname === pathname;
+
+  const { data: session, status } = useSession();
 
   React.useEffect(() => {
     const path = window.location.pathname;
@@ -56,13 +61,21 @@ const TopNav = () => {
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <item.icon sx={{ fontSize: '1.5rem' }} />
-                {item.title}
+                {session && status === 'authenticated' ? (
+                  <>
+                    {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
+                  </>
+                ) : (
+                  <>
+                    {item.title}
+                  </>
+                )}
               </Box>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-    </Box>
+    </Box >
   );
 
   return (
@@ -86,7 +99,12 @@ const TopNav = () => {
             Oi
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
+            {session && status === 'authenticated' && (
+              <>
+                {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
+              </>
+            )}
+            {!session && navItems.map((item) => (
               <Button key={item.id} sx={{
                 color: activeLink === item.path ? theme.palette.secondary.main : theme.text.primary,
                 fontWeight: 500,

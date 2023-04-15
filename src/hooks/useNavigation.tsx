@@ -6,7 +6,7 @@ const useNavigation = () => {
     router.push(path);
   };
 
-  return { navigate };
+  return { navigate, router };
 }
 
 export default useNavigation;

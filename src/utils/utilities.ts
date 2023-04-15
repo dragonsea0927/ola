@@ -7,6 +7,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import { FaMedium } from 'react-icons/fa'
+import axios from 'axios';
 
 export const getFormattedDate = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -92,3 +93,28 @@ export const tabs: TabArray = [
     value: 'fullstack',
   },
 ]
+
+export const adminNavItems: NavItems = [
+  {
+    id: 1,
+    title: 'projects',
+    path: '/admin/projects',
+    icon: WorkIcon
+  },
+
+  { id: 2, title: 'blogs', path: '/admin/blogs', icon: RssFeedIcon },
+  { id: 3, title: 'contact', path: '/admin/contact', icon: ContactEmergencyIcon }
+];
+
+export const sendDataToBackend = async (data: any, url: string) => {
+  try {
+    const res = await axios.post(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+}

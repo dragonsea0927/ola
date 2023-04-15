@@ -15,7 +15,9 @@ import AllProjects from "./Projects/AllProjects";
 import BackendProjects from "./Projects/Backends";
 import FrontendProjects from "./Projects/Frontends";
 import FullstackProjects from "./Projects/Fullstacks";
+import AccessDenied from "./protected/Acessdenied";
+import ControllInput from "./Form/ControlInput";
 
 export {
-  Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects
+  Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects, AccessDenied, ControllInput
 };

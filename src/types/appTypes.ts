@@ -1,3 +1,5 @@
+import { Session } from "next-auth";
+
 export type Project = {
   name: string,
   description: string,
@@ -11,6 +13,7 @@ export type Project = {
   updatedAt: string,
   deletedAt: string,
   published: boolean,
+  userId: string,
 }
 
 export type Projects = Project[]
@@ -75,4 +78,10 @@ export type TabPanelProps = {
   children: React.ReactNode
   index: number
   value: number
+}
+
+export type AdminRoutesProps = {
+  session: Session
+  isActive: (pathname: string) => boolean
+  signOut: () => void
 }

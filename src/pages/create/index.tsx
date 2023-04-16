@@ -3,13 +3,14 @@ import { Layout } from '@/components'
 import { styled } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
 import { useRouter } from 'next/router'
 import { sendDataToBackend } from '@/utils';
 import { useForm } from 'react-hook-form';
 import { Project } from '@/types';
 import { ControllInput } from '@/components';
+import { GetServerSideProps } from 'next';
 
 const FormContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -67,27 +68,31 @@ const FormStyles = styled('form')(({ theme }) => ({
   },
 }));
 
-const InputStyles = styled(TextField)(({ theme }) => ({
-  backgroundColor: theme.white.main,
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: theme.palette.secondary.main,
-    },
-    '&:hover fieldset': {
-      borderColor: theme.palette.secondary.light,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: theme.palette.secondary.light,
-    },
-  },
-}));
 
 const InputBoxStyles = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(2),
 }));
 
-const CreateHomePage: React.FC = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+
+  const session = await getSession(context)
+  if (!session) {
+    return {
+      redirect: {
+        destination: 'api/auth/signin',
+        permanent: false,
+      },
+    }
+  }
+  return {
+    props: { session },
+  }
+
+
+}
+
+const CreateHomePage: React.FC = (props) => {
   const { data: session, status } = useSession();
   const [response, setResponse] = useState<any>(false);
   const router = useRouter()
@@ -116,7 +121,7 @@ const CreateHomePage: React.FC = () => {
       user: session?.user?.email,
     }
     const res = await sendDataToBackend(newData, '/api/v1/post')
-    if (res.status === 200) {
+    if (res?.status === 200) {
       setResponse(!response)
     }
   }
@@ -135,6 +140,7 @@ const CreateHomePage: React.FC = () => {
   return (
     <Layout>
       <FormContainer>
+        <p>Welcome {session.user?.name}</p>
         <Typography
           variant="h1"
           component="h1"

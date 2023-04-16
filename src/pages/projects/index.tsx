@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, AccessDenied } from '@/components'
+import { Layout, AccessDenied, Drafts } from '@/components'
 import { useSession, getSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import prisma from '@/lib/prisma';
@@ -88,7 +88,7 @@ const Projects: React.FC<Props> = (props) => {
 
   return (
     <Layout>
-      <div>
+      <Box>
         <Typography variant='h1'
           gutterBottom
           sx={{
@@ -97,21 +97,8 @@ const Projects: React.FC<Props> = (props) => {
           }}
         >Project Drafts</Typography>
         {props.projects.length === 0 && <Noprojects />}
-        {props.projects.map((project: Project) => (
-          <div key={project?.id}>
-            <h2>{project.name}</h2>
-            <p>{project.description}</p>
-            <p>{project.name}</p>
-            <p>{project.githubUrl}</p>
-            <p>{project.liveUrl}</p>
-            <p>{project.stacks}</p>
-            <p>{project.coverImgUrl}</p>
-            <p>{project.modalImgUrl}</p>
-            <p>{project.tag}</p>
-            <p>{project.userId}</p>
-          </div>
-        ))}
-      </div>
+        {props.projects.length > 0 && <Drafts projects={props.projects} />}
+      </Box>
     </Layout>
   )
 }

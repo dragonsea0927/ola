@@ -1,12 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Project } from '../../../../types/appTypes'
 import prisma from '@/lib/prisma'
+import { getSession } from 'next-auth/react'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
 
+  const session = await getSession({ req })
+
+  console.log(session?.user?.email)
   try {
     const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, userId }: Project = req.body;
     const project = {
@@ -34,7 +38,7 @@ export default async function handler(
         userId: loggedInUser.id,
         user: {
           connect: {
-            id: loggedInUser.id
+            email: loggedInUser?.email || ""
           }
         }
       }

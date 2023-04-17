@@ -21,13 +21,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   const projects = await prisma.project.findMany({
     where: {
-      user: {
+      author: {
         email: session?.user?.email
       },
       published: false
     },
     include: {
-      user: {
+      author: {
         select: {
           name: true,
         }

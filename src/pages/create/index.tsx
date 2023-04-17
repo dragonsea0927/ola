@@ -115,10 +115,9 @@ const CreateHomePage: React.FC = (props) => {
   }, [reset])
 
   const onSubmit = async (data: Project) => {
-    const newData = {
+    const newData: Project = {
       ...data,
       stacks: data.stacks.split(',').map((item: string) => item.trim()),
-      user: session?.user?.email,
     }
     const res = await sendDataToBackend(newData, '/api/v1/post')
     if (res?.status === 200) {
@@ -140,7 +139,6 @@ const CreateHomePage: React.FC = (props) => {
   return (
     <Layout>
       <FormContainer>
-        <p>Welcome {session.user?.name}</p>
         <Typography
           variant="h1"
           component="h1"

@@ -18,7 +18,6 @@ export type Project = {
     email: string,
     image: string,
   }
-  // authorId?: string,
 }
 
 export type Projects = Project[]

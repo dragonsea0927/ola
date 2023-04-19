@@ -32,7 +32,7 @@ async function publishProject(id: string) {
 }
 
 
-const EditProjectPage: React.FC<Project> = (props) => {
+const EditProjectPage: React.FC = (props) => {
   const [message, setMessage] = React.useState<string>('');
   const { data: session, status } = useSession();
   const [showToast, setShowToast] = React.useState<boolean>(false);

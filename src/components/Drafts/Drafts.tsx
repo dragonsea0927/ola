@@ -8,10 +8,11 @@ interface Props {
 }
 
 const StyledDrafts = styled('div')(({ theme }) => ({
-  display: 'flex',
-  gap: '20px',
-  border: '1px solid red',
+  width: '100%',
+  display: 'grid',
   padding: '20px',
+  gridTemplateColumns: 'repeat(3, 430px)',
+  gridGap: '20px',
 }))
 
 

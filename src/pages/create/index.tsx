@@ -2,14 +2,13 @@ import React, { useCallback, useState } from 'react'
 import { Layout, Toast } from '@/components'
 import { styled } from '@mui/material'
 import Typography from '@mui/material/Typography';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
 import { useRouter } from 'next/router'
 import { sendDataToBackend } from '@/utils';
 import { useForm } from 'react-hook-form';
 import { Project } from '@/types';
 import { ControllInput } from '@/components';
-import { GetServerSideProps } from 'next';
 
 
 const FormContainer = styled('div')(({ theme }) => ({
@@ -73,24 +72,6 @@ const InputBoxStyles = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(2),
 }));
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-
-//   const session = await getSession(context)
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: 'api/auth/signin',
-//         permanent: false,
-//       },
-//     }
-//   }
-//   return {
-//     props: { session },
-//   }
-
-
-// }
 
 const CreateHomePage: React.FC = (props) => {
   const { data: session, status } = useSession();

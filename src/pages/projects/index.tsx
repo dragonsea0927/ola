@@ -88,7 +88,9 @@ const Projects: React.FC<Props> = (props) => {
 
   return (
     <Layout>
-      <Box>
+      <Box
+        sx={{ margin: '0 auto' }}
+      >
         <Typography variant='h1'
           gutterBottom
           sx={{

@@ -1,22 +1,51 @@
 import { Project } from '@/types'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import { styled } from '@mui/material/styles'
+import { useNavigation } from '@/hooks'
+import Typography from '@mui/material/Typography'
 
 type Props = {
   project: Project
 }
 
 const StyledDraft = styled('div')(({ theme }) => ({
-  width: '500px',
-  gap: '20px',
-  border: '1px solid red',
+  cursor: 'pointer',
+  padding: '20px',
+  borderRadius: '5px',
+  boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
+  img: {
+    width: '100%',
+    objectFit: 'fill',
+    borderRadius: '5px',
+  },
+
+  div: {
+    display: 'flex',
+    ailgnItems: 'center',
+    justifyContent: 'space-between',
+
+    p: {
+      textTransform: 'capitalize'
+    }
+  },
+
+  '&:hover': {
+    transform: 'scale(1)',
+
+    img: {
+      transform: 'scale(1.1)',
+    }
+  }
 }))
 
 const Draft = ({ project }: Props) => {
+  const { navigate } = useNavigation()
   return (
-    <StyledDraft>
+
+    <StyledDraft
+      onClick={() => navigate(`/projects/${project?.id}`)}
+    >
       <Image
         src={project?.coverImgUrl}
         alt={project?.coverImgUrl}
@@ -24,14 +53,9 @@ const Draft = ({ project }: Props) => {
         height={300}
       />
       <div>
-        <h1>{project?.name}</h1>
-        <span>{project?.tag}</span>
+        <Typography variant='h4'>{project?.name}</Typography>
+        <p>{project?.tag}</p>
       </div>
-      <p>{project?.description}</p>
-      <p>{project?.createdAt}</p>
-
-      <Link href={project?.githubUrl}>Source</Link>
-      <Link href={project?.liveUrl}>Live</Link>
     </StyledDraft>
   )
 }

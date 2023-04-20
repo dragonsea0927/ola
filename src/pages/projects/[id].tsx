@@ -167,6 +167,10 @@ const ProjectPage: React.FC<Project> = (props) => {
     }
   }
 
+  const handleProjectEdit = (id: string) => {
+    navigate(`/projects/edit/${id}`);
+  }
+
   if (status === 'loading') {
     return (
       <Layout>
@@ -244,7 +248,7 @@ const ProjectPage: React.FC<Project> = (props) => {
             </button>
 
             <button
-              onClick={() => { }}
+              onClick={() => handleProjectEdit(props?.project.id)}
             >
               Edit
             </button>

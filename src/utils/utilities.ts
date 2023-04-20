@@ -8,7 +8,6 @@ import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import { FaMedium } from 'react-icons/fa'
 import axios from 'axios';
-import { ReactNode } from "react";
 
 export const getFormattedDate = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;

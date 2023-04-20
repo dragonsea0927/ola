@@ -14,7 +14,7 @@ const useTogglePublish = ({ id, initialState }: Props) => {
   const togglePublish = async () => {
     const res = await publishProject(id);
     if (res?.status === 'success') {
-      const msg = published ? 'Project published' : 'Project unpublished';
+      const msg = published ? 'Project unpublished' : 'Project published';
       setPublished(!published);
       setMessage(msg);
       setShowToast(!showToast);

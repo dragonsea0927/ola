@@ -186,7 +186,7 @@ const ProjectPage: React.FC<Project> = (props) => {
           >{props?.project?.tag}</Typography>
           <Typography variant='h4'
             sx={{ textTransform: 'capitalize' }}
-          >{props?.project?.name}</Typography>
+          >{!published ? `${props?.project?.name} (Draft)` : props?.project?.name}</Typography>
           <Typography variant='body1'>
             {props?.project?.description}
           </Typography>
@@ -224,7 +224,7 @@ const ProjectPage: React.FC<Project> = (props) => {
             <button
               onClick={() => togglePublish()}
             >
-              {published && userHasValidSession && projectBelongsToUser ? 'Publish' : 'Unpublish'}
+              {!published && userHasValidSession && projectBelongsToUser ? 'Publish' : 'Unpublish'}
             </button>
 
             <button

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, AccessDenied, CustomButton, Toast } from '@/components'
+import { Layout, AccessDenied, CustomButton, Toast, Status } from '@/components'
 import { styled, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import { GetServerSideProps } from 'next';
@@ -153,7 +153,11 @@ const ProjectPage: React.FC<Project> = (props) => {
   });
 
   if (status === 'loading') {
-    return <div>Authenticating ...</div>;
+    return (
+      <Layout>
+        <Status message="Authenticating..." />
+      </Layout>
+    );
   }
 
   if (!session) {

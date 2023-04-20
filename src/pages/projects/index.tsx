@@ -24,7 +24,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       author: {
         email: session?.user?.email
       },
-      published: false
     },
     include: {
       author: {

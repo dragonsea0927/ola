@@ -41,8 +41,15 @@ const StyledDraft = styled('div')(({ theme }) => ({
 
 const Draft = ({ project }: Props) => {
   const { navigate } = useNavigation()
-  return (
+  const [published, setPublished] = React.useState(project?.published)
 
+  console.log(published)
+  React.useEffect(() => {
+    setPublished(project?.published)
+  }, [project?.published])
+
+
+  return (
     <StyledDraft
       onClick={() => navigate(`/projects/${project?.id}`)}
     >
@@ -56,6 +63,7 @@ const Draft = ({ project }: Props) => {
         <Typography variant='h4'>{project?.name}</Typography>
         <p>{project?.tag}</p>
       </div>
+      <p>Published: <span style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{`${Boolean(published)}`}</span></p>
     </StyledDraft>
   )
 }

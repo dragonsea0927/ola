@@ -122,7 +122,16 @@ export const sendDataToBackend = async (data: Project, url: string) => {
 
 export async function publishProject(id: string) {
   try {
-    const response = await axios.put(`/api/v1/publish/${id}`);
+    const response = await axios.put(`/api/v1/projects/publish/${id}`);
+    return response.data;
+  } catch (error) {
+    return error?.response?.data?.message;
+  }
+}
+
+export async function deleteProject(id: string) {
+  try {
+    const response = await axios.delete(`/api/v1/projects/delete/${id}`);
     return response.data;
   } catch (error) {
     return error?.response?.data?.message;

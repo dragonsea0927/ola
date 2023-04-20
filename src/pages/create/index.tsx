@@ -101,7 +101,7 @@ const CreateHomePage: React.FC = (props) => {
       ...data,
       stacks: data?.stacks?.split(',').map((item: string) => item.trim()),
     }
-    const res = await sendDataToBackend(newData, '/api/v1/post')
+    const res = await sendDataToBackend(newData, '/api/v1/projects/create')
     if (res?.status === 200) {
       setResponse(!response)
     } else {

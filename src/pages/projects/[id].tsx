@@ -9,7 +9,8 @@ import { Project } from '@/types';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 import Image from 'next/image'
-import { useTogglePublish } from '@/hooks';
+import { useTogglePublish, useNavigation } from '@/hooks';
+import { deleteProject } from '@/utils';
 
 const ProjsctContent = styled(Grid)(({ theme }) => ({
   width: '85%',
@@ -151,6 +152,20 @@ const ProjectPage: React.FC<Project> = (props) => {
   const { published, togglePublish, showToast, message, setShowToast } = useTogglePublish({
     id: props?.project?.id, initialState: props?.project?.published
   });
+  const [showDelete, setShowDelete] = React.useState(false);
+  const [deleteMsg, setDeleteMsg] = React.useState('');
+  const { navigate } = useNavigation();
+
+  const handleProjectDelete = async (id: string) => {
+    const response = await deleteProject(id);
+    if (response.status === 'success') {
+      setDeleteMsg(response.message);
+      setShowDelete(!showDelete);
+      setTimeout(() => {
+        navigate('/projects');
+      }, 4000);
+    }
+  }
 
   if (status === 'loading') {
     return (
@@ -171,6 +186,7 @@ const ProjectPage: React.FC<Project> = (props) => {
     <Layout>
       {showToast && <Toast severity='success' message={message} onClose={() => setShowToast(!showToast)} open={showToast} />
       }
+      {showDelete && <Toast severity='success' message={deleteMsg} onClose={() => setShowDelete(!showDelete)} open={showDelete} />}
       <ProjsctContent>
         <ProjectImage>
           <Image
@@ -233,11 +249,10 @@ const ProjectPage: React.FC<Project> = (props) => {
               Edit
             </button>
 
-            <button
-              onClick={() => { }}
-            >
-              Delete
-            </button>
+            {
+              userHasValidSession && projectBelongsToUser && (
+                <button onClick={() => handleProjectDelete(props?.project.id)}>Delete</button>
+              )}
           </BtnContainer>
         )}
       </div>

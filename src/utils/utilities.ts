@@ -1,4 +1,4 @@
-import { NavItems, SocialLinks, TabArray } from "@/types";
+import { NavItems, SocialLinks, TabArray, Project } from "@/types";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -106,15 +106,33 @@ export const adminNavItems: NavItems = [
   { id: 3, title: 'contact', path: '/admin/contact', icon: ContactEmergencyIcon }
 ];
 
-export const sendDataToBackend = async (data: any, url: string) => {
+export const sendDataToBackend = async (data: Project, url: string) => {
   try {
     const res = await axios.post(url, data, {
       headers: {
         'Content-Type': 'application/json',
       }
-    });
+    })
     return res;
   } catch (error) {
-    console.log(error);
+    return error?.response?.data?.message
+  }
+}
+
+export async function publishProject(id: string) {
+  try {
+    const response = await axios.put(`/api/v1/projects/publish/${id}`);
+    return response.data;
+  } catch (error) {
+    return error?.response?.data?.message;
+  }
+}
+
+export async function deleteProject(id: string) {
+  try {
+    const response = await axios.delete(`/api/v1/projects/delete/${id}`);
+    return response.data;
+  } catch (error) {
+    return error?.response?.data?.message;
   }
 }

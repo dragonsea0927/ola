@@ -1,26 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Project } from '../../../../types/appTypes'
 import prisma from '@/lib/prisma'
+import { getServerSession } from "next-auth/next"
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
+import { Session } from 'next-auth'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
 
+  const session: Session = await getServerSession(req, res, authOptions) as Session
+
   try {
-    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, userId }: Project = req.body;
+    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag }: Project = req.body;
     const project = {
       name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag,
-      userId
     };
 
-    const loggedInUser = await prisma.user.findUnique({
-      where: {
-        email: req.body.user
-      }
-    })
-
-    if (!loggedInUser) {
+    if (!session?.user?.email) {
       return res.status(401).json({
         status: "error",
         message: "You are not authorized to perform this action"
@@ -31,10 +29,9 @@ export default async function handler(
     const result = await prisma.project.create({
       data: {
         ...project,
-        userId: loggedInUser.id,
-        user: {
+        author: {
           connect: {
-            id: loggedInUser.id
+            email: session?.user?.email as string
           }
         }
       }

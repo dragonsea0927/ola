@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
-import { Layout } from '@/components'
+import { Layout, Toast } from '@/components'
 import { styled } from '@mui/material'
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
@@ -10,6 +9,7 @@ import { sendDataToBackend } from '@/utils';
 import { useForm } from 'react-hook-form';
 import { Project } from '@/types';
 import { ControllInput } from '@/components';
+
 
 const FormContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -67,31 +67,18 @@ const FormStyles = styled('form')(({ theme }) => ({
   },
 }));
 
-const InputStyles = styled(TextField)(({ theme }) => ({
-  backgroundColor: theme.white.main,
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: theme.palette.secondary.main,
-    },
-    '&:hover fieldset': {
-      borderColor: theme.palette.secondary.light,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: theme.palette.secondary.light,
-    },
-  },
-}));
 
 const InputBoxStyles = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(2),
 }));
 
-const CreateHomePage: React.FC = () => {
+const CreateHomePage: React.FC = (props) => {
   const { data: session, status } = useSession();
-  const [response, setResponse] = useState<any>(false);
+  const [response, setResponse] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
   const router = useRouter()
-  const { register, handleSubmit, control, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<Project>({
+  const { register, handleSubmit, control, reset, formState: { isSubmitting } } = useForm<Project>({
     mode: 'onBlur',
     defaultValues: {
       name: '',
@@ -110,14 +97,15 @@ const CreateHomePage: React.FC = () => {
   }, [reset])
 
   const onSubmit = async (data: Project) => {
-    const newData = {
+    const newData: Project = {
       ...data,
-      stacks: data.stacks.split(',').map((item: string) => item.trim()),
-      user: session?.user?.email,
+      stacks: data?.stacks?.split(',').map((item: string) => item.trim()),
     }
-    const res = await sendDataToBackend(newData, '/api/v1/post')
-    if (res.status === 200) {
+    const res = await sendDataToBackend(newData, '/api/v1/projects/create')
+    if (res?.status === 200) {
       setResponse(!response)
+    } else {
+      setShowError(!showError)
     }
   }
 
@@ -144,7 +132,16 @@ const CreateHomePage: React.FC = () => {
           Create Project
         </Typography>
 
-        {response && <p style={{ textAlign: 'center', color: 'green' }}>Project Created Successfully</p>}
+        {response && <Toast
+          message='Project created successfully'
+          severity='success'
+          open={response}
+          onClose={() => setResponse(!response)}
+        />
+        }
+
+        {showError && <Toast message='Oops!, Something went wrong' severity='error' open={showError} onClose={() => setShowError(!showError)} />
+        }
         <FormStyles
           onSubmit={handleSubmit(onSubmit)}
         >

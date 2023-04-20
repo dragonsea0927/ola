@@ -1,6 +1,7 @@
 import { Session } from "next-auth";
 
 export type Project = {
+  [x: string]: any;
   name: string,
   description: string,
   stacks: string[],
@@ -13,7 +14,11 @@ export type Project = {
   updatedAt: string,
   deletedAt: string,
   published: boolean,
-  userId: string,
+  author?: {
+    name: string,
+    email: string,
+    image: string,
+  }
 }
 
 export type Projects = Project[]

@@ -22,8 +22,8 @@ model Project {
   deletedAt   DateTime?
   published   Boolean   @default(false)
 
-  user   User?   @relation(fields: [id], references: [id])
-  userId String? @db.ObjectId
+  author   User?   @relation(fields: [authorId], references: [id])
+  authorId String? @db.ObjectId
 }
 
 model Account {

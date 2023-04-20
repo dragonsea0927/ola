@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Toast, AccessDenied, CustomButton } from '@/components'
+import { Layout, AccessDenied, CustomButton, Toast } from '@/components'
 import { styled, Grid } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import { GetServerSideProps } from 'next';
@@ -9,6 +9,7 @@ import { Project } from '@/types';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 import Image from 'next/image'
+import { useTogglePublish } from '@/hooks';
 
 const ProjsctContent = styled(Grid)(({ theme }) => ({
   width: '85%',
@@ -100,6 +101,33 @@ const ProjectDetails = styled('div')(({ theme }) => ({
 
 }))
 
+const BtnContainer = styled('div')(({ theme }) => ({
+  width: '500px',
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '20px',
+  margin: '0 auto',
+
+  button: {
+    width: '180px',
+    padding: '10px 20px',
+    fontSize: '18px',
+    borderRadius: '8px',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+    color: theme.palette.secondary.main,
+    backgroundColor: theme.white.main,
+    '&:hover': {
+      transition: '0.4s',
+      transform: 'scale(1.04)',
+      zIndex: 1,
+      boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
+    },
+
+  }
+}))
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const project = await prisma.project.findUnique({
     where: {
@@ -116,18 +144,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-const publishStyle = {
-  width: '500px',
-  display: 'flex',
-  flexDirection: 'row',
-  gap: '20px',
-  margin: '0 auto'
-}
-
 const ProjectPage: React.FC<Project> = (props) => {
   const { data: session, status } = useSession();
   const userHasValidSession = Boolean(session);
   const projectBelongsToUser = session?.user?.email === props?.project.author?.email;
+  const { published, togglePublish, showToast, message, setShowToast } = useTogglePublish({
+    id: props?.project?.id, initialState: props?.project?.published
+  });
 
   if (status === 'loading') {
     return <div>Authenticating ...</div>;
@@ -142,6 +165,8 @@ const ProjectPage: React.FC<Project> = (props) => {
   }
   return (
     <Layout>
+      {showToast && <Toast severity='success' message={message} onClose={() => setShowToast(!showToast)} open={showToast} />
+      }
       <ProjsctContent>
         <ProjectImage>
           <Image
@@ -159,7 +184,7 @@ const ProjectPage: React.FC<Project> = (props) => {
             sx={{ textTransform: 'capitalize' }}
           >{props?.project?.name}</Typography>
           <Typography variant='body1'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.
+            {props?.project?.description}
           </Typography>
           <Typography variant='body1'
             sx={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}
@@ -190,49 +215,26 @@ const ProjectPage: React.FC<Project> = (props) => {
         </ProjectDetails>
       </ProjsctContent>
       <div>
-        {!props?.project.published && userHasValidSession && projectBelongsToUser && (
-          <div style={publishStyle}>
-            <CustomButton
-              variant='outlined'
-              color='primary'
-              width='180px'
-              onClick={() => { }}
+        {userHasValidSession && projectBelongsToUser && (
+          <BtnContainer>
+            <button
+              onClick={() => togglePublish()}
             >
-              Publish
-            </CustomButton>
+              {published && userHasValidSession && projectBelongsToUser ? 'Publish' : 'Unpublish'}
+            </button>
 
-            <CustomButton
-              variant='outlined'
-              color='primary'
-              width='180px'
+            <button
               onClick={() => { }}
             >
               Edit
-            </CustomButton>
-          </div>
-        )}
+            </button>
 
-
-        {props?.project?.published && (
-          <div style={publishStyle}>
-            <CustomButton
-              variant='outlined'
-              color='primary'
-              width='180px'
+            <button
               onClick={() => { }}
             >
-              Unpublish
-            </CustomButton>
-
-            <CustomButton
-              variant='outlined'
-              color='primary'
-              width='180px'
-              onClick={() => { }}
-            >
-              Edit
-            </CustomButton>
-          </div>
+              Delete
+            </button>
+          </BtnContainer>
         )}
       </div>
     </Layout>

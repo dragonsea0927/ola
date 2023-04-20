@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/react';
 import prisma from '@/lib/prisma';
+import { useTogglePublish } from '@/hooks';
 import { Project } from '@/types';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -23,27 +24,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-async function publishProject(id: string) {
-  const response = await fetch(`/api/v1/publish/${id}`, {
-    method: 'PUT',
-  });
-
-  return response.json();
-}
-
-
-const EditProjectPage: React.FC = (props) => {
-  const [message, setMessage] = React.useState<string>('');
+const EditProjectPage: React.FC<Project> = (props) => {
+  const { published, togglePublish, showToast, message, setShowToast } = useTogglePublish({ id: props?.project?.id, initialState: props?.project?.published });
   const { data: session, status } = useSession();
-  const [showToast, setShowToast] = React.useState<boolean>(false);
 
-  const togglePublish = async () => {
-    const res = await publishProject(props?.project?.id);
-    if (res?.status === 'success') {
-      setMessage(res?.message);
-      setShowToast(!showToast);
-    }
-  };
 
 
   if (status === 'loading') {
@@ -67,19 +51,8 @@ const EditProjectPage: React.FC = (props) => {
       }
       <Typography variant='h4'>{!props?.project?.published ? `${props?.project?.name} (Draft)` : props?.project?.name}
       </Typography>
-      {!props?.project.published && userHasValidSession && projectBelongsToUser && (
-        <button onClick={() => togglePublish()
-        }>Publish</button>
-      )}
-
-
-      {props?.project?.published && (
-        <>
-          <Typography variant='body1'>Published: {props?.project?.published}</Typography>
-          <button onClick={() => togglePublish()
-          }>Unpublish</button>
-        </>
-      )}
+      <button onClick={() => togglePublish()
+      }>{published && userHasValidSession && projectBelongsToUser ? 'Publish' : 'Unpublish'}</button>
     </Layout>
   );
 }

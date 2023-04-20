@@ -116,7 +116,15 @@ export const sendDataToBackend = async (data: Project, url: string) => {
     })
     return res;
   } catch (error) {
-    console.log(error?.response?.data?.message);
     return error?.response?.data?.message
+  }
+}
+
+export async function publishProject(id: string) {
+  try {
+    const response = await axios.put(`/api/v1/publish/${id}`);
+    return response.data;
+  } catch (error) {
+    return error?.response?.data?.message;
   }
 }

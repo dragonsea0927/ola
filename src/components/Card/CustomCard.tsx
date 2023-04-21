@@ -177,11 +177,13 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
               <AccessTimeSharpIcon fontSize='small' />
               {otherProps?.duration}
 
-            </div> : otherProps?.role}
+            </div> : otherProps?.role[0].toLocaleUpperCase() + otherProps?.role.slice(1)}
           </Typography>
         </CardMediaTop>
-        <Typography variant={otherProps?.duration ? 'h6' : 'body1'} color='text.dark' component='div'>
-          {description}
+        <Typography variant={otherProps?.duration ? 'h6' : 'body1'} color='text.dark' component='div'
+          style={{ textAlign: otherProps?.role ? 'justify' : 'left' }}
+        >
+          {description.slice(0, 80)}...
         </Typography>
       </CardContentContainer>
       <OverlayDiv className='overlay'>
@@ -189,7 +191,7 @@ const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps
           {otherProps?.overlayText}
         </CustomButton>
       </OverlayDiv>
-    </CardContainer>
+    </CardContainer >
   )
 }
 

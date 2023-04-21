@@ -71,7 +71,7 @@ const TabStyle = styled(Tab)(({ theme }) => ({
 }))
 
 
-const ProjectSection = ({ handleOpenModal }: { handleOpenModal: () => void }) => {
+const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id) => void, data: any }) => {
   const [activeTab, setActiveTab] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -81,7 +81,7 @@ const ProjectSection = ({ handleOpenModal }: { handleOpenModal: () => void }) =>
   const switchComponent = (value: string) => {
     switch (value) {
       case 'all':
-        return <AllProjects handleOpenModal={handleOpenModal} />
+        return <AllProjects handleOpenModal={handleOpenModal} projects={data} />
       case 'frontend':
         return <FrontendProjects />
       case 'backend':

@@ -106,9 +106,9 @@ export const adminNavItems: NavItems = [
   { id: 3, title: 'contact', path: '/admin/contact', icon: ContactEmergencyIcon }
 ];
 
-export const sendDataToBackend = async (data: Project, url: string) => {
+export const sendDataToBackend = async (data: Project) => {
   try {
-    const res = await axios.post(url, data, {
+    const res = await axios.post('/api/v1/projects/create', data, {
       headers: {
         'Content-Type': 'application/json',
       }
@@ -131,6 +131,19 @@ export async function publishProject(id: string) {
 export async function deleteProject(id: string) {
   try {
     const response = await axios.delete(`/api/v1/projects/delete/${id}`);
+    return response.data;
+  } catch (error) {
+    return error?.response?.data?.message;
+  }
+}
+
+export async function updateProject(id: string, data: Project) {
+  try {
+    const response = await axios.put(`/api/v1/projects/update/${id}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
     return response.data;
   } catch (error) {
     return error?.response?.data?.message;

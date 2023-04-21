@@ -1,12 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
+import { getServerSession } from "next-auth/next"
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  const session = await getServerSession(req, res, authOptions)
+
   try {
     const { id } = req.query
+
+    if (!session?.user?.email) {
+      return res.status(401).json({
+        status: "error",
+        message: "You are not authorized to perform this action"
+      })
+    }
+
     const project = await prisma.project.findUnique({
       where: {
         id: id as string

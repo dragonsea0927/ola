@@ -73,7 +73,7 @@ const InputBoxStyles = styled('div')(({ theme }) => ({
   gap: theme.spacing(2),
 }));
 
-const CreateHomePage: React.FC = (props) => {
+const CreateHomePage: React.FC<Project> = (props) => {
   const { data: session, status } = useSession();
   const [response, setResponse] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
@@ -99,9 +99,9 @@ const CreateHomePage: React.FC = (props) => {
   const onSubmit = async (data: Project) => {
     const newData: Project = {
       ...data,
-      stacks: data?.stacks?.split(',').map((item: string) => item.trim()),
+      stacks: data?.stacks?.toString().split(',').map((item: string) => item.trim()),
     }
-    const res = await sendDataToBackend(newData, '/api/v1/projects/create')
+    const res = await sendDataToBackend(newData)
     if (res?.status === 200) {
       setResponse(!response)
     } else {

@@ -95,8 +95,9 @@ const EditProjectPage: React.FC<Project> = (props) => {
       stacks: newStacks,
     }
     const res = await updateProject(props?.project?.id, updatedData)
-    if (res?.status === 200) {
+    if (res?.status === 200 || res?.status === 'success') {
       setResponseOk(!responseOk)
+      navigate(`/projects/${props.project.id}`)
     } else {
       setShowError(!showError)
     }

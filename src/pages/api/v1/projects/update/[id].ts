@@ -32,12 +32,14 @@ export default async function handler(
         message: 'Project not found'
       })
     }
+
+    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, } = req.body
     const project = await prisma.project.update({
       where: {
         id: id as string
       },
       data: {
-        ...req.body
+        name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, updatedAt: new Date()
       }
     })
 

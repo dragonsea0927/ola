@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { Hero, Layout, ProjectSection, ProjectModal, BlogSection, BlogModal } from '@/components'
 import { useFetch, useToggle } from '@/hooks'
 import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
 import prisma from '@/lib/prisma'
 import { Project } from '@/types'
 
@@ -52,15 +51,6 @@ export default function Home(props: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // const session = await getSession({ req })
-
-  // if (!session) {
-  //   res.statusCode = 403
-  //   return {
-  //     props: { projects: [] }
-  //   }
-  // }
-
   const projects = await prisma.project.findMany({
     where: {
       published: true

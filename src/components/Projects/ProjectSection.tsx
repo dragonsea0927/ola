@@ -71,7 +71,7 @@ const TabStyle = styled(Tab)(({ theme }) => ({
 }))
 
 
-const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id) => void, data: any }) => {
+const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id: string) => void, data: any }) => {
   const [activeTab, setActiveTab] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

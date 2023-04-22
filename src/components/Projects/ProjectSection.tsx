@@ -83,11 +83,11 @@ const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id) => vo
       case 'all':
         return <AllProjects handleOpenModal={handleOpenModal} projects={data} />
       case 'frontend':
-        return <FrontendProjects />
+        return <FrontendProjects projects={data} handleOpenModal={handleOpenModal} />
       case 'backend':
-        return <BackendProjects />
+        return <BackendProjects projects={data} handleOpenModal={handleOpenModal} />
       case 'fullstack':
-        return <FullstackProjects />
+        return <FullstackProjects projects={data} handleOpenModal={handleOpenModal} />
       default:
         return null
     }

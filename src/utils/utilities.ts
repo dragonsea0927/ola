@@ -149,3 +149,7 @@ export async function updateProject(id: string, data: Project) {
     return error?.response?.data?.message;
   }
 }
+
+export const projectsFilter = (projects: Project[], tag: string) => {
+  return projects.filter((project) => project.tag === tag);
+}

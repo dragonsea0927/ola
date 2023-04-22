@@ -90,3 +90,8 @@ export type AdminRoutesProps = {
   isActive: (pathname: string) => boolean
   signOut: () => void
 }
+
+export type ProjectProps = {
+  projects: Project[]
+  handleOpenModal: (id: string) => void
+}

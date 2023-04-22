@@ -49,7 +49,7 @@ const FooterBottom = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
-  margin: '40px auto',
+  margin: '80px auto',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     height: '100%',
@@ -177,13 +177,14 @@ const ContactLeft = styled('div')(({ theme }) => ({
     alignSelf: 'center',
     display: 'flex',
     flexDirection: 'column',
+    gap: '10px',
   },
 
   '.contact-inner-text': {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    gap: '15px',
+    gap: '25px',
 
     h4: {
       fontSize: '29px',
@@ -259,7 +260,7 @@ const BottomNav = () => {
                       </Typography>
 
                       <Typography variant='body1'>
-                        I am available for freelance work. Connect with me on social media or send me an email.
+                        I am available for collaboration & freelance work. Connect with me on social media or send me an email.
                       </Typography>
 
                       <Typography variant='body1'>

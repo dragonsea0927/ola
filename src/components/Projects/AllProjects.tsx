@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import { CustomCard } from '..'
-import ProjectImage from '../../assets/images/portfolio.jpg'
+import { Project } from '@/types'
 
 export const Projects = styled(Grid)(({ theme }) => ({
   display: 'grid',
@@ -25,19 +25,20 @@ export const Projects = styled(Grid)(({ theme }) => ({
 
 }))
 
-const AllProjects = ({ handleOpenModal }: { handleOpenModal: () => void }) => {
+const AllProjects = ({ handleOpenModal, projects }: { handleOpenModal: (id: string) => void, projects: any }) => {
+
   return (
     <div>
       <Projects>
-        {[1, 2, 3, 4, 5, 6].map((item) => (
+        {projects?.map((item: Project) => (
           <CustomCard
-            key={item}
-            image={ProjectImage}
+            key={item.id}
+            image={item.modalImgUrl}
             overlayText='View Project'
-            name='Cuxtomer'
-            role='Frontend'
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            onClick={handleOpenModal}
+            name={item.name}
+            role={item.tag}
+            description={item.description}
+            onClick={() => handleOpenModal(item.id)}
           />
         ))}
       </Projects>

@@ -5,10 +5,12 @@ import ModalImg from '../../assets/images/modalpic.jpeg'
 import Image from 'next/image'
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
+import { Project } from '@/types'
 
 interface ProjectModalProps {
   open: boolean
-  handleClose: () => void
+  handleClose: (id: string) => void
+  project: Project
 }
 
 const ProjsctContent = styled(Grid)(({ theme }) => ({
@@ -100,32 +102,35 @@ const ProjectDetails = styled('div')(({ theme }) => ({
 
 }))
 
-const ProjectModal = ({ open, handleClose }: ProjectModalProps) => {
+const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
   return (
 
     <CustomModal
       open={open}
-      handleClose={handleClose}
+      handleClose={() => { handleClose(project.id) }}
       width='1230px'
       height='518px'
     >
       <ProjsctContent>
         <ProjectImage>
-          <Image src={ModalImg} alt='modal' />
+          <Image
+            src={project.modalImgUrl}
+            alt='modal'
+            width={545}
+            height={408}
+          />
         </ProjectImage>
         <ProjectDetails>
-          <Typography variant='h6'>Frontend</Typography>
-          <Typography variant='h4'>Coral Task Manager</Typography>
+          <Typography variant='h6'
+            sx={{ textTransform: 'capitalize' }}
+          >{project.tag}</Typography>
+          <Typography variant='h4'>{project.name}</Typography>
           <Typography variant='body1'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.
+            {project.description}
           </Typography>
 
           <Typography variant='body1'>
-            Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!
-          </Typography>
-
-          <Typography variant='body1'>
-            Tech Stacks: React, Redux, Material UI, Next JS, TypeScript, Firebase
+            Tech Stacks: {project.stacks.map((tech: string) => tech + ', ')}
           </Typography>
           <div>
             <CustomButton

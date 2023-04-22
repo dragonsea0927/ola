@@ -52,20 +52,17 @@ export default function Home(props: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req })
+  // const session = await getSession({ req })
 
-  if (!session) {
-    res.statusCode = 403
-    return {
-      props: { projects: [] }
-    }
-  }
+  // if (!session) {
+  //   res.statusCode = 403
+  //   return {
+  //     props: { projects: [] }
+  //   }
+  // }
 
   const projects = await prisma.project.findMany({
     where: {
-      author: {
-        email: session?.user?.email
-      },
       published: true
     },
     include: {

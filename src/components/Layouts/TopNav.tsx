@@ -1,10 +1,11 @@
-import React from 'react'
-import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, styled, Toolbar, Typography } from '@mui/material';
+import React, { useRef } from 'react'
+import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, styled, Toolbar, Typography } from '@mui/material';
 import { useAppTheme, useNavigation } from '@/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
 import { navItems } from '@/utils';
 import { signOut, useSession } from 'next-auth/react';
 import AdminRoutes from './AdminRoutes';
+import { scrollToViewMethod } from '@/utils';
 
 const TopNavContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -28,7 +29,9 @@ const TopNav = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { navigate, router } = useNavigation();
   const [activeLink, setActiveLink] = React.useState('');
+  const [itemRef, setItemRef] = React.useState<any>(null);
   const isActive = (pathname: string) => router.pathname === pathname;
+  const target = useRef(itemRef);
 
   const { data: session, status } = useSession();
 
@@ -57,9 +60,15 @@ const TopNav = () => {
         {navItems.map((item) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: 'center', cursor: 'pointer' }}
-              onClick={() => handleNavigation(item.path)}
+              ref={target}
+              onClick={() => {
+                setItemRef(target);
+                handleNavigation(item.path);
+                scrollToViewMethod(target);
+              }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}
+              >
                 <item.icon sx={{ fontSize: '1.5rem' }} />
                 {session && status === 'authenticated' ? (
                   <>
@@ -104,26 +113,37 @@ const TopNav = () => {
                 {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
               </>
             )}
-            {!session && navItems.map((item) => (
-              <Button key={item.id} sx={{
-                color: activeLink === item.path ? theme.palette.secondary.main : theme.text.primary,
-                fontWeight: 500,
-                fontSize: '15px',
-                letterSpacing: '0.1rem',
-                textTransform: 'capitalize',
-                '&:hover': {
-                  color: theme.palette.secondary.main,
-                  textDecoration: 'underline',
-                  pddingBottom: '5px',
-                },
+            <Box sx={{ display: 'flex', border: '1px solid red' }}>
+              {!session && navItems.map((item) => (
+                <ListItem key={item.id} disablePadding>
+                  <ListItemButton sx={{
+                    color: activeLink === item.path ? theme.palette.secondary.main : theme.text.primary,
+                    fontWeight: 500,
+                    fontSize: '15px',
+                    letterSpacing: '0.1rem',
+                    textTransform: 'capitalize',
+                    '&:hover': {
+                      color: theme.palette.secondary.main,
+                      textDecoration: 'underline',
+                      pddingBottom: '5px',
+                    },
 
-                textDecoration: activeLink === item.path ? 'underline' : 'none',
-              }}
-                onClick={() => handleNavigation(item.path)}
-              >
-                {item.title}
-              </Button>
-            ))}
+                    textDecoration: activeLink === item.path ? 'underline' : 'none',
+                  }}
+                    ref={target}
+                    onClick={() => {
+                      setItemRef(target);
+                      scrollToViewMethod(target);
+                      handleNavigation(item.path)
+                    }
+                    }
+                  >
+                    {item.title}
+
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

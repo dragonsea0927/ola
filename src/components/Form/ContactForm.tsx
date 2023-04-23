@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { CustomButton } from '@/components';
+import { CustomButton, ScrollToView } from '@/components';
 import { useForm } from 'react-hook-form';
 import CircularProgress from '@mui/material/CircularProgress';
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -68,6 +68,7 @@ const ContactForm = () => {
     resolver: formValidation,
   });
 
+
   const onSubmit = (data: FormValues) => {
     // console.log(data);
   };
@@ -80,6 +81,7 @@ const ContactForm = () => {
 
 
   return (
+
     <FormContainer>
       <Form
         component="form"
@@ -107,8 +109,8 @@ const ContactForm = () => {
               width={{ xs: '38ch', md: '30ch' }}
             />
           </Box>
-          {errors.number?.message ? <small>{`${errors.number.message}`}</small> : null}
           {errors.name?.message ? <small>{`${errors.name.message}`}</small> : null}
+          {errors.number?.message ? <small>{`${errors.number.message}`}</small> : null}
         </Box>
 
         <ControlInput

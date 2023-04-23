@@ -36,7 +36,7 @@ export default function Home(props: Props) {
       />}
       <Head>
         <title>Ola Ishola</title>
-        <meta name="description" content="Personal website built with NextJS, MongoDB and Material UI" />
+        <meta name="description" content="Personal website built with NextJS, Prisma, MongoDB and Material UI" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />

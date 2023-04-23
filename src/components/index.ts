@@ -20,7 +20,8 @@ import ControllInput from "./Form/ControlInput";
 import Drafts from "./Drafts/Drafts";
 import Toast from "./Toast/Toast";
 import Status from "./Status/Status";
+import ScrollToView from "./ScrollToView/ScrollToView";
 
 export {
-  Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects, AccessDenied, ControllInput, Drafts, Toast, Status
+  Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects, AccessDenied, ControllInput, Drafts, Toast, Status, ScrollToView
 };

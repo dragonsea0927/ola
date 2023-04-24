@@ -1,15 +1,16 @@
 import { motion } from 'framer-motion';
 
-
 interface ScrollToViewProps {
   children: React.ReactNode;
+  dataTarget?: string;
 }
 
-function ScrollToView({ children }: ScrollToViewProps) {
+function ScrollToView({ children, dataTarget }: ScrollToViewProps) {
   const divVariants = {
     hidden: {
       opacity: 0,
       y: 50,
+      // scale: 0,
     },
     visible: {
       opacity: 1,
@@ -24,12 +25,14 @@ function ScrollToView({ children }: ScrollToViewProps) {
   return (
     <div>
       <motion.div
-        id={id}
+        data-target={dataTarget}
         variants={divVariants}
         initial="hidden"
         animate="visible"
       >
-        {children}
+        <motion.div>
+          {children}
+        </motion.div>
       </motion.div>
     </div>
   );

@@ -50,7 +50,7 @@ export type NavItem = {
   title: string;
   path: string;
   icon?: any;
-  ref?: any;
+  link?: string;
 }
 
 export type NavItems = NavItem[]

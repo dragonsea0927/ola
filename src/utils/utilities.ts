@@ -40,8 +40,8 @@ export const navItems: NavItems = [
     icon: WorkIcon
   },
   { id: 2, title: 'about', path: '/about', icon: InfoIcon },
-  { id: 4, title: 'blogs', path: '', icon: RssFeedIcon, ref: null },
-  { id: 5, title: 'contact', path: '', icon: ContactEmergencyIcon, ref: null }
+  { id: 4, title: 'blogs', path: 'blog-section', icon: RssFeedIcon, link: 'blogs' },
+  { id: 5, title: 'contact', path: '', icon: ContactEmergencyIcon, link: 'contact-form' }
 ];
 
 export const socialLinks: SocialLinks = [
@@ -154,7 +154,8 @@ export const projectsFilter = (projects: Project[], tag: string) => {
   return projects.filter((project) => project.tag === tag);
 }
 
-export function scrollToViewMethod(ref: any) {
-  // console.log(ref)
-  ref?.current?.scrollIntoView({ behavior: 'smooth' });
+export function scrollToViewMethod() {
+  const elem = document.getElementById('scroll');
+  console.log(elem)
+  elem?.scrollIntoView({ behavior: 'smooth' });
 }

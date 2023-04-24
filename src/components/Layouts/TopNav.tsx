@@ -6,6 +6,7 @@ import { navItems } from '@/utils';
 import { signOut, useSession } from 'next-auth/react';
 import AdminRoutes from './AdminRoutes';
 import { scrollToViewMethod } from '@/utils';
+import Link from 'next/link';
 
 const TopNavContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -29,9 +30,7 @@ const TopNav = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { navigate, router } = useNavigation();
   const [activeLink, setActiveLink] = React.useState('');
-  const [itemRef, setItemRef] = React.useState<any>(null);
   const isActive = (pathname: string) => router.pathname === pathname;
-  const target = useRef(itemRef);
 
   const { data: session, status } = useSession();
 
@@ -41,6 +40,7 @@ const TopNav = () => {
   }, []);
 
   const handleNavigation = (path: string) => {
+    console.log(path)
     navigate(path);
   };
 
@@ -60,11 +60,10 @@ const TopNav = () => {
         {navItems.map((item) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton sx={{ textAlign: 'center', cursor: 'pointer' }}
-              ref={target}
               onClick={() => {
-                setItemRef(target);
                 handleNavigation(item.path);
-                scrollToViewMethod(target);
+                // console.log(item.path)
+                // item.path === '/#contact-form' && scrollToViewMethod('contact-form');
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}
@@ -113,7 +112,7 @@ const TopNav = () => {
                 {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
               </>
             )}
-            <Box sx={{ display: 'flex', border: '1px solid red' }}>
+            <Box sx={{ display: 'flex' }}>
               {!session && navItems.map((item) => (
                 <ListItem key={item.id} disablePadding>
                   <ListItemButton sx={{
@@ -130,16 +129,13 @@ const TopNav = () => {
 
                     textDecoration: activeLink === item.path ? 'underline' : 'none',
                   }}
-                    ref={target}
                     onClick={() => {
-                      setItemRef(target);
-                      scrollToViewMethod(target);
+                      scrollToViewMethod
                       handleNavigation(item.path)
                     }
                     }
                   >
                     {item.title}
-
                   </ListItemButton>
                 </ListItem>
               ))}

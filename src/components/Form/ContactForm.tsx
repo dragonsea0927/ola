@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { CustomButton, ScrollToView } from '@/components';
+import { CustomButton } from '@/components';
 import { useForm } from 'react-hook-form';
 import CircularProgress from '@mui/material/CircularProgress';
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -81,14 +81,12 @@ const ContactForm = () => {
 
 
   return (
-
     <FormContainer>
       <Form
         component="form"
         sx={{
           '& > :not(style)': { m: 1, width: { xs: '38ch', md: '60ch', } },
         }}
-
       >
         <Box>
           <Box sx={{ display: 'flex', gap: '5px' }}>

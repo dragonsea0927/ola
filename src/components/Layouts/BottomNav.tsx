@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { socialLinks } from '@/utils'
-import { Copyright, ContactForm, Icons } from '@/components'
+import { Copyright, ContactForm, Icons, ScrollToView } from '@/components'
 import Image from 'next/image'
 import ContactImage from '@/assets/images/contact1.png'
 import { useNavigation } from '@/hooks'
@@ -206,6 +206,7 @@ const ContactLeft = styled('div')(({ theme }) => ({
 const BottomNav = () => {
   const { router } = useNavigation()
   return (
+
     <FooterContainer>
       {router.pathname === '/create' || router.pathname === '/projects' ? '' : (
         <>
@@ -234,6 +235,7 @@ const BottomNav = () => {
       {router.pathname === '/create' || router.pathname === '/projects' ? '' : (
         <>
           <FooterBottom>
+
             <FooterBottomTop>
               <Typography variant='h1'>
                 Let's work together.
@@ -244,47 +246,51 @@ const BottomNav = () => {
               </Typography>
             </FooterBottomTop>
 
-            <FooterBottomBottom>
-              <ContactForm />
-              <MediaBox>
-                <ContactLeft>
-                  <Image src={ContactImage} alt='contact image' width={460} height={200} />
-                  <div className='contact-inner'>
-                    <div className='contact-inner-text'>
-                      <Typography variant='h4'>
-                        Ola Ishola
-                        <br />
-                        <Typography variant='body1'>
-                          Software Developer
+            <ScrollToView data-target='contact-form' id='scroll'>
+              <FooterBottomBottom>
+                <ContactForm />
+                <MediaBox>
+                  <ContactLeft>
+                    <Image src={ContactImage} alt='contact image' width={460} height={200} />
+                    <div className='contact-inner'>
+                      <div className='contact-inner-text'>
+                        <Typography variant='h4'>
+                          Ola Ishola
+                          <br />
+                          <Typography variant='body1'>
+                            Software Developer
+                          </Typography>
                         </Typography>
-                      </Typography>
 
-                      <Typography variant='body1'>
-                        I am available for collaboration & freelance work. Connect with me on social media or send me an email.
-                      </Typography>
+                        <Typography variant='body1'>
+                          I am available for collaboration & freelance work. Connect with me on social media or send me an email.
+                        </Typography>
 
-                      <Typography variant='body1'>
-                        Phone: +234 8110837448
-                        <br />
-                        Email: olaishola@hotmail.co.uk
-                      </Typography>
+                        <Typography variant='body1'>
+                          Phone: +234 8110837448
+                          <br />
+                          Email: olaishola@hotmail.co.uk
+                        </Typography>
+                      </div>
+                      <FooterSocialMedia>
+                        {socialLinks.map((link) => (
+                          <div key={link.id}>
+                            <Icons link={link} key={link.id} />
+                          </div>
+                        ))}
+                      </FooterSocialMedia>
                     </div>
-                    <FooterSocialMedia>
-                      {socialLinks.map((link) => (
-                        <div key={link.id}>
-                          <Icons link={link} key={link.id} />
-                        </div>
-                      ))}
-                    </FooterSocialMedia>
-                  </div>
-                </ContactLeft>
-              </MediaBox>
-            </FooterBottomBottom>
+                  </ContactLeft>
+                </MediaBox>
+              </FooterBottomBottom>
+            </ScrollToView>
           </FooterBottom>
           <Copyright />
         </>
-      )}
-    </FooterContainer>
+      )
+      }
+    </FooterContainer >
+
   )
 }
 

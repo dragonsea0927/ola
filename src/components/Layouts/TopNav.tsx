@@ -6,7 +6,7 @@ import { navItems } from '@/utils';
 import { signOut, useSession } from 'next-auth/react';
 import AdminRoutes from './AdminRoutes';
 import { scrollToViewMethod } from '@/utils';
-import Link from 'next/link';
+
 
 const TopNavContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
@@ -40,7 +40,6 @@ const TopNav = () => {
   }, []);
 
   const handleNavigation = (path: string) => {
-    console.log(path)
     navigate(path);
   };
 
@@ -62,8 +61,7 @@ const TopNav = () => {
             <ListItemButton sx={{ textAlign: 'center', cursor: 'pointer' }}
               onClick={() => {
                 handleNavigation(item.path);
-                // console.log(item.path)
-                // item.path === '/#contact-form' && scrollToViewMethod('contact-form');
+                scrollToViewMethod(item.link as string);
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}
@@ -130,7 +128,7 @@ const TopNav = () => {
                     textDecoration: activeLink === item.path ? 'underline' : 'none',
                   }}
                     onClick={() => {
-                      scrollToViewMethod
+                      scrollToViewMethod(item.link as string);
                       handleNavigation(item.path)
                     }
                     }

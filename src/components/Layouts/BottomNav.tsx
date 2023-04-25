@@ -246,7 +246,7 @@ const BottomNav = () => {
               </Typography>
             </FooterBottomTop>
 
-            <ScrollToView data-target='contact-form' id='scroll'>
+            <ScrollToView to='contact-form'>
               <FooterBottomBottom>
                 <ContactForm />
                 <MediaBox>

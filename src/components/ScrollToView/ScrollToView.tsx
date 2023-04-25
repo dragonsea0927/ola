@@ -1,41 +1,25 @@
+import React from 'react';
 import { motion } from 'framer-motion';
+import { Element } from 'react-scroll'
 
-interface ScrollToViewProps {
+interface Props {
+  to: string;
   children: React.ReactNode;
-  dataTarget?: string;
 }
 
-function ScrollToView({ children, dataTarget }: ScrollToViewProps) {
-  const divVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      // scale: 0,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeInOut',
-      },
-    },
-  };
-
+const ScrollToView: React.FC<Props> = ({ to, children }) => {
   return (
-    <div>
+    <Element name={to}>
       <motion.div
-        data-target={dataTarget}
-        variants={divVariants}
-        initial="hidden"
-        animate="visible"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
-        <motion.div>
-          {children}
-        </motion.div>
+        {children}
       </motion.div>
-    </div>
+    </Element>
   );
-}
+};
 
 export default ScrollToView;
+

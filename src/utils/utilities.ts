@@ -41,8 +41,8 @@ export const navItems: NavItems = [
     icon: WorkIcon
   },
   { id: 2, title: 'about', path: '/about', icon: InfoIcon },
-  { id: 4, title: 'blogs', path: '', icon: RssFeedIcon, link: 'blogs' },
-  { id: 5, title: 'contact', path: '', icon: ContactEmergencyIcon, link: 'contact-form' }
+  { id: 4, title: 'blogs', path: '/#blogs-section', icon: RssFeedIcon, link: 'blogs' },
+  { id: 5, title: 'contact', path: '/#contact-section', icon: ContactEmergencyIcon, link: 'contact-form' }
 ];
 
 export const socialLinks: SocialLinks = [

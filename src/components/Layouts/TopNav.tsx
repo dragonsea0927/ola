@@ -35,12 +35,13 @@ const TopNav = () => {
   const { data: session, status } = useSession();
 
   React.useEffect(() => {
-    const path = window.location.pathname || '';
+    const path = window.location.pathname;
     setActiveLink(path);
   }, []);
 
   const handleNavigation = (path: string) => {
     navigate(path);
+    setActiveLink(path);
   };
 
   const handleDrawerToggle = () => {
@@ -123,6 +124,10 @@ const TopNav = () => {
                       color: theme.palette.secondary.main,
                       textDecoration: 'underline',
                       pddingBottom: '5px',
+                      '&[data-active="true"]': {
+                        color: theme.palette.secondary.main,
+                        textDecoration: 'underline',
+                      },
                     },
 
                     textDecoration: activeLink === item.path ? 'underline' : 'none',

@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { socialLinks } from '@/utils'
-import { Copyright, ContactForm, Icons, ScrollToView } from '@/components'
+import { Copyright, ContactForm, Icons, ScrollToView, ScrollToTop } from '@/components'
 import Image from 'next/image'
 import ContactImage from '@/assets/images/contact1.png'
 import { useNavigation } from '@/hooks'
@@ -289,6 +289,7 @@ const BottomNav = () => {
         </>
       )
       }
+      <ScrollToTop />
     </FooterContainer >
 
   )

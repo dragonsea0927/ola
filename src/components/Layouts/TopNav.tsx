@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, styled, Toolbar, Typography } from '@mui/material';
 import { useAppTheme, useNavigation } from '@/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -35,7 +35,7 @@ const TopNav = () => {
   const { data: session, status } = useSession();
 
   React.useEffect(() => {
-    const path = window.location.pathname;
+    const path = window.location.pathname || '';
     setActiveLink(path);
   }, []);
 

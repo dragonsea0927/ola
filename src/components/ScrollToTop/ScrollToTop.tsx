@@ -8,6 +8,18 @@ const ScrollToTopContainer = styled('div')(({ theme }) => ({
   bottom: theme.spacing(2),
   right: theme.spacing(2),
   zIndex: 1000,
+
+  '& svg': {
+    transition: 'all 0.3s ease-in-out',
+    fontSize: '3rem',
+    color: theme.palette.secondary.main,
+    '&:hover': {
+      color: theme.palette.secondary.dark,
+      border: `1px solid ${theme.palette.secondary.dark}`,
+      borderRadius: '50%',
+      transform: 'scale(1.2)',
+    }
+  },
 }));
 
 const ScrollToTop = () => {
@@ -34,7 +46,7 @@ const ScrollToTop = () => {
   return (
     <ScrollToTopContainer>
       <IconButton onClick={scrollTop} style={{ display: showScroll ? 'flex' : 'none' }}>
-        <ArrowCircleUpIcon sx={{ fontSize: '3rem', color: 'secondary.main' }} />
+        <ArrowCircleUpIcon />
       </IconButton>
     </ScrollToTopContainer>
   );

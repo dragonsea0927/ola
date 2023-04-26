@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { CustomButton } from '@/components';
@@ -68,6 +68,7 @@ const ContactForm = () => {
     resolver: formValidation,
   });
 
+
   const onSubmit = (data: FormValues) => {
     // console.log(data);
   };
@@ -86,7 +87,6 @@ const ContactForm = () => {
         sx={{
           '& > :not(style)': { m: 1, width: { xs: '38ch', md: '60ch', } },
         }}
-
       >
         <Box>
           <Box sx={{ display: 'flex', gap: '5px' }}>
@@ -107,8 +107,8 @@ const ContactForm = () => {
               width={{ xs: '38ch', md: '30ch' }}
             />
           </Box>
-          {errors.number?.message ? <small>{`${errors.number.message}`}</small> : null}
           {errors.name?.message ? <small>{`${errors.name.message}`}</small> : null}
+          {errors.number?.message ? <small>{`${errors.number.message}`}</small> : null}
         </Box>
 
         <ControlInput

@@ -8,6 +8,7 @@ import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import { FaMedium } from 'react-icons/fa'
 import axios from 'axios';
+import { animateScroll as scroll, scroller } from 'react-scroll'
 
 export const getFormattedDate = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -40,8 +41,8 @@ export const navItems: NavItems = [
     icon: WorkIcon
   },
   { id: 2, title: 'about', path: '/about', icon: InfoIcon },
-  { id: 4, title: 'blogs', path: '#blog', icon: RssFeedIcon },
-  { id: 5, title: 'contact', path: '#contact', icon: ContactEmergencyIcon }
+  { id: 4, title: 'blogs', path: '/#blogs-section', icon: RssFeedIcon, link: 'blogs' },
+  { id: 5, title: 'contact', path: '/#contact-section', icon: ContactEmergencyIcon, link: 'contact-form' }
 ];
 
 export const socialLinks: SocialLinks = [
@@ -152,4 +153,13 @@ export async function updateProject(id: string, data: Project) {
 
 export const projectsFilter = (projects: Project[], tag: string) => {
   return projects.filter((project) => project.tag === tag);
+}
+
+export function scrollToViewMethod(id: string) {
+  scroller.scrollTo(id, {
+    duration: 1500,
+    delay: 100,
+    smooth: 'easeOutCubic',
+    offset: 50,
+  })
 }

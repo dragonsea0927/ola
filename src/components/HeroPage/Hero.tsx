@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, styled } from '@mui/material'
+import { Box, styled, IconButton } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { CustomButton } from '..'
@@ -104,15 +104,16 @@ const SocialMedia = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: '15px',
   padding: '0px 0px 16px 16px',
-  a: {
-    textTransform: 'capitalize',
-    cursor: 'pointer',
-    color: theme.text.dark,
-    textDecoration: 'none',
+  '& svg': {
+    fontSize: '2.5rem',
+    color: theme.palette.secondary.main,
+    transition: 'all 0.3s ease-in-out',
     '&:hover': {
-      color: theme.palette.secondary.main,
-      textDecoration: 'underline',
-    },
+      color: theme.palette.secondary.dark,
+      border: `1px solid ${theme.palette.secondary.dark}`,
+      borderRadius: '50%',
+      transform: 'scale(1.2)',
+    }
   },
   [theme.breakpoints.down('sm')]: {
     display: 'flex',
@@ -124,12 +125,17 @@ const SocialMedia = styled('div')(({ theme }) => ({
 
   [theme.breakpoints.up('lg')]: {
     display: 'flex',
-    position: 'absolute',
-    top: 410,
-    right: 0,
-    bottom: 40,
-    transformOrigin: '220px 40px',
-    transform: 'rotate(90deg)',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'fixed',
+    right: theme.spacing(1),
+    bottom: theme.spacing(12),
+    zIndex: 1000,
+    padding: '16px',
+
+    // 'svg:hover': {
+    //   color: 'secondary.main', fontSize: '1.8rem'
+    // }
   },
 }))
 
@@ -171,8 +177,16 @@ const Hero = () => {
         {socialLinks.map((link) => (
           <Link
             key={link.id}
+            href={link.path}
+            target='_blank'
+            rel='noopener noreferrer'
           >
-            {link.title} </Link>
+            <IconButton
+              aria-label={link.title}
+            >
+              <link.icon />
+            </IconButton>
+          </Link>
         ))}
       </SocialMedia>
 

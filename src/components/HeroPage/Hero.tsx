@@ -132,10 +132,6 @@ const SocialMedia = styled('div')(({ theme }) => ({
     bottom: theme.spacing(12),
     zIndex: 1000,
     padding: '16px',
-
-    // 'svg:hover': {
-    //   color: 'secondary.main', fontSize: '1.8rem'
-    // }
   },
 }))
 

@@ -6,7 +6,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import WorkIcon from '@mui/icons-material/Work';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
-import { FaMedium } from 'react-icons/fa'
+import { FaMedium, FaAngellist } from 'react-icons/fa'
 import axios from 'axios';
 import { animateScroll as scroll, scroller } from 'react-scroll'
 
@@ -70,6 +70,12 @@ export const socialLinks: SocialLinks = [
     title: 'Medium',
     path: 'https://medium.com/@olaishola',
     icon: FaMedium
+  },
+  {
+    id: 5,
+    title: 'AngelList',
+    path: 'https://angel.co/u/ola-ishola',
+    icon: FaAngellist
   }
 ];
 

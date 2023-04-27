@@ -169,3 +169,24 @@ export function scrollToViewMethod(id: string) {
     offset: 50,
   })
 }
+
+export const resumeTabs: TabArray = [
+  {
+    label: 'Education',
+    value: 'education',
+  },
+  {
+    label: 'Experience',
+    value: 'experience',
+  },
+
+  {
+    label: 'Skills',
+    value: 'skills',
+  },
+
+  {
+    label: 'Certifications',
+    value: 'certifications',
+  },
+]

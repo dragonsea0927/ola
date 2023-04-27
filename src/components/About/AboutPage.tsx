@@ -8,6 +8,7 @@ import temImg from '@/assets/images/modalpic.jpeg'
 import Image from 'next/image'
 import CurrentWork from './CurrentWork'
 import AboutContent from './AboutContent'
+import ResumeTabs from './ResumeTabs'
 
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -38,6 +39,14 @@ const AboutPageContainerStyling = styled('div')(({ theme }) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
+
+    h2: {
+      textAlign: 'center',
+      margin: '2rem auto',
+    },
+
+  },
+  '.resume': {
 
     h2: {
       textAlign: 'center',
@@ -77,6 +86,21 @@ const AboutInfoDiv = styled('div')(({ theme }) => ({
   },
 }))
 
+const StyledResumeSection = styled('section')(({ theme }) => ({
+  margin: '5rem auto',
+  display: 'flex',
+  flexDirection: 'column',
+
+  h2: {
+    textAlign: 'center',
+    margin: '2rem auto',
+  },
+
+  [theme.breakpoints.down('sm')]: {
+    color: 'blue',
+  },
+}))
+
 
 
 const AboutPage = () => {
@@ -109,9 +133,10 @@ const AboutPage = () => {
           />
         </div>
 
-        <section className='resume'>
+        <StyledResumeSection className='resume'>
           <Typography variant='h2'>My Resume</Typography>
-        </section>
+          <ResumeTabs />
+        </StyledResumeSection>
       </AboutPageContainerStyling>
     </Layout>
   )

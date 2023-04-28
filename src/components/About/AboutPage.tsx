@@ -48,7 +48,7 @@ const AboutPageContainerStyling = styled('div')(({ theme }) => ({
   },
   '.resume': {
 
-    h2: {
+    '.sub-header': {
       textAlign: 'center',
       margin: '2rem auto',
     },
@@ -91,11 +91,6 @@ const StyledResumeSection = styled('section')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
 
-  h2: {
-    textAlign: 'center',
-    margin: '2rem auto',
-  },
-
   [theme.breakpoints.down('sm')]: {
     color: 'blue',
   },
@@ -134,7 +129,7 @@ const AboutPage = () => {
         </div>
 
         <StyledResumeSection className='resume'>
-          <Typography variant='h2'>My Resume</Typography>
+          <Typography variant='h2' className='sub-header'>My Resume</Typography>
           <ResumeTabs />
         </StyledResumeSection>
       </AboutPageContainerStyling>

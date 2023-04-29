@@ -27,10 +27,16 @@ const items = [
     cardDetailedText: "Spent 160+ hours Collaborating, building a portfolio of personal projects, and experimenting with new technologies by collaborating in small groups through a short hackathon sprint.",
   },
   {
-    title: "Software Engineer",
-    cardTitle: "Software Engineer",
-    cardSubtitle: "DevOps University",
-    cardDetailedText: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
+    title: "November 2013–March 2015",
+    cardTitle: "MSC, Computer Networking",
+    cardSubtitle: "University of Bedfordshire, UK",
+    cardDetailedText: "A thesis on the evaluation of open source cloud computing platforms' security models using OpenStack and Eucalyptus open source platforms.",
+  },
+  {
+    title: "September 2010–July 2013",
+    cardTitle: "BSC, Computer Networking",
+    cardSubtitle: "University of Bedfordshire, UK",
+    cardDetailedText: "A thesis on the performance evaluation of virtualization in computing environments.",
   },
 ];
 
@@ -51,7 +57,7 @@ const StyledTimeline = styled('div')(({ theme }) => ({
 
 const Education = () => {
   const theme = useAppTheme()
-  const [activeItem, setActiveItem] = React.useState({})
+  const [activeItem, setActiveItem] = React.useState(items[0])
 
   const handleSelect = (index: any) => {
     setActiveItem(index)
@@ -63,7 +69,6 @@ const Education = () => {
         items={items}
         mode="VERTICAL_ALTERNATING"
         handleSelect={handleSelect}
-        classNames={theme.palette.mode}
         activeItem={activeItem}
       />
     </StyledTimeline>

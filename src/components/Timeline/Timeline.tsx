@@ -9,21 +9,18 @@ interface TimelineItem {
   cardDetailedText: string | Array<string>;
   cardText?: string;
   items?: any;
-  id: string;
 }
 
 interface TimelineProps {
   items: TimelineItem[];
   mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING';
   handleSelect: (index: number) => void;
-  classNames?: any;
-  className?: string;
-  activeItem?: TimelineItem;
+  activeItem?: any;
 }
 
-const Timeline: React.FC<TimelineProps> = ({ items, mode, handleSelect, classNames, activeItem }) => {
+const Timeline: React.FC<TimelineProps> = ({ items, mode, handleSelect, activeItem }) => {
+
   const theme = useAppTheme()
-  console.log(activeItem?.id)
   return (
     <div style={{ width: "90%", height: "", margin: '0 auto' }}>
       <Chrono
@@ -46,7 +43,7 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode, handleSelect, classNam
         theme={{
           primary: '#253E66',
           secondary: 'white',
-          cardBgColor: activeItem?.id ? theme.palette.secondary.main : theme.palette.background.default,
+          cardBgColor: 'white',
           cardSubtitleColor: theme.palette.secondary.main,
           cardTitleColor: theme.text.primary,
           titleColor: theme.text.primary,
@@ -59,15 +56,13 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode, handleSelect, classNam
         onItemSelected={(index) => handleSelect && handleSelect(index as number)}
         activeItemIndex={0}
         enableDarkToggle
-        classNames={{
-          cardSubTitle: classNames?.cardSubTitle,
-        }}
+        darkMode={theme.palette.mode === 'dark'}
         nestedCardHeight={200}
         fontSizes={{
           cardSubtitle: '0.9rem',
           cardText: '0.85rem',
           cardTitle: '1.1rem',
-          title: '1.3rem',
+          title: '1rem',
         }}
       />
     </div>

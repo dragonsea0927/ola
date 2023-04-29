@@ -51,10 +51,11 @@ const StyledTimeline = styled('div')(({ theme }) => ({
 
 const Education = () => {
   const theme = useAppTheme()
-  const [active, setActive] = React.useState(0)
-  const handleSelect = (index: number) => {
-    setActive(index)
-    console.log(active)
+  const [activeItem, setActiveItem] = React.useState({})
+
+  const handleSelect = (index: any) => {
+    setActiveItem(index)
+    console.log(index)
   }
   return (
     <StyledTimeline>
@@ -62,9 +63,8 @@ const Education = () => {
         items={items}
         mode="VERTICAL_ALTERNATING"
         handleSelect={handleSelect}
-      // classNames={{
-      //   cardSubTitle: 'subtitle',
-      // }}
+        classNames={theme.palette.mode}
+        activeItem={activeItem}
       />
     </StyledTimeline>
   )

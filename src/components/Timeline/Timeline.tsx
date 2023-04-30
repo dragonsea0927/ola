@@ -14,7 +14,7 @@ interface TimelineItem {
 interface TimelineProps {
   items: TimelineItem[];
   mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING';
-  handleSelect: (index: number) => void;
+  handleSelect?: (index: number) => void;
   activeItem?: any;
 }
 

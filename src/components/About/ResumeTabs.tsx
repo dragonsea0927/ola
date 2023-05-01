@@ -25,7 +25,7 @@ const StlyedTabs = styled(Tabs)(({ theme }) => ({
 }))
 
 const ResumeTabs = () => {
-  const [activeTab, setActiveTab] = React.useState(0);
+  const [activeTab, setActiveTab] = React.useState(1);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };

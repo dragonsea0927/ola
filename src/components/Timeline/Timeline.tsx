@@ -3,7 +3,7 @@ import { Chrono } from 'react-chrono';
 import { useAppTheme } from '@/hooks';
 
 interface TimelineItem {
-  title: string;
+  title?: string;
   cardTitle: string;
   cardSubtitle?: string;
   cardDetailedText: string | Array<string>;

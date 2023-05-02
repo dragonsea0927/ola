@@ -34,6 +34,12 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.accredible.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

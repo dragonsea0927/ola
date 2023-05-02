@@ -15,9 +15,9 @@ const items = [
     ]
   },
   {
-    title: "Nov 2021 - August 2022",
+    title: "Nov 2021 - June 2022",
     cardTitle: "Remote Full Stack Web Development Program",
-    cardSubtitle: "Microverse Inc. (November 2021 - August 2022)",
+    cardSubtitle: "Microverse Inc. (November 2021 - June 2022)",
     cardDetailedText: ["Spent 1300+ hours mastering algorithms, data structures, and full-stack development while simultaneously developing projects with Ruby, Rails, JavaScript, React, and Redux", "Developed skills in remote pair programming using GitHub, industry-standard git-flow, and daily standups to communicate and collaborate with international remote developers.", "Completed 1000+ hours of remote pair programming with 30+ developers from 50+ countries.", "Developed 20+ projects in a remote environment using Agile methodologies and industry-standard tools.", "Completed 100+ hours of technical and soft skills training."],
   },
   {

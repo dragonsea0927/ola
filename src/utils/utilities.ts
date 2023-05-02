@@ -186,7 +186,7 @@ export const resumeTabs: TabArray = [
   },
 
   {
-    label: 'Certifications',
+    label: 'Certifications & Trainings',
     value: 'certifications',
   },
 ]

@@ -10,34 +10,57 @@ export default async function handler(
 ) {
 
   const session = await getServerSession(req, res, authOptions)
-  console.log(session)
 
-  try {
-    // if (!session?.user?.email) {
-    //   return res.status(401).json({
-    //     status: "error",
-    //     message: "You are not authorized to perform this action"
-    //   })
-    // }
+  // if (!session?.user?.email) {
+  //   return res.status(401).json({
+  //     status: "error",
+  //     message: "You are not authorized to perform this action"
+  //   })
+  // }
 
-    const aboutItems: About = req.body
+  switch (req.method) {
+    case "GET":
+      try {
+        const about = await prisma.about.findMany()
+        res.status(200).json({
+          status: "success",
+          data: about,
+          message: "About page fetched successfully"
+        })
+      }
+      catch (error) {
+        res.status(500).json({
+          status: "error",
+          error: error,
+          message: `Error fetching about data from database ${error}`,
+        });
+      }
+      break;
+    case "POST":
+      try {
+        const aboutItems: About = req.body
+        const about = await prisma.about.create({
+          data: req.body
+        })
+        res.status(200).json({
+          status: "success",
+          data: about,
+          message: "About page created successfully"
+        })
 
-    const about = await prisma.about.create({
-      data: req.body
-    })
-
-
-    res.status(200).json({
-      status: "success",
-      data: about,
-      message: "About page created successfully"
-    })
-
-  } catch (error) {
-    res.status(500).json({
-      status: "error",
-      error: error,
-      message: `Error adding about data to database ${error}`,
-    });
+      } catch (error) {
+        res.status(500).json({
+          status: "error",
+          error: error,
+          message: `Error adding about data to database ${error}`,
+        });
+      }
+      break;
+    default:
+      res.status(405).json({
+        status: "error",
+        message: "Method not allowed"
+      })
+      break;
   }
 }

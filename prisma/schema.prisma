@@ -46,7 +46,7 @@ model About {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   author        User?         @relation(fields: [authorId], references: [id])
-  authorId      String?       @unique @db.ObjectId
+  authorId      String?       @db.ObjectId
 }
 
 model Account {
@@ -89,7 +89,7 @@ model User {
   projects      Project[]
   accounts      Account[]
   sessions      Session[]
-  about         About?
+  about         About[]
 
   @@map(name: "users")
 }

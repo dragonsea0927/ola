@@ -26,6 +26,29 @@ model Project {
   authorId String? @db.ObjectId
 }
 
+type currentWork {
+  name        String
+  role        String
+  description String
+  imageUrl    String
+  date        String
+}
+
+model About {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  intro         String
+  focused       String
+  transitionOne String
+  transitionTwo String
+  hobbies       String
+  currentWorks  currentWork[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  author        User?         @relation(fields: [authorId], references: [id])
+  authorId      String?       @unique @db.ObjectId
+}
+
 model Account {
   id                 String  @id @default(auto()) @map("_id") @db.ObjectId
   userId             String  @db.ObjectId
@@ -66,6 +89,7 @@ model User {
   projects      Project[]
   accounts      Account[]
   sessions      Session[]
+  about         About?
 
   @@map(name: "users")
 }

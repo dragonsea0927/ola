@@ -3,6 +3,7 @@ import { AboutPage } from '@/components'
 import { getSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import prisma from '@/lib/prisma';
+import { About } from '@/types';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
@@ -34,7 +35,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 }
 
-const AboutHomePage = (props) => {
+interface AboutHomePageProps {
+  about: About[]
+}
+
+const AboutHomePage: React.FC<AboutHomePageProps> = (props) => {
   const { about } = props
   return (
     <>

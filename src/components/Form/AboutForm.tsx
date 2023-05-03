@@ -1,28 +1,8 @@
 import React from 'react'
 import { styled } from '@mui/material/styles';
+import { ControllInput } from '@/components';
 import { About, currentWork } from '@/types';
 import { useForm } from 'react-hook-form';
-import { ControllInput } from '@/components';
-
-const FormContainer = styled('div')(({ theme }) => ({
-  width: '100%',
-  height: '100%',
-  padding: '2rem',
-  marging: '5rem auto',
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  [theme.breakpoints.up('md')]: {
-    height: '100%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    height: '100%',
-  },
-
-}));
 
 const StyledForm = styled('form')(({ theme }) => ({
   width: '60%',
@@ -57,19 +37,38 @@ const StyledForm = styled('form')(({ theme }) => ({
 
 }));
 
-
-const EditAboutForm = (props) => {
-  const data = props
+const AboutForm = ({ handleFormSubmit }) => {
   const { register, handleSubmit, control, reset, formState: { isSubmitting } } = useForm<About>({
     mode: 'onBlur',
-    defaultValues: data?.about[0]
+    defaultValues: {
+      title: '',
+      intro: '',
+      focused: '',
+      transitionOne: '',
+      transitionTwo: '',
+      hobbies: '',
+      currentWorks: [],
+    }
   })
 
   const onSubmit = async (data: About) => {
-    console.log(data)
+    const newData = {
+      ...data,
+      currentWorks: data?.currentWorks?.toString().split(',').map((item: any) => {
+        return {
+          name: item.name,
+          role: item.role,
+          description: item.description,
+          imageurl: item.imageurl,
+          date: item.date,
+        }
+      })
+    }
+    handleFormSubmit(newData)
   }
+
   return (
-    <FormContainer>
+    <div>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <ControllInput
           label="About Title"
@@ -132,63 +131,58 @@ const EditAboutForm = (props) => {
           multiline
           rows={3}
         />
+        <div>
+          <h2>Current Work</h2>
+          <ControllInput
+            label='name'
+            name='name'
+            control={control}
+            size='small'
+            inputProps={register('currentWorks')}
+            sx={{ width: '100%' }}
 
-        {data?.about[0].currentWorks?.map((work: currentWork, index: number) => (
-          <div key={index}>
-            <h2>{work.name}</h2>
-            <ControllInput
-              label='name'
-              name='name'
-              control={control}
-              size='small'
-              inputProps={register(`currentWorks.${index}.name`)}
-              sx={{ width: '100%' }}
+          />
 
-            />
+          <ControllInput
+            label='role'
+            name='role'
+            control={control}
+            size='small'
+            inputProps={register('currentWorks')}
+            sx={{ width: '100%' }}
+          />
 
-            <ControllInput
-              label='role'
-              name='role'
-              control={control}
-              size='small'
-              inputProps={register(`currentWorks.${index}.role`)}
-              sx={{ width: '100%' }}
-            />
+          <ControllInput
+            label='description'
+            name='description'
+            control={control}
+            size='small'
+            inputProps={register('currentWorks')}
+            sx={{ width: '100%' }}
+          />
 
-            <ControllInput
-              label='description'
-              name='description'
-              control={control}
-              size='small'
-              inputProps={register(`currentWorks.${index}.description`)}
-              sx={{ width: '100%' }}
-            />
+          <ControllInput
+            label='imageUrl'
+            name='imageUrl'
+            control={control}
+            size='small'
+            inputProps={register('currentWorks')}
+            sx={{ width: '100%' }}
+          />
 
-            <ControllInput
-              label='imageUrl'
-              name='imageUrl'
-              control={control}
-              size='small'
-              inputProps={register(`currentWorks.${index}.imageUrl`)}
-              sx={{ width: '100%' }}
-            />
-
-            <ControllInput
-              label='date'
-              name='date'
-              control={control}
-              size='small'
-              inputProps={register(`currentWorks.${index}.date`)}
-              sx={{ width: '100%' }}
-            />
-          </div>
-        ))}
-        <button type="submit">
-          {isSubmitting ? 'Loading...' : 'Submit'}
-        </button>
+          <ControllInput
+            label='date'
+            name='date'
+            control={control}
+            size='small'
+            inputProps={register('currentWorks')}
+            sx={{ width: '100%' }}
+          />
+        </div>
+        <button type="submit" >Submit</button>
       </StyledForm>
-    </FormContainer>
+    </div>
   )
 }
 
-export default EditAboutForm
+export default AboutForm

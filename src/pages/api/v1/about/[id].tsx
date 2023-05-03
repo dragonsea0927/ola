@@ -8,32 +8,75 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { id } = req.query
   const { method } = req
 
+  if (!session?.user?.email) {
+    return res.status(401).json({
+      status: 'error',
+      message: "You are not authorized to perform this action"
+    })
+  }
+
   switch (method) {
     case 'GET':
-      const contents = await prisma.about.findUnique({
-        where: {
-          id: id as string
+      try {
+        const contents = await prisma.about.findUnique({
+          where: {
+            id: id as string
+          }
+        })
+
+        if (!contents) {
+          return res.status(404).json({
+            status: 'error',
+            message: 'Not found'
+          })
         }
-      })
-      res.status(200).json({
-        status: 'success',
-        data: contents
-      })
+
+        res.status(200).json({
+          status: 'success',
+          data: contents
+        })
+
+      } catch (error) {
+        res.status(500).json({
+          status: 'error',
+          message: `Oops! Something went wrong. ${error?.message}`
+        })
+      }
       break
     case 'PUT':
-      const updatedAbout = await prisma.about.update({
-        where: {
-          id: id as string
-        },
-        data: req.body
-      })
-      res.status(200).json({
-        status: 'success',
-        data: updatedAbout
-      })
+      try {
+        const checkExist = await prisma.about.findUnique({
+          where: {
+            id: id as string
+          }
+        })
+
+        if (!checkExist) {
+          return res.status(404).json({
+            status: 'error',
+            message: 'Not found'
+          })
+        }
+
+        const updatedAbout = await prisma.about.update({
+          where: {
+            id: id as string
+          },
+          data: req.body
+        })
+        res.status(200).json({
+          status: 'success',
+          data: updatedAbout
+        })
+      } catch (error) {
+        res.status(500).json({
+          status: 'error',
+          message: `Oops! Something went wrong. ${error?.message}`
+        })
+      }
       break
     default:
-      res.status(405).json({ message: 'Method not allowed' })
+      res.status(405).json({ message: 'HTTP Method not allowed' })
       break
   }
 }

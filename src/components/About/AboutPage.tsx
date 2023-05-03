@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
-import { Layout } from '@/components'
+import { EditAboutForm, Layout } from '@/components'
 import { styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import AboutImage from './AboutImage'
 import temImg from '@/assets/images/modalpic.jpeg'
-import Image from 'next/image'
 import CurrentWork from './CurrentWork'
 import AboutContent from './AboutContent'
 import ResumeTabs from './ResumeTabs'
+import { useSession } from 'next-auth/react';
 
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -98,41 +98,61 @@ const StyledResumeSection = styled('section')(({ theme }) => ({
 
 
 
-const AboutPage = () => {
+const AboutPage = ({ data }) => {
+  const { data: session } = useSession()
+  const [isEditable, setIsEditable] = React.useState(false)
+
+  const toggleEditable = () => {
+    setIsEditable(!isEditable)
+  }
+  const userLoggedIn = session?.user?.email
+
   return (
     <Layout>
       <AboutPageContainerStyling>
         <StyledTypography variant='h1'>I'm Ola.</StyledTypography>
-        <AboutInfoDiv>
-          <AboutImage />
-          <div className='about'>
-            <AboutContent />
-          </div>
-        </AboutInfoDiv>
-        <div className='current'>
-          <Typography variant='h2'>Currently working on</Typography>
-          <CurrentWork
-            appImage={temImg}
-            year='2022-Present'
-            appTitle='JobHunter'
-            role='FullStack Developer'
-            appDescription='Resume builder and job application tracker for african job seekers.'
-          />
+        {isEditable && userLoggedIn ? (
+          <>
+            <EditAboutForm about={data} />
+          </>
+        ) : (
+          <>
+            <AboutInfoDiv>
+              <AboutImage />
+              <div className='about'>
+                <AboutContent />
+              </div>
+            </AboutInfoDiv>
+            <div className='current'>
+              <Typography variant='h2'>Currently working on</Typography>
+              <CurrentWork
+                appImage={temImg}
+                year='2022-Present'
+                appTitle='JobHunter'
+                role='FullStack Developer'
+                appDescription='Resume builder and job application tracker for african job seekers.'
+              />
 
-          <CurrentWork
-            appImage={temImg}
-            year='2023-Present'
-            appTitle='Juubix'
-            role='FullStack Developer'
-            appDescription='Juubix a decentralized Talents and Investors matching platform.'
-          />
-        </div>
+              <CurrentWork
+                appImage={temImg}
+                year='2023-Present'
+                appTitle='Juubix'
+                role='FullStack Developer'
+                appDescription='Juubix a decentralized Talents and Investors matching platform.'
+              />
+            </div>
+            {userLoggedIn && <button type='button' onClick={toggleEditable}>
+              Edit
+            </button>}
+          </>
+        )}
 
         <StyledResumeSection className='resume'>
           <Typography variant='h2' className='sub-header'>My Resume</Typography>
           <ResumeTabs />
         </StyledResumeSection>
       </AboutPageContainerStyling>
+
     </Layout>
   )
 }

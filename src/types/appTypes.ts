@@ -97,7 +97,7 @@ export type ProjectProps = {
   handleOpenModal: (id: string) => void
 }
 
-type currentWork = {
+export type currentWork = {
   name: string,
   role: string,
   description: string,

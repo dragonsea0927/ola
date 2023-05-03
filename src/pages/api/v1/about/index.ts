@@ -11,13 +11,6 @@ export default async function handler(
 
   const session = await getServerSession(req, res, authOptions)
 
-  // if (!session?.user?.email) {
-  //   return res.status(401).json({
-  //     status: "error",
-  //     message: "You are not authorized to perform this action"
-  //   })
-  // }
-
   switch (req.method) {
     case "GET":
       try {
@@ -37,12 +30,20 @@ export default async function handler(
       }
       break;
     case "POST":
+
+      if (!session?.user?.email) {
+        return res.status(401).json({
+          status: "error",
+          message: "You are not authorized to perform this action"
+        })
+      }
+
       try {
         const aboutItems: About = req.body
         const about = await prisma.about.create({
           data: req.body
         })
-        res.status(200).json({
+        res.status(201).json({
           status: "success",
           data: about,
           message: "About page created successfully"

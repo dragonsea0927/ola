@@ -7,9 +7,9 @@ import {
   AdminRoutesProps,
   Project,
   ProjectProps,
-  About
+  About, currentWork
 } from './appTypes'
 
 export type {
-  Projects, LayoutProps, ButtonProps, StyledButtonProps, NavItems, NavItem, SocialLinks, SocialLink, FormValues, TabArray, TabPanelProps, AdminRoutesProps, Project, ProjectProps, About
+  Projects, LayoutProps, ButtonProps, StyledButtonProps, NavItems, NavItem, SocialLinks, SocialLink, FormValues, TabArray, TabPanelProps, AdminRoutesProps, Project, ProjectProps, About, currentWork
 }

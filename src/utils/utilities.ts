@@ -1,4 +1,4 @@
-import { NavItems, SocialLinks, TabArray, Project } from "@/types";
+import { NavItems, SocialLinks, TabArray, Project, About } from "@/types";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -190,3 +190,17 @@ export const resumeTabs: TabArray = [
     value: 'certifications',
   },
 ]
+
+export const updateAboutInfo = async (id: string, data: About) => {
+  try {
+    const response = await axios.put(`/api/v1/about/${id}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response.data;
+    // console.log(id)
+  } catch (error) {
+    return error?.response?.data?.message;
+  }
+}

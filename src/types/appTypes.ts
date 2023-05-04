@@ -109,8 +109,8 @@ export type About = {
   title: string,
   intro: string,
   focused: string,
-  transitionOne: string,
-  transitionTwo: string,
+  transitionOne?: string,
+  transitionTwo?: string,
   hobbies: string,
   currentWorks: currentWork[],
   author?: {

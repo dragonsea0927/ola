@@ -1,6 +1,6 @@
 import React from 'react'
 import { AboutPage } from '@/components'
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import prisma from '@/lib/prisma';
 import { About } from '@/types';
@@ -16,20 +16,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 
   const about = await prisma.about.findMany()
-  //   // where: {
-  //   //   author: {
-  //   //     email: session?.user?.email
-  //   //   },
-  //   // },
-  //   // include: {
-  //   //   author: {
-  //   //     select: {
-  //   //       name: true,
-  //   //     }
-  //   //   }
-  //   // }
-  // })
-
   return {
     props: { about: JSON.parse(JSON.stringify(about)) }
   }
@@ -41,6 +27,9 @@ interface AboutHomePageProps {
 
 const AboutHomePage: React.FC<AboutHomePageProps> = (props) => {
   const { about } = props
+  const { data: session } = useSession()
+
+  console.log(session)
   return (
     <>
       <AboutPage data={about} />

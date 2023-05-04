@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import { About, currentWork } from '@/types';
 import { useForm } from 'react-hook-form';
 import { ControllInput } from '@/components';
+import { useNavigation } from '@/hooks';
+import { updateAboutInfo } from '@/utils'
 
 const FormContainer = styled('div')(({ theme }) => ({
   width: '100%',
@@ -42,6 +44,23 @@ const StyledForm = styled('form')(({ theme }) => ({
     gap: '2rem',
 
   },
+
+  button: {
+    width: '40%',
+    height: '3rem',
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.white.main,
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    transition: 'all .3s ease-in-out',
+    fontSize: '1.2rem',
+    '&:hover': {
+      backgroundColor: theme.white.main,
+      color: theme.palette.secondary.main,
+      border: `1px solid ${theme.palette.secondary.main}`,
+    }
+  },
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     display: 'flex',
@@ -60,14 +79,33 @@ const StyledForm = styled('form')(({ theme }) => ({
 
 const EditAboutForm = (props) => {
   const data = props
+  const [success, setSuccess] = React.useState(false)
+  const [error, setError] = React.useState(false)
+  const { navigate } = useNavigation()
   const { register, handleSubmit, control, reset, formState: { isSubmitting } } = useForm<About>({
     mode: 'onBlur',
     defaultValues: data?.about[0]
   })
 
   const onSubmit = async (data: About) => {
-    console.log(data)
+    const updateData = {
+      title: data.title,
+      intro: data.intro,
+      focused: data.focused,
+      transitionOne: data.transitionOne,
+      transitionTwo: data.transitionTwo,
+      hobbies: data.hobbies,
+      currentWorks: data.currentWorks
+    }
+    const res = await updateAboutInfo(props.about[0].id, updateData)
+    if (res?.status === 200 || res?.status === 'success') {
+      setSuccess(!success)
+      navigate(`/about`)
+    } else {
+      setError(!error)
+    }
   }
+
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -138,7 +176,7 @@ const EditAboutForm = (props) => {
             <h2>{work.name}</h2>
             <ControllInput
               label='name'
-              name='name'
+              name={`currentWorks.${index}.name`}
               control={control}
               size='small'
               inputProps={register(`currentWorks.${index}.name`)}
@@ -148,7 +186,7 @@ const EditAboutForm = (props) => {
 
             <ControllInput
               label='role'
-              name='role'
+              name={`currentWorks.${index}.role`}
               control={control}
               size='small'
               inputProps={register(`currentWorks.${index}.role`)}
@@ -157,7 +195,7 @@ const EditAboutForm = (props) => {
 
             <ControllInput
               label='description'
-              name='description'
+              name={`currentWorks.${index}.description`}
               control={control}
               size='small'
               inputProps={register(`currentWorks.${index}.description`)}
@@ -166,7 +204,7 @@ const EditAboutForm = (props) => {
 
             <ControllInput
               label='imageUrl'
-              name='imageUrl'
+              name={`currentWorks.${index}.imageUrl`}
               control={control}
               size='small'
               inputProps={register(`currentWorks.${index}.imageUrl`)}
@@ -175,7 +213,7 @@ const EditAboutForm = (props) => {
 
             <ControllInput
               label='date'
-              name='date'
+              name={`currentWorks.${index}.date`}
               control={control}
               size='small'
               inputProps={register(`currentWorks.${index}.date`)}
@@ -183,7 +221,9 @@ const EditAboutForm = (props) => {
             />
           </div>
         ))}
-        <button type="submit">
+        <button type="submit"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? 'Loading...' : 'Submit'}
         </button>
       </StyledForm>

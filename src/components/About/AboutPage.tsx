@@ -105,7 +105,7 @@ const AboutPage = ({ data }) => {
   const toggleEditable = () => {
     setIsEditable(!isEditable)
   }
-  const userLoggedIn = session?.user?.email
+  const userLoggedIn = session?.user?.email && session?.user?.role === 'admin'
 
   return (
     <Layout>

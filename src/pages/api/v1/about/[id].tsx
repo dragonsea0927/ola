@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const checkExist = await prisma.about.findUnique({
           where: {
             id: id as string
-          }
+          },
         })
 
         if (!checkExist) {
@@ -62,7 +62,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           where: {
             id: id as string
           },
-          data: req.body
+          data: {
+            ...req.body,
+            updatedAt: new Date()
+          }
         })
         res.status(200).json({
           status: 'success',

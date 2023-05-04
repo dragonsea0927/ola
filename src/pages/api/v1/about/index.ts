@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import { getServerSession } from "next-auth/next"
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { About } from '@/types'
+import { getToken } from "next-auth/jwt"
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,6 +11,7 @@ export default async function handler(
 ) {
 
   const session = await getServerSession(req, res, authOptions)
+  const secret = process.env.NEXTAUTH_SECRET
 
   switch (req.method) {
     case "GET":
@@ -30,7 +32,8 @@ export default async function handler(
       }
       break;
     case "POST":
-
+      const token = await getToken({ req, secret })
+      console.log("JSON Web Token", token)
       if (!session?.user?.email) {
         return res.status(401).json({
           status: "error",

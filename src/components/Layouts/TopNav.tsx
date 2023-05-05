@@ -100,9 +100,8 @@ const TopNav = () => {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontWeight: 700, fontSize: '1.1rem', letterSpacing: '0.1rem' }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
             <Logo />
           </Typography>

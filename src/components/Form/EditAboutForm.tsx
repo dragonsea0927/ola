@@ -97,7 +97,7 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
       transitionOne: data.transitionOne,
       transitionTwo: data.transitionTwo,
       hobbies: data.hobbies,
-      profileImageUrl: data.profileImgUrl,
+      profileImgUrl: data.profileImgUrl,
       currentWorks: data.currentWorks
     }
     const res = await updateAboutInfo(props.about[0].id, updateData)
@@ -114,8 +114,10 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
 
   return (
     <FormContainer>
+
       {success && <Toast severity='success' message='Update Success' open={success} onClose={() => setSuccess(!success)} />}
       {error && <Toast severity='error' message='Update Failed' open={error} onClose={() => setError(!error)} />}
+
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <ControllInput
           label="About Title"
@@ -181,7 +183,7 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
 
         <ControllInput
           label="Profile Image Url"
-          name="profileImageUrl"
+          name="profileImgUrl"
           control={control}
           size='small'
           inputProps={register('profileImgUrl')}

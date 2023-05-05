@@ -31,18 +31,18 @@ export default async function handler(
       }
       break;
     case "POST":
-      // const token = await getToken({ req, secret })
-      // console.log("JSON Web Token", token)
-      if (!session?.user?.email) {
-        return res.status(401).json({
-          status: "error",
-          message: "You are not authorized to perform this action"
-        })
-      }
+      // if (!session?.user?.email || session?.user?.role !== "admin") {
+      //   return res.status(401).json({
+      //     status: "error",
+      //     message: "You are not authorized to perform this action"
+      //   })
+      // }
 
       try {
         const about = await prisma.about.create({
-          data: req.body
+          data: {
+            ...req.body,
+          }
         })
         res.status(201).json({
           status: "success",

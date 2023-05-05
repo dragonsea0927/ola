@@ -49,7 +49,7 @@ export const socialLinks: SocialLinks = [
   {
     id: 1,
     title: 'github',
-    path: 'https://github.com/netman5',
+    path: 'https://github.com/olaishola05',
     icon: GitHubIcon
   },
   {
@@ -62,7 +62,7 @@ export const socialLinks: SocialLinks = [
   {
     id: 3,
     title: 'twitter',
-    path: 'https://twitter.com/Orlaish',
+    path: 'https://twitter.com/olaishola05',
     icon: TwitterIcon
   },
   {

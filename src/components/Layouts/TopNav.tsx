@@ -6,6 +6,7 @@ import { navItems } from '@/utils';
 import { signOut, useSession } from 'next-auth/react';
 import AdminRoutes from './AdminRoutes';
 import { scrollToViewMethod } from '@/utils';
+import Logo from './Logo';
 
 
 const TopNavContainer = styled('div')(({ theme }) => ({
@@ -53,7 +54,7 @@ const TopNav = () => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        OI
+        <Logo />
       </Typography>
       <Divider />
       <List>
@@ -103,7 +104,7 @@ const TopNav = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontWeight: 700, fontSize: '1.1rem', letterSpacing: '0.1rem' }}
           >
-            Oi
+            <Logo />
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {session && status === 'authenticated' && (

@@ -107,8 +107,7 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
   const { data: session } = useSession()
   const [isEditable, setIsEditable] = React.useState(false)
   const { data } = props
-
-  console.log('data', data)
+  const { currentWorks } = data[0]
 
   const toggleEditable = () => {
     setIsEditable(!isEditable)
@@ -129,29 +128,21 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
             <AboutInfoDiv>
               <AboutImage />
               <div className='about'>
-                <AboutContent />
+                <AboutContent content={data} />
               </div>
             </AboutInfoDiv>
             <div className='current'>
               <Typography variant='h2'>Currently working on</Typography>
-              {data[0]?.currentWorks?.map((work, idx) => (
+              {currentWorks?.map((work, idx) => (
                 <CurrentWork
                   key={idx}
-                  appImage={work.imageUrl}
+                  appImage={work.imageUrl || temImg}
                   year={work.date}
                   appTitle={work.name}
                   role={work.role}
                   appDescription={work.description}
                 />
               ))}
-
-              {/* <CurrentWork
-                appImage={temImg}
-                year='2023-Present'
-                appTitle='Juubix'
-                role='FullStack Developer'
-                appDescription='Juubix a decentralized Talents and Investors matching platform.'
-              /> */}
             </div>
             {userLoggedIn && <button type='button' onClick={toggleEditable}>
               Edit

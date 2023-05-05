@@ -82,7 +82,7 @@ const EditAboutForm = (props) => {
   const [success, setSuccess] = React.useState(false)
   const [error, setError] = React.useState(false)
   const { navigate } = useNavigation()
-  const { register, handleSubmit, control, reset, formState: { isSubmitting } } = useForm<About>({
+  const { register, handleSubmit, control, formState: { isSubmitting } } = useForm<About>({
     mode: 'onBlur',
     defaultValues: data?.about[0]
   })
@@ -104,6 +104,10 @@ const EditAboutForm = (props) => {
     } else {
       setError(!error)
     }
+  }
+
+  const handleCancel = () => {
+    props.toggleEdit(false)
   }
 
   return (
@@ -224,8 +228,10 @@ const EditAboutForm = (props) => {
         <button type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Loading...' : 'Submit'}
+          {isSubmitting ? 'Loading...' : 'Update'}
         </button>
+
+        <button type="button" onClick={() => handleCancel()}>Close Edit</button>
       </StyledForm>
     </FormContainer>
   )

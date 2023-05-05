@@ -1,8 +1,13 @@
 import React from 'react'
 import { styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import { About } from '@/types'
 
-const AboutContent = (props) => {
+interface Props {
+  content: About[]
+}
+
+const AboutContent: React.FC<Props> = (props) => {
   const { content } = props
   const { intro, title, transitionOne, transitionTwo, focused, hobbies } = content[0]
   return (

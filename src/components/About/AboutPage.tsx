@@ -113,7 +113,6 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
     setIsEditable(!isEditable)
   }
   const userLoggedIn = session?.user?.email && session?.user?.role === 'admin'
-  // console.log('userLoggedIn', userLoggedIn)
 
   return (
     <Layout>
@@ -121,7 +120,7 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
         <StyledTypography variant='h1'>I'm Ola.</StyledTypography>
         {isEditable && userLoggedIn ? (
           <>
-            <EditAboutForm about={data} />
+            <EditAboutForm about={data} toggleEdit={toggleEditable} />
           </>
         ) : (
           <>

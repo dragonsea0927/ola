@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
 import { getServerSession } from "next-auth/next"
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import { About } from '@/types'
 import { getToken } from "next-auth/jwt"
 
 export default async function handler(
@@ -32,8 +31,8 @@ export default async function handler(
       }
       break;
     case "POST":
-      const token = await getToken({ req, secret })
-      console.log("JSON Web Token", token)
+      // const token = await getToken({ req, secret })
+      // console.log("JSON Web Token", token)
       if (!session?.user?.email) {
         return res.status(401).json({
           status: "error",
@@ -42,7 +41,6 @@ export default async function handler(
       }
 
       try {
-        const aboutItems: About = req.body
         const about = await prisma.about.create({
           data: req.body
         })

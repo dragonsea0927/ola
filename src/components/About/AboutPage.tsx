@@ -9,6 +9,7 @@ import CurrentWork from './CurrentWork'
 import AboutContent from './AboutContent'
 import ResumeTabs from './ResumeTabs'
 import { useSession } from 'next-auth/react';
+import { About } from '@/types'
 
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -96,16 +97,24 @@ const StyledResumeSection = styled('section')(({ theme }) => ({
   },
 }))
 
+interface AboutPageProps {
+  data: About[]
+}
 
 
-const AboutPage = ({ data }) => {
+
+const AboutPage: React.FC<AboutPageProps> = (props) => {
   const { data: session } = useSession()
   const [isEditable, setIsEditable] = React.useState(false)
+  const { data } = props
+
+  console.log('data', data)
 
   const toggleEditable = () => {
     setIsEditable(!isEditable)
   }
   const userLoggedIn = session?.user?.email && session?.user?.role === 'admin'
+  // console.log('userLoggedIn', userLoggedIn)
 
   return (
     <Layout>
@@ -125,21 +134,24 @@ const AboutPage = ({ data }) => {
             </AboutInfoDiv>
             <div className='current'>
               <Typography variant='h2'>Currently working on</Typography>
-              <CurrentWork
-                appImage={temImg}
-                year='2022-Present'
-                appTitle='JobHunter'
-                role='FullStack Developer'
-                appDescription='Resume builder and job application tracker for african job seekers.'
-              />
+              {data[0]?.currentWorks?.map((work, idx) => (
+                <CurrentWork
+                  key={idx}
+                  appImage={work.imageUrl}
+                  year={work.date}
+                  appTitle={work.name}
+                  role={work.role}
+                  appDescription={work.description}
+                />
+              ))}
 
-              <CurrentWork
+              {/* <CurrentWork
                 appImage={temImg}
                 year='2023-Present'
                 appTitle='Juubix'
                 role='FullStack Developer'
                 appDescription='Juubix a decentralized Talents and Investors matching platform.'
-              />
+              /> */}
             </div>
             {userLoggedIn && <button type='button' onClick={toggleEditable}>
               Edit

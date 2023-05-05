@@ -2,8 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material/styles';
 import { About, currentWork } from '@/types';
 import { useForm } from 'react-hook-form';
-import { ControllInput } from '@/components';
-import { useNavigation } from '@/hooks';
+import { ControllInput, Toast } from '@/components';
 import { updateAboutInfo } from '@/utils'
 
 const FormContainer = styled('div')(({ theme }) => ({
@@ -76,12 +75,15 @@ const StyledForm = styled('form')(({ theme }) => ({
 
 }));
 
+interface AboutPageProps {
+  about: About[],
+  toggleEdit: (value: boolean) => void,
+}
 
-const EditAboutForm = (props) => {
+const EditAboutForm: React.FC<AboutPageProps> = (props) => {
   const data = props
   const [success, setSuccess] = React.useState(false)
   const [error, setError] = React.useState(false)
-  const { navigate } = useNavigation()
   const { register, handleSubmit, control, formState: { isSubmitting } } = useForm<About>({
     mode: 'onBlur',
     defaultValues: data?.about[0]
@@ -95,12 +97,12 @@ const EditAboutForm = (props) => {
       transitionOne: data.transitionOne,
       transitionTwo: data.transitionTwo,
       hobbies: data.hobbies,
+      profileImageUrl: data.profileImgUrl,
       currentWorks: data.currentWorks
     }
     const res = await updateAboutInfo(props.about[0].id, updateData)
     if (res?.status === 200 || res?.status === 'success') {
       setSuccess(!success)
-      navigate(`/about`)
     } else {
       setError(!error)
     }
@@ -112,6 +114,8 @@ const EditAboutForm = (props) => {
 
   return (
     <FormContainer>
+      {success && <Toast severity='success' message='Update Success' open={success} onClose={() => setSuccess(!success)} />}
+      {error && <Toast severity='error' message='Update Failed' open={error} onClose={() => setError(!error)} />}
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <ControllInput
           label="About Title"
@@ -173,6 +177,15 @@ const EditAboutForm = (props) => {
           sx={{ width: '100%' }}
           multiline
           rows={3}
+        />
+
+        <ControllInput
+          label="Profile Image Url"
+          name="profileImageUrl"
+          control={control}
+          size='small'
+          inputProps={register('profileImgUrl')}
+          sx={{ width: '100%' }}
         />
 
         {data?.about[0].currentWorks?.map((work: currentWork, index: number) => (

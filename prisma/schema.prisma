@@ -37,6 +37,7 @@ type currentWork {
 model About {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
   title         String
+  profileImgUrl String
   intro         String
   focused       String
   transitionOne String

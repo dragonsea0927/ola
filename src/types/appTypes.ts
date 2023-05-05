@@ -106,6 +106,7 @@ export type currentWork = {
 }
 
 export type About = {
+  profileImgUrl?: string,
   title: string,
   intro: string,
   focused: string,

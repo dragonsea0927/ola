@@ -27,6 +27,9 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 }))
 
 const AboutPageContainerStyling = styled('div')(({ theme }) => ({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
   h2: {
     fontSize: '45px',
     fontWeight: 600,
@@ -54,6 +57,31 @@ const AboutPageContainerStyling = styled('div')(({ theme }) => ({
       margin: '2rem auto',
     },
   },
+
+  '.btn-container': {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0 auto',
+    width: '50%',
+
+    '.editBtn': {
+      width: '20%',
+      height: '3rem',
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.white.main,
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      transition: 'all .3s ease-in-out',
+      fontSize: '1.2rem',
+      '&:hover': {
+        backgroundColor: theme.white.main,
+        color: theme.palette.secondary.main,
+      },
+    },
+  },
+
   [theme.breakpoints.down('sm')]: {
     color: 'blue',
   },
@@ -143,9 +171,11 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
                 />
               ))}
             </div>
-            {userLoggedIn && <button type='button' onClick={toggleEditable}>
-              Edit
-            </button>}
+            {userLoggedIn && <div className='btn-container'>
+              <button type='button' className='editBtn' onClick={toggleEditable}>
+                Edit
+              </button>
+            </div>}
           </>
         )}
 

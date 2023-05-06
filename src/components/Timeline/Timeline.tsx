@@ -14,11 +14,9 @@ interface TimelineItem {
 interface TimelineProps {
   items: TimelineItem[];
   mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING';
-  handleSelect?: (index: number) => void;
-  activeItem?: any;
 }
 
-const Timeline: React.FC<TimelineProps> = ({ items, mode, handleSelect, activeItem }) => {
+const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
 
   const theme = useAppTheme()
   return (
@@ -53,9 +51,7 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode, handleSelect, activeIt
         cardWidth={600}
         useReadMore={true}
         borderLessCards={true}
-        onItemSelected={(index) => handleSelect && handleSelect(index as number)}
         activeItemIndex={0}
-        enableDarkToggle
         darkMode={theme.palette.mode === 'dark'}
         nestedCardHeight={200}
         fontSizes={{

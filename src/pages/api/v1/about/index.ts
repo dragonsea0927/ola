@@ -9,7 +9,6 @@ export default async function handler(
 ) {
 
   const session = await getServerSession(req, res, authOptions)
-  const secret = process.env.NEXTAUTH_SECRET
 
   switch (req.method) {
     case "GET":

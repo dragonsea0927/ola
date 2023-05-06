@@ -1,0 +1,14 @@
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border: 1px solid red;
+}
+
+.subtitle{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: red;
+    text-align: left;
+}

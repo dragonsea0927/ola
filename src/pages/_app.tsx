@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { theme, createEmotionCache } from '@/config'
 import '../styles/globals.scss'
+import '@/styles/about.css';
 import { SessionProvider } from 'next-auth/react'
 
 const clientSideEmotionCache = createEmotionCache();

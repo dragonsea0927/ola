@@ -96,3 +96,27 @@ export type ProjectProps = {
   projects: Project[]
   handleOpenModal: (id: string) => void
 }
+
+export type currentWork = {
+  name: string,
+  role: string,
+  description: string,
+  imageUrl: string,
+  date: string,
+}
+
+export type About = {
+  profileImgUrl: string,
+  title: string,
+  intro: string,
+  focused: string,
+  transitionOne?: string,
+  transitionTwo?: string,
+  hobbies: string,
+  currentWorks: currentWork[],
+  author?: {
+    name: string,
+    email: string,
+    image: string,
+  }
+}

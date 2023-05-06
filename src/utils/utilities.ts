@@ -1,4 +1,4 @@
-import { NavItems, SocialLinks, TabArray, Project } from "@/types";
+import { NavItems, SocialLinks, TabArray, Project, About } from "@/types";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -6,7 +6,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import WorkIcon from '@mui/icons-material/Work';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
-import { FaMedium } from 'react-icons/fa'
+import { FaMedium, FaAngellist } from 'react-icons/fa'
 import axios from 'axios';
 import { animateScroll as scroll, scroller } from 'react-scroll'
 
@@ -49,7 +49,7 @@ export const socialLinks: SocialLinks = [
   {
     id: 1,
     title: 'github',
-    path: 'https://github.com/netman5',
+    path: 'https://github.com/olaishola05',
     icon: GitHubIcon
   },
   {
@@ -62,7 +62,7 @@ export const socialLinks: SocialLinks = [
   {
     id: 3,
     title: 'twitter',
-    path: 'https://twitter.com/Orlaish',
+    path: 'https://twitter.com/olaishola05',
     icon: TwitterIcon
   },
   {
@@ -70,6 +70,12 @@ export const socialLinks: SocialLinks = [
     title: 'Medium',
     path: 'https://medium.com/@olaishola',
     icon: FaMedium
+  },
+  {
+    id: 5,
+    title: 'AngelList',
+    path: 'https://angel.co/u/ola-ishola',
+    icon: FaAngellist
   }
 ];
 
@@ -162,4 +168,39 @@ export function scrollToViewMethod(id: string) {
     smooth: 'easeOutCubic',
     offset: 50,
   })
+}
+
+export const resumeTabs: TabArray = [
+  {
+    label: 'Education',
+    value: 'education',
+  },
+  {
+    label: 'Experience',
+    value: 'experience',
+  },
+
+  {
+    label: 'Skills',
+    value: 'skills',
+  },
+
+  {
+    label: 'Certifications & Trainings',
+    value: 'certifications',
+  },
+]
+
+export const updateAboutInfo = async (id: string, data: About) => {
+  try {
+    const response = await axios.put(`/api/v1/about/${id}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response.data;
+    // console.log(id)
+  } catch (error) {
+    return error?.response?.data?.message;
+  }
 }

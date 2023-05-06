@@ -22,7 +22,10 @@ import Toast from "./Toast/Toast";
 import Status from "./Status/Status";
 import ScrollToView from "./ScrollToView/ScrollToView";
 import ScrollToTop from "./ScrollToTop/ScrollToTop";
+import AboutPage from "./About/AboutPage";
+import Timeline from "./Timeline/Timeline";
+import EditAboutForm from "./Form/EditAboutForm";
 
 export {
-  Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects, AccessDenied, ControllInput, Drafts, Toast, Status, ScrollToView, ScrollToTop
+  Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal, ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects, AccessDenied, ControllInput, Drafts, Toast, Status, ScrollToView, ScrollToTop, AboutPage, Timeline, EditAboutForm,
 };

@@ -53,6 +53,7 @@ const ControlInput = ({ name, control, label, width, placeholder, ...otherProps 
           label={label}
           variant="outlined"
           size='medium'
+          color='secondary'
           placeholder={placeholder}
           sx={{ width: width }}
           onChange={onChange}

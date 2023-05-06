@@ -1,5 +1,4 @@
 import React from 'react'
-import temImg from '@/assets/images/modalpic.jpeg'
 import Image from 'next/image'
 import { styled } from '@mui/material'
 import { socialLinks } from '@/utils'

@@ -49,11 +49,14 @@ const SocialMedia = styled('div')(({ theme }) => ({
 }))
 
 
-
-const AboutImage = () => {
+interface Props {
+  photo: string;
+}
+const AboutImage: React.FC<Props> = (props) => {
+  const { photo } = props
   return (
     <AboutImageContainer>
-      <Image src={temImg} alt='Ola' width={300} height={600} />
+      <Image src={photo} alt='Ola' width={300} height={400} />
       <SocialMedia>
         {socialLinks.map((link) => (
           <Link

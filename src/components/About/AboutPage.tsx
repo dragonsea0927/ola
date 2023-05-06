@@ -135,7 +135,7 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
   const { data: session } = useSession()
   const [isEditable, setIsEditable] = React.useState(false)
   const { data } = props
-  const { currentWorks } = data[0]
+  const { currentWorks, profileImgUrl } = data[0]
 
   const toggleEditable = () => {
     setIsEditable(!isEditable)
@@ -153,7 +153,7 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
         ) : (
           <>
             <AboutInfoDiv>
-              <AboutImage />
+              <AboutImage photo={profileImgUrl} />
               <div className='about'>
                 <AboutContent content={data} />
               </div>

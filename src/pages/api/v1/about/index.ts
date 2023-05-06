@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
 import { getServerSession } from "next-auth/next"
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import { getToken } from "next-auth/jwt"
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,12 +30,12 @@ export default async function handler(
       }
       break;
     case "POST":
-      // if (!session?.user?.email || session?.user?.role !== "admin") {
-      //   return res.status(401).json({
-      //     status: "error",
-      //     message: "You are not authorized to perform this action"
-      //   })
-      // }
+      if (!session?.user?.email || session?.user?.role !== "admin") {
+        return res.status(401).json({
+          status: "error",
+          message: "You are not authorized to perform this action"
+        })
+      }
 
       try {
         const about = await prisma.about.create({

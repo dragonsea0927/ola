@@ -47,6 +47,7 @@ const GridItem = styled(Grid)(({ theme }) => ({
   flexDirection: 'column',
   gap: '30px',
   margin: 'auto',
+  borderRadius: '10px',
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
   },
@@ -130,7 +131,7 @@ const SocialMedia = styled('div')(({ theme }) => ({
     position: 'fixed',
     right: theme.spacing(1),
     bottom: theme.spacing(12),
-    zIndex: 1000,
+    // zIndex: 1000,
     padding: '16px',
   },
 }))

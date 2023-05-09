@@ -6,10 +6,12 @@ import Link from 'next/link'
 import { randomItemFromArray } from '@/utils'
 import { ScrollToView } from '@/components'
 
-const BlogMainContainer = styled(Grid)(({ theme }) => ({
+const BlogMainContainer = styled('div')(({ theme }) => ({
   width: '100%',
+  height: '100vh',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: '20px',
+  border: '1px solid red',
 
   h1: {
     fontSize: '60px',
@@ -44,7 +46,6 @@ const BlogMainContainer = styled(Grid)(({ theme }) => ({
 
 const BlogsContents = styled(Grid)(({ theme }) => ({
   width: '100%',
-  height: '100%',
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '20px',
@@ -76,31 +77,33 @@ const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps)
   const sliceData = data?.items ? data.items.slice(0, 3) : []
 
   return (
-    <ScrollToView to='blogs' >
-      <BlogMainContainer
-      >
-        <Typography variant='body1' className='blog-info'>Check some of my Technical articles</Typography>
-        <Typography variant='h1'>Recent Articles</Typography>
-        <BlogsContents>
-          {sliceData.map((item: any, index: number) => {
-            const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
-            return (
-              < CustomCard
-                key={item.guid}
-                image={item.thumbnail || ProjectImage}
-                overlayText='Read More'
-                name={tags || 'No tags'}
-                duration={item.duration || '5+ min'}
-                description={item.title}
-                onClick={() => handleOpenBlogModal(item)}
-              />
-            )
-          })}
-        </BlogsContents>
-        <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='https://dev.to/'>here</Link>
-        </Typography>
-      </BlogMainContainer>
-    </ScrollToView>
+    <div>
+      <ScrollToView to='blogs' >
+        <BlogMainContainer
+        >
+          <Typography variant='body1' className='blog-info'>Check some of my Technical articles</Typography>
+          <Typography variant='h1'>Recent Articles</Typography>
+          <BlogsContents>
+            {sliceData.map((item: any, index: number) => {
+              const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
+              return (
+                < CustomCard
+                  key={item.guid}
+                  image={item.thumbnail || ProjectImage}
+                  overlayText='Read More'
+                  name={tags || 'No tags'}
+                  duration={item.duration || '5+ min'}
+                  description={item.title}
+                  onClick={() => handleOpenBlogModal(item)}
+                />
+              )
+            })}
+          </BlogsContents>
+          <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='https://dev.to/'>here</Link>
+          </Typography>
+        </BlogMainContainer>
+      </ScrollToView>
+    </div>
   )
 }
 

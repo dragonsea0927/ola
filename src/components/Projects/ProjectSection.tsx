@@ -9,8 +9,8 @@ import { tabs } from '@/utils'
 
 const ProjectContainer = styled(Grid)(({ theme }) => ({
   width: '100vw',
-  height: '100%',
   padding: '20px',
+  border: '1px solid red',
   h2: {
     fontSize: '60px',
     textAlign: 'center',
@@ -24,7 +24,6 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
-    border: '1px solid red',
 
     '.info': {
       fontSize: '12px',
@@ -36,13 +35,11 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
-    border: '1px solid blue',
+
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
-    border: '1px solid green',
+
   },
 
 }))
@@ -52,18 +49,18 @@ const TabsStyle = styled(Tabs)(({ theme }) => ({
   width: '65%',
   margin: '30px auto',
   [theme.breakpoints.down('sm')]: {
-    width: '100%',
+    width: '90%',
     '& .MuiTabs-flexContainer': {
       flexWrap: 'wrap',
     },
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+    width: '90%',
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+    width: '65%',
   },
 }))
 
@@ -84,6 +81,7 @@ const TabStyle = styled(Tab)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     width: '100%',
+    fontSize: '15px',
   },
 }))
 

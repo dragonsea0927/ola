@@ -37,11 +37,11 @@ const CardContainer = styled(Card)(({ theme }) => ({
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+
   },
 
 }))
@@ -77,12 +77,10 @@ const CardMediaContainer = styled(CardMedia)(({ theme }) => ({
     transition: 'tranform 0s'
   },
   [theme.breakpoints.down('sm')]: {
-    padding: '10px',
-
     img: {
       width: '100%',
       height: '233px',
-      objectFit: 'fit',
+      objectFit: 'fill',
     },
   },
 
@@ -121,11 +119,11 @@ const CardMediaTop = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+
   },
 
 }))

@@ -14,22 +14,35 @@ const GridContainer = styled(Grid)(({ theme }) => ({
   gap: '30px',
   position: 'relative',
   [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    margin: '20px auto',
+    width: '100vw',
+    height: '75vh',
+    margin: '10px auto',
+    padding: '0px 10px',
+    gap: '40px',
     h1: {
-      fontSize: '30px',
+      fontSize: '33px',
     }
   },
 
   [theme.breakpoints.up('md')]: {
     flexDirection: 'row',
     padding: '0px 20px',
+    margin: '50px auto',
+    height: '68vh',
     h1: {
-      fontSize: '38px',
-    }
+      fontSize: '80px',
+    },
+
+    '.intro': {
+      fontSize: '1.2rem',
+      color: 'gray',
+      width: '600px',
+      textAlign: 'justify',
+    },
   },
 
   [theme.breakpoints.up('lg')]: {
+    height: '75vh',
     flexDirection: 'column',
     margin: '50px auto',
     h1: {
@@ -47,9 +60,9 @@ const GridItem = styled(Grid)(({ theme }) => ({
   flexDirection: 'column',
   gap: '30px',
   margin: 'auto',
-  borderRadius: '10px',
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    width: '100%',
+    padding: '5px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -61,7 +74,7 @@ const GridItem = styled(Grid)(({ theme }) => ({
     p: {
       textAlign: 'center',
       margin: 'auto',
-    }
+    },
   },
 
   [theme.breakpoints.up('lg')]: {
@@ -111,13 +124,18 @@ const SocialMedia = styled('div')(({ theme }) => ({
     transition: 'all 0.3s ease-in-out',
     '&:hover': {
       color: theme.palette.secondary.dark,
-      border: `1px solid ${theme.palette.secondary.dark}`,
       borderRadius: '50%',
       transform: 'scale(1.2)',
     }
   },
   [theme.breakpoints.down('sm')]: {
-    display: 'flex',
+    padding: 'none',
+    gap: '5px',
+    margin: '0 auto',
+    '& svg': {
+      fontSize: '2rem'
+    },
+    // border: `1px solid ${theme.palette.secondary.main}`,
   },
 
   [theme.breakpoints.up('md')]: {
@@ -131,7 +149,6 @@ const SocialMedia = styled('div')(({ theme }) => ({
     position: 'fixed',
     right: theme.spacing(1),
     bottom: theme.spacing(12),
-    // zIndex: 1000,
     padding: '16px',
   },
 }))
@@ -150,7 +167,7 @@ const Hero = () => {
             repeat={Infinity}
           />
         </Typography>
-        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '50%', } }}>
+        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '50%', } }} className='intro'>
           Hi there! I'm a software developer based in Nigeria. I have a
           passion for building web applications and I'm always looking for new
           opportunities to learn and grow.

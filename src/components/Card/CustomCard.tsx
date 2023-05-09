@@ -31,7 +31,9 @@ const CardContainer = styled(Card)(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    width: '100%',
+    padding: '2px',
+    borderRadius: '8px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -50,7 +52,7 @@ const CardContentContainer = styled(CardContent)(({ theme }) => ({
   padding: '0px',
   gap: '6px',
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    padding: '0px 10px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -66,17 +68,22 @@ const CardContentContainer = styled(CardContent)(({ theme }) => ({
 const CardMediaContainer = styled(CardMedia)(({ theme }) => ({
   width: '100%',
   margin: 'auto',
-  borderRadius: '20px',
 
   img: {
-    borderRadius: '10px',
+    borderRadius: '8px',
     width: '100%',
-    height: '230px',
+    height: '233px',
     objectFit: 'cover',
     transition: 'tranform 0s'
   },
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    padding: '10px',
+
+    img: {
+      width: '100%',
+      height: '233px',
+      objectFit: 'fit',
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -95,7 +102,6 @@ const CardMediaTop = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   marginBottom: '10px',
-
   h6: {
     color: theme.palette.secondary.main,
   },
@@ -111,7 +117,7 @@ const CardMediaTop = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    padding: '10px 0px',
   },
 
   [theme.breakpoints.up('md')]: {

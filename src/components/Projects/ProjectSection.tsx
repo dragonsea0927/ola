@@ -24,14 +24,25 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
+    border: '1px solid red',
+
+    '.info': {
+      fontSize: '12px',
+    },
+
+    h2: {
+      fontSize: '30px',
+    }
   },
 
   [theme.breakpoints.up('md')]: {
     display: { xs: 'none', sm: 'none', md: 'block' },
+    border: '1px solid blue',
   },
 
   [theme.breakpoints.up('lg')]: {
     display: { xs: 'none', sm: 'none', md: 'block' },
+    border: '1px solid green',
   },
 
 }))
@@ -42,6 +53,9 @@ const TabsStyle = styled(Tabs)(({ theme }) => ({
   margin: '30px auto',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
+    '& .MuiTabs-flexContainer': {
+      flexWrap: 'wrap',
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -67,7 +81,10 @@ const TabStyle = styled(Tab)(({ theme }) => ({
   textTransform: 'capitalize',
   '&:hover': {
     color: 'text.primary',
-  }
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
 }))
 
 

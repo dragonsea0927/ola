@@ -1,10 +1,8 @@
 import React from 'react'
 import { styled, Grid, Typography } from '@mui/material'
-import { CustomCard } from '..'
-import ProjectImage from '../../assets/images/portfolio.jpg'
 import Link from 'next/link'
 import { randomItemFromArray, readTimeInfo } from '@/utils'
-import { ScrollToView } from '@/components'
+import { ScrollToView, CustomCard } from '@/components'
 
 
 const BlogMainContainer = styled('div')(({ theme }) => ({
@@ -12,7 +10,6 @@ const BlogMainContainer = styled('div')(({ theme }) => ({
   height: '100%',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: '20px',
-  border: '1px solid red',
 
   h1: {
     fontSize: '60px',
@@ -59,9 +56,7 @@ const BlogMainContainer = styled('div')(({ theme }) => ({
 const BlogsContents = styled(Grid)(({ theme }) => ({
   width: '100%',
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '20px',
-  padding: '80px',
   height: '100%',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
 
@@ -72,11 +67,13 @@ const BlogsContents = styled(Grid)(({ theme }) => ({
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    padding: '20px',
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    padding: '80px',
   },
 }))
 

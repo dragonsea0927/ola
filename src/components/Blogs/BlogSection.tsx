@@ -3,12 +3,13 @@ import { styled, Grid, Typography } from '@mui/material'
 import { CustomCard } from '..'
 import ProjectImage from '../../assets/images/portfolio.jpg'
 import Link from 'next/link'
-import { randomItemFromArray } from '@/utils'
+import { randomItemFromArray, readTimeInfo } from '@/utils'
 import { ScrollToView } from '@/components'
+
 
 const BlogMainContainer = styled('div')(({ theme }) => ({
   width: '100%',
-  height: '100vh',
+  height: '100%',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: '20px',
   border: '1px solid red',
@@ -30,9 +31,20 @@ const BlogMainContainer = styled('div')(({ theme }) => ({
     color: theme.text.dark,
   },
   [theme.breakpoints.down('sm')]: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+
+    h1: {
+      fontSize: '30px',
+    },
+
+    '.blog-info': {
+      fontSize: '12px',
+    },
+
+    '.blogs': {
+      marginTop: theme.spacing(2),
+      fontSize: '14px',
+      alignItems: 'start',
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -50,6 +62,7 @@ const BlogsContents = styled(Grid)(({ theme }) => ({
   gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '20px',
   padding: '80px',
+  height: '100%',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
 
   [theme.breakpoints.down('sm')]: {
@@ -75,7 +88,6 @@ interface BlogSectionProps {
 
 const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps) => {
   const sliceData = data?.items ? data.items.slice(0, 3) : []
-
   return (
     <div>
       <ScrollToView to='blogs' >
@@ -89,17 +101,17 @@ const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps)
               return (
                 < CustomCard
                   key={item.guid}
-                  image={item.thumbnail || ProjectImage}
+                  image={item?.thumbnail}
                   overlayText='Read More'
                   name={tags || 'No tags'}
-                  duration={item.duration || '5+ min'}
+                  duration={readTimeInfo(item.content)}
                   description={item.title}
                   onClick={() => handleOpenBlogModal(item)}
                 />
               )
             })}
           </BlogsContents>
-          <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='https://dev.to/'>here</Link>
+          <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='/blogs'>here</Link>
           </Typography>
         </BlogMainContainer>
       </ScrollToView>

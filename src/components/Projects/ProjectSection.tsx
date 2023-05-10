@@ -10,7 +10,6 @@ import { tabs } from '@/utils'
 const ProjectContainer = styled(Grid)(({ theme }) => ({
   width: '100vw',
   padding: '20px',
-  border: '1px solid red',
   h2: {
     fontSize: '60px',
     textAlign: 'center',

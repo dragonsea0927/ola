@@ -68,13 +68,16 @@ const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChild
   [theme.breakpoints.down('sm')]: {
     width: width,
     height: height,
-    padding: '5px',
+    padding: '30px 10px 10px 10px',
 
     span: {
-      backgroundColor: '#FF024F',
+      width: '20px',
+      height: '20px',
+      fontSize: '1.2rem',
       color: '#fff',
       position: 'fixed',
-      top: '40px',
+      top: '12px',
+      right: '8px',
       zIndex: 1000,
       boxShadow: 'none',
     },

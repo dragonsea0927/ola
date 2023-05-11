@@ -48,6 +48,7 @@ const ProjectImage = styled('div')(({ theme }) => ({
     img: {
       width: '87%',
       height: '100%',
+      borderRadius: '8px',
     }
 
   },
@@ -97,19 +98,19 @@ const ProjectDetails = styled('div')(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     padding: '10px',
     width: '87%',
-    border: '1px solid red',
 
     h4: {
       fontSize: '25px',
       fontWeight: 700,
       marginBottom: '10px',
+      color: theme.palette.secondary.dark,
     },
 
     p: {
       fontSize: '17px',
       lineHeight: '25px',
       fontWeight: 400,
-      marginBottom: '14px',
+      marginBottom: '10px',
       textAlign: 'justify',
     },
 
@@ -138,7 +139,7 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
       open={open}
       handleClose={() => { handleClose(project.id) }}
       width={isMobile ? '100%' : '1230px'}
-      height={isMobile ? '93%' : '512px'}
+      height={isMobile ? '85%' : '512px'}
     >
       <ProjsctContent>
         <ProjectImage>
@@ -155,7 +156,7 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
           >{project.tag}</Typography>
           <Typography variant='h4'>{project.name}</Typography>
           <Typography variant='body1'>
-            {project.description}
+            {isMobile ? "Prompt engineering is not just about designing and developing prompts. It encompasses a wide range of skills and techniques that are useful for interacting and developing with LLMs. It's an important skill to interface, build with, and understand capabilities of LLMs." : project.description}
           </Typography>
 
           <Typography variant='body1'>

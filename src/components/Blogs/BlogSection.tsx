@@ -3,6 +3,7 @@ import { styled, Grid, Typography } from '@mui/material'
 import Link from 'next/link'
 import { randomItemFromArray, readTimeInfo } from '@/utils'
 import { ScrollToView, CustomCard } from '@/components'
+import { useMediaQuery } from '@/hooks'
 
 
 const BlogMainContainer = styled('div')(({ theme }) => ({
@@ -85,6 +86,9 @@ interface BlogSectionProps {
 
 const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps) => {
   const sliceData = data?.items ? data.items.slice(0, 3) : []
+  const isResponsive = useMediaQuery('(max-width: 960px)')
+  // console.log('isResponsive', isResponsive)
+
   return (
     <div>
       <ScrollToView to='blogs' >

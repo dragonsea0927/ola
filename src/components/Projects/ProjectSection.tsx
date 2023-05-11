@@ -2,10 +2,12 @@ import React from 'react'
 import { styled } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import { TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects } from '@/components'
+import { TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects, CustomCard } from '@/components'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { tabs } from '@/utils'
+import { useMediaQuery } from '@/hooks'
+import { Projects } from './AllProjects'
 
 const ProjectContainer = styled(Grid)(({ theme }) => ({
   width: '100vw',
@@ -87,6 +89,7 @@ const TabStyle = styled(Tab)(({ theme }) => ({
 
 const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id: string) => void, data: any }) => {
   const [activeTab, setActiveTab] = React.useState(0);
+  const isMobile = useMediaQuery('(max-width: 600px)')
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
@@ -112,43 +115,62 @@ const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id: strin
       <Typography variant='body1' className='info'>Visit my portfolio for my latest projects</Typography>
       <Typography variant='h2'>My Recents Works</Typography>
 
-      <TabsStyle
-        value={activeTab}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="inherit"
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable auto tabs example"
-      >
-        {tabs.map((tab, index) => (
-          <TabStyle
-            key={tab.label}
-            label={tab.label}
-            id={`scrollable-auto-tab-${tab.value}`}
-            aria-controls={`scrollable-auto-tabpanel-${tab.value}`}
-            sx={{
-              borderRadius: activeTab === index ? '5px' : '0px',
-              backgroundColor: activeTab === index ? 'secondary.main' : 'transparent',
-              color: activeTab === index ? 'white' : 'secondary.main',
-            }}
-          />
-        ))}
-      </TabsStyle>
-
-      {tabs.map((tab, index) => {
-        const { label, value } = tab
-        return (
-          <TabPanel
-            key={label}
+      {isMobile && (
+        <Projects>
+          {data.map((project: any) => (
+            <CustomCard
+              key={project.id}
+              image={project.modalImgUrl}
+              overlayText='View Project'
+              name={project.name}
+              role={project.tag}
+              description={project.description}
+              onClick={() => handleOpenModal(project.id)}
+            />
+          )
+          )}
+        </Projects>
+      )}
+      {!isMobile && (
+        <>
+          <TabsStyle
             value={activeTab}
-            index={index}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="inherit"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
           >
-            {switchComponent(value)}
-          </TabPanel>
-        )
-      }
+            {tabs.map((tab, index) => (
+              <TabStyle
+                key={tab.label}
+                label={tab.label}
+                id={`scrollable-auto-tab-${tab.value}`}
+                aria-controls={`scrollable-auto-tabpanel-${tab.value}`}
+                sx={{
+                  borderRadius: activeTab === index ? '5px' : '0px',
+                  backgroundColor: activeTab === index ? 'secondary.main' : 'transparent',
+                  color: activeTab === index ? 'white' : 'secondary.main',
+                }}
+              />
+            ))}
+          </TabsStyle>
 
+          {tabs.map((tab, index) => {
+            const { label, value } = tab
+            return (
+              <TabPanel
+                key={label}
+                value={activeTab}
+                index={index}
+              >
+                {switchComponent(value)}
+              </TabPanel>
+            )
+          }
+
+          )}</>
       )}
 
     </ProjectContainer >

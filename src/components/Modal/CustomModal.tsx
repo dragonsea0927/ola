@@ -4,22 +4,19 @@ import Modal from '@mui/material/Modal'
 import Fade from '@mui/material/Fade';
 import Box from '@mui/material/Box';
 
-
-
 const CustomModalContainer = styled(Modal)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    padding: '5px',
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+
   },
 
 }))
@@ -31,8 +28,8 @@ interface ModalChildrenProps {
 }
 
 const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChildrenProps) => ({
-  width: width || '500px',
-  height: height || '500px',
+  width: width,
+  height: height,
   backgroundColor: '#ECF0F3',
   borderRadius: '10px',
   padding: 45,
@@ -40,7 +37,7 @@ const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChild
   display: 'flex',
   flexDirection: 'column',
   gap: '5px',
-  overflowX: 'auto',
+  // overflowY: 'auto',
 
   span: {
     display: 'flex',
@@ -69,7 +66,18 @@ const ModalChildrenContainer = styled(Box)(({ theme, width, height }: ModalChild
     }
   },
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    width: width,
+    height: height,
+    padding: '5px',
+
+    span: {
+      backgroundColor: '#FF024F',
+      color: '#fff',
+      position: 'fixed',
+      top: '40px',
+      zIndex: 1000,
+      boxShadow: 'none',
+    },
   },
 
   [theme.breakpoints.up('md')]: {

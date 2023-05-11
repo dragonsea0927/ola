@@ -18,8 +18,8 @@ const IconContainer = styled('div')(({ theme }) => ({
     flexDirection: 'column-reverse',
 
     p: {
-      color: theme.text.dark,
       gap: '5px',
+      margin: '5px'
     },
 
   },

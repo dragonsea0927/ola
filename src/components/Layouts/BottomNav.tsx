@@ -12,7 +12,6 @@ const FooterContainer = styled('div')(({ theme }) => ({
   height: '100%',
   [theme.breakpoints.down('sm')]: {
     height: '100%',
-    backgroundColor: theme.palette.primary.main,
     color: theme.text.dark,
   },
 }))
@@ -20,7 +19,6 @@ const FooterContainer = styled('div')(({ theme }) => ({
 const FooterTop = styled('div')(({ theme }) => ({
   width: '100%',
   height: '400px',
-  backgroundColor: theme.white.main,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -36,8 +34,10 @@ const FooterTop = styled('div')(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     height: '100%',
+    borderBottom: `1px solid ${theme.text.primary}`,
+    borderTop: `1px solid ${theme.text.primary}`,
     blockquote: {
-      fontSize: '30px',
+      fontSize: '20px',
       color: theme.text.dark,
     },
   },
@@ -54,7 +54,6 @@ const FooterBottom = styled('div')(({ theme }) => ({
     width: '100%',
     height: '100%',
     margin: '20px auto',
-    backgroundColor: theme.palette.primary.main,
   },
 }))
 
@@ -95,7 +94,6 @@ const FooterSocialMedia = styled('div')(({ theme }) => ({
   alignItems: 'flex-end',
   gap: '20px',
   paddingTop: '20px',
-
   div: {
     display: 'flex',
     alignItems: 'center',
@@ -119,7 +117,7 @@ const FooterSocialMedia = styled('div')(({ theme }) => ({
 
     svg: {
       fontSize: '25px',
-      color: theme.text.dark,
+      color: theme.palette.secondary.main,
     },
   },
   [theme.breakpoints.down('sm')]: {

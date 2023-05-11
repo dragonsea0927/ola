@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconButton } from '@mui/material'
+import { IconButton, styled } from '@mui/material'
 import CustomIcon from './CustomIcon'
 import { useNavigation } from '@/hooks'
 
@@ -12,18 +12,33 @@ interface IconProps {
   }
 }
 
+const IconButtonStyle = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.secondary.dark,
+  fontSize: '1.1rem',
+  padding: '5px',
+
+  '&:hover': {
+    color: theme.palette.primary.main,
+  },
+
+  [theme.breakpoints.down('sm')]: {
+    color: theme.palette.secondary.main,
+    fontSize: '1.3rem',
+    padding: '2px',
+  },
+}))
+
 const Icons = ({ link }: IconProps) => {
   const { icon: IconComponent } = link;
   const { navigate } = useNavigation()
   return (
     <>
-      <IconButton
+      <IconButtonStyle
         key={link.id}
         onClick={() => navigate(link.path)}
-        sx={{ color: 'text.dark', fontSize: '1.1rem', padding: '5px', }}
       >
         <CustomIcon icon={IconComponent} />
-      </IconButton>
+      </IconButtonStyle>
     </>
   )
 }

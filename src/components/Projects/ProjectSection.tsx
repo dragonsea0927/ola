@@ -32,6 +32,7 @@ const ProjectContainer = styled(Grid)(({ theme }) => ({
 
     h2: {
       fontSize: '30px',
+      marginBottom: '10px',
     }
   },
 

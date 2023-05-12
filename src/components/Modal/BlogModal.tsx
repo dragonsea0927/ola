@@ -1,9 +1,9 @@
 import React from 'react'
-import { CustomButton, CustomModal } from '..'
+import { CustomModal } from '..'
 import { styled, Grid, Typography, Box } from '@mui/material'
 import LinkIcon from '@mui/icons-material/Link';
-import DOMPurify from 'dompurify';
 import Link from 'next/link';
+import { useMediaQuery } from '@/hooks';
 
 interface BlogModalProps {
   open: boolean
@@ -20,7 +20,7 @@ const BlogContent = styled(Grid)(({ theme }) => ({
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: 10,
   [theme.breakpoints.down('sm')]: {
-    gridTemplateColumns: 'repeat(1, 1fr)',
+    padding: '0px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -39,6 +39,7 @@ const BlogDetails = styled('div')(({ theme }) => ({
   h4: {
     fontWeight: 700,
     color: theme.text.dark,
+    fontSize: '24px',
   },
 
   '.link': {
@@ -92,10 +93,86 @@ const BlogDetails = styled('div')(({ theme }) => ({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: '10px',
+
+    li: {
+      listStyle: 'none',
+      width: 'fit-content',
+      padding: '5px 10px',
+      borderRadius: '5px',
+      backgroundColor: '#FF024F',
+      color: 'white',
+      fontSize: '16px',
+    }
   },
 
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    width: '100%',
+    overflowY: 'auto',
+
+    'h4:first-of-type': {
+      display: 'none',
+    },
+
+    h4: {
+      fontWeight: 700,
+      color: theme.text.dark,
+      fontSize: '20px',
+    },
+
+    div: {
+
+      img: {
+        width: '100% !important',
+        height: '200px !important',
+        borderRadius: '8px',
+        objectFit: 'fill !important',
+        margin: '0px auto !important',
+      },
+
+      li: {
+        fontSize: '16px',
+        lineHeight: '25px',
+        fontWeight: 400,
+        marginBottom: '18px',
+      },
+    },
+
+
+    '.contents': {
+      width: '100% !important',
+      margin: '0px auto',
+
+      pre: {
+        width: '100% !important',
+        height: 'auto !important',
+        overflowX: 'auto !important',
+        overflowY: 'auto !important',
+        backgroundColor: '#fff !important',
+        padding: '10px !important',
+        wordBreak: 'break-all !important',
+        whiteSpace: 'pre-wrap !important',
+        wordWrap: 'break-word !important',
+        fontSize: '12px !important',
+        margin: '0px auto !important',
+        borderRadius: '8px !important',
+      },
+
+      p: {
+        fontSize: '16px',
+        lineHeight: '25px',
+        fontWeight: 400,
+        color: theme.text.dark,
+      },
+    },
+
+    '.tags': {
+
+      li: {
+        width: 'fit-content',
+        padding: '5px 10px',
+        fontSize: '14px',
+      },
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -104,39 +181,34 @@ const BlogDetails = styled('div')(({ theme }) => ({
 
   [theme.breakpoints.up('lg')]: {
     display: { xs: 'none', sm: 'none', md: 'block' },
+    overflowX: 'hidden',
   },
 
 }))
 
 const ProjectModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
-
+  const isMobile = useMediaQuery('(max-width: 600px)')
   const { title, categories, pubDate, content } = blogItem
   return (
     <CustomModal
       open={open}
       handleClose={handleClose}
-      width='1000px'
-      height='700px'
+      width={isMobile ? '100%' : '1000px'}
+      height={isMobile ? '85%' : '700px'}
     >
       <BlogContent>
         <BlogDetails>
           <Typography variant='h4'>{title}</Typography>
-          <Typography variant='body1'>
+          <Typography variant='body1' sx={{ display: isMobile ? 'none' : 'block' }}>
             Published: {pubDate}
           </Typography>
-          <Box dangerouslySetInnerHTML={{ __html: content }} />
+          <Box dangerouslySetInnerHTML={{ __html: content }} className='contents' />
 
           <Box className='tags'>
             {categories.map((category: string) => (
               <Box key={category}
                 sx={{
-                  listStyle: 'none',
-                  width: 'fit-content',
-                  padding: '5px 10px',
-                  borderRadius: '5px',
-                  backgroundColor: '#FF024F',
-                  color: 'white',
-                  fontSize: '16px',
+
                 }} component='li'>
                 {category}
               </Box>

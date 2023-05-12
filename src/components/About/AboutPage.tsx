@@ -10,19 +10,21 @@ import AboutContent from './AboutContent'
 import ResumeTabs from './ResumeTabs'
 import { useSession } from 'next-auth/react';
 import { About } from '@/types'
+import { useMediaQuery } from '@/hooks'
+import Image from 'next/image'
 
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.secondary.main,
   textAlign: 'center',
-  margin: '2rem auto',
+  margin: '1rem auto',
   fontSize: '92.558px !important',
   fontWeight: 700,
   lineHeight: '1.1',
   letterSpacing: '-0.02em',
 
   [theme.breakpoints.down('sm')]: {
-    color: 'blue',
+    fontSize: '80px !important',
   },
 }))
 
@@ -38,7 +40,7 @@ const AboutPageContainerStyling = styled('div')(({ theme }) => ({
 
   '.current': {
     width: '90%',
-    margin: '5rem auto',
+    margin: '3rem auto',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -83,7 +85,19 @@ const AboutPageContainerStyling = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    color: 'blue',
+    width: '100%',
+    h2: {
+      fontSize: '20px',
+    },
+
+    '.current': {
+      width: '95%',
+      margin: '2rem auto',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
   },
 }))
 
@@ -111,7 +125,30 @@ const AboutInfoDiv = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    color: 'blue',
+    width: '95%',
+    flexDirection: 'column',
+    gap: '2rem',
+    margin: '2rem auto',
+
+    '.about': {
+      width: '100%',
+      padding: theme.spacing(2),
+      gap: '1rem',
+      backgroundColor: 'transparent',
+
+      p: {
+        fontSize: '1rem',
+      },
+
+    },
+
+    '.profile': {
+      width: '45%',
+      height: '45%',
+      borderRadius: '50%',
+      objectFit: 'cover',
+      boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
+    },
   },
 }))
 
@@ -121,7 +158,7 @@ const StyledResumeSection = styled('section')(({ theme }) => ({
   flexDirection: 'column',
 
   [theme.breakpoints.down('sm')]: {
-    color: 'blue',
+    margin: '2rem auto',
   },
 }))
 
@@ -141,6 +178,7 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
     setIsEditable(!isEditable)
   }
   const userLoggedIn = session?.user?.email && session?.user?.role === 'admin'
+  const isMobile = useMediaQuery('(max-width: 600px)')
 
   return (
     <Layout>
@@ -153,7 +191,7 @@ const AboutPage: React.FC<AboutPageProps> = (props) => {
         ) : (
           <>
             <AboutInfoDiv>
-              <AboutImage photo={profileImgUrl} />
+              {isMobile ? <Image src={profileImgUrl} alt='Ola' width={300} height={400} className='profile' /> : <AboutImage photo={profileImgUrl} />}
               <div className='about'>
                 <AboutContent content={data} />
               </div>

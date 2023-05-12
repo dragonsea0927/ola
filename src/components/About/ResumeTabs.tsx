@@ -22,6 +22,13 @@ const StlyedTabs = styled(Tabs)(({ theme }) => ({
   '& .MuiTabs-flexContainer': {
     justifyContent: 'center',
   },
+
+  [theme.breakpoints.down('sm')]: {
+    width: '90%',
+    '& .MuiTabs-flexContainer': {
+      flexWrap: 'wrap',
+    },
+  },
 }))
 
 const ResumeTabs = () => {
@@ -70,7 +77,7 @@ const ResumeTabs = () => {
               fontWeight: activeTab === index ? 700 : 600,
               width: '280px',
               padding: '1.5rem',
-              margin: '0 .8rem',
+              margin: '0.8rem',
               boxShadow: activeTab === index ? '0px 0px 10px 0px rgba(0,0,0,0.75)' : 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
               '&:hover': {
                 backgroundColor: 'secondary.main',

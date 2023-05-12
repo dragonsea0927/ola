@@ -40,15 +40,45 @@ const CurrentWorkItem = styled('div')(({ theme }) => ({
 
     '&:hover': {
       backgroundColor: theme.palette.secondary.dark,
-    }
+    },
   },
+
+  '.card': {
+    display: 'flex',
+    gap: '10px',
+    alignItems: 'center',
+  },
+
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    gap: '1rem',
+    padding: '10px',
+    width: '95%',
+    margin: '2rem auto',
+
+    '.card': {
+      flexDirection: 'column',
+      gap: '1rem',
+      alignItems: 'center',
+
+      img: {
+        width: '100%',
+        height: '100%',
+      },
+    },
+
+    button: {
+      alignSelf: 'flex-start',
+    },
+  },
+
 }))
 
 const CurrentWork: React.FC<CurrentWorkProps> = ({ appImage, role, appTitle, appDescription, year }) => {
   return (
     <>
       <CurrentWorkItem>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <div className='card'>
           <Image src={appImage} alt='Ola' width={200} height={150} />
           <div>
             <Typography variant='body1'>{year}</Typography>

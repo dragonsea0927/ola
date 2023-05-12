@@ -9,11 +9,11 @@ const StyledTimeline = styled('div')(({ theme }) => ({
   h2: {
     fontSize: '0.85rem',
   },
-  [theme.breakpoints.down('md')]: {
+
+  [theme.breakpoints.down('sm')]: {
     width: '100%',
-  },
-  [theme.breakpoints.up('md')]: {
-    width: '80%',
+    border: '1px solid red',
+    // margin: '50px auto',
   },
 }));
 

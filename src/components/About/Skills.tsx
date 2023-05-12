@@ -37,6 +37,22 @@ const StyledSkills = styled('div')(({ theme }) => ({
     marginBottom: 10,
   },
 
+  [theme.breakpoints.down('sm')]: {
+    margin: '50px auto',
+    width: '100%',
+
+    h3: {
+      fontSize: '1.5rem',
+      textAlign: 'center',
+    },
+
+    p: {
+      margin: '0 auto',
+      maxWidth: 500,
+      gap: 10,
+    },
+  },
+
 }));
 
 const Skills = () => {

@@ -38,8 +38,6 @@ const StyledSkills = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    margin: '50px auto',
-    width: '100%',
 
     h3: {
       fontSize: '1.5rem',
@@ -48,8 +46,8 @@ const StyledSkills = styled('div')(({ theme }) => ({
 
     p: {
       margin: '0 auto',
-      maxWidth: 500,
-      gap: 10,
+      maxWidth: 418,
+      gap: 1,
     },
   },
 

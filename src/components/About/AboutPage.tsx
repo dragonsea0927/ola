@@ -143,8 +143,8 @@ const AboutInfoDiv = styled('div')(({ theme }) => ({
     },
 
     '.profile': {
-      width: '45%',
-      height: '45%',
+      width: 150,
+      height: 150,
       borderRadius: '50%',
       objectFit: 'cover',
       boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
@@ -168,7 +168,7 @@ interface AboutPageProps {
 
 
 
-const AboutPage: React.FC<AboutPageProps> = (props) => {
+const AboutPage = (props: AboutPageProps) => {
   const { data: session } = useSession()
   const [isEditable, setIsEditable] = React.useState(false)
   const { data } = props

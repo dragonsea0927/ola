@@ -19,13 +19,10 @@ const AboutImageContainer = styled('div')(({ theme }) => ({
 
   [theme.breakpoints.down('sm')]: {
     width: '10%',
-    border: '1px solid red',
-    // height: '400px',
-    // borderRadius: '200px 200px 0px 0px',
     img: {
       with: '100%',
       objectFit: 'fill',
-      // borderRadius: '50%',
+      borderRadius: '50%',
       transition: 'all 0.5s ease-in-out',
       zIndex: 1,
     },

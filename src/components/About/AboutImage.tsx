@@ -59,10 +59,10 @@ const SocialMedia = styled('div')(({ theme }) => ({
 }))
 
 
-interface Props {
+interface AboutImage {
   photo: string;
 }
-const AboutImage: React.FC<Props> = (props) => {
+const AboutImage = (props: AboutImage) => {
   const { photo } = props
   return (
     <AboutImageContainer>

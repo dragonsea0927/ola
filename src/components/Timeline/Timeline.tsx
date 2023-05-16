@@ -41,7 +41,6 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
           items: item.items,
         }))}
         mode={mode}
-        // flipLayout
         slideShow
         slideItemDuration={4500}
         slideShowType="reveal"

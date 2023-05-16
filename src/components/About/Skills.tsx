@@ -24,6 +24,7 @@ const StyledSkills = styled('div')(({ theme }) => ({
   a: {
     color: theme.palette.text.primary,
     textDecoration: 'none',
+    margin: theme.spacing(0.5),
     '&:hover': {
       color: theme.palette.secondary.main,
       transition: '0.3s ease-in-out',

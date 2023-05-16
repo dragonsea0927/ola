@@ -54,7 +54,7 @@ const CurrentWorkItem = styled('div')(({ theme }) => ({
     gap: '1rem',
     padding: '10px',
     width: '95%',
-    margin: '2rem auto',
+    margin: '1rem auto',
 
     '.card': {
       flexDirection: 'column',
@@ -67,9 +67,9 @@ const CurrentWorkItem = styled('div')(({ theme }) => ({
       },
     },
 
-    button: {
-      alignSelf: 'flex-start',
-    },
+    // button: {
+    //   alignSelf: 'flex-start',
+    // },
   },
 
 }))

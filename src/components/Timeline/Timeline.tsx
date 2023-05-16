@@ -1,6 +1,7 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import { Chrono } from 'react-chrono';
-import { useAppTheme } from '@/hooks';
+import { useAppTheme, useMediaQuery } from '@/hooks';
 
 interface TimelineItem {
   title?: string;
@@ -16,26 +17,35 @@ interface TimelineProps {
   mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING';
 }
 
-const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
+const StyledTimelineContainer = styled('div')(({ theme }) => ({
+  width: "90%",
+  height: "",
+  margin: '0 auto',
 
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
+}));
+
+const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const theme = useAppTheme()
   return (
-    <div style={{ width: "90%", height: "", margin: '0 auto' }}>
+    <StyledTimelineContainer>
       <Chrono
         items={items.map((item) => ({
-          title: item.title,
+          title: '',
           cardTitle: item.cardTitle,
           cardSubtitle: item.cardSubtitle,
           cardDetailedText: item.cardDetailedText,
           items: item.items,
         }))}
         mode={mode}
-        flipLayout
         slideShow
         slideItemDuration={4500}
         slideShowType="reveal"
         scrollable={{ scrollbar: true }}
-        enableOutline={true}
+        enableOutline={false}
         enableBreakPoint={true}
         verticalBreakPoint={400}
         theme={{
@@ -61,7 +71,7 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
           title: '1rem',
         }}
       />
-    </div>
+    </StyledTimelineContainer>
   );
 };
 

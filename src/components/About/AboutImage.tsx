@@ -16,6 +16,17 @@ const AboutImageContainer = styled('div')(({ theme }) => ({
     transition: 'all 0.5s ease-in-out',
     zIndex: 1,
   },
+
+  [theme.breakpoints.down('sm')]: {
+    width: '10%',
+    img: {
+      with: '100%',
+      objectFit: 'fill',
+      borderRadius: '50%',
+      transition: 'all 0.5s ease-in-out',
+      zIndex: 1,
+    },
+  },
 }))
 
 const SocialMedia = styled('div')(({ theme }) => ({
@@ -48,10 +59,10 @@ const SocialMedia = styled('div')(({ theme }) => ({
 }))
 
 
-interface Props {
+interface AboutImage {
   photo: string;
 }
-const AboutImage: React.FC<Props> = (props) => {
+const AboutImage = (props: AboutImage) => {
   const { photo } = props
   return (
     <AboutImageContainer>

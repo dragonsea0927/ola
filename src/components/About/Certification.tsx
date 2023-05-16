@@ -37,6 +37,33 @@ const StyledCertificationContainer = styled('div')(({ theme }) => ({
       }
     },
   },
+
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+
+    h3: {
+      fontSize: '1.5rem',
+      textAlign: 'center',
+    },
+
+    p: {
+      width: '90%',
+      fontSize: '1rem',
+      marginBottom: '1rem',
+    },
+
+    ul: {
+      width: '100%',
+      padding: '1rem',
+      display: 'grid',
+      gap: '0.8rem',
+
+      li: {
+        fontSize: '1.1rem',
+        padding: '0.5rem',
+      },
+    },
+  },
 }));
 
 const Certification = () => {

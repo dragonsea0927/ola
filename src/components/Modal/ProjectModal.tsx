@@ -1,11 +1,11 @@
 import React from 'react'
 import { CustomButton, CustomModal } from '..'
 import { styled, Grid, Typography } from '@mui/material'
-import ModalImg from '../../assets/images/modalpic.jpeg'
 import Image from 'next/image'
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 import { Project } from '@/types'
+import { useMediaQuery } from '@/hooks';
 
 interface ProjectModalProps {
   open: boolean
@@ -22,7 +22,10 @@ const ProjsctContent = styled(Grid)(({ theme }) => ({
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: 10,
   [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    height: '100%',
     gridTemplateColumns: 'repeat(1, 1fr)',
+    gap: '0px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -42,7 +45,12 @@ const ProjectImage = styled('div')(({ theme }) => ({
     borderRadius: '10px',
   },
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    img: {
+      width: '87%',
+      height: '100%',
+      borderRadius: '8px',
+    }
+
   },
 
   [theme.breakpoints.up('md')]: {
@@ -58,7 +66,6 @@ const ProjectImage = styled('div')(({ theme }) => ({
 const ProjectDetails = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  // gap: '15px',
   padding: '10px',
 
   h4: {
@@ -89,7 +96,29 @@ const ProjectDetails = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    padding: '16px',
+    padding: '10px',
+    width: '87%',
+
+    h4: {
+      fontSize: '25px',
+      fontWeight: 700,
+      marginBottom: '10px',
+      color: theme.palette.secondary.dark,
+    },
+
+    p: {
+      fontSize: '17px',
+      lineHeight: '25px',
+      fontWeight: 400,
+      marginBottom: '10px',
+      textAlign: 'justify',
+    },
+
+    button: {
+      fontSize: '15px',
+      padding: '10px',
+      fontWeight: 600,
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -103,13 +132,14 @@ const ProjectDetails = styled('div')(({ theme }) => ({
 }))
 
 const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
+  const isMobile = useMediaQuery('(max-width: 600px)')
   return (
 
     <CustomModal
       open={open}
       handleClose={() => { handleClose(project.id) }}
-      width='1230px'
-      height='518px'
+      width={isMobile ? '100%' : '1230px'}
+      height={isMobile ? '85%' : '512px'}
     >
       <ProjsctContent>
         <ProjectImage>
@@ -126,7 +156,7 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
           >{project.tag}</Typography>
           <Typography variant='h4'>{project.name}</Typography>
           <Typography variant='body1'>
-            {project.description}
+            {isMobile ? "Prompt engineering is not just about designing and developing prompts. It encompasses a wide range of skills and techniques that are useful for interacting and developing with LLMs. It's an important skill to interface, build with, and understand capabilities of LLMs." : project.description}
           </Typography>
 
           <Typography variant='body1'>

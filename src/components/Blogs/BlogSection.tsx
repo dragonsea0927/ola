@@ -1,13 +1,14 @@
 import React from 'react'
 import { styled, Grid, Typography } from '@mui/material'
-import { CustomCard } from '..'
-import ProjectImage from '../../assets/images/portfolio.jpg'
 import Link from 'next/link'
-import { randomItemFromArray } from '@/utils'
-import { ScrollToView } from '@/components'
+import { randomItemFromArray, readTimeInfo } from '@/utils'
+import { ScrollToView, CustomCard } from '@/components'
+import { useMediaQuery } from '@/hooks'
 
-const BlogMainContainer = styled(Grid)(({ theme }) => ({
+
+const BlogMainContainer = styled('div')(({ theme }) => ({
   width: '100%',
+  height: '100%',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
   padding: '20px',
 
@@ -28,9 +29,20 @@ const BlogMainContainer = styled(Grid)(({ theme }) => ({
     color: theme.text.dark,
   },
   [theme.breakpoints.down('sm')]: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+
+    h1: {
+      fontSize: '30px',
+    },
+
+    '.blog-info': {
+      fontSize: '12px',
+    },
+
+    '.blogs': {
+      marginTop: theme.spacing(2),
+      fontSize: '14px',
+      alignItems: 'start',
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -44,11 +56,9 @@ const BlogMainContainer = styled(Grid)(({ theme }) => ({
 
 const BlogsContents = styled(Grid)(({ theme }) => ({
   width: '100%',
-  height: '100%',
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '20px',
-  padding: '80px',
+  height: '100%',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
 
   [theme.breakpoints.down('sm')]: {
@@ -58,11 +68,13 @@ const BlogsContents = styled(Grid)(({ theme }) => ({
   },
 
   [theme.breakpoints.up('md')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    padding: '20px',
   },
 
   [theme.breakpoints.up('lg')]: {
-    display: { xs: 'none', sm: 'none', md: 'block' },
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    padding: '80px',
   },
 }))
 
@@ -74,33 +86,37 @@ interface BlogSectionProps {
 
 const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps) => {
   const sliceData = data?.items ? data.items.slice(0, 3) : []
+  const isResponsive = useMediaQuery('(max-width: 960px)')
+  // console.log('isResponsive', isResponsive)
 
   return (
-    <ScrollToView to='blogs' >
-      <BlogMainContainer
-      >
-        <Typography variant='body1' className='blog-info'>Check some of my Technical articles</Typography>
-        <Typography variant='h1'>Recent Articles</Typography>
-        <BlogsContents>
-          {sliceData.map((item: any, index: number) => {
-            const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
-            return (
-              < CustomCard
-                key={item.guid}
-                image={item.thumbnail || ProjectImage}
-                overlayText='Read More'
-                name={tags || 'No tags'}
-                duration={item.duration || '5+ min'}
-                description={item.title}
-                onClick={() => handleOpenBlogModal(item)}
-              />
-            )
-          })}
-        </BlogsContents>
-        <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='https://dev.to/'>here</Link>
-        </Typography>
-      </BlogMainContainer>
-    </ScrollToView>
+    <div>
+      <ScrollToView to='blogs' >
+        <BlogMainContainer
+        >
+          <Typography variant='body1' className='blog-info'>Check some of my Technical articles</Typography>
+          <Typography variant='h1'>Recent Articles</Typography>
+          <BlogsContents>
+            {sliceData.map((item: any, index: number) => {
+              const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
+              return (
+                < CustomCard
+                  key={item.guid}
+                  image={item?.thumbnail}
+                  overlayText='Read More'
+                  name={tags || 'No tags'}
+                  duration={readTimeInfo(item.content)}
+                  description={item.title}
+                  onClick={() => handleOpenBlogModal(item)}
+                />
+              )
+            })}
+          </BlogsContents>
+          <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='/blogs'>here</Link>
+          </Typography>
+        </BlogMainContainer>
+      </ScrollToView>
+    </div>
   )
 }
 

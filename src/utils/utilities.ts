@@ -8,7 +8,8 @@ import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import { FaMedium, FaAngellist } from 'react-icons/fa'
 import axios from 'axios';
-import { animateScroll as scroll, scroller } from 'react-scroll'
+import { animateScroll as scroll, scroller } from 'react-scroll';
+const readingTime = require('reading-time/lib/reading-time');
 
 export const getFormattedDate = (date: Date) => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -203,4 +204,9 @@ export const updateAboutInfo = async (id: string, data: About) => {
   } catch (error) {
     return error?.response?.data?.message;
   }
+}
+
+export const readTimeInfo = (content: any) => {
+  const stats = readingTime(content);
+  return stats.text;
 }

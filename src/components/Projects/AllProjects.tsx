@@ -7,8 +7,7 @@ import { Project } from '@/types'
 export const Projects = styled(Grid)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
-  gap: '20px',
-  padding: '80px',
+
   [theme.breakpoints.down('sm')]: {
     gridTemplateColumns: 'repeat(1, 1fr)',
     padding: '10px',
@@ -16,11 +15,15 @@ export const Projects = styled(Grid)(({ theme }) => ({
   },
 
   [theme.breakpoints.up('md')]: {
-    gap: '30px',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    padding: '10px',
+    gap: '20px',
   },
 
   [theme.breakpoints.up('lg')]: {
-
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    padding: '80px',
+    gap: '30px',
   },
 
 }))

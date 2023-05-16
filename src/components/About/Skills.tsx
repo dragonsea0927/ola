@@ -24,6 +24,7 @@ const StyledSkills = styled('div')(({ theme }) => ({
   a: {
     color: theme.palette.text.primary,
     textDecoration: 'none',
+    margin: theme.spacing(0.5),
     '&:hover': {
       color: theme.palette.secondary.main,
       transition: '0.3s ease-in-out',
@@ -35,6 +36,20 @@ const StyledSkills = styled('div')(({ theme }) => ({
     height: 60,
     margin: '0 auto',
     marginBottom: 10,
+  },
+
+  [theme.breakpoints.down('sm')]: {
+
+    h3: {
+      fontSize: '1.5rem',
+      textAlign: 'center',
+    },
+
+    p: {
+      margin: '0 auto',
+      maxWidth: 418,
+      gap: 1,
+    },
   },
 
 }));

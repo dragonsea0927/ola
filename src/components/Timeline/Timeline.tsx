@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Chrono } from 'react-chrono';
-import { useAppTheme } from '@/hooks';
+import { useAppTheme, useMediaQuery } from '@/hooks';
 
 interface TimelineItem {
   title?: string;
@@ -24,30 +24,29 @@ const StyledTimelineContainer = styled('div')(({ theme }) => ({
 
   [theme.breakpoints.down('sm')]: {
     width: '100%',
-    // margin: '0 auto',
   },
 }));
 
 const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
-
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const theme = useAppTheme()
   return (
     <StyledTimelineContainer>
       <Chrono
         items={items.map((item) => ({
-          title: item.title,
+          title: '',
           cardTitle: item.cardTitle,
           cardSubtitle: item.cardSubtitle,
           cardDetailedText: item.cardDetailedText,
           items: item.items,
         }))}
         mode={mode}
-        flipLayout
+        // flipLayout
         slideShow
         slideItemDuration={4500}
         slideShowType="reveal"
         scrollable={{ scrollbar: true }}
-        enableOutline={true}
+        enableOutline={false}
         enableBreakPoint={true}
         verticalBreakPoint={400}
         theme={{

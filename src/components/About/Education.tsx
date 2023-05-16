@@ -3,7 +3,7 @@ import { Timeline } from '@/components'
 import { styled } from '@mui/material/styles';
 import { educationItems as items } from '@/utils'
 
-const StyledTimeline = styled('div')(({ theme }) => ({
+const StyledEducationTimeline = styled('div')(({ theme }) => ({
   margin: '50px auto',
   width: '50%',
   h2: {
@@ -12,20 +12,18 @@ const StyledTimeline = styled('div')(({ theme }) => ({
 
   [theme.breakpoints.down('sm')]: {
     width: '100%',
-    border: '1px solid red',
-    // margin: '50px auto',
   },
 }));
 
 
 const Education = () => {
   return (
-    <StyledTimeline>
+    <StyledEducationTimeline>
       <Timeline
         items={items}
-        mode="VERTICAL_ALTERNATING"
+        mode='VERTICAL'
       />
-    </StyledTimeline>
+    </StyledEducationTimeline>
   )
 }
 

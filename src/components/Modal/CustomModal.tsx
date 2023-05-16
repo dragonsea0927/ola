@@ -3,6 +3,7 @@ import { styled } from '@mui/material'
 import Modal from '@mui/material/Modal'
 import Fade from '@mui/material/Fade';
 import Box from '@mui/material/Box';
+import ScrollProgress from '../Animations/ScrollProgress';
 
 const CustomModalContainer = styled(Modal)(({ theme }) => ({
   display: 'flex',
@@ -116,6 +117,7 @@ const CustomModal = ({ open, handleClose, children, ...props }: CustomModalProps
           >
             X
           </span>
+          <ScrollProgress />
           {children}
         </ModalChildrenContainer>
       </Fade>

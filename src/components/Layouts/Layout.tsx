@@ -4,7 +4,6 @@ import TopNav from './TopNav';
 import BottomNav from './BottomNav';
 import { LayoutProps } from '@/types';
 import { ScrollProgress } from '@/components'
-// import Styles from '@/styles/Animations.module.scss'
 
 
 const LayoutRoot = styled('div')(({ theme }) => ({
@@ -15,7 +14,6 @@ const LayoutRoot = styled('div')(({ theme }) => ({
 
   '.progressbar': {
     position: 'fixed',
-    // top: -10,
     left: 0,
     right: 0,
     height: '5px',

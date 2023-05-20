@@ -17,6 +17,7 @@ export default function Home(props: Props) {
   const { data, isLoading, isError } = useFetch(url)
   const [blogItem, setBlogId] = React.useState({})
   const [project, setProject] = React.useState({})
+  const [loading, setLoading] = React.useState(true)
 
   const handleOpenModal = (id: string) => {
     setOpenModal()
@@ -28,6 +29,12 @@ export default function Home(props: Props) {
     setOpenBlogModal()
     setBlogId(item)
   }
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 5000)
+  }, [])
 
   return (
     <>
@@ -41,11 +48,13 @@ export default function Home(props: Props) {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <Layout>
+      {loading ? <div>Loading...</div> : isError ? <div>Error</div> : (
+        <Layout>
         <Hero />
         <ProjectSection handleOpenModal={handleOpenModal} data={props.projects} />
         <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} isLoading={isLoading} />
       </Layout>
+      )}
     </>
   )
 }

@@ -37,7 +37,7 @@ export const randomItemFromArray = (arr: any[], n: number) => {
 export const navItems: NavItems = [
   {
     id: 1,
-    title: 'projects',
+    title: 'projects /',
     path: '/',
     icon: WorkIcon
   },

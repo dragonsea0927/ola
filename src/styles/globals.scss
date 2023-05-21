@@ -1,6 +1,6 @@
 body{
   background-color: #ecf3f3;
-  height: 100vh;
+  // height: 100vh;
   width: 100vw;
 
 
@@ -33,5 +33,11 @@ body{
     animation-delay: -$i * .2s;
     transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
     background: hsl(random(360), 70%, 50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .particle {
+    display: none;
   }
 }

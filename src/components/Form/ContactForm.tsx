@@ -81,7 +81,7 @@ const ContactForm = () => {
 
 
   return (
-    <FormContainer>
+    <FormContainer data-aos="fade-up">
       <Form
         component="form"
         sx={{

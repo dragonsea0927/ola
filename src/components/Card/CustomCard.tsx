@@ -167,7 +167,7 @@ const OverlayDiv = styled('div')(({ theme }) => ({
 
 const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps) => {
   return (
-    <CardContainer>
+    <CardContainer data-aos="fade-up" data-aos-duration="3000">
       <CardMediaContainer>
         <Image src={image} alt={name} width={500} height={100} />
       </CardMediaContainer>

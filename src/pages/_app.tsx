@@ -8,7 +8,7 @@ import { theme, createEmotionCache } from '@/config'
 import '../styles/globals.scss'
 import '@/styles/about.css';
 import { SessionProvider } from 'next-auth/react'
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -25,10 +25,16 @@ export default function App(props: MyAppProps) {
     },
     pageAnimate: {
       opacity: 1
+    },
+    pageExit: {
+      backgroundColor: 'white',
+      filter: `invert()`,
+      opacity: 0
     }
   }
   return (
-    <motion.div key={router.route} initial="pageInitial" animate="pageAnimate" variants={variantProps}>
+    <AnimatePresence>
+    <motion.div key={router.route} initial="pageInitial" animate="pageAnimate" exit="pageExit" variants={variantProps}>
     <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
         <Head>
@@ -73,5 +79,6 @@ export default function App(props: MyAppProps) {
       </CacheProvider>
     </SessionProvider>
     </motion.div>
+    </AnimatePresence>
   );
 }

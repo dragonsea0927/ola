@@ -9,6 +9,8 @@ import '../styles/globals.scss'
 import '@/styles/about.css';
 import { SessionProvider } from 'next-auth/react'
 import { motion, AnimatePresence } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -18,6 +20,19 @@ export interface MyAppProps extends AppProps {
 
 export default function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps: { session, ...pageProps }, router } = props;
+
+  React.useEffect(() => {
+    AOS.init({
+      // once: true,
+      delay: 50,
+      duration: 1000,
+      easing: "ease-out-cubic",
+    });
+  }, []);
+
+  React.useEffect(() => {
+    AOS.refresh()
+  }, [])
 
   const variantProps = {
     pageInitial: {

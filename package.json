@@ -45,6 +45,7 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.4",
     "@types/dompurify": "^3.0.0",
     "@types/react-scroll": "^1.8.6",
     "prisma": "^4.12.0",

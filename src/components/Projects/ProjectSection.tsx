@@ -112,12 +112,12 @@ const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id: strin
   };
 
   return (
-    <ProjectContainer>
-      <Typography variant='body1' className='info'>Visit my portfolio for my latest projects</Typography>
-      <Typography variant='h2'>My Recents Works</Typography>
+    <ProjectContainer data-aos="fade-up" data-aos-anchor-placement="top-center">
+      <Typography variant='body1' className='info' data-aos="fade-right">Visit my portfolio for my latest projects</Typography>
+      <Typography variant='h2' data-aos="fade-left">My Recents Works</Typography>
 
       {isMobile && (
-        <Projects>
+        <Projects data-aos="fade-up" data-aos-duration="3000">
           {data.map((project: any) => (
             <CustomCard
               key={project.id}
@@ -133,7 +133,7 @@ const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id: strin
         </Projects>
       )}
       {!isMobile && (
-        <>
+        <div data-aos="fade-up" data-aos-duration="3000">
           <TabsStyle
             value={activeTab}
             onChange={handleChange}
@@ -171,7 +171,7 @@ const ProjectSection = ({ handleOpenModal, data }: { handleOpenModal: (id: strin
             )
           }
 
-          )}</>
+          )}</div>
       )}
 
     </ProjectContainer >

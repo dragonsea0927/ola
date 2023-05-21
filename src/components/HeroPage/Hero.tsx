@@ -156,7 +156,7 @@ const SocialMedia = styled('div')(({ theme }) => ({
 
 const Hero = () => {
   return (
-    <GridContainer container spacing={2}>
+    <GridContainer container spacing={2} data-aos="fade-up" data-aos-duration="3000">
       <GridItem item xs={12} sm={12} md={12}>
         <Typography variant='h1'>Hello
           I'm <Box component='span' sx={{ color: 'secondary.main' }}>Ola</Box>,
@@ -167,7 +167,7 @@ const Hero = () => {
             repeat={Infinity}
           />
         </Typography>
-        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '50%', } }} className='intro'>
+        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '50%', } }} className='intro' data-aos="zoom-in-up" data-aos-duration="8000">
           Hi there! I'm a software developer based in Nigeria. I have a
           passion for building web applications and I'm always looking for new
           opportunities to learn and grow.
@@ -187,13 +187,14 @@ const Hero = () => {
           >Hire me</CustomButton>
         </ButtonContainer>
       </GridItem>
-      <SocialMedia>
+      <SocialMedia data-aos="fade-up" data-aos-duration="3000">
         {socialLinks.map((link) => (
           <Link
             key={link.id}
             href={link.path}
             target='_blank'
             rel='noopener noreferrer'
+            data-aos="zoom-in-up" data-aos-duration="8000"
           >
             <IconButton
               aria-label={link.title}

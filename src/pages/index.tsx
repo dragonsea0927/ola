@@ -17,7 +17,7 @@ export default function Home(props: Props) {
   const { data, isLoading, isError } = useFetch(url)
   const [blogItem, setBlogId] = React.useState({})
   const [project, setProject] = React.useState({})
-  const [loading, setLoading] = React.useState(true)
+  const [loading, setLoading] = React.useState(false)
 
   const handleOpenModal = (id: string) => {
     setOpenModal()
@@ -32,8 +32,8 @@ export default function Home(props: Props) {
 
   React.useEffect(() => {
     setTimeout(() => {
-      setLoading(false)
-    }, 5000)
+      // setLoading(false)
+    }, 2000)
   }, [])
 
   return (

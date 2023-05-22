@@ -111,26 +111,28 @@ const TopNav = () => {
                 {<AdminRoutes session={session} isActive={isActive} signOut={signOut} />}
               </>
             )}
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', gap: '40px' }}>
               {!session && navItems.map((item) => (
-                <ListItem key={item.id} disablePadding>
+                <ListItem key={item.id} 
+                disablePadding sx={{ 
+                  borderBottom: activeLink === item.path ? `2px solid ${theme.palette.secondary.main}` : ''}}>
                   <ListItemButton sx={{
                     color: activeLink === item.path ? theme.palette.secondary.main : theme.text.primary,
                     fontWeight: 500,
-                    fontSize: '15px',
+                    fontSize: '17px',
                     letterSpacing: '0.1rem',
                     textTransform: 'capitalize',
+                    padding: '4px',
+                    
                     '&:hover': {
                       color: theme.palette.secondary.main,
-                      textDecoration: 'underline',
-                      pddingBottom: '5px',
+                      backgroundColor: 'transparent',
+                      scale: 1.5,
                       '&[data-active="true"]': {
                         color: theme.palette.secondary.main,
                         textDecoration: 'underline',
                       },
                     },
-
-                    textDecoration: activeLink === item.path ? 'underline' : 'none',
                   }}
                     onClick={() => {
                       scrollToViewMethod(item.link as string);

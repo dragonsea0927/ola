@@ -19,9 +19,17 @@ const GridContainer = styled(Grid)(({ theme }) => ({
     margin: '10px auto',
     padding: '0px 10px',
     gap: '40px',
+    
     h1: {
-      fontSize: '33px',
-    }
+      fontSize: '30px',
+    },
+
+    p: {
+      width: '100%',
+      textAlign: 'justify',
+      margin: 'auto',
+      color: theme.text.primary,
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -62,7 +70,7 @@ const GridItem = styled(Grid)(({ theme }) => ({
   margin: 'auto',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
-    padding: '5px',
+    padding: '20px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -135,7 +143,6 @@ const SocialMedia = styled('div')(({ theme }) => ({
     '& svg': {
       fontSize: '2rem'
     },
-    // border: `1px solid ${theme.palette.secondary.main}`,
   },
 
   [theme.breakpoints.up('md')]: {
@@ -178,7 +185,7 @@ const Hero = () => {
             color='secondary'
             width='150px'
             onClick={() => { console.log('clicked') }}
-          >See my works</CustomButton>
+          >My works</CustomButton>
           <CustomButton
             variant='contained'
             color='secondary'

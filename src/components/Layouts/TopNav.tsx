@@ -127,7 +127,6 @@ const TopNav = () => {
                     '&:hover': {
                       color: theme.palette.secondary.main,
                       backgroundColor: 'transparent',
-                      scale: 1.5,
                       '&[data-active="true"]': {
                         color: theme.palette.secondary.main,
                         textDecoration: 'underline',

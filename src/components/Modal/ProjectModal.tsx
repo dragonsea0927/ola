@@ -46,9 +46,10 @@ const ProjectImage = styled('div')(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     img: {
-      width: '87%',
-      height: '100%',
+      width: '314px',
+      height: '200px',
       borderRadius: '8px',
+      alignSelf: 'center',
     }
 
   },
@@ -97,7 +98,7 @@ const ProjectDetails = styled('div')(({ theme }) => ({
 
   [theme.breakpoints.down('sm')]: {
     padding: '10px',
-    width: '87%',
+    width: '100%',
 
     h4: {
       fontSize: '25px',
@@ -112,13 +113,23 @@ const ProjectDetails = styled('div')(({ theme }) => ({
       fontWeight: 400,
       marginBottom: '10px',
       textAlign: 'justify',
+      border: '1px solid red',
+      width: '314px',
+      alignSelf: 'center',
     },
 
-    button: {
-      fontSize: '15px',
-      padding: '10px',
-      fontWeight: 600,
+    '.btn-container': {
+      display: 'flex',
+      border: '1px solid red',
+      alignSelf: 'center',
+      button: {
+        fontSize: '13px',
+        padding: '10px',
+        fontWeight: 600,
+        width: 150,
+      },
     },
+
   },
 
   [theme.breakpoints.up('md')]: {
@@ -159,10 +170,10 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
             {isMobile ? "Prompt engineering is not just about designing and developing prompts. It encompasses a wide range of skills and techniques that are useful for interacting and developing with LLMs. It's an important skill to interface, build with, and understand capabilities of LLMs." : project.description}
           </Typography>
 
-          <Typography variant='body1'>
+          {/* <Typography variant='body1'>
             Tech Stacks: {project.stacks.map((tech: string) => tech + ', ')}
-          </Typography>
-          <div>
+          </Typography> */}
+          <div className='btn-container'>
             <CustomButton
               variant='contained'
               color='primary'

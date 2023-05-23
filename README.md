@@ -27,8 +27,6 @@ A fullstack app built with NextJS/TS, Prisma, MongoDB, Material UI, Next API, Ne
 
 ![demo-image](src/assets/images/demo.png)
 
-</br>
-
 ## Built With
 
 - **NextJS** - React Framework
@@ -40,8 +38,6 @@ A fullstack app built with NextJS/TS, Prisma, MongoDB, Material UI, Next API, Ne
 - **Next Authentication** - Authentication
 - **Next Image** - Image Optimization
 - **Next SEO** - SEO
-- **Next Sitemap** - Sitemap
-- **Next PWA** - PWA
 
 ## Getting Started
 

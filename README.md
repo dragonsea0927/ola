@@ -1,38 +1,131 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Developer Portfolio
+
+## Description
+
+A fullstack app built with NextJS/TS, Prisma, MongoDB, Material UI, Next API, Next Authentication with features to add projects, edit, delete, toggle projects on & off and filter projects based on tech stacks.
+
+## This project is bootstrapped with Fullstack Nextjs Boilerplate
+
+</br>
+
+[![better commits is enabled](https://img.shields.io/badge/better--commits-enabled?style=for-the-badge&logo=git&color=a6e3a1&logoColor=D9E0EE&labelColor=302D41)](https://github.com/Everduin94/better-commits)
+![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Nextjs](https://img.shields.io/badge/-Nextjs-black?style=for-the-badge&logo=nextjs&logoColor=white)
+![Eslint](https://img.shields.io/badge/-eslint-brightgreen?style=for-the-badge&logo=eslint&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![Prisma](https://img.shields.io/badge/-prisma-purple?style=for-the-badge&logo=prisma&logoColor=white)
+![Vercel](https://img.shields.io/badge/-vercel-black?style=for-the-badge&logo=vercel&logoColor=white)
+![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![Material UI](https://img.shields.io/badge/-Material%20UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)
+![Git](https://img.shields.io/badge/-Git-black?style=for-the-badge&logo=git&logoColor=white)
+![Editor](https://img.shields.io/badge/-VSCode-blue?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+
+## Demo
+
+[Live Demo](coming soon)
+</br>
+
+![demo-image](src/assets/images/demo.png)
+
+</br>
+
+## Built With
+
+- **NextJS** - React Framework
+- **TypeScript** - Static Typing
+- **Prisma** - ORM
+- **MongoDB** - Database
+- **Material UI** - UI Library
+- **Next API** - API Routes
+- **Next Authentication** - Authentication
+- **Next Image** - Image Optimization
+- **Next SEO** - SEO
+- **Next Sitemap** - Sitemap
+- **Next PWA** - PWA
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en/) - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [MongoDB](https://www.mongodb.com/) - MongoDB is a general purpose, document-based, distributed database built for modern application developers and for the cloud era.
+- [Prisma](https://www.prisma.io/) - Prisma is a next-generation ORM for Node.js and TypeScript.
+
+### Installing
+
+1. Clone the repo
+
+```bash
+git clone https://github.com/olaishola05/ola.git
+```
+
+2. Install dependencies
+
+```bash
+npm install
+npx prisma generate
+```
+
+3. Create a `.env.local` file in the root directory and add the following environment variables
+
+```bash
+MONGODB_URI= # Your MongoDB URI
+MONGODB_DB= # Your MongoDB Database Name
+NEXT_PUBLIC_MEDIUM_API_URL= # Your Medium API URL
+NEXTAUTH_URL= # Your Next Auth URL
+NEXTAUTH_SECRET= # Your Next Auth Secret
+```
+
+4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. Create a [Vercel](https://vercel.com/) account
+2. Install Vercel CLI
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm i -g vercel
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Login to Vercel
 
-## Learn More
+```bash
+vercel login
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Deploy to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+vercel
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
+- GitHub: [@olaishola05](https://github.com/@olaishola05)
+- Twitter: [@olaishola05](https://twitter.com/@olaishola05)
+- LinkedIn: [Oladipupo Ishola](https://www.linkedin.com/in/ola-ishola/)
+- Medium: [@olaishola](https://medium.com/@olaishola)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/olaishola05/ola/issues) here 😏😏.
+
+### Show your support
+
+- Give a ⭐ if you like this project
+
+## Acknowledgments
+
+- Thanks to everyone building tools to make developers lives easier
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](MIT.md) file for details

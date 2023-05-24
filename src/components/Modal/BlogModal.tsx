@@ -108,10 +108,7 @@ const BlogDetails = styled('div')(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     overflowY: 'auto',
-
-    'h4:first-of-type': {
-      display: 'none',
-    },
+    padding: '0px',
 
     h4: {
       fontWeight: 700,
@@ -122,11 +119,10 @@ const BlogDetails = styled('div')(({ theme }) => ({
     div: {
 
       img: {
-        width: '100% !important',
-        height: '200px !important',
+        width: '100%',
+        height: '100%',
         borderRadius: '8px',
-        objectFit: 'fill !important',
-        margin: '0px auto !important',
+        objectFit: 'contain',
       },
 
       li: {
@@ -162,6 +158,7 @@ const BlogDetails = styled('div')(({ theme }) => ({
         lineHeight: '25px',
         fontWeight: 400,
         color: theme.text.dark,
+        textAlign: 'justify',
       },
     },
 

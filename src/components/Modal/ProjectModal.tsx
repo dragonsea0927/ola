@@ -20,7 +20,6 @@ const ProjsctContent = styled(Grid)(({ theme }) => ({
   gridTemplateColumns: 'repeat(2, 1fr)',
   gap: '20px',
   backgroundColor: `linear-gradient(145deg, #e2e8ec, #ffffff)`,
-  padding: 10,
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     height: '100%',
@@ -41,14 +40,14 @@ const ProjsctContent = styled(Grid)(({ theme }) => ({
 const ProjectImage = styled('div')(({ theme }) => ({
   img: {
     width: '100%',
-    // height: 408,
+    height: 408,
     borderRadius: '10px',
   },
   [theme.breakpoints.down('sm')]: {
-    alignSelf: 'center',
+    margin: '0px auto',
     img: {
-      width: '314px',
-      height: '200px',
+      width: '100%',
+      height: '250px',
       borderRadius: '8px',
       alignSelf: 'center',
     }
@@ -98,8 +97,8 @@ const ProjectDetails = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    padding: '10px',
     width: '100%',
+    padding: '0px',
 
     h4: {
       fontSize: '25px',
@@ -114,20 +113,21 @@ const ProjectDetails = styled('div')(({ theme }) => ({
       fontWeight: 400,
       marginBottom: '10px',
       textAlign: 'justify',
-      border: '1px solid red',
-      width: '314px',
-      alignSelf: 'center',
+    },
+
+    '.stacks': {
+      fontSize: '15px',
     },
 
     '.btn-container': {
       display: 'flex',
-      border: '1px solid red',
       alignSelf: 'center',
       button: {
-        fontSize: '13px',
+        fontSize: '14px',
         padding: '10px',
         fontWeight: 600,
         width: 150,
+        height: 50,
       },
     },
 
@@ -151,7 +151,7 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
       open={open}
       handleClose={() => { handleClose(project.id) }}
       width={isMobile ? '100%' : '1230px'}
-      height={isMobile ? '85%' : '512px'}
+      height={isMobile ? '90%' : '512px'}
     >
       <ProjsctContent>
         <ProjectImage>
@@ -171,9 +171,9 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
             {isMobile ? "Prompt engineering is not just about designing and developing prompts. It encompasses a wide range of skills and techniques that are useful for interacting and developing with LLMs. It's an important skill to interface, build with, and understand capabilities of LLMs." : project.description}
           </Typography>
 
-          {/* <Typography variant='body1'>
+          <Typography variant='body1' className='stacks'>
             Tech Stacks: {project.stacks.map((tech: string) => tech + ', ')}
-          </Typography> */}
+          </Typography>
           <div className='btn-container'>
             <CustomButton
               variant='contained'

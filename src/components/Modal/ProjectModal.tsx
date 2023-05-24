@@ -40,11 +40,12 @@ const ProjsctContent = styled(Grid)(({ theme }) => ({
 
 const ProjectImage = styled('div')(({ theme }) => ({
   img: {
-    width: 545,
-    height: 408,
+    width: '100%',
+    // height: 408,
     borderRadius: '10px',
   },
   [theme.breakpoints.down('sm')]: {
+    alignSelf: 'center',
     img: {
       width: '314px',
       height: '200px',

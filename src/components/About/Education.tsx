@@ -18,7 +18,7 @@ const StyledEducationTimeline = styled('div')(({ theme }) => ({
 
 const Education = () => {
   return (
-    <StyledEducationTimeline>
+    <StyledEducationTimeline data-aos="zoom-in-up">
       <Timeline
         items={items}
         mode='VERTICAL'

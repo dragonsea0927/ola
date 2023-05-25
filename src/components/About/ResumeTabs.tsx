@@ -51,7 +51,7 @@ const ResumeTabs = () => {
     }
   };
   return (
-    <>
+    <div data-aos="fade-up">
       <StlyedTabs
         value={activeTab}
         onChange={handleChange}
@@ -102,7 +102,7 @@ const ResumeTabs = () => {
           </TabPanel>
         )
       })}
-    </>
+    </div>
   )
 }
 

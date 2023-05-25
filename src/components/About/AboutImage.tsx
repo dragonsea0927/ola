@@ -65,7 +65,7 @@ interface AboutImage {
 const AboutImage = (props: AboutImage) => {
   const { photo } = props
   return (
-    <AboutImageContainer>
+    <AboutImageContainer data-aos="fade-up">
       <Image src={photo} alt='Ola' width={300} height={400} />
       <SocialMedia>
         {socialLinks.map((link) => (

@@ -77,7 +77,7 @@ const CurrentWorkItem = styled('div')(({ theme }) => ({
 const CurrentWork: React.FC<CurrentWorkProps> = ({ appImage, role, appTitle, appDescription, year }) => {
   return (
     <>
-      <CurrentWorkItem>
+      <CurrentWorkItem data-aos="fade-up">
         <div className='card'>
           <Image src={appImage} alt='Ola' width={200} height={150} />
           <div>

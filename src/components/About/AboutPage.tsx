@@ -182,21 +182,21 @@ const AboutPage = (props: AboutPageProps) => {
 
   return (
     <Layout>
-      <AboutPageContainerStyling>
-        <StyledTypography variant='h1'>I'm Ola.</StyledTypography>
+      <AboutPageContainerStyling data-aos="fade-up" data-aos-duration="3000">
+        <StyledTypography variant='h1' data-aos="zoom-in-up">I'm Ola.</StyledTypography>
         {isEditable && userLoggedIn ? (
           <>
             <EditAboutForm about={data} toggleEdit={toggleEditable} />
           </>
         ) : (
           <>
-            <AboutInfoDiv>
-              {isMobile ? <Image src={profileImgUrl} alt='Ola' width={300} height={400} className='profile' /> : <AboutImage photo={profileImgUrl} />}
+            <AboutInfoDiv data-aos="fade-up">
+              {isMobile ? <Image src={profileImgUrl} alt='Ola' width={300} height={400} className='profile'/> : <AboutImage photo={profileImgUrl}/>}
               <div className='about'>
                 <AboutContent content={data} />
               </div>
             </AboutInfoDiv>
-            <div className='current'>
+            <div className='current' data-aos="fade-up">
               <Typography variant='h2'>Currently working on</Typography>
               {currentWorks?.map((work, idx) => (
                 <CurrentWork
@@ -217,8 +217,8 @@ const AboutPage = (props: AboutPageProps) => {
           </>
         )}
 
-        <StyledResumeSection className='resume'>
-          <Typography variant='h2' className='sub-header'>My Resume</Typography>
+        <StyledResumeSection className='resume' data-aos="fade-up">
+          <Typography variant='h2' className='sub-header' data-aos="fade-up">My Resume</Typography>
           <ResumeTabs />
         </StyledResumeSection>
       </AboutPageContainerStyling>

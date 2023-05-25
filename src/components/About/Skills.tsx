@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 const StyledSkills = styled('div')(({ theme }) => ({
   margin: '50px auto',
   maxWidth: 800,
+  height: '100%',
 
   h3: {
     textAlign: 'center',
@@ -39,6 +40,9 @@ const StyledSkills = styled('div')(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
+    margin: '0px auto',
+    maxWidth: 600,
+    height: '100%',
 
     h3: {
       fontSize: '1.5rem',
@@ -46,8 +50,9 @@ const StyledSkills = styled('div')(({ theme }) => ({
     },
 
     p: {
-      margin: '0 auto',
       maxWidth: 418,
+      textAlign: 'center',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 2fr))',
       gap: 1,
     },
   },

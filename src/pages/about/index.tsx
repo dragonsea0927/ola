@@ -6,6 +6,7 @@ import prisma from '@/lib/prisma';
 import { About } from '@/types';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+
   const about = await prisma.about.findMany()
   return {
     props: { about: JSON.parse(JSON.stringify(about)) }

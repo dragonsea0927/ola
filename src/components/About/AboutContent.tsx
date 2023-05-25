@@ -9,6 +9,16 @@ interface Props {
 
 const StyledAboutContent = styled('div')(({ theme }) => ({
   width: '100%',
+
+  h2: {
+    margin: '1rem auto',
+  },
+
+  p: {
+    textAlign: 'justify',
+    marginBottom: '1rem',
+  },
+  
   [theme.breakpoints.down('sm')]: {
     width: '100%',
 

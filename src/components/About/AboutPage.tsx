@@ -181,7 +181,6 @@ const AboutPage = (props: AboutPageProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)')
 
   return (
-    <Layout>
       <AboutPageContainerStyling data-aos="fade-up" data-aos-duration="3000">
         <StyledTypography variant='h1' data-aos="zoom-in-up">I'm Ola.</StyledTypography>
         {isEditable && userLoggedIn ? (
@@ -222,8 +221,6 @@ const AboutPage = (props: AboutPageProps) => {
           <ResumeTabs />
         </StyledResumeSection>
       </AboutPageContainerStyling>
-
-    </Layout>
   )
 }
 

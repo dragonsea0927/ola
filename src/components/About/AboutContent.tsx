@@ -7,7 +7,7 @@ interface Props {
   content: About[]
 }
 
-const AboutContent: React.FC<Props> = (props) => {
+const AboutContent = (props: Props) => {
   const { content } = props
   const { intro, title, transitionOne, transitionTwo, focused, hobbies } = content[0]
   return (
@@ -25,11 +25,11 @@ const AboutContent: React.FC<Props> = (props) => {
         {transitionOne}
       </Typography>
 
-      <Typography variant='body1'>
+      <Typography variant='body1' data-aos="zoom-in-up">
         {transitionTwo}
       </Typography>
 
-      <Typography variant='body1'>
+      <Typography variant='body1' data-aos="zoom-in-up">
         {hobbies}
       </Typography>
 

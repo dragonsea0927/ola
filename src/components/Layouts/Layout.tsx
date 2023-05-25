@@ -3,12 +3,25 @@ import { styled } from '@mui/material';
 import TopNav from './TopNav';
 import BottomNav from './BottomNav';
 import { LayoutProps } from '@/types';
+import { ScrollProgress } from '@/components'
+
 
 const LayoutRoot = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   overflow: 'hidden',
   gap: '40px',
+
+  '.progressbar': {
+    position: 'fixed',
+    left: 0,
+    right: 0,
+    height: '5px',
+    background: '#087ea4',
+    transformOrigin: ' 0 %',
+    transform: 'scaleX(0)',
+    zIndex: 9999,
+  }
 }));
 
 const LayoutContent = styled('main')({
@@ -23,7 +36,10 @@ export default function Layout(props: LayoutProps) {
   return (
     <LayoutRoot>
       <TopNav />
-      <LayoutContent>{props.children}</LayoutContent>
+      <LayoutContent>
+        {props.children}
+        <ScrollProgress className='progressbar' />
+      </LayoutContent>
       <BottomNav />
     </LayoutRoot>
   );

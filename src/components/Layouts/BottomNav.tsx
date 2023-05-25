@@ -205,7 +205,7 @@ const BottomNav = () => {
   const { router } = useNavigation()
   return (
 
-    <FooterContainer>
+    <FooterContainer data-aos="fade-up">
       {router.pathname === '/create' || router.pathname === '/projects' ? '' : (
         <>
           <FooterTop>
@@ -232,7 +232,7 @@ const BottomNav = () => {
 
       {router.pathname === '/create' || router.pathname === '/projects' ? '' : (
         <>
-          <FooterBottom>
+          <FooterBottom data-aos="fade-up">
 
             <FooterBottomTop>
               <Typography variant='h1'>

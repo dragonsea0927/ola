@@ -3,7 +3,7 @@ import { Timeline } from '@/components'
 import { styled } from '@mui/material/styles'
 import { workExpItems as items } from '@/utils'
 
-const StyledTimeline = styled('div')(({ theme }) => ({
+const StyledWorkTimeline = styled('div')(({ theme }) => ({
   h2: {
     fontSize: '0.85rem',
   },
@@ -16,12 +16,12 @@ const StyledTimeline = styled('div')(({ theme }) => ({
 
 const WorkExperience = () => {
   return (
-    <StyledTimeline>
+    <StyledWorkTimeline data-aos="zoom-in-up">
       <Timeline
         items={items}
         mode='VERTICAL_ALTERNATING'
       />
-    </StyledTimeline>
+    </StyledWorkTimeline>
   )
 }
 

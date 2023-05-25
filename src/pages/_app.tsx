@@ -8,6 +8,9 @@ import { theme, createEmotionCache } from '@/config'
 import '../styles/globals.scss'
 import '@/styles/about.css';
 import { SessionProvider } from 'next-auth/react'
+import { motion, AnimatePresence } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -16,8 +19,37 @@ export interface MyAppProps extends AppProps {
 }
 
 export default function App(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps: { session, ...pageProps } } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps: { session, ...pageProps }, router } = props;
+
+  React.useEffect(() => {
+    AOS.init({
+      // once: true,
+      delay: 50,
+      duration: 1000,
+      easing: "ease-out-cubic",
+    });
+  }, []);
+
+  React.useEffect(() => {
+    AOS.refresh()
+  }, [])
+
+  const variantProps = {
+    pageInitial: {
+      opacity: 0
+    },
+    pageAnimate: {
+      opacity: 1
+    },
+    pageExit: {
+      backgroundColor: 'white',
+      filter: `invert()`,
+      opacity: 0
+    }
+  }
   return (
+    <AnimatePresence>
+    <motion.div key={router.route} initial="pageInitial" animate="pageAnimate" exit="pageExit" variants={variantProps}>
     <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
         <Head>
@@ -61,5 +93,7 @@ export default function App(props: MyAppProps) {
         </ThemeProvider>
       </CacheProvider>
     </SessionProvider>
+    </motion.div>
+    </AnimatePresence>
   );
 }

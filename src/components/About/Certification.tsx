@@ -68,7 +68,7 @@ const StyledCertificationContainer = styled('div')(({ theme }) => ({
 
 const Certification = () => {
   return (
-    <StyledCertificationContainer>
+    <StyledCertificationContainer data-aos="zoom-in-up">
       <h3>Certification & Trainings</h3>
       <p>Here are some of the certifications and trainings I have completed.</p>
       <ul>

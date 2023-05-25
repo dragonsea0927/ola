@@ -86,18 +86,18 @@ interface BlogSectionProps {
 
 const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps) => {
   const sliceData = data?.items ? data.items.slice(0, 3) : []
-  const isResponsive = useMediaQuery('(max-width: 960px)')
-  // console.log('isResponsive', isResponsive)
+  const isMobile = useMediaQuery('(max-width: 960px)')
+  const mobileSlicedData = data?.items ? data.items.slice(0, 4) : []
 
   return (
-    <div>
+    <div data-aos="fade-up" data-aos-duration="3000">
       <ScrollToView to='blogs' >
         <BlogMainContainer
         >
-          <Typography variant='body1' className='blog-info'>Check some of my Technical articles</Typography>
-          <Typography variant='h1'>Recent Articles</Typography>
+          <Typography variant='body1' className='blog-info' data-aos="fade-up">Check some of my Technical articles</Typography>
+          <Typography variant='h1' data-aos="fade-up">Recent Articles</Typography>
           <BlogsContents>
-            {sliceData.map((item: any, index: number) => {
+            {!isMobile && sliceData.map((item: any, index: number) => {
               const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
               return (
                 < CustomCard
@@ -111,8 +111,23 @@ const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps)
                 />
               )
             })}
+            {isMobile && mobileSlicedData.map((item: any, index: number) => {
+              const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
+              return (
+                < CustomCard
+                  key={item.guid}
+                  image={item?.thumbnail}
+                  overlayText='Read More'
+                  name={tags || 'No tags'}
+                  duration={readTimeInfo(item.content)}
+                  description={item.title}
+                  onClick={() => handleOpenBlogModal(item)}
+                />
+              )
+            }
+            )}
           </BlogsContents>
-          <Typography variant='body1' className='blogs '>To view more of my articles, click <Link href='/blogs'>here</Link>
+          <Typography variant='body1' className='blogs' data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">To view more of my articles, click <Link href='/blogs'>here</Link>
           </Typography>
         </BlogMainContainer>
       </ScrollToView>

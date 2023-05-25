@@ -10,6 +10,7 @@ const TabPanel = ({ children, value, index, ...others }: TabPanelProps) => {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...others}
+      data-aos="fade-up"
     >
       {children}
     </Box>

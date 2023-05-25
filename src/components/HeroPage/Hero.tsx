@@ -19,9 +19,17 @@ const GridContainer = styled(Grid)(({ theme }) => ({
     margin: '10px auto',
     padding: '0px 10px',
     gap: '40px',
+    
     h1: {
-      fontSize: '33px',
-    }
+      fontSize: '30px',
+    },
+
+    p: {
+      width: '100%',
+      textAlign: 'justify',
+      margin: 'auto',
+      color: theme.text.primary,
+    },
   },
 
   [theme.breakpoints.up('md')]: {
@@ -62,7 +70,7 @@ const GridItem = styled(Grid)(({ theme }) => ({
   margin: 'auto',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
-    padding: '5px',
+    padding: '20px',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -135,7 +143,6 @@ const SocialMedia = styled('div')(({ theme }) => ({
     '& svg': {
       fontSize: '2rem'
     },
-    // border: `1px solid ${theme.palette.secondary.main}`,
   },
 
   [theme.breakpoints.up('md')]: {
@@ -156,7 +163,7 @@ const SocialMedia = styled('div')(({ theme }) => ({
 
 const Hero = () => {
   return (
-    <GridContainer container spacing={2}>
+    <GridContainer container spacing={2} data-aos="fade-up" data-aos-duration="3000">
       <GridItem item xs={12} sm={12} md={12}>
         <Typography variant='h1'>Hello
           I'm <Box component='span' sx={{ color: 'secondary.main' }}>Ola</Box>,
@@ -167,7 +174,7 @@ const Hero = () => {
             repeat={Infinity}
           />
         </Typography>
-        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '50%', } }} className='intro'>
+        <Typography variant='body1' sx={{ width: { xs: '100%', sm: '100%', md: '50%', } }} className='intro' data-aos="zoom-in-up" data-aos-duration="8000">
           Hi there! I'm a software developer based in Nigeria. I have a
           passion for building web applications and I'm always looking for new
           opportunities to learn and grow.
@@ -178,7 +185,7 @@ const Hero = () => {
             color='secondary'
             width='150px'
             onClick={() => { console.log('clicked') }}
-          >See my works</CustomButton>
+          >My works</CustomButton>
           <CustomButton
             variant='contained'
             color='secondary'
@@ -187,13 +194,14 @@ const Hero = () => {
           >Hire me</CustomButton>
         </ButtonContainer>
       </GridItem>
-      <SocialMedia>
+      <SocialMedia data-aos="fade-up" data-aos-duration="3000">
         {socialLinks.map((link) => (
           <Link
             key={link.id}
             href={link.path}
             target='_blank'
             rel='noopener noreferrer'
+            data-aos="zoom-in-up" data-aos-duration="8000"
           >
             <IconButton
               aria-label={link.title}

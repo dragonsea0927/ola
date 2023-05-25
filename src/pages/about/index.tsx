@@ -6,14 +6,6 @@ import prisma from '@/lib/prisma';
 import { About } from '@/types';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // const session = await getSession({ req })
-
-  // if (!session) {
-  //   res.statusCode = 403
-  //   return {
-  //     props: { about: [] }
-  //   }
-  // }
 
   const about = await prisma.about.findMany()
   return {
@@ -28,9 +20,9 @@ interface AboutHomePageProps {
 const AboutHomePage: React.FC<AboutHomePageProps> = (props) => {
   const { about } = props
   return (
-    <>
+    <div data-aos="fade-up">
       <AboutPage data={about} />
-    </>
+    </div>
   )
 }
 

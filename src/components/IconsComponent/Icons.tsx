@@ -18,7 +18,10 @@ const IconButtonStyle = styled(IconButton)(({ theme }) => ({
   padding: '5px',
 
   '&:hover': {
-    color: theme.palette.primary.main,
+    border: `1px solid ${theme.white.main}`,
+    color: theme.white.main,
+    backgroundColor: theme.palette.secondary.light,
+    transform: 'scale(1.3) ease-in-out',
   },
 
   [theme.breakpoints.down('sm')]: {

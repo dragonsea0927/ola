@@ -1,6 +1,5 @@
 import React from 'react'
-import { AboutPage } from '@/components'
-import { getSession } from 'next-auth/react';
+import { AboutPage, Layout } from '@/components'
 import { GetServerSideProps } from 'next';
 import prisma from '@/lib/prisma';
 import { About } from '@/types';
@@ -20,9 +19,11 @@ interface AboutHomePageProps {
 const AboutHomePage: React.FC<AboutHomePageProps> = (props) => {
   const { about } = props
   return (
-    <div data-aos="fade-up">
-      <AboutPage data={about} />
-    </div>
+    <Layout>
+      <div data-aos="fade-up">
+        <AboutPage data={about} />
+      </div>
+    </Layout>
   )
 }
 

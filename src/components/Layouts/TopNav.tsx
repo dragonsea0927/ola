@@ -11,7 +11,7 @@ import Logo from './Logo';
 
 const TopNavContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 3),
-  backgroundColor: theme.white.main,
+  // backgroundColor: theme.white.main,
   fontWeight: 400,
   fontSize: '1.1rem',
   letterSpacing: '0.1rem',
@@ -88,7 +88,14 @@ const TopNav = () => {
 
   return (
     <TopNavContainer>
-      <AppBar component="nav" sx={{ backgroundColor: theme.white.main, color: theme.text.primary }}>
+      <AppBar component="nav" sx={{ 
+        backgroundColor: '#ecf3f3', 
+        color: theme.text.primary,
+        boxShadow: 'none',
+        [theme.breakpoints.down('sm')]: {
+          backgroundColor: 'white',
+        }
+        }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -97,7 +104,7 @@ const TopNav = () => {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{fontSize: '2rem', color: theme.palette.secondary.dark}}/>
           </IconButton>
           <Typography
             component="div"
@@ -157,7 +164,7 @@ const TopNav = () => {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: theme.palette.primary.dark, color: theme.text.dark, textTransform: 'capitalize' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#ecf3f3', color: theme.text.dark, textTransform: 'capitalize' },
           }}
         >
           {drawer}

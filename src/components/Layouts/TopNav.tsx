@@ -91,6 +91,7 @@ const TopNav = () => {
       <AppBar component="nav" sx={{ 
         backgroundColor: '#ecf3f3', 
         color: theme.text.primary,
+        boxShadow: 'none',
         [theme.breakpoints.down('sm')]: {
           backgroundColor: 'white',
         }

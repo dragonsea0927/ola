@@ -1,26 +1,28 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import BrandLogo from '@/assets/images/brandlogo.jpeg'
+import BrandLogo from '@/assets/images/Logo-no-bg.png'
 import Image from 'next/image'
+import Link from 'next/link'
 
-const LogoContainer = styled('div')(({ theme }) => ({
+const LogoContainer = styled(Link)(({ theme }) => ({
 
   img: {
-    width: 50,
-    height: 50,
-    objectFit: 'cover',
-    objectPosition: 'center',
-  }
+    width: 70,
+    height: 70,
+    objectFit: 'contain',
+    cursor: 'pointer',
+  },
 }))
 
 const Logo = () => {
   return (
-    <LogoContainer>
+    <LogoContainer href='/'>
       <Image
         src={BrandLogo}
         alt="Brand Logo"
         width={50}
         height={50}
+        className='logo'
       />
     </LogoContainer>
   )

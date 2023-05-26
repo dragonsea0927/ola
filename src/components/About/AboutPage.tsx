@@ -1,10 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
-import { EditAboutForm, Layout } from '@/components'
+import { EditAboutForm } from '@/components'
 import { styled } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import AboutImage from './AboutImage'
-import temImg from '@/assets/images/modalpic.jpeg'
 import CurrentWork from './CurrentWork'
 import AboutContent from './AboutContent'
 import ResumeTabs from './ResumeTabs'
@@ -200,7 +199,7 @@ const AboutPage = (props: AboutPageProps) => {
               {currentWorks?.map((work, idx) => (
                 <CurrentWork
                   key={idx}
-                  appImage={work.imageUrl || temImg}
+                  appImage={work.imageUrl}
                   year={work.date}
                   appTitle={work.name}
                   role={work.role}

@@ -75,7 +75,7 @@ const InputBoxStyles = styled('div')(({ theme }) => ({
 
 const CreateHomePage: React.FC<Project> = (props) => {
   const { data: session, status } = useSession();
-  const [response, setResponse] = useState<boolean>(false);
+  const [responseOk, setResponseOk] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const router = useRouter()
   const { register, handleSubmit, control, reset, formState: { isSubmitting } } = useForm<Project>({
@@ -103,17 +103,17 @@ const CreateHomePage: React.FC<Project> = (props) => {
     }
     const res = await sendDataToBackend(newData)
     if (res?.status === 200) {
-      setResponse(!response)
+      setResponseOk(!responseOk)
     } else {
       setShowError(!showError)
     }
   }
 
   React.useEffect(() => {
-    if (response) {
+    if (responseOk) {
       handleReset();
     }
-  }, [response, reset, handleReset]);
+  }, [responseOk, reset, handleReset]);
 
   const loading = status === 'loading';
   if (router.pathname !== 'undefined' && loading) return null;
@@ -132,11 +132,11 @@ const CreateHomePage: React.FC<Project> = (props) => {
           Create Project
         </Typography>
 
-        {response && <Toast
+        {responseOk && <Toast
           message='Project created successfully'
           severity='success'
-          open={response}
-          onClose={() => setResponse(!response)}
+          open={responseOk}
+          onClose={() => setResponseOk(!responseOk)}
         />
         }
 

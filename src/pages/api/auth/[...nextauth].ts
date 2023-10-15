@@ -12,19 +12,6 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
-      // idToken: true,
-      // profile(profile: any, tokens: any) {
-      //   return {
-      //     id: profile.id,
-      //     name: profile.name,
-      //     email: profile.email,
-      //     image: profile.avatar_url,
-      //     accessToken: tokens.access_token,
-      //     idToken: tokens?.id_token,
-      //     role: 'admin'
-      //   }
-      // }
-
     }),
   ],
   adapter: PrismaAdapter(prisma),

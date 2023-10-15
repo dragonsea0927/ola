@@ -37,8 +37,8 @@ export default function Layout(props: LayoutProps) {
     <LayoutRoot>
       <TopNav />
       <LayoutContent>
+      <ScrollProgress className='progressbar' />
         {props.children}
-        <ScrollProgress className='progressbar' />
       </LayoutContent>
       <BottomNav />
     </LayoutRoot>

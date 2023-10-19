@@ -1,14 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
 import { getAuthSession } from '@/utils/auth';
 import { Project } from '@/types'
 
 export async function GET(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: NextRequest,
 ) {
-  try {
+  const { searchParams } = new URL(req.nextUrl.toString());
+  const tag = searchParams.get('tag');
 
+  try {
     const result = await prisma.project.findMany({
       orderBy: [
         { createdAt: 'desc' },
@@ -17,7 +18,7 @@ export async function GET(
 
       where: {
         tag: {
-          contains: req.query.tag as string,
+          contains: tag as string,
         },
       },
 
@@ -35,39 +36,40 @@ export async function GET(
         updatedAt: true,
       },
     })
-    res.status(200).json({
-      nHits: result.length,
+    return NextResponse.json({
       status: "success",
-      data: result,
       message: "Projects fetched successfully",
-    });
+      data: result,
+      nHits: result.length,
+    }, { status: 200 });
   } catch (error) {
-    res.status(500).json({
+    return NextResponse.json({
       status: "error",
       error: error,
       message: `Error fetching projects from database ${error}`,
-    });
+    }, { status: 500 });
   }
 }
 
 export async function POST(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: NextRequest,
 ) {
 
   const session = await getAuthSession();
 
   try {
-    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag }: Project = req.body;
+    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag }: Project = await req.json();
     const project = {
       name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag,
     };
 
     if (!session?.user?.email) {
-      return res.status(401).json({
+      return NextResponse.json({
         status: "error",
         message: "You are not authorized to perform this action"
-      })
+      },
+        { status: 401 }
+      )
     }
 
     const result = await prisma.project.create({
@@ -81,16 +83,19 @@ export async function POST(
       }
     });
 
-    res.status(200).json({
+    return NextResponse.json({
       status: "success",
       data: result,
       message: "Project added successfully",
-    });
+    }, { status: 201 });
   } catch (error) {
-    res.status(500).json({
+    return NextResponse.json({
       status: "error",
       error: error,
       message: `Error adding project to database ${error}`,
+    }, {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
     });
   }
 }

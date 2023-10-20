@@ -1,12 +1,12 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { getAuthSession } from '@/utils/auth';
 
 export async function GET(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: NextRequest,
+  { params }: { params: { id: string } }
 ) {
-  const { id } = req.query
+  const { id } = params
   try {
     const project = await prisma.project.findUnique({
       where: {
@@ -15,38 +15,43 @@ export async function GET(
     })
 
     if (!project) {
-      res.status(404).json({
+      return NextResponse.json({
         status: 'error',
         message: 'Project not found'
-      })
-
-      res.status(200).json({
-        status: 'success',
-        message: 'Project found successful',
-        data: project
+      }, {
+        status: 404,
       })
     }
+
+    return NextResponse.json({
+      status: 'success',
+      message: 'Project found successful',
+      data: project
+    })
+
   } catch (error) {
-    res.status(500).json({
+    return NextResponse.json({
       error: error,
       message: `Error getting project ${error}`
     })
   }
 }
 
-export default async function PUT(
-  req: NextApiRequest,
-  res: NextApiResponse
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { id: string } }
 ) {
 
   const session = await getAuthSession();
-  const { id } = req.query
+  const { id } = params
   try {
 
     if (!session?.user?.email) {
-      return res.status(401).json({
+      return NextResponse.json({
         status: "error",
         message: "You are not authorized to perform this action"
+      }, {
+        status: 401
       })
 
     }
@@ -58,13 +63,15 @@ export default async function PUT(
     })
 
     if (!projectExist) {
-      res.status(404).json({
+      return NextResponse.json({
         status: 'error',
         message: 'Project not found'
+      }, {
+        status: 404,
       })
     }
 
-    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag, } = req.body
+    const { name, description, stacks, githubUrl, liveUrl, coverImgUrl, modalImgUrl, tag } = await req.json()
     const project = await prisma.project.update({
       where: {
         id: id as string
@@ -74,33 +81,38 @@ export default async function PUT(
       }
     })
 
-    res.status(200).json({
+    return NextResponse.json({
       status: 'success',
       message: 'Project updated successful',
       data: project
+    }, {
+      status: 200
     })
   } catch (e) {
-    res.status(500).json({
+    return NextResponse.json({
       status: 'Internal error',
       message: `Error updating project ${e}`
+    }, {
+      status: 500
     })
   }
 }
 
 export async function DELETE(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: NextRequest,
+  { params }: { params: { id: string } }
 ) {
 
   const session = await getAuthSession();
-
   try {
-    const { id } = req.query
+    const { id } = params
 
     if (!session?.user?.email) {
-      return res.status(401).json({
+      return NextResponse.json({
         status: "error",
         message: "You are not authorized to perform this action"
+      }, {
+        status: 401
       })
     }
 
@@ -111,9 +123,11 @@ export async function DELETE(
     })
 
     if (!project) {
-      res.status(404).json({
+      return NextResponse.json({
         status: 'error',
         message: 'Project not found'
+      }, {
+        status: 404,
       })
     }
 
@@ -122,15 +136,19 @@ export async function DELETE(
         id: id as string
       }
     })
-    res.status(200).json({
+    return NextResponse.json({
       status: 'success',
       message: `Project deleted successfully with id: ${id}`
+    }, {
+      status: 200
     })
 
   } catch (error) {
-    res.status(500).json({
+    return NextResponse.json({
       error: error,
       message: `Error deleting project from database ${error}`
+    }, {
+      status: 500
     })
   }
 }

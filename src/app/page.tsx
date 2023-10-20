@@ -1,39 +1,39 @@
-'use client';
+// 'use client';
 
-import React from 'react'
-import Head from 'next/head'
-import { Hero, ProjectSection, ProjectModal, BlogSection, BlogModal } from '@/components'
-import { useFetch, useToggle } from '@/hooks'
-import { Project } from '@/types'
-import Homepage from '@/components/Home/Homepage';
+// import React from 'react'
+// import Head from 'next/head'
+// import { Hero, ProjectSection, ProjectModal, BlogSection, BlogModal } from '@/components'
+// import { useFetch, useToggle } from '@/hooks'
+// import { Project } from '@/types'
+// import Homepage from '@/components/Home/Homepage';
 
-type Props = {
-  projects: Project[]
-}
+// type Props = {
+//   projects: Project[]
+// }
 
-export default function Home(props: Props) {
-  const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
-  const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)
-  const url = process.env.NEXT_PUBLIC_MEDIUM_API_URL || ''
-  const { data, isLoading, isError } = useFetch(url)
-  const [blogItem, setBlogId] = React.useState({})
-  const [project, setProject] = React.useState({})
-  const [loading, setLoading] = React.useState(false)
+export default function Home() {
+  // const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
+  // const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)
+  // const url = process.env.NEXT_PUBLIC_MEDIUM_API_URL || ''
+  // const { data, isLoading, isError } = useFetch(url)
+  // const [blogItem, setBlogId] = React.useState({})
+  // const [project, setProject] = React.useState({})
+  // const [loading, setLoading] = React.useState(false)
 
-  const handleOpenModal = (id: string) => {
-    setOpenModal()
-    const project = props.projects.find((item: any) => item.id === id)
-    setProject(project || {})
-  }
+  // const handleOpenModal = (id: string) => {
+  //   setOpenModal()
+  //   const project = props.projects.find((item: any) => item.id === id)
+  //   setProject(project || {})
+  // }
 
-  const handleOpenBlogModal = (item: any) => {
-    setOpenBlogModal()
-    setBlogId(item)
-  }
+  // const handleOpenBlogModal = (item: any) => {
+  //   setOpenBlogModal()
+  //   setBlogId(item)
+  // }
 
   return (
-    <>
-      {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} project={project} />}
+    <main className="mt-4">
+      {/* {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} project={project} />}
       {openBlogModal && <BlogModal blogItem={blogItem} open={openBlogModal} handleClose={handleOpenBlogModal}
       />}
       <Head>
@@ -49,8 +49,9 @@ export default function Home(props: Props) {
           <ProjectSection handleOpenModal={handleOpenModal} data={props.projects} />
           <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} isLoading={isLoading} />
         </>
-      )}
-    </>
+      )} */}
+      <h1>Hello world</h1>
+    </main>
   )
 }
 

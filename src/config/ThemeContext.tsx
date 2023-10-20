@@ -1,33 +1,8 @@
-// 'use client'
+"use client";
 
-// import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-// import { red } from '@mui/material/colors';
+import React, { createContext, useEffect, useState } from 'react'
 
-// declare module '@mui/material/styles' {
-//   interface Theme {
-//     white: {
-//       main: string;
-//     },
-
-//     text: {
-//       primary: string;
-//       dark: string;
-//     }
-//   }
-
-//   interface ThemeOptions {
-//     white?: {
-//       main?: React.CSSProperties['color'];
-//     },
-
-//     text?: {
-//       primary?: React.CSSProperties['color'];
-//       dark?: React.CSSProperties['color'];
-//     }
-//   }
-// }
-
-// let theme = createTheme({
+// const themes = {
 //   white: {
 //     main: '#ffffff',
 //   },
@@ -48,7 +23,7 @@
 //       light: '#149eca',
 //     },
 //     error: {
-//       main: red.A400,
+//       main: 'crimson',
 //     },
 //   },
 
@@ -118,8 +93,48 @@
 //     },
 
 //   },
-// });
+//   dark: {
+//     main: '#23272f',
+//     light: '#404756',
+//     dark: '#1c1f25',
+//   },
 
-// theme = responsiveFontSizes(theme);
+//   light: {
+//     main: '#ffffff',
+//     light: '#f6f7f9',
+//     dark: '#ebecef',
+//   },
+// }
 
-// export default theme
+export const ThemeContext = createContext(
+  {
+    theme: 'light',
+    toggleTheme: () => { }
+  }
+)
+
+const getFromLocalStorage = () => {
+  if (typeof window !== 'undefined') {
+    const value = localStorage.getItem("themeMode");
+    return value || "light";
+  }
+}
+
+export default function ThemeContextProvider({ children }: { children: React.ReactNode }) {
+  const [themeMode, setTheme] = useState(() => {
+    return getFromLocalStorage() || "light";
+  })
+
+  const toggleTheme = () => {
+    setTheme(themeMode === "light" ? "dark" : "light")
+  }
+
+  useEffect(() => {
+    localStorage.setItem("themeMode", themeMode);
+  }, [themeMode])
+
+  return (
+    <ThemeContext.Provider value={{ theme: themeMode, toggleTheme }}>{children}
+    </ThemeContext.Provider>
+  )
+}

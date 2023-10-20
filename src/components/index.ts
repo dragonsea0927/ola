@@ -27,6 +27,8 @@ import Timeline from "./Timeline/Timeline";
 import EditAboutForm from "./Form/EditAboutForm";
 import ScrollProgress from "./Animations/ScrollProgress";
 
+
+
 export {
   Layout, CustomButton, Hero, ProjectSection, ContactForm, Copyright, Icons, CustomCard, CustomModal,
   ProjectModal, BlogSection, BlogModal, TabPanel, AllProjects, BackendProjects, FrontendProjects, FullstackProjects,

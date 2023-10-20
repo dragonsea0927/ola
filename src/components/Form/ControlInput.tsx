@@ -1,27 +1,29 @@
+'use client';
+
 import React from 'react'
 import { Controller } from 'react-hook-form';
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
+// import TextField from '@mui/material/TextField';
+// import { styled } from '@mui/material/styles';
 
-const Input = styled(TextField)(({ theme }) => ({
-  backgroundColor: theme.white.main,
-  borderRadius: '8px',
-  '& .MuiInputBase-input': {
-    color: theme.text.primary,
-  },
-  '& .MuiInput-underline:before': {
-    borderBottomColor: theme.white.main,
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: theme.white.main,
-  },
-  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-    borderBottomColor: theme.white.main,
-  },
-  '& .MuiFormLabel-root': {
-    color: theme.text.primary,
-  },
-}));
+// const Input = styled(TextField)(({ theme }) => ({
+//   backgroundColor: theme.white.main,
+//   borderRadius: '8px',
+//   '& .MuiInputBase-input': {
+//     color: theme.text.primary,
+//   },
+//   '& .MuiInput-underline:before': {
+//     borderBottomColor: theme.white.main,
+//   },
+//   '& .MuiInput-underline:after': {
+//     borderBottomColor: theme.white.main,
+//   },
+//   '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+//     borderBottomColor: theme.white.main,
+//   },
+//   '& .MuiFormLabel-root': {
+//     color: theme.text.primary,
+//   },
+// }));
 
 interface Props {
   name: string;
@@ -48,7 +50,7 @@ const ControlInput = ({ name, control, label, width, placeholder, ...otherProps 
         fieldState: { invalid, isTouched, isDirty, error },
         formState,
       }) =>
-        <Input
+        <input
           id="outlined-basic"
           label={label}
           variant="outlined"

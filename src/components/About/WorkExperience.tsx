@@ -1,6 +1,6 @@
 import React from 'react'
 import { Timeline } from '@/components'
-import { styled } from '@mui/material/styles'
+import styled from '@mui/material/styles/styled'
 import { workExpItems as items } from '@/utils'
 
 const StyledWorkTimeline = styled('div')(({ theme }) => ({

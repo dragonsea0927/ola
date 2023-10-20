@@ -1,6 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #ecf3f3;
+  --textColor: #404756;
+  --textColorDark: #23272f;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+  --primary: #087ea4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.progressbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--primary);
+  transform-origin: 0%;
+  transform: scaleX(0);
+  z-index: 9999;
+}
+
+.wrapper {
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.dark {
+  --bg: #0f172a;
+  --textColor: #ddd;
+  --softBg: #1f273a;
+  --softTextColor: #a6a6a6;
+}
+
 body {
-  background-color: #ecf3f3;
+  background-color: var(--bg);
   width: 100vw;
+  overflow-x: hidden;
 
   @media screen and (max-width: 768px) {
     background-color: white;
@@ -45,5 +89,47 @@ body {
 @media screen and (max-width: 768px) {
   .particle {
     display: none;
+  }
+}
+
+@media screen and (max-width: 1536px) {
+  .wrapper {
+    max-width: 1366px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid red;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    max-width: 768px;
+    padding-left: 20px;
+    padding-right: 10px;
+    border: 1px solid dodgerblue;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    max-width: 700px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border: 1px solid green;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid yellow;
   }
 }

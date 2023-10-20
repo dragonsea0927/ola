@@ -1,37 +1,33 @@
 import prisma from '@/lib/prisma'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
+import { getAuthSession } from '@/utils/auth';
+import { responseReturn } from '@/app/api/route';
 
 export default async function PUT(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: NextRequest,
+  { params }: { params: { id: string } }
 ) {
-  const { id } = req.query
+  const { id } = params
+  const session = await getAuthSession();
   try {
+
+    if (!session?.user?.email) {
+      return responseReturn(401, "You are not authorized to perform this action", 'error')
+    }
     const togglePublished = await prisma.project.findUnique({
       where: { id: id as string },
     })
 
     if (!togglePublished) {
-      res.status(404).json({
-        status: 'error',
-        message: `Project not found with id: ${id}`,
-      })
+      return responseReturn(404, `Project not found with id: ${id}`, 'error')
     }
 
     const project = await prisma.project.update({
       where: { id: id as string },
       data: { published: !togglePublished?.published },
     })
-    res.json({
-      status: 'success',
-      message: `Project published successfully with id: ${id}`,
-      project,
-    })
+    return responseReturn(200, `Project published successfully with id: ${id}`, 'success', project)
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      error: error,
-      message: `Error publishing project with id: ${id}`,
-    })
+    return responseReturn(500, `Error publishing project with id: ${id}`, 'error')
   }
 }

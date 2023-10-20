@@ -1,13 +1,22 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
-
-type Data = {
-  name: string
-}
+import { NextRequest, NextResponse } from 'next/server'
 
 export function GET(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
+  req: NextRequest,
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  return NextResponse.json(
+    { data: 'Hello, world!', message: 'fetch successful' },
+    { status: 200 })
 }
+
+export const responseReturn =
+  (status: number, message: string, statusText: string, data?: any, error?: any) => {
+    return NextResponse.json({
+      status: statusText,
+      message: message,
+      data: data,
+      error: error
+    }, {
+      status: status,
+      headers: { "Content-Type": "application/json" },
+    })
+  }

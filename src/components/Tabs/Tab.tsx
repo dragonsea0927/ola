@@ -1,10 +1,9 @@
 import React from 'react'
-import { Box } from '@mui/material'
 import { TabPanelProps } from '@/types'
 
 const TabPanel = ({ children, value, index, ...others }: TabPanelProps) => {
   return (
-    <Box
+    <div
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -13,7 +12,7 @@ const TabPanel = ({ children, value, index, ...others }: TabPanelProps) => {
       data-aos="fade-up"
     >
       {children}
-    </Box>
+    </div>
   )
 }
 

@@ -1,16 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
 import { getAuthSession } from "@/utils/auth";
+import { responseReturn } from '@/app/api/route';
 
-export default async function GET(req: NextApiRequest, res: NextApiResponse) {
+export default async function GET
+  (req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getAuthSession();
-  const { id } = req.query
+  const { id } = params
 
   if (!session?.user?.email) {
-    return res.status(401).json({
-      status: 'error',
-      message: "You are not authorized to perform this action"
-    })
+    return responseReturn(401, "You are not authorized to perform this action", 'error')
   }
 
   try {
@@ -21,37 +20,27 @@ export default async function GET(req: NextApiRequest, res: NextApiResponse) {
     })
 
     if (!contents) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Not found'
-      })
+      return responseReturn(404, "About contents not found", 'error')
     }
 
-    res.status(200).json({
-      status: 'success',
-      data: contents
-    })
+    return responseReturn(200, "About fetched successfully", 'success', contents)
 
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: `Oops! Something went wrong. ${error?.message}`
-    })
+  } catch (error: any) {
+    return responseReturn(500, `Oops! Something went wrong. ${error?.message}`, 'error', null, error?.message)
   }
 }
 
-export async function PUT(req: NextApiRequest, res: NextApiResponse) {
+export async function PATCH(
+  req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getAuthSession();
-  const { id } = req.query
+  const { id } = params
 
   if (!session?.user?.email) {
-    return res.status(401).json({
-      status: 'error',
-      message: "You are not authorized to perform this action"
-    })
+    return responseReturn(401, "You are not authorized to perform this action", 'error')
   }
 
   try {
+    const body = await req.json()
     const checkExist = await prisma.about.findUnique({
       where: {
         id: id as string
@@ -59,10 +48,7 @@ export async function PUT(req: NextApiRequest, res: NextApiResponse) {
     })
 
     if (!checkExist) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Not found'
-      })
+      return responseReturn(404, "About contents not found", 'error')
     }
 
     const updatedAbout = await prisma.about.update({
@@ -70,18 +56,13 @@ export async function PUT(req: NextApiRequest, res: NextApiResponse) {
         id: id as string
       },
       data: {
-        ...req.body,
+        ...body,
         updatedAt: new Date()
       }
     })
-    res.status(200).json({
-      status: 'success',
-      data: updatedAbout
-    })
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: `Oops! Something went wrong. ${error?.message}`
-    })
+
+    return responseReturn(200, "About updated successfully", 'success', updatedAbout)
+  } catch (error: any) {
+    return responseReturn(500, `Oops! Something went wrong. ${error?.message}`, 'error', null, error?.message)
   }
 }

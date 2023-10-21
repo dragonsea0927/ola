@@ -25,10 +25,12 @@ export default function RootLayout({
         <AuthProvider>
           <AnimationProvider>
             <AppThemeProvider>
-              <div className='wrapper'>
-                <Layout>
-                  {children}
-                </Layout>
+              <div className='container'>
+                <div className='wrapper'>
+                  <Layout>
+                    {children}
+                  </Layout>
+                </div>
               </div>
             </AppThemeProvider>
           </AnimationProvider>

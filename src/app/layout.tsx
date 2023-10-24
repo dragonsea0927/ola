@@ -4,7 +4,7 @@ import { Montserrat } from 'next/font/google'
 import './global.scss'
 import { Layout } from '@/components'
 import AnimationProvider from '@/providers/AnimationProvider';
-import AppThemeProvider from '@/providers/AppThemeProvider'
+import AppThemeProvider from '@/providers/AppThemeProvider';
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 
@@ -25,13 +25,13 @@ export default function RootLayout({
         <AuthProvider>
           <AnimationProvider>
             <AppThemeProvider>
-              <div className='container'>
+              <main className='container'>
                 <div className='wrapper'>
                   <Layout>
                     {children}
                   </Layout>
                 </div>
-              </div>
+              </main>
             </AppThemeProvider>
           </AnimationProvider>
         </AuthProvider>

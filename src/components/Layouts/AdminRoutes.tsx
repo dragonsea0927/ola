@@ -39,7 +39,7 @@ export default function AdminRoutes() {
       </div>
 
       {open && (
-        <div className='absolute top-24 left-0 w-full h-[calc(100vh-100px)]bg-[primary] flex flex-col items-center justify-center gap-12 text-xl'>
+        <div className='absolute top-[100px] left-0 w-full bg-[var(--bg)] flex flex-col items-center justify-center gap-12 text-xl h-[calc(100vh - 100px)] py-4'>
           <Link href='/'>Home</Link>
           <Link href='/about'>About</Link>
           <Link href='/contact'>Contact</Link>

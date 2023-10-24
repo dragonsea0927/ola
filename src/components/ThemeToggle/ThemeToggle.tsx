@@ -8,7 +8,6 @@ export default function ThemeToggle() {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleThemeSwitch = () => {
-    console.log('theme', theme);
     toggleTheme();
   }
   return (

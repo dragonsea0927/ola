@@ -18,7 +18,7 @@ export default function AdminRoutes() {
   }
 
   return (
-    <>{status === "unauthenticated" ? (
+    <>{!session ? (
       <Link href='/auth/signin' className='cursor-pointer hidden'>Login</Link>
     ) : (
       <React.Fragment>
@@ -44,7 +44,7 @@ export default function AdminRoutes() {
           <Link href='/about'>About</Link>
           <Link href='/contact'>Contact</Link>
 
-          {status === "unauthenticated" ? (
+          {!session ? (
             <Link href='/auth/signin'>Login</Link>
           ) : (
             <React.Fragment>

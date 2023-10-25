@@ -19,7 +19,7 @@ export default function TopNav() {
   const routePath = usePathname();
   const isActive = (pathname: string) => routePath === pathname;
   return (
-    <div className='flex items-center justify-between h-[80px]'>
+    <div className='flex items-center justify-between h-[80px] sticky top-0 z-10 bg-[var(--bg)]'>
       <div className='flex gap-3 flex-1'>
         <Logo />
       </div>

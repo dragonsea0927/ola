@@ -12,6 +12,7 @@
   --contactBg: #fff;
   --cta: #087ea4;
   --ctaText: #fff;
+  --formText: #fff;
 }
 
 * {
@@ -23,6 +24,7 @@
 body {
   width: 100vw;
   overflow-x: hidden;
+  background-color: var(--bg);
 
   @media screen and (max-width: 768px) {
     background-color: var(--bg);
@@ -71,6 +73,7 @@ body {
   --contactBg: #fff;
   --cta: #087ea4;
   --ctaText: #fff;
+  --formText: #fff;
 }
 
 .dark {
@@ -82,6 +85,7 @@ body {
   --contactBg: #1f273a;
   --cta: #fff;
   --ctaText: #087ea4;
+  --formText: #0f172a;
 }
 
 @for $i from 1 through 30 {

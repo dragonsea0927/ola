@@ -1,7 +1,7 @@
 import TopNav from './TopNav';
-// import BottomNav from './BottomNav';
+import BottomNav from './BottomNav';
 import { LayoutProps } from '@/types';
-import { ScrollProgress } from '@/components'
+import { ScrollProgress, ScrollToTop } from '@/components'
 
 
 export default function Layout(props: LayoutProps) {
@@ -12,7 +12,8 @@ export default function Layout(props: LayoutProps) {
         <ScrollProgress className='progressbar' />
         {props.children}
       </div>
-      {/* <BottomNav /> */}
+      <BottomNav />
+      <ScrollToTop />
     </main>
   );
 }

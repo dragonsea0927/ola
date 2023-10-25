@@ -1,13 +1,4 @@
 import { NavItems, SocialLinks, TabArray, Project, About } from "@/types";
-// import GitHubIcon from '@mui/icons-material/GitHub';
-// import LinkedInIcon from '@mui/icons-material/LinkedIn';
-// import TwitterIcon from '@mui/icons-material/Twitter';
-// import InfoIcon from '@mui/icons-material/Info';
-// import WorkIcon from '@mui/icons-material/Work';
-// import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-// import RssFeedIcon from '@mui/icons-material/RssFeed';
-// import { FaMedium, FaAngellist } from 'react-icons/fa'
-
 import { FaLinkedinIn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { FaMediumM } from 'react-icons/fa';
@@ -15,7 +6,6 @@ import { FaInstagram } from 'react-icons/fa';
 import { FaHashnode } from 'react-icons/fa6';
 import { FaThreads } from 'react-icons/fa6';
 import { BsGithub } from 'react-icons/bs';
-import { SiWellfound } from 'react-icons/si';
 import axios from 'axios';
 // import { animateScroll as scroll, scroller } from 'react-scroll';
 const readingTime = require('reading-time/lib/reading-time');
@@ -82,12 +72,7 @@ export const socialLinks: SocialLinks = [
     path: 'https://medium.com/@olaishola',
     icon: FaMediumM
   },
-  {
-    id: 5,
-    title: 'Wellfound',
-    path: 'https://angel.co/u/ola-ishola',
-    icon: SiWellfound
-  },
+
   {
     id: 6,
     title: 'Instagram',

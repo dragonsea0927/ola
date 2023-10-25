@@ -9,6 +9,9 @@
   --softBg: #f0f0f0;
   --softTextColor: #626262;
   --primary: #087ea4;
+  --contactBg: #fff;
+  --cta: #087ea4;
+  --ctaText: #fff;
 }
 
 * {
@@ -65,6 +68,9 @@ body {
   --softBg: #f0f0f0;
   --softTextColor: #626262;
   --primary: #087ea4;
+  --contactBg: #fff;
+  --cta: #087ea4;
+  --ctaText: #fff;
 }
 
 .dark {
@@ -72,7 +78,10 @@ body {
   --textColor: #ddd;
   --softBg: #1f273a;
   --softTextColor: #a6a6a6;
-  --primary: #a6a6a6;
+  --primary: #fff;
+  --contactBg: #1f273a;
+  --cta: #fff;
+  --ctaText: #087ea4;
 }
 
 @for $i from 1 through 30 {

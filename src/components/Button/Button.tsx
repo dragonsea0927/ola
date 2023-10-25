@@ -26,11 +26,8 @@ export default function CustomButton(props: ButtonProps) {
   border-[var(--cta)]'
 `;
   return <button
-    variant={variant}
     color={color}
-    size={size}
     onClick={onClick}
-    width={width}
     className={tailwindClasses}
   >
     {children}

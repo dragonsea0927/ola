@@ -6,6 +6,7 @@ import { Copyright, ContactForm, Icons, ScrollToView } from '@/components'
 import Image from 'next/image'
 import ContactImage from '@/assets/images/contact1.png'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const BottomNav = () => {
   const pathname = usePathname()
@@ -73,7 +74,7 @@ const BottomNav = () => {
                       <p className='text-lg'>
                         Phone: +234 8110837448
                         <br />
-                        Email: olaishola@hotmail.co.uk
+                        Email: <Link href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`} className='text-blue-500'>Click here.</Link>
                       </p>
                     </div>
                     <div className='flex gap-1.5 md:items-end md:gap-2 pt-5'>

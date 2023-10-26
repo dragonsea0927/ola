@@ -5,7 +5,7 @@
 // import { Hero, ProjectSection, ProjectModal, BlogSection, BlogModal } from '@/components'
 // import { useFetch, useToggle } from '@/hooks'
 // import { Project } from '@/types'
-// import Homepage from '@/components/Home/Homepage';
+import Homepage from '@/components/Home/Homepage';
 
 // type Props = {
 //   projects: Project[]
@@ -50,7 +50,7 @@ export default function Home() {
           <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} isLoading={isLoading} />
         </>
       )} */}
-      <h1>Hello world</h1>
+      <Homepage />
     </main>
   )
 }

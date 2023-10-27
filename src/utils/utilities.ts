@@ -93,27 +93,27 @@ export const socialLinks: SocialLinks = [
   },
 ];
 
-// export const tabs: TabArray = [
-//   {
-//     label: 'All Projects',
-//     value: 'all',
+export const tabs: TabArray = [
+  {
+    label: 'All Projects',
+    value: 'all',
 
-//   },
-//   {
-//     label: 'Frontend',
-//     value: 'frontend',
-//   },
+  },
+  {
+    label: 'Frontend',
+    value: 'frontend',
+  },
 
-//   {
-//     label: 'Backend',
-//     value: 'backend',
-//   },
+  {
+    label: 'Backend',
+    value: 'backend',
+  },
 
-//   {
-//     label: 'Fullstack',
-//     value: 'fullstack',
-//   },
-// ]
+  {
+    label: 'Fullstack',
+    value: 'fullstack',
+  },
+]
 
 // export const adminNavItems: NavItems = [
 //   {

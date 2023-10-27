@@ -1,13 +1,13 @@
 import React from 'react'
-import { Projects } from './AllProjects'
 import { CustomCard } from '@/components'
 import { ProjectProps } from '@/types'
 import { projectsFilter } from '@/utils'
+import ProjectsContainer from './ProjectsContainer'
 
 const FrontendProjects = ({ projects, handleOpenModal }: ProjectProps) => {
   const frontendProjects = projectsFilter(projects, 'frontend')
   return (
-    <Projects>
+    <ProjectsContainer>
       {frontendProjects?.map((item) => (
         <CustomCard
           key={item.id}
@@ -19,7 +19,7 @@ const FrontendProjects = ({ projects, handleOpenModal }: ProjectProps) => {
           onClick={() => handleOpenModal(item.id)}
         />
       ))}
-    </Projects>
+    </ProjectsContainer>
   )
 }
 

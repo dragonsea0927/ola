@@ -6,7 +6,7 @@
 // import Typography from '@mui/material/Typography'
 // import Image from 'next/image'
 // import { CustomButton } from '..'
-// // import AccessTimeSharpIcon from '@mui/icons-material/AccessTimeSharp';
+// import { BiTimeFive as AccessTimeSharpIcon } from 'react-icons/bi'
 
 // const CardContainer = styled(Card)(({ theme }) => ({
 //   display: 'flex',
@@ -200,3 +200,81 @@
 // }
 
 // export default CustomCard
+
+interface CustomCardProps {
+  image: string;
+  name: string;
+  description: string;
+  role?: string;
+  duration?: string;
+  overlayText?: string;
+  onClick?: () => void;
+}
+
+import React from 'react';
+import Image from 'next/image';
+import { BiTimeFive as AccessTimeSharpIcon } from 'react-icons/bi';
+import { CustomButton } from '..';
+
+const CardContainer = ({ children }: React.PropsWithChildren<{}>) => (
+  <div className="flex flex-col justify-center gap-10 p-4 shadow-xl rounded-lg bg-gray-200 hover:bg-white hover:shadow-lg hover:cursor-pointer transition duration-300">
+    {children}
+  </div>
+);
+
+const CardMediaContainer = ({ image }: { image: string }) => (
+  <div className="w-full">
+    <Image src={image} alt={image} width={500} height={100} className="rounded-t-lg" />
+  </div>
+);
+
+const CardContentContainer = ({ children }: React.PropsWithChildren<{}>) => (
+  <div className="flex flex-col gap-6">
+    {children}
+  </div>
+);
+
+const CardMediaTop = ({ name, role, duration }: { name: string; role?: string; duration?: string }) => (
+  <div className="flex flex-row items-center justify-between mb-4">
+    <h6 className="text-secondary">{name}</h6>
+    <p className="text-secondary">
+      {duration ? (
+        <div className="flex items-center gap-2">
+          <AccessTimeSharpIcon className="text-sm" />
+          {duration}
+        </div>
+      ) : (
+        role ? role[0].toUpperCase() + role.slice(1) : ''
+      )}
+    </p>
+  </div>
+);
+
+const OverlayDiv = ({ children, onClick, overlayText }: React.PropsWithChildren<{ onClick?: () => void; overlayText?: string }>) => (
+  <div className="absolute top-0 bottom-0 left-0 right-0 opacity-0 transition duration-300 bg-primary-dark">
+    {children}
+    <button
+      onClick={onClick}
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 text-lg cursor-pointer rounded-lg text-center transition duration-300"
+    >
+      {overlayText}
+    </button>
+  </div>
+);
+
+const CustomCard = ({ image, name, description, role, duration, overlayText, onClick }: CustomCardProps) => {
+  return (
+    <CardContainer>
+      <CardMediaContainer image={image} />
+      <CardContentContainer>
+        <CardMediaTop name={name} role={role} duration={duration} />
+        <p className="text-dark text-left">
+          {description.slice(0, 80)}...
+        </p>
+      </CardContentContainer>
+      <OverlayDiv onClick={onClick} overlayText={overlayText} />
+    </CardContainer>
+  );
+};
+
+export default CustomCard;

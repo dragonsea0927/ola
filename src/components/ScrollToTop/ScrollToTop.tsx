@@ -35,8 +35,8 @@ const ScrollToTop = () => {
         onClick={scrollTop}
         style={{
           display: showScroll ? 'flex' : 'none',
-          transform: atTop ? 'scale(0)' : 'scale(1)',
-          // transform: atTop ? 'rotate(0deg)' : 'rotate(180deg)',
+          // transform: atTop ? 'scale(0)' : 'scale(1)',
+          transform: atTop ? 'rotate(0deg)' : 'rotate(180deg)',
           transition: 'transform 0.3s ease-in-out',
         }}
         className='transition-all duration-300 ease-in-out text-5xl text-[var(--cta)] hover:bg-[var(--primary)] hover:text-[var(--ctaText)] cursor-pointer rounded-full'

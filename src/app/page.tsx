@@ -1,17 +1,34 @@
-// 'use client';
-
-// import React from 'react'
-// import Head from 'next/head'
-// import { Hero, ProjectSection, ProjectModal, BlogSection, BlogModal } from '@/components'
-// import { useFetch, useToggle } from '@/hooks'
-// import { Project } from '@/types'
+import React from 'react'
+import { Metadata } from 'next';
 import Homepage from '@/components/Home/Homepage';
 
-// type Props = {
-//   projects: Project[]
-// }
+export const metadata: Metadata = {
+  title: 'Ola Ishola | Software Engineer',
+  description: 'Personal website built with NextJS, Prisma, MongoDB and Tailwind CSS',
+  viewport: 'width=device-width, initial-scale=1',
+}
 
-export default function Home() {
+const getProjects = async () => {
+  const res = await fetch(`${process.env.API_URL}/projects`)
+  if (!res.ok) {
+    throw new Error('Something went wrong')
+  }
+  return res.json()
+}
+
+const getMediumPosts = async () => {
+  const res = await fetch(`${process.env.MEDIUM_API_URL}`)
+  if (!res.ok) {
+    throw new Error('Something went wrong')
+  }
+  return res.json()
+}
+
+export default async function Home() {
+  const projects = await getProjects()
+  const posts = await getMediumPosts()
+  console.log(posts)
+
   // const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
   // const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)
   // const url = process.env.NEXT_PUBLIC_MEDIUM_API_URL || ''
@@ -36,39 +53,12 @@ export default function Home() {
       {/* {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} project={project} />}
       {openBlogModal && <BlogModal blogItem={blogItem} open={openBlogModal} handleClose={handleOpenBlogModal}
       />}
-      <Head>
-        <title>Ola Ishola</title>
-        <meta name="description" content="Personal website built with NextJS, Prisma, MongoDB and Material UI" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
       {loading ? <div>Loading...</div> : isError ? <div>Error</div> : (
         <>
-          <Homepage />
-          <ProjectSection handleOpenModal={handleOpenModal} data={props.projects} />
           <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} isLoading={isLoading} />
         </>
       )} */}
-      <Homepage />
+      <Homepage projects={projects?.data} posts={posts} />
     </main>
   )
 }
-
-// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-//   const projects = await prisma.project.findMany({
-//     where: {
-//       published: true
-//     },
-//     include: {
-//       author: {
-//         select: {
-//           name: true,
-//         }
-//       }
-//     }
-//   })
-//   return {
-//     props: { projects: JSON.parse(JSON.stringify(projects)) }
-//   }
-// }

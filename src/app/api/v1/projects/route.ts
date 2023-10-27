@@ -45,6 +45,7 @@ export async function GET(
           coverImgUrl: true,
           modalImgUrl: true,
           tag: true,
+          published: true,
           createdAt: true,
           updatedAt: true,
         },

@@ -25,9 +25,10 @@ const getMediumPosts = async () => {
 }
 
 export default async function Home() {
-  const projects = await getProjects()
-  const posts = await getMediumPosts()
-  console.log(posts)
+  const projectsData = getProjects()
+  const postsData = getMediumPosts()
+  const [projects, posts] = await Promise.all([projectsData, postsData])
+  // console.log(posts)
 
   // const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
   // const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)

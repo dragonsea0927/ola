@@ -1,8 +1,9 @@
-// import React from 'react'
-// import { styled, Grid, Typography } from '@mui/material'
-// import Link from 'next/link'
-// import { randomItemFromArray, readTimeInfo } from '@/utils'
-// import { ScrollToView, CustomCard } from '@/components'
+'use client';
+
+import React from 'react'
+import Link from 'next/link'
+import { randomItemFromArray, readTimeInfo } from '@/utils'
+import { ScrollToView, CustomCard } from '@/components'
 // import { useMediaQuery } from '@/hooks'
 
 
@@ -78,72 +79,65 @@
 //   },
 // }))
 
-// interface BlogSectionProps {
-//   handleOpenBlogModal: any
-//   data: any
-//   isLoading: boolean
-// }
+interface BlogSectionProps {
+  handleOpenBlogModal: any
+  data: any
+}
 
-// // const getProjects = async () => {
-// //   const res = await fetch(`${process.env.NEXT_PUBLIC_MEDIUM_API_URL}`)
 
-// //   if (!res.ok) {
-// //     throw new Error('Something went wrong')
-// //   }
+const BlogSection = ({ handleOpenBlogModal, data }: BlogSectionProps) => {
+  // const blogs = await getProjects()
+  const sliceData = data?.items ? data.items.slice(0, 3) : []
+  // const isMobile = useMediaQuery('(max-width: 960px)')
+  const mobileSlicedData = data?.items ? data.items.slice(0, 4) : []
 
-// //   return res.json()
-// // }
+  return (
+    <div data-aos="fade-up" data-aos-duration="3000">
+      {/* <ScrollToView to='blogs' > */}
+      <div>
+        <p className='blog-info' data-aos="fade-up">Check some of my Technical articles</p>
+        <h1 data-aos="fade-up">Recent Articles</h1>
+        <div className=''>
+          <div className='hidden md:block'>
+            {sliceData.map((item: any, index: number) => {
+              const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
+              return (
+                < CustomCard
+                  key={item.guid}
+                  image={item?.thumbnail}
+                  overlayText='Read More'
+                  name={tags || 'No tags'}
+                  duration={readTimeInfo(item.content)}
+                  description={item.title}
+                  onClick={() => handleOpenBlogModal(item)}
+                />
+              )
+            })}
+          </div>
+          <div className='md:hidden'>
+            {mobileSlicedData.map((item: any, index: number) => {
+              const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
+              return (
+                < CustomCard
+                  key={item.guid}
+                  image={item?.thumbnail}
+                  overlayText='Read More'
+                  name={tags || 'No tags'}
+                  duration={readTimeInfo(item.content)}
+                  description={item.title}
+                  onClick={() => handleOpenBlogModal(item)}
+                />
+              )
+            }
+            )}
+          </div>
+        </div>
+        <p className='blogs' data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">To view more of my articles, click <Link href='/blogs'>here</Link>
+        </p>
+      </div>
+      {/* </ScrollToView> */}
+    </div>
+  )
+}
 
-// const BlogSection = ({ handleOpenBlogModal, data, isLoading }: BlogSectionProps) => {
-//   // const blogs = await getProjects()
-//   const sliceData = data?.items ? data.items.slice(0, 3) : []
-//   const isMobile = useMediaQuery('(max-width: 960px)')
-//   const mobileSlicedData = data?.items ? data.items.slice(0, 4) : []
-
-//   return (
-//     <div data-aos="fade-up" data-aos-duration="3000">
-//       <ScrollToView to='blogs' >
-//         <BlogMainContainer
-//         >
-//           <Typography variant='body1' className='blog-info' data-aos="fade-up">Check some of my Technical articles</Typography>
-//           <Typography variant='h1' data-aos="fade-up">Recent Articles</Typography>
-//           <BlogsContents>
-//             {!isMobile && sliceData.map((item: any, index: number) => {
-//               const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
-//               return (
-//                 < CustomCard
-//                   key={item.guid}
-//                   image={item?.thumbnail}
-//                   overlayText='Read More'
-//                   name={tags || 'No tags'}
-//                   duration={readTimeInfo(item.content)}
-//                   description={item.title}
-//                   onClick={() => handleOpenBlogModal(item)}
-//                 />
-//               )
-//             })}
-//             {isMobile && mobileSlicedData.map((item: any, index: number) => {
-//               const tags = item?.categories ? randomItemFromArray(item.categories, 5) : ''
-//               return (
-//                 < CustomCard
-//                   key={item.guid}
-//                   image={item?.thumbnail}
-//                   overlayText='Read More'
-//                   name={tags || 'No tags'}
-//                   duration={readTimeInfo(item.content)}
-//                   description={item.title}
-//                   onClick={() => handleOpenBlogModal(item)}
-//                 />
-//               )
-//             }
-//             )}
-//           </BlogsContents>
-//           <Typography variant='body1' className='blogs' data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">To view more of my articles, click <Link href='/blogs'>here</Link>
-//           </Typography>
-//         </BlogMainContainer>
-//       </ScrollToView>
-//     </div>
-//   )
-// }
-
-// export default BlogSection
+export default BlogSection

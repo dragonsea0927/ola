@@ -13,13 +13,13 @@ interface CustomCardProps {
 }
 
 const CardContainer = ({ children }: React.PropsWithChildren<{}>) => (
-  <div className="flex flex-col relative justify-center gap-6 p-3 md:p-4 shadow-xl rounded-lg bg-[--contactBg] hover:bg-white hover:shadow-lg hover:cursor-pointer transition duration-300">
+  <div className="flex flex-col relative justify-center gap-6 px-3 pt-3 pb-8 md:px-4 md:pt-4 md:pb-14  shadow-xl rounded-lg bg-[--contactBg] hover:bg-white hover:shadow-lg hover:cursor-pointer transition duration-300">
     {children}
   </div>
 );
 
 const CardMediaContainer = ({ image }: { image: string }) => (
-  <div className="relative w-full h-[200px] md:h-[233px] rounded-lg transform m-auto">
+  <div className="relative w-full h-[200px] md:h-[300px] lg:h-[350px] rounded-lg transform m-auto">
     <Image src={image} alt={image} fill className="object-cover rounded-lg" />
   </div>
 );
@@ -64,7 +64,7 @@ const CustomCard = ({ image, name, description, role, duration, overlayText, onC
       <CardContentContainer>
         <CardMediaTop name={name} role={role} duration={duration} />
         <p className="text-dark text-left">
-          {description.slice(0, 80)}...
+          {description.slice(0, 200)}...
         </p>
       </CardContentContainer>
       <OverlayDiv onClick={onClick} overlayText={overlayText} />

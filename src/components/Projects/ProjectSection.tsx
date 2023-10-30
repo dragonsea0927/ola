@@ -190,10 +190,11 @@ import { useToggle } from '@/hooks';
 import { Project } from '@/types';
 
 type props = {
-  handleOpenModal?: (id: string) => void;
+  // handleOpenModal?: (id: string) => void;
+  data: Project[];
 };
 
-const ProjectSection = ({ data }) => {
+const ProjectSection = ({ data }: props) => {
   const [activeTab, setActiveTab] = useState(0);
   const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
   const [project, setProject] = useState({})
@@ -224,7 +225,7 @@ const ProjectSection = ({ data }) => {
   };
 
   return (
-    <div data-aos="fade-up" data-aos-anchor-placement="top-center" className="px-2 pb-9 w-full mb-10">
+    <div data-aos="fade-up" data-aos-anchor-placement="top-center" className="md:px-2 pb-9 w-full mb-10">
       <div className="w-full flex flex-col gap-2">
         <p className="info text-[var(--textColor)] text-center text-base md:text-xl" data-aos="zoom-in-up" data-aos-duration="8000">
           Visit my portfolio for my latest projects
@@ -233,8 +234,8 @@ const ProjectSection = ({ data }) => {
           My Recent Works
         </h2>
 
-        <div data-aos="fade-up" data-aos-duration="3000" className='md:hidden lg:hidden'>
-          {data?.data?.map((project: any) => (
+        <div data-aos="fade-up" data-aos-duration="3000" className='md:hidden lg:hidden flex flex-col gap-10 mt-5'>
+          {data?.map((project: any) => (
             <CustomCard
               key={project.id}
               image={project.modalImgUrl}
@@ -248,12 +249,12 @@ const ProjectSection = ({ data }) => {
         </div>
 
         <div data-aos="fade-up" data-aos-duration="3000" className='hidden md:block'>
-          <ul className="w-90p flex justify-center gap-5 mx-auto mt-10">
+          <ul className="w-90p flex justify-center gap-5 mx-auto mt-10 md:mb-7 lg:mb-0">
             {tabs.map((tab, index) => (
               <li key={tab.label}>
                 <button
                   onClick={() => handleChange(null, index)}
-                  className={`px-4 py-2 border border-primary hover:bg-primary hover:text-white rounded-full ${activeTab === index ? 'bg-primary text-white' : 'text-primary'}`}
+                  className={`px-4 py-2 border border-[var(--cta)] hover:bg-primary hover:text-white rounded-full ${activeTab === index ? 'bg-[var(--btnMode)] text-white' : 'text-primary'}`}
                 >
                   {tab.label}
                 </button>

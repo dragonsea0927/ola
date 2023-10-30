@@ -13,6 +13,7 @@
   --cta: #087ea4;
   --ctaText: #fff;
   --formText: #fff;
+  --btnMode: #087ea4;
 }
 
 * {
@@ -86,6 +87,7 @@ body {
   --cta: #fff;
   --ctaText: #087ea4;
   --formText: #0f172a;
+  --btnMode: #1f273a;
 }
 
 @for $i from 1 through 30 {

@@ -1,205 +1,6 @@
-// import React from 'react'
-// import { styled } from '@mui/material'
-// import Card from '@mui/material/Card'
-// import CardContent from '@mui/material/CardContent'
-// import CardMedia from '@mui/material/CardMedia'
-// import Typography from '@mui/material/Typography'
-// import Image from 'next/image'
-// import { CustomButton } from '..'
-// import { BiTimeFive as AccessTimeSharpIcon } from 'react-icons/bi'
-
-// const CardContainer = styled(Card)(({ theme }) => ({
-//   display: 'flex',
-//   flexDirection: 'column',
-//   justifyContent: 'center',
-//   gap: '10px',
-//   boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
-//   borderRadius: '20px',
-//   padding: '20px',
-//   backgroundColor: '#ecf0f3',
-//   position: 'relative',
-//   '&:hover': {
-//     '.overlay': {
-//       opacity: 1,
-//       transform: 'scale(1)',
-//     },
-
-//     img: {
-//       transform: 'scale(1.01)',
-//     },
-//     cursor: 'pointer',
-//   },
-
-//   [theme.breakpoints.down('sm')]: {
-//     width: '100%',
-//     padding: '2px',
-//     borderRadius: '8px',
-//   },
-
-//   [theme.breakpoints.up('md')]: {
-
-//   },
-
-//   [theme.breakpoints.up('lg')]: {
-
-//   },
-
-// }))
-
-// const CardContentContainer = styled(CardContent)(({ theme }) => ({
-//   display: 'flex',
-//   flexDirection: 'column',
-//   padding: '0px',
-//   gap: '6px',
-//   [theme.breakpoints.down('sm')]: {
-//     padding: '0px 10px',
-//   },
-
-//   [theme.breakpoints.up('md')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-//   [theme.breakpoints.up('lg')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-// }))
-
-// const CardMediaContainer = styled(CardMedia)(({ theme }) => ({
-//   width: '100%',
-//   margin: 'auto',
-
-//   img: {
-//     borderRadius: '8px',
-//     width: '100%',
-//     height: '233px',
-//     objectFit: 'cover',
-//     transition: 'tranform 0s'
-//   },
-//   [theme.breakpoints.down('sm')]: {
-//     img: {
-//       width: '100%',
-//       height: '233px',
-//       objectFit: 'fill',
-//     },
-//   },
-
-//   [theme.breakpoints.up('md')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-//   [theme.breakpoints.up('lg')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-// }))
-
-// const CardMediaTop = styled('div')(({ theme }) => ({
-//   display: 'flex',
-//   flexDirection: 'row',
-//   alignItems: 'center',
-//   justifyContent: 'space-between',
-//   marginBottom: '10px',
-//   h6: {
-//     color: theme.palette.secondary.main,
-//   },
-
-//   p: {
-//     color: theme.palette.secondary.main,
-//   },
-
-//   '.duration': {
-//     display: 'flex',
-//     alignItems: 'center',
-//     gap: '5px',
-//   },
-
-//   [theme.breakpoints.down('sm')]: {
-//     padding: '10px 0px',
-//   },
-
-//   [theme.breakpoints.up('md')]: {
-
-//   },
-
-//   [theme.breakpoints.up('lg')]: {
-
-//   },
-
-// }))
-
-// interface CustomCardProps {
-//   image: any
-//   name: string
-//   description: string
-//   role?: string
-//   duration?: string
-//   overlayText?: string
-//   onClick?: () => void
-// }
-
-// const OverlayDiv = styled('div')(({ theme }) => ({
-//   position: 'absolute',
-//   top: 0,
-//   bottom: 0,
-//   left: 0,
-//   right: 0,
-//   opacity: 0,
-//   transition: '.3s ease',
-//   backgroundColor: theme.palette.primary.dark,
-
-//   button: {
-//     position: 'absolute',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     'msTransform': 'translate(-50%, -50%)',
-//     fontSize: '16px',
-//     padding: '12px 24px',
-//     cursor: 'pointer',
-//     borderRadius: '5px',
-//     textAlign: 'center',
-//     textDecoration: 'none',
-//     display: 'inline-block',
-//     transition: '0.3s',
-//   },
-// }))
-
-// const CustomCard = ({ image, name, description, ...otherProps }: CustomCardProps) => {
-//   return (
-//     <CardContainer data-aos="fade-up" data-aos-duration="3000">
-//       <CardMediaContainer>
-//         <Image src={image} alt={name} width={500} height={100} />
-//       </CardMediaContainer>
-//       <CardContentContainer>
-//         <CardMediaTop>
-//           <Typography variant='h6' component='h6'>
-//             {name}
-//           </Typography>
-//           <Typography variant='body1' component='div'>
-//             {otherProps?.duration ? <div className='duration'>
-//               <AccessTimeSharpIcon fontSize='small' />
-//               {otherProps?.duration}
-
-//             </div> : otherProps?.role[0].toLocaleUpperCase() + otherProps?.role.slice(1)}
-//           </Typography>
-//         </CardMediaTop>
-//         <Typography variant={otherProps?.duration ? 'h6' : 'body1'} color='text.dark' component='div'
-//           style={{ textAlign: otherProps?.role ? 'justify' : 'left' }}
-//         >
-//           {description.slice(0, 80)}...
-//         </Typography>
-//       </CardContentContainer>
-//       <OverlayDiv className='overlay'>
-//         <CustomButton onClick={otherProps?.onClick} variant='outlined' color='secondary'>
-//           {otherProps?.overlayText}
-//         </CustomButton>
-//       </OverlayDiv>
-//     </CardContainer >
-//   )
-// }
-
-// export default CustomCard
+import React from 'react';
+import Image from 'next/image';
+import { BiTimeFive as AccessTimeSharpIcon } from 'react-icons/bi';
 
 interface CustomCardProps {
   image: string;
@@ -211,51 +12,45 @@ interface CustomCardProps {
   onClick?: () => void;
 }
 
-import React from 'react';
-import Image from 'next/image';
-import { BiTimeFive as AccessTimeSharpIcon } from 'react-icons/bi';
-import { CustomButton } from '..';
-
 const CardContainer = ({ children }: React.PropsWithChildren<{}>) => (
-  <div className="flex flex-col justify-center gap-10 p-4 shadow-xl rounded-lg bg-gray-200 hover:bg-white hover:shadow-lg hover:cursor-pointer transition duration-300">
+  <div className="flex flex-col relative justify-center gap-6 p-3 md:p-4 shadow-xl rounded-lg bg-[--contactBg] hover:bg-white hover:shadow-lg hover:cursor-pointer transition duration-300">
     {children}
   </div>
 );
 
 const CardMediaContainer = ({ image }: { image: string }) => (
-  <div className="w-full">
-    <Image src={image} alt={image} width={500} height={100} className="rounded-t-lg" />
+  <div className="relative w-full h-[200px] md:h-[233px] rounded-lg transform m-auto">
+    <Image src={image} alt={image} fill className="object-cover rounded-lg" />
   </div>
 );
 
 const CardContentContainer = ({ children }: React.PropsWithChildren<{}>) => (
-  <div className="flex flex-col gap-6">
+  <div className="flex flex-col gap-2 py-0 px-2 md:p-0">
     {children}
   </div>
 );
 
 const CardMediaTop = ({ name, role, duration }: { name: string; role?: string; duration?: string }) => (
-  <div className="flex flex-row items-center justify-between mb-4">
-    <h6 className="text-secondary">{name}</h6>
-    <p className="text-secondary">
+  <div className="flex flex-row items-center justify-between mb-3">
+    <h6 className="text-[var(--textColor)] font-semibold text-base md:text-lg py-1 px-0 md:p-0 capitalize">{name}</h6>
+    <p className="text-[var(--textColor)]">
       {duration ? (
         <div className="flex items-center gap-2">
-          <AccessTimeSharpIcon className="text-sm" />
-          {duration}
+          <AccessTimeSharpIcon className="text-base md:text-lg" />
+          <span>{duration}</span>
         </div>
       ) : (
-        role ? role[0].toUpperCase() + role.slice(1) : ''
+        <span className='text-base font-medium capitalize'>{role ? role[0].toUpperCase() + role.slice(1) : ''}</span>
       )}
     </p>
   </div>
 );
 
-const OverlayDiv = ({ children, onClick, overlayText }: React.PropsWithChildren<{ onClick?: () => void; overlayText?: string }>) => (
-  <div className="absolute top-0 bottom-0 left-0 right-0 opacity-0 transition duration-300 bg-primary-dark">
-    {children}
+const OverlayDiv = ({ onClick, overlayText }: React.PropsWithChildren<{ onClick?: () => void; overlayText?: string }>) => (
+  <div className="absolute top-0 bottom-0 left-0 right-0 opacity-0 hover:opacity-100 transition duration-300 hover:bg-[var(--softBg)] hover:transform hover:rounded-lg">
     <button
       onClick={onClick}
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 text-lg cursor-pointer rounded-lg text-center transition duration-300"
+      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 text-base cursor-pointer rounded-md text-center transition duration-300 hover:border hover:border-[var(--primary)] shadow-lg"
     >
       {overlayText}
     </button>

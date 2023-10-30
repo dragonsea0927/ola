@@ -227,12 +227,12 @@ const ProjectSection = ({ data }: props) => {
   return (
     <div data-aos="fade-up" data-aos-anchor-placement="top-center" className="md:px-2 pb-9 w-full mb-10">
       <div className="w-full flex flex-col gap-2">
-        <p className="info text-[var(--textColor)] text-center text-base md:text-xl" data-aos="zoom-in-up" data-aos-duration="8000">
+        <p className="info text-[var(--textColor)] text-center text-base md:text-xl font-light" data-aos="zoom-in-up" data-aos-duration="8000">
           Visit my portfolio for my latest projects
         </p>
-        <h2 className="text-2xl md:text-6xl text-center">
+        <h1 className="text-2xl md:text-6xl text-center">
           My Recent Works
-        </h2>
+        </h1>
 
         <div data-aos="fade-up" data-aos-duration="3000" className='md:hidden lg:hidden flex flex-col gap-10 mt-5'>
           {data?.map((project: any) => (

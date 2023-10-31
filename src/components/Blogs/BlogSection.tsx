@@ -7,14 +7,12 @@ import { CustomCard } from '@/components'
 
 
 interface BlogSectionProps {
-  data: any
+  data: any,
+  handleOpenBlogModal: (item: any) => void
 }
 
 
-const BlogSection = ({ data }: BlogSectionProps) => {
-  const handleOpenBlogModal = (item: any) => {
-    // console.log(item)
-  }
+const BlogSection = ({ data, handleOpenBlogModal }: BlogSectionProps) => {
   return (
     <div data-aos="fade-up" data-aos-duration="3000" className='md:px-2 pb-9 w-full mb-10 lg:px-10'>
       <div className='w-full flex flex-col gap-2'>
@@ -32,7 +30,7 @@ const BlogSection = ({ data }: BlogSectionProps) => {
                   name={tags || 'No tags'}
                   duration={readTimeInfo(item.content)}
                   description={item.title}
-                  onClick={() => handleOpenBlogModal(item)}
+                  onClick={() => handleOpenBlogModal(item.guid)}
                 />
               )
             })}
@@ -48,7 +46,7 @@ const BlogSection = ({ data }: BlogSectionProps) => {
                   name={tags || 'No tags'}
                   duration={readTimeInfo(item.content)}
                   description={item.title}
-                  onClick={() => handleOpenBlogModal(item)}
+                  onClick={() => handleOpenBlogModal(item.guid)}
                 />
               )
             }

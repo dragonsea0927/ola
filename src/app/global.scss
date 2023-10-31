@@ -90,6 +90,64 @@ body {
   --btnMode: #1f273a;
 }
 
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  color: var(--textColor);
+
+  img {
+    width: 100%;
+    height: 510px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    margin-bottom: 18px;
+    margin-top: 10px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    margin-bottom: 18px;
+  }
+
+  // h4:first-child {
+  //   font-size: 60px;
+  //   line-height: 40px;
+  //   font-weight: 700;
+  //   color: var(--textColor);
+  // }
+
+  h3 {
+    font-size: 25px;
+    line-height: 40px;
+    font-weight: 700;
+    color: var(--textColor);
+  }
+
+  pre {
+    width: 900px !important;
+    padding: 10px;
+    background-color: #1f273a;
+    color: white;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-size: 15px;
+    border-radius: 8px;
+    margin: 0 auto;
+    overflow: auto;
+  }
+}
+
 @for $i from 1 through 30 {
   @keyframes particle-animation-#{$i} {
     100% {
@@ -156,6 +214,47 @@ body {
     padding-left: 0px;
     padding-right: 0px;
     border: 1px solid green;
+  }
+
+  .contents {
+    width: 100%;
+    margin: 0 auto;
+
+    img {
+      height: 100%;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    li {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    pre {
+      width: 100% !important;
+      padding: 10px;
+      background-color: var(--contactBg);
+      color: var(--softTextColor);
+      word-break: break-all;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      font-size: 12px;
+      border-radius: 8px;
+      margin: 0 auto;
+      overflow: auto;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      margin-bottom: 18px;
+      color: var(--TextColor);
+      text-align: justify;
+    }
   }
 }
 

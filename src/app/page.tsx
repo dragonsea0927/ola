@@ -28,7 +28,6 @@ export default async function Home() {
   const projectsData = getProjects()
   const postsData = getMediumPosts()
   const [projects, posts] = await Promise.all([projectsData, postsData])
-  // console.log(posts)
 
   // const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
   // const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)
@@ -54,11 +53,7 @@ export default async function Home() {
       {/* {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} project={project} />}
       {openBlogModal && <BlogModal blogItem={blogItem} open={openBlogModal} handleClose={handleOpenBlogModal}
       />}
-      {loading ? <div>Loading...</div> : isError ? <div>Error</div> : (
-        <>
-          <BlogSection handleOpenBlogModal={handleOpenBlogModal} data={data} isLoading={isLoading} />
-        </>
-      )} */}
+      */}
       <Homepage projects={projects?.data} posts={posts} />
     </main>
   )

@@ -16,14 +16,12 @@ export default function CustomButton(props: ButtonProps) {
   flex
   items-center
   justify-center
-  gap-10
+  gap-3
   text-base
   md:text-lg
   text-[var(--ctaText)]
   ${variant === 'contained' ? `bg-[var(--cta)]` : 'bg-transparent'}
-  ${variant === 'outlined' ? `border border-[var(--primary)] text-[var(--primary)]` : 'border-none'}
-  hover:bg-white hover:text-[var(--cta)] hover:border 
-  border-[var(--cta)]'
+  ${variant === 'outlined' ? `border border-[var(--primary)] text-[var(--primary)]` : 'border-none'} hover:border border-[var(--cta)]'
 `;
   return <button
     color={color}

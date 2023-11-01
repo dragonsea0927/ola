@@ -128,6 +128,7 @@
 
 import React from 'react';
 
+
 interface CustomModalProps {
   open: boolean;
   handleClose: () => void;
@@ -139,7 +140,7 @@ interface CustomModalProps {
 const CustomModal = ({ open, handleClose, children, width, height }: CustomModalProps) => {
   return (
     <div
-      className={`fixed inset-0 ${open ? 'visible opacity-100 border border-red-500 bg-gray-300' : 'invisible opacity-0'
+      className={`fixed inset-0 ${open ? 'visible opacity-100 bg-gray-300' : 'invisible opacity-0'
         } transition-all duration-300 ease-in-out z-50`}
       onClick={handleClose}
     >
@@ -148,12 +149,12 @@ const CustomModal = ({ open, handleClose, children, width, height }: CustomModal
           } transition-all duration-300 ease-in-out`}
       >
         <div
-          className={`w-[${width}] h-[${height}] md:w-[${width}] lg:w-[${width}] bg-inherit rounded-lg p-2 flex flex-col gap-5 relative `}
+          className={`w-[${width}] h-[${height}] md:w-[${width}] lg:w-[${width}] bg-inherit rounded-lg p-1 flex flex-col gap-5 relative `}
           style={{ width: width, height: height }}
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className="absolute top-5 right-5 w-12 h-12 bg-red-500 text-white rounded-full text-2xl flex items-center justify-center transition-all duration-300 ease-in-out cursor-pointer"
+            className="absolute -top-4 -right-2 w-12 h-12 bg-red-500 text-white rounded-full text-2xl flex items-center justify-center transition-all duration-300 ease-in-out cursor-pointer z-50"
             onClick={handleClose}
           >
             X

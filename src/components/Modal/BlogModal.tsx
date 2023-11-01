@@ -19,9 +19,9 @@ const BlogModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
       open={open}
       handleClose={handleClose}
       width={isMobile ? '100vw' : '1200px'}
-      height={isMobile ? '100vh' : '88vh'}
+      height={isMobile ? '90vh' : '88vh'}
     >
-      <div className="grid grid-cols-1 pb-3 gap-5 md:p-3 w-full h-full bg-[var(--bg)] to-white rounded-lg"
+      <div className="grid grid-cols-1 pb-3 gap-5 md:p-3 w-full h-full bg-[var(--bg)] rounded-lg"
       >
         <div className="p-2 md:p-3 w-full overflow-y-auto">
           <h4 className="font-bold text-xl md:text-3xl text-center text-dark mb-2">{title}</h4>

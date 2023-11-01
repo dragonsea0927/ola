@@ -29,31 +29,8 @@ export default async function Home() {
   const postsData = getMediumPosts()
   const [projects, posts] = await Promise.all([projectsData, postsData])
 
-  // const { isOpen: openModal, toggleOpen: setOpenModal } = useToggle(false)
-  // const { isOpen: openBlogModal, toggleOpen: setOpenBlogModal } = useToggle(false)
-  // const url = process.env.NEXT_PUBLIC_MEDIUM_API_URL || ''
-  // const { data, isLoading, isError } = useFetch(url)
-  // const [blogItem, setBlogId] = React.useState({})
-  // const [project, setProject] = React.useState({})
-  // const [loading, setLoading] = React.useState(false)
-
-  // const handleOpenModal = (id: string) => {
-  //   setOpenModal()
-  //   const project = props.projects.find((item: any) => item.id === id)
-  //   setProject(project || {})
-  // }
-
-  // const handleOpenBlogModal = (item: any) => {
-  //   setOpenBlogModal()
-  //   setBlogId(item)
-  // }
-
   return (
     <main className="mt-4">
-      {/* {openModal && <ProjectModal open={openModal} handleClose={handleOpenModal} project={project} />}
-      {openBlogModal && <BlogModal blogItem={blogItem} open={openBlogModal} handleClose={handleOpenBlogModal}
-      />}
-      */}
       <Homepage projects={projects?.data} posts={posts} />
     </main>
   )

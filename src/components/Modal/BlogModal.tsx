@@ -18,10 +18,10 @@ const BlogModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
     <CustomModal
       open={open}
       handleClose={handleClose}
-      width={isMobile ? '100vw' : isTablet ? '80vw' : '60vw'}
-      height={isMobile ? '100vh' : isTablet ? '80vh' : '60vh'}
+      width={isMobile ? '100vw' : '1200px'}
+      height={isMobile ? '100vh' : '88vh'}
     >
-      <div className="grid grid-cols-1 gap-5 md:p-3 w-full h-full bg-gradient-to-br from-blue-100 to-white border border-red-600"
+      <div className="grid grid-cols-1 pb-3 gap-5 md:p-3 w-full h-full bg-[var(--bg)] to-white rounded-lg"
       >
         <div className="p-2 md:p-3 w-full overflow-y-auto">
           <h4 className="font-bold text-xl md:text-3xl text-center text-dark mb-2">{title}</h4>
@@ -32,7 +32,7 @@ const BlogModal = ({ open, handleClose, blogItem }: BlogModalProps) => {
             dangerouslySetInnerHTML={{ __html: content }}
             className="contents"
           ></div>
-          <div className="tags flex flex-wrap gap-2">
+          <div className="tags flex flex-wrap gap-2 my-3">
             {categories?.map((category: string) => (
               <span
                 key={category}

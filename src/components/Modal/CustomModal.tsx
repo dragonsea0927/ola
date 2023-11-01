@@ -139,7 +139,7 @@ interface CustomModalProps {
 const CustomModal = ({ open, handleClose, children, width, height }: CustomModalProps) => {
   return (
     <div
-      className={`fixed inset-0 ${open ? 'visible opacity-100' : 'invisible opacity-0'
+      className={`fixed inset-0 ${open ? 'visible opacity-100 border border-red-500 bg-gray-300' : 'invisible opacity-0'
         } transition-all duration-300 ease-in-out z-50`}
       onClick={handleClose}
     >
@@ -148,7 +148,7 @@ const CustomModal = ({ open, handleClose, children, width, height }: CustomModal
           } transition-all duration-300 ease-in-out`}
       >
         <div
-          className={`w-[${width}] h-[${height}] md:w-[${width}] lg:w-[${width}] bg-inherit rounded-lg p-8 flex flex-col gap-5 relative`}
+          className={`w-[${width}] h-[${height}] md:w-[${width}] lg:w-[${width}] bg-inherit rounded-lg p-2 flex flex-col gap-5 relative `}
           style={{ width: width, height: height }}
           onClick={(e) => e.stopPropagation()}
         >

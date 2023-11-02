@@ -51,7 +51,6 @@ const BottomNav = () => {
               </p>
             </div>
 
-            {/* <ScrollToView to='contact-form'> */}
             <div id='contact' className='flex-col items-center justify-center w-full lg:flex lg:flex-row-reverse lg:p-5 gap-[90px] lg:justify-between mt-5'>
               <ContactForm />
               <div className='hidden lg:flex lg:flex-col lg:gap-3 p-5 bg-white rounded-xl shadow-[rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px] lg:bg-[var(--contactBg)]'>
@@ -90,7 +89,6 @@ const BottomNav = () => {
                 </div>
               </div>
             </div>
-            {/* </ScrollToView> */}
           </div>
           <Copyright />
         </>

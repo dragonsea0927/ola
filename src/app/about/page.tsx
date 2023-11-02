@@ -1,9 +1,8 @@
 import React from 'react'
-import { AboutPage, Layout } from '@/components'
-import { About } from '@/types';
+import { AboutPage } from '@/components'
 
 const getAbout = async () => {
-  const res = await fetch('http://localhost:8000/api/v1/about')
+  const res = await fetch(`${process.env.API_URL}/about`)
 
   if (!res.ok) {
     throw new Error(res.statusText)
@@ -11,7 +10,6 @@ const getAbout = async () => {
 
   return res.json()
 }
-
 
 const AboutHomePage = async () => {
   const about = await getAbout()

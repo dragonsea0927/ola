@@ -35,7 +35,7 @@ const ProjectSection = ({ data, handleOpenModal }: props) => {
   };
 
   return (
-    <div data-aos="fade-up" data-aos-anchor-placement="top-center" className="md:px-2 pb-9 w-full mb-10">
+    <div id='portfolio' data-aos="fade-up" data-aos-anchor-placement="top-center" className="md:px-2 pb-9 w-full mb-10">
       <div className="w-full flex flex-col gap-2">
         <p className="info text-[var(--textColor)] text-center text-base md:text-xl font-light" data-aos="zoom-in-up" data-aos-duration="8000">
           Visit my portfolio for my latest projects

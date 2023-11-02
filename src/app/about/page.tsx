@@ -1,5 +1,11 @@
 import React from 'react'
 import { AboutPage } from '@/components'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About | Oladipupo Ishola',
+  description: 'About Oladipupo Ishola',
+}
 
 const getAbout = async () => {
   const res = await fetch(`${process.env.API_URL}/about`)

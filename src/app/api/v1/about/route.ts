@@ -1,11 +1,11 @@
-import type { NextApiRequest } from 'next'
+import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
 import { getAuthSession } from '@/utils/auth'
 import { responseReturn } from '../../route'
 
 
-export default async function handler(
-  req: NextApiRequest,
+export async function GET(
+  req: NextRequest,
 ) {
 
   try {
@@ -18,7 +18,7 @@ export default async function handler(
 }
 
 export async function POST(
-  req: NextApiRequest,
+  req: NextRequest,
 ) {
 
   const session: any = await getAuthSession();
@@ -37,11 +37,6 @@ export async function POST(
     return responseReturn(201, "About page created successfully", 'success', about)
 
   } catch (error: any) {
-    // res.status(500).json({
-    //   status: "error",
-    //   error: error?.message,
-    //   message: `Error adding about data to database ${error?.message}`,
-    // });
     return responseReturn(500, `Error adding about data to database ${error?.message}`, 'error')
   }
 }

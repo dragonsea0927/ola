@@ -1,16 +1,16 @@
 // /* eslint-disable react/no-unescaped-entities */
-// import React from 'react'
-// import { EditAboutForm } from '@/components'
-// import { styled } from '@mui/material'
-// import Typography from '@mui/material/Typography'
-// import AboutImage from './AboutImage'
-// import CurrentWork from './CurrentWork'
-// import AboutContent from './AboutContent'
-// import ResumeTabs from './ResumeTabs'
-// import { useSession } from 'next-auth/react';
-// import { About } from '@/types'
-// import { useMediaQuery } from '@/hooks'
-// import Image from 'next/image'
+'use client';
+
+import React from 'react'
+import { EditAboutForm } from '@/components'
+import AboutImage from './AboutImage'
+import CurrentWork from './CurrentWork'
+import AboutContent from './AboutContent'
+import ResumeTabs from './ResumeTabs'
+import { useSession } from 'next-auth/react';
+import { About } from '@/types'
+import { useMediaQuery } from '@/hooks'
+import Image from 'next/image'
 
 
 // const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -161,66 +161,69 @@
 //   },
 // }))
 
-// interface AboutPageProps {
-//   data: About[]
-// }
+interface AboutPageProps {
+  data: any
+}
 
 
 
-// const AboutPage = (props: AboutPageProps) => {
-//   const { data: session } = useSession()
-//   const [isEditable, setIsEditable] = React.useState(false)
-//   const { data } = props
-//   const { currentWorks, profileImgUrl } = data[0]
+const AboutPage = ({ data }: AboutPageProps) => {
+  const { data: session } = useSession()
+  const [isEditable, setIsEditable] = React.useState(false)
+  const aboutData: About = data?.data[0]
+  const { currentWorks, profileImgUrl } = aboutData
 
-//   const toggleEditable = () => {
-//     setIsEditable(!isEditable)
-//   }
-//   const userLoggedIn = session?.user?.email && session?.user?.role === 'admin'
-//   const isMobile = useMediaQuery('(max-width: 600px)')
+  const toggleEditable = () => {
+    setIsEditable(!isEditable)
+  }
 
-//   return (
-//       <AboutPageContainerStyling data-aos="fade-up" data-aos-duration="3000">
-//         <StyledTypography variant='h1' data-aos="zoom-in-up">I'm Ola.</StyledTypography>
-//         {isEditable && userLoggedIn ? (
-//           <>
-//             <EditAboutForm about={data} toggleEdit={toggleEditable} />
-//           </>
-//         ) : (
-//           <>
-//             <AboutInfoDiv data-aos="fade-up">
-//               {isMobile ? <Image src={profileImgUrl} alt='Ola' width={300} height={400} className='profile'/> : <AboutImage photo={profileImgUrl}/>}
-//               <div className='about'>
-//                 <AboutContent content={data} />
-//               </div>
-//             </AboutInfoDiv>
-//             <div className='current' data-aos="fade-up">
-//               <Typography variant='h2'>Currently working on</Typography>
-//               {currentWorks?.map((work, idx) => (
-//                 <CurrentWork
-//                   key={idx}
-//                   appImage={work.imageUrl}
-//                   year={work.date}
-//                   appTitle={work.name}
-//                   role={work.role}
-//                   appDescription={work.description}
-//                 />
-//               ))}
-//             </div>
-//             {userLoggedIn && <div className='btn-container'>
-//               <button type='button' className='editBtn' onClick={toggleEditable}>
-//                 Edit
-//               </button>
-//             </div>}
-//           </>
-//         )}
+  const userLoggedIn = session?.user?.email && session?.user?.role === 'admin'
+  const isMobile = useMediaQuery('(max-width: 600px)')
 
-//         <StyledResumeSection className='resume' data-aos="fade-up">
-//           <Typography variant='h2' className='sub-header' data-aos="fade-up">My Resume</Typography>
-//           <ResumeTabs />
-//         </StyledResumeSection>
-//       </AboutPageContainerStyling>
-//   )
-// }
+  return (
+    <main data-aos="fade-up" data-aos-duration="3000"
+      className='w-full flex flex-col md:mt-10'
+    >
+      <h1 className='text-center my-4 font-bold text-7xl md:text-8xl text-[var(--textColor)] md:mb-10' data-aos="zoom-in-up">{"I'm Ola."}</h1>
+      {isEditable && userLoggedIn ? (
+        <>
+          <EditAboutForm about={data} toggleEdit={toggleEditable} />
+        </>
+      ) : (
+        <>
+          <div className='w-[95%] flex flex-col gap-8 md:w-[100%] md:flex-row md:items-center md:gap-20' data-aos="fade-up">
+            {isMobile ? <Image src={profileImgUrl} alt='Ola' width={300} height={400} className='profile' /> : <AboutImage photo={profileImgUrl} />}
+            <div className='about'>
+              <AboutContent content={data} />
+            </div>
+          </div>
+          <div className='current w-[95%] my-8 mx-auto flex flex-col justify-between items-center md:w-[90%] md:my-12' data-aos="fade-up">
+            <h2 className='text-center my-8 mx-auto text-2xl md:text-5xl'>Currently working on</h2>
+            {currentWorks?.map((work, idx) => (
+              <CurrentWork
+                key={idx}
+                appImage={work.imageUrl}
+                year={work.date}
+                appTitle={work.name}
+                role={work.role}
+                appDescription={work.description}
+              />
+            ))}
+          </div>
+          {userLoggedIn && <div className='btn-container'>
+            <button type='button' className='editBtn' onClick={toggleEditable}>
+              Edit
+            </button>
+          </div>}
+        </>
+      )}
 
-// export default AboutPage
+      <div className='resume' data-aos="fade-up">
+        <h2 className='sub-header text-center my-8 mx-auto text-2xl md:text-5xl font-semibold' data-aos="fade-up">My Resume</h2>
+        <ResumeTabs />
+      </div>
+    </main>
+  )
+}
+
+export default AboutPage

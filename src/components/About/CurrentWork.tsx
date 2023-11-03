@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 interface CurrentWorkProps {
-  appImage: any
+  appImage: string
   appTitle: string
   appDescription: string
   link: string

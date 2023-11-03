@@ -19,7 +19,8 @@ export default function TopNav() {
       </div>
       <div className='hidden lg:flex gap-3 flex-1'>
         {socialLinks.map(({ id, path, icon }) => (
-          <Link href={path} key={id}>
+          <Link href={path} target='_blank'
+            rel='noopener noreferrer' key={id}>
             <CustomIcon icon={icon} className='h-6 w-6' />
           </Link>
         ))}

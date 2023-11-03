@@ -1,19 +1,13 @@
 'use client';
 
 import React from 'react';
-import { navItems } from '@/utils';
+import { navItems, socialLinks } from '@/utils';
 import Logo from './Logo';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import Link from 'next/link'
 import AdminRoutes from './AdminRoutes';
-import { FaLinkedinIn } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
-import { FaMediumM } from 'react-icons/fa';
-import { FaInstagram } from 'react-icons/fa';
-import { FaHashnode } from 'react-icons/fa6';
-import { FaThreads } from 'react-icons/fa6';
-import { BsGithub } from 'react-icons/bs';
+import CustomIcon from '../IconsComponent/CustomIcon';
 
 export default function TopNav() {
   const routePath = usePathname();
@@ -24,13 +18,11 @@ export default function TopNav() {
         <Logo />
       </div>
       <div className='hidden lg:flex gap-3 flex-1'>
-        <FaLinkedinIn className='w-6 h-6' />
-        <FaXTwitter className='w-6 h-6' />
-        <FaMediumM className='w-6 h-6' />
-        <FaInstagram className='w-6 h-6' />
-        <FaHashnode className='w-6 h-6' />
-        <FaThreads className='w-6 h-6' />
-        <BsGithub className='w-6 h-6' />
+        {socialLinks.map(({ id, path, icon }) => (
+          <Link href={path} key={id}>
+            <CustomIcon icon={icon} className='h-6 w-6' />
+          </Link>
+        ))}
       </div>
       <div className='flex flex-2 md:flex-1 gap-4 items-center text-base'>
         <ThemeToggle />

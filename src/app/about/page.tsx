@@ -8,7 +8,11 @@ export const metadata: Metadata = {
 }
 
 const getAbout = async () => {
-  const res = await fetch(`${process.env.API_URL}/about`)
+  const res = await fetch(`${process.env.API_URL}/about`, {
+    next: {
+      revalidate: 3600,
+    }
+  })
 
   if (!res.ok) {
     throw new Error(res.statusText)

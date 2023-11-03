@@ -40,7 +40,7 @@ const Hero = () => {
             href={`${process.env.NEXT_PUBLIC_RESUME_URL}`}
             target='_blank'
             rel='noopener noreferrer'
-            className='w-[200px] h-[45px] px-3 py-5 rounded-full leading-4 tracking-tighter shadow-lg flex items-center justify-center gap-10 text-base md:text-lg text-[var(--ctaText)] bg-[var(--cta)] border border-[var(--primary)] hover:bg-white hover:text-[var(--cta)] hover:border hover:border-[var(--cta)]'
+            className='w-[200px] h-[45px] px-3 py-5 rounded-full leading-4 tracking-tighter shadow-lg flex items-center justify-center gap-10 text-base md:text-lg text-[var(--ctaText)] bg-[var(--cta)] border border-[var(--primary)] hover:bg-[var(--cta)] hover:text-[var(--ctaText)] hover:border hover:border-[var(--cta)]'
           >Hire me</Link>
         </div>
       </div>

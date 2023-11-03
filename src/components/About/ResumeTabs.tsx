@@ -114,6 +114,7 @@ import Education from './Education';
 import WorkExperience from './WorkExperience';
 import Skills from './Skills';
 import Certification from './Certification';
+import TabPanel from '../Tabs/Tab';
 
 const ResumeTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -141,34 +142,24 @@ const ResumeTabs = () => {
     <div data-aos="fade-up">
       <div className="w-90 m-auto p-4 bg-transparent">
         <div className="w-full flex justify-center">
-          <div className="w-full flex-wrap flex">
+          <ul className="w-90 flex justify-center gap-5 mx-auto mt-5 md:mb-7 lg:mb-0">
             {resumeTabs.map((tab, index) => (
-              <div
-                key={tab.label}
-                className={`rounded ${activeTab === index ? 'rounded-md' : 'rounded'
-                  } transition-transform duration-300 ${activeTab === index ? 'bg-secondary-main' : 'bg-white'
-                  } ${activeTab === index ? 'text-white' : 'text-primary'
-                  } ${activeTab === index ? 'font-semibold' : 'font-normal'
-                  } w-280 px-6 py-6 m-2 ${activeTab === index ? 'shadow-md' : 'shadow'
-                  } cursor-pointer hover:bg-secondary-main hover:text-white hover:font-semibold hover:scale-110`}
-                onClick={(e) => handleChange(e, index)}
-              >
-                {tab.label}
-              </div>
+              <li key={tab.label} className='list-none'>
+                <button
+                  onClick={(e) => handleChange(e, index)}
+                  className={`px-4 py-2 border border-[var(--cta)] hover:bg-[var(--cta)] hover:text-[var(--ctaText)] rounded-full ${activeTab === index ? 'bg-[var(--btnMode)] text-white' : 'text-primary'}`}
+                >
+                  {tab.label}
+                </button>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
       {resumeTabs.map((tab, index) => (
-        <div key={tab.label}>
-          <div
-            value={activeTab}
-            index={index}
-            style={{ display: activeTab === index ? 'block' : 'none' }}
-          >
-            {switchTab(tab.value)}
-          </div>
-        </div>
+        <TabPanel key={tab.label} value={activeTab} index={index}>
+          {switchTab(tab.value)}
+        </TabPanel>
       ))}
     </div>
   );

@@ -51,20 +51,19 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
         enableBreakPoint={true}
         verticalBreakPoint={400}
         theme={{
-          primary: '#253E66',
-          secondary: 'white',
-          cardBgColor: 'white',
-          // cardSubtitleColor: theme.palette.secondary.main,
-          // cardTitleColor: theme.text.primary,
-          // titleColor: theme.text.primary,
-          // titleColorActive: theme.palette.secondary.main,
-          // nestedCardBgColor: theme.palette.background.default,
+          primary: 'var(--primary)',
+          secondary: 'var(--bg)',
+          cardBgColor: 'var(--contactBg)',
+          cardSubtitleColor: 'var(--textColor)',
+          cardTitleColor: 'var(--textColor)',
+          titleColor: 'var(--textColor)',
+          titleColorActive: 'var(--primary)',
+          nestedCardBgColor: 'var(--contactBg)',
         }}
         cardWidth={600}
         useReadMore={true}
         borderLessCards={true}
         activeItemIndex={0}
-        // darkMode={theme.palette.mode === 'dark'}
         nestedCardHeight={200}
         fontSizes={{
           cardSubtitle: '0.9rem',

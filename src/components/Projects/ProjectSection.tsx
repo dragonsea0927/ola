@@ -59,12 +59,12 @@ const ProjectSection = ({ data, handleOpenModal }: props) => {
         </div>
 
         <div data-aos="fade-up" data-aos-duration="3000" className='hidden md:block'>
-          <ul className="w-90p flex justify-center gap-5 mx-auto mt-10 md:mb-7 lg:mb-0">
+          <ul className="w-90 flex justify-center gap-5 mx-auto mt-10 md:mb-7 lg:mb-0">
             {tabs.map((tab, index) => (
               <li key={tab.label}>
                 <button
                   onClick={() => handleChange(null, index)}
-                  className={`px-4 py-2 border border-[var(--cta)] hover:bg-primary hover:text-white rounded-full ${activeTab === index ? 'bg-[var(--btnMode)] text-white' : 'text-primary'}`}
+                  className={`px-4 py-2 border border-[var(--cta)] hover:bg-[var(--cta)] hover:text-[var(--ctaText)]  rounded-full ${activeTab === index ? 'bg-[var(--btnMode)] text-white' : 'text-primary'}`}
                 >
                   {tab.label}
                 </button>

@@ -96,6 +96,7 @@ export type currentWork = {
   role: string,
   description: string,
   imageUrl: string,
+  link: string,
   date: string,
 }
 

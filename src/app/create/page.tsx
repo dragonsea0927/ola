@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
-import { Toast } from '@/components'
-import { styled } from '@mui/material'
-import Typography from '@mui/material/Typography';
+// import { Toast } from '@/components'
+// import { styled } from '@mui/material'
+// import Typography from '@mui/material/Typography';
 import { useSession } from 'next-auth/react';
 import { AccessDenied } from '@/components'
 import { useRouter } from 'next/router'
@@ -150,39 +150,32 @@ const CreateHomePage: React.FC<Project> = (props) => {
               control={control}
               name='name'
               placeholder='Project Name'
-              label='Project Name'
-              sx={{ width: '100%' }}
-              size='small'
+              width={'100%'}
               inputProps={register('name')}
             />
             <ControllInput
               control={control}
-              label="Tag"
               name='tag'
               placeholder='e.g frontend, backend, fullstack, etc'
               size='small'
-              sx={{ width: '100%' }}
+              width={'100%'}
               inputProps={register('tag')}
             />
           </InputBoxStyles>
           <InputBoxStyles>
             <ControllInput
               control={control}
-              label="Github URL"
               name='githubUrl'
               placeholder='Github URL'
-              size='small'
-              sx={{ width: '100%' }}
+              width={'100%'}
               inputProps={register('githubUrl')}
             />
 
             <ControllInput
               control={control}
-              label="Live URL"
               name='liveUrl'
               placeholder='Live URL'
-              size='small'
-              sx={{ width: '100%' }}
+              width={'100%'}
               inputProps={register('liveUrl')}
             />
 
@@ -191,7 +184,6 @@ const CreateHomePage: React.FC<Project> = (props) => {
           <InputBoxStyles>
             <ControllInput
               control={control}
-              label="cover image URL"
               name='coverImgUrl'
               placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
               size='small'
@@ -201,7 +193,6 @@ const CreateHomePage: React.FC<Project> = (props) => {
 
             <ControllInput
               control={control}
-              label="Modal image URL"
               name='modalImgUrl'
               placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
               size='small'
@@ -211,7 +202,6 @@ const CreateHomePage: React.FC<Project> = (props) => {
           </InputBoxStyles>
           <ControllInput
             control={control}
-            label="Stacks"
             name='stacks'
             placeholder='e.g React, Node, Express, MongoDB, etc'
             size='small'
@@ -220,12 +210,10 @@ const CreateHomePage: React.FC<Project> = (props) => {
 
           <ControllInput
             control={control}
-            label="Description"
             placeholder='e.g Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
             size='small'
             name='description'
-            multiline
-            rows={8}
+            type='textarea'
           />
 
           <div className='buttons'>

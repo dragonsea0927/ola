@@ -45,7 +45,7 @@ const Hero = () => {
         </div>
       </div>
       <div data-aos="fade-up" data-aos-duration="3000"
-        className='absolute bottom-5 flex p-0 gap-2 my-0 text-3xl md:flex-col md:gap-3 md:my-0 md:mx-0 md:mb-5 md:fixed md:right-0 md:bottom-0 md:z-10'
+        className='absolute bottom-5 flex p-0 gap-2 my-0 text-3xl md:flex-col md:gap-3 md:my-0 md:mx-0 md:mb-8 md:fixed md:right-0 md:bottom-0 md:z-10'
       >
         {socialLinks.map((link) => (
           <Link

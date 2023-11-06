@@ -9,8 +9,8 @@ const ScrollToTop = () => {
   const [atTop, setAtTop] = useState(true);
 
   const scrollTop = React.useCallback(() => {
-    scroll.scrollToTop();
-  }, []);
+    showScroll ? scroll.scrollToTop() : atTop ? scroll.scrollToBottom() : scroll.scrollToTop();
+  }, [atTop, showScroll]);
 
   useEffect(() => {
     const checkScrollTop = () => {

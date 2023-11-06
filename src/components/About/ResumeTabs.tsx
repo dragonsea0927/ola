@@ -142,7 +142,7 @@ const ResumeTabs = () => {
     <div data-aos="fade-up">
       <div className="w-90 m-auto p-4 bg-transparent">
         <div className="w-full flex justify-center">
-          <ul className="w-90 flex justify-center gap-5 mx-auto mt-5 md:mb-7 lg:mb-0">
+          <ul className="w-90 flex flex-col items-center md:flex-row justify-center gap-5 mx-auto mt-5 md:mb-7 lg:mb-0">
             {resumeTabs.map((tab, index) => (
               <li key={tab.label} className='list-none'>
                 <button

@@ -4,7 +4,7 @@ import { educationItems as items } from '@/utils'
 
 const Education = () => {
   return (
-    <main className='w-full my-12 mx-auto md:w-1/2' data-aos="zoom-in-up">
+    <main className='w-full md:h-[90%] my-12 md:mx-auto' data-aos="zoom-in-up">
       <Timeline
         items={items}
         mode='VERTICAL_ALTERNATING'

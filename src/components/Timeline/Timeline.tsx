@@ -1,9 +1,7 @@
 'use client'
 
 import React from 'react';
-// import { styled } from '@mui/material/styles';
 import { Chrono } from 'react-chrono';
-import { useMediaQuery } from '@/hooks';
 
 interface TimelineItem {
   title?: string;
@@ -19,21 +17,9 @@ interface TimelineProps {
   mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING';
 }
 
-// const StyledTimelineContainer = styled('div')(({ theme }) => ({
-//   width: "90%",
-//   height: "",
-//   margin: '0 auto',
-
-//   [theme.breakpoints.down('sm')]: {
-//     width: '100%',
-//   },
-// }));
-
 const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  // const theme = useAppTheme()
   return (
-    <div className='w-full md:w-[90%] my-0 mx-auto'>
+    <div className='w-full md:w-[90%] my-0 md:mx-auto'>
       <Chrono
         items={items.map((item) => ({
           title: '',
@@ -50,17 +36,19 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
         enableOutline={false}
         enableBreakPoint={true}
         verticalBreakPoint={400}
+        hideControls={true}
         theme={{
           primary: 'var(--primary)',
           secondary: 'var(--bg)',
           cardBgColor: 'var(--contactBg)',
-          cardSubtitleColor: 'var(--textColor)',
-          cardTitleColor: 'var(--textColor)',
-          titleColor: 'var(--textColor)',
+          cardSubtitleColor: 'var(--primary)',
+          cardTitleColor: 'var(--primary)',
+          titleColor: 'var(--primary)',
           titleColorActive: 'var(--primary)',
           nestedCardBgColor: 'var(--contactBg)',
+          detailsColor: 'var(--textColor)',
         }}
-        cardWidth={600}
+        cardWidth={700}
         useReadMore={true}
         borderLessCards={true}
         activeItemIndex={0}

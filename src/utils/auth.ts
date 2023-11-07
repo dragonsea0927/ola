@@ -12,6 +12,9 @@ export const authOptions: NextAuthOptions = {
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: '/auths/signin',
+  },
   callbacks: {
     jwt: async ({ token, profile, account, user, }: any) => {
       if (user && user.idToken) {

@@ -2,9 +2,9 @@ import AuthProvider from '@/providers/AuthProvider'
 import { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import './global.scss'
-import { Layout } from '@/components'
 import AnimationProvider from '@/providers/AnimationProvider';
 import AppThemeProvider from '@/providers/AppThemeProvider';
+import App from '@/components/app/App'
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 
@@ -27,9 +27,9 @@ export default function RootLayout({
             <AppThemeProvider>
               <main className='container'>
                 <div className='wrapper'>
-                  <Layout>
+                  <App>
                     {children}
-                  </Layout>
+                  </App>
                 </div>
               </main>
             </AppThemeProvider>

@@ -6,6 +6,8 @@ import { NextAuthOptions, getServerSession } from 'next-auth';
 export const authOptions: NextAuthOptions = {
   providers: [
     GitHubProvider({
+      id: 'github',
+      name: 'GitHub',
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),

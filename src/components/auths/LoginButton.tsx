@@ -8,17 +8,15 @@ import { useRouter, usePathname } from 'next/navigation'
 export default function LoginButton() {
   const router = useRouter();
   const pathname = usePathname();
-  const routes = ['/admin/create', '/admin/projects']
-  const adminRoutes = pathname.includes(routes[0]) || pathname.includes(routes[1])
 
   const handleLogin = async (provider: string) => {
     try {
-      const res = await signIn(provider, { callbackUrl: adminRoutes ? '/admin/create' : '/' });
+      const res = await signIn(provider, { callbackUrl: 'http://localhost:8000/admin/dashboard' });
 
       if (res?.error) {
         throw new Error(res.error);
       } else {
-        router.push('/admin/create');
+        router.push('/admin/dashboard');
       }
     } catch (error: any) {
       console.log(error?.message);

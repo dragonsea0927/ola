@@ -133,39 +133,35 @@ const EditProjectPage: React.FC<Project> = (props) => {
             control={control}
             name='name'
             placeholder='Project Name'
-            label='Project Name'
-            sx={{ width: '100%' }}
+            width={'100%'}
             size='small'
             inputProps={register('name')}
           />
           <ControllInput
             control={control}
-            label="Tag"
             name='tag'
             placeholder='e.g frontend, backend, fullstack, etc'
             size='small'
-            sx={{ width: '100%' }}
+            width={'100%'}
             inputProps={register('tag')}
           />
         </InputBoxStyles>
         <InputBoxStyles>
           <ControllInput
             control={control}
-            label="Github URL"
             name='githubUrl'
             placeholder='Github URL'
             size='small'
-            sx={{ width: '100%' }}
+            width={'100%'}
             inputProps={register('githubUrl')}
           />
 
           <ControllInput
             control={control}
-            label="Live URL"
             name='liveUrl'
             placeholder='Live URL'
             size='small'
-            sx={{ width: '100%' }}
+            width={'100%'}
             inputProps={register('liveUrl')}
           />
 
@@ -174,27 +170,24 @@ const EditProjectPage: React.FC<Project> = (props) => {
         <InputBoxStyles>
           <ControllInput
             control={control}
-            label="cover image URL"
             name='coverImgUrl'
             placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
             size='small'
-            sx={{ width: '100%' }}
+            width={'100%'}
             inputProps={register('coverImgUrl')}
           />
 
           <ControllInput
             control={control}
-            label="Modal image URL"
             name='modalImgUrl'
             placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
             size='small'
-            sx={{ width: '100%' }}
+            width={'100%'}
             inputProps={register('modalImgUrl')}
           />
         </InputBoxStyles>
         <ControllInput
           control={control}
-          label="Stacks"
           name='stacks'
           placeholder='e.g React, Node, Express, MongoDB, etc'
           size='small'
@@ -203,12 +196,10 @@ const EditProjectPage: React.FC<Project> = (props) => {
 
         <ControllInput
           control={control}
-          label="Description"
           placeholder={`${props?.project?.name} is an app for ...`}
           size='small'
           name='description'
-          multiline
-          rows={8}
+          type='textarea'
         />
 
         <div className='buttons'>

@@ -6,17 +6,17 @@ export default function middleware(req: NextRequest) {
   const isOnAdminPage = req.nextUrl?.pathname.startsWith('/admin');
   console.log(isOnAdminPage);
 
-  if (isOnAdminPage) {
-    if (isLoggedIn) return NextResponse.next()
-    return NextResponse.redirect(new URL('/auths/signin', req.nextUrl))
-  } else if (isLoggedIn) {
-    return NextResponse.redirect(new URL('/admin', req.nextUrl))
-  }
+  // if (isOnAdminPage) {
+  //   if (isLoggedIn) return NextResponse.next()
+  //   return NextResponse.redirect(new URL('/auths/signin', req.nextUrl))
+  // } else if (isLoggedIn) {
+  //   return NextResponse.redirect(new URL('/admin', req.nextUrl))
+  // }
   return NextResponse.next()
 }
 
 
 export const config = {
-  matcher: ['/admin/:path*',],
+  // matcher: ['/admin/:path*',],
   // matcher: ['/((?!api|_next/static|_next/image|.png).*)'],
 }

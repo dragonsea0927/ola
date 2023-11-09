@@ -88,7 +88,7 @@ export const socialLinks: SocialLinks = [
   {
     id: 8,
     title: 'Dev.to',
-    path: 'https://dev.to/olaishola05',
+    path: 'https://www.threads.net/@olaishola05',
     icon: FaThreads
   },
 ];

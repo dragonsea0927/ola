@@ -1,31 +1,19 @@
-// 'use client'
+import { Project } from '@/types'
+import React from 'react'
+import Draft from './Draft'
 
-// import { Project } from '@/types'
-// import React from 'react'
-// import Draft from './Draft'
-// import { styled } from '@mui/material/styles'
+interface Props {
+  projects: Project[]
+}
 
-// interface Props {
-//   projects: Project[]
-// }
+const Drafts = ({ projects }: Props) => {
+  return (
+    <main className='w-full grid gap-5 p-5 grid-cols-3'>
+      {projects.map((project) => (
+        <Draft key={project?.id} project={project} />
+      ))}
+    </main>
+  )
+}
 
-// const StyledDrafts = styled('div')(({ theme }) => ({
-//   width: '100%',
-//   display: 'grid',
-//   padding: '20px',
-//   gridTemplateColumns: 'repeat(3, 430px)',
-//   gridGap: '20px',
-// }))
-
-
-// const Drafts = ({ projects }: Props) => {
-//   return (
-//     <StyledDrafts>
-//       {projects.map((project) => (
-//         <Draft key={project?.id} project={project} />
-//       ))}
-//     </StyledDrafts>
-//   )
-// }
-
-// export default Drafts
+export default Drafts

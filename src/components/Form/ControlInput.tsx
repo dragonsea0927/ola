@@ -9,7 +9,7 @@ interface Props {
   width?: any;
   placeholder?: string;
   type?: string;
-  inputProps?: any;
+  inputprops?: any;
   size?: any;
   error?: string;
 }

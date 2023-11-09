@@ -33,7 +33,7 @@ const CardContentContainer = ({ children }: React.PropsWithChildren<{}>) => (
 const CardMediaTop = ({ name, role, duration }: { name: string; role?: string; duration?: string }) => (
   <div className="flex flex-row items-center justify-between mb-3">
     <h6 className="text-[var(--textColor)] font-semibold text-base md:text-lg py-1 px-0 md:p-0 capitalize">{name}</h6>
-    <p className="text-[var(--textColor)]">
+    <div className="text-[var(--textColor)]">
       {duration ? (
         <div className="flex items-center gap-2">
           <AccessTimeSharpIcon className="text-base md:text-lg" />
@@ -42,7 +42,7 @@ const CardMediaTop = ({ name, role, duration }: { name: string; role?: string; d
       ) : (
         <span className='text-base font-medium capitalize'>{role ? role[0].toUpperCase() + role.slice(1) : ''}</span>
       )}
-    </p>
+    </div>
   </div>
 );
 

@@ -48,15 +48,12 @@ const Hero = () => {
         className='absolute bottom-5 flex p-0 gap-2 my-0 text-3xl md:flex-col md:gap-3 md:my-0 md:mx-0 md:mb-8 md:fixed md:right-0 md:bottom-0 md:z-10'
       >
         {socialLinks.map((link) => (
-          <Link
+          <div
             key={link.id}
-            href={link.path}
-            target='_blank'
-            rel='noopener noreferrer'
             data-aos="zoom-in-up" data-aos-duration="8000"
           >
             <Icons link={link} />
-          </Link>
+          </div>
         ))}
       </div>
     </main>

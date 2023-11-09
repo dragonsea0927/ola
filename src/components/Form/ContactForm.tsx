@@ -50,7 +50,7 @@ const ContactForm = () => {
                 control={control}
                 name="name"
                 placeholder="e.g John Doe"
-                inputProps={register('name')}
+                inputprops={register('name')}
                 width={'100%'}
                 error={errors.name?.message}
               />
@@ -62,7 +62,7 @@ const ContactForm = () => {
                 control={control}
                 name="number"
                 placeholder="e.g +2348012345678"
-                inputProps={register('number')}
+                inputprops={register('number')}
                 width={'100%'}
                 error={errors.number?.message}
               />
@@ -76,7 +76,7 @@ const ContactForm = () => {
             control={control}
             name="email"
             placeholder="e.g youremail@something.com"
-            inputProps={register('email')}
+            inputprops={register('email')}
             width={'100%'}
             error={errors.email?.message}
           />
@@ -89,7 +89,7 @@ const ContactForm = () => {
             control={control}
             name="subject"
             placeholder="e.g I want to hire you"
-            inputProps={register('subject')}
+            inputprops={register('subject')}
             width={'100%'}
             error={errors.subject?.message}
           />
@@ -102,7 +102,7 @@ const ContactForm = () => {
             name="message"
             type='textarea'
             placeholder='Say hello!'
-            inputProps={register('message')}
+            inputprops={register('message')}
             width={'100%'}
             error={errors.message?.message}
           />

@@ -1,9 +1,9 @@
 import prisma from '@/lib/prisma'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import { getAuthSession } from '@/utils/auth';
 import { responseReturn } from '@/app/api/route';
 
-export default async function PUT(
+export default async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {

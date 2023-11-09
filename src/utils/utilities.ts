@@ -175,15 +175,6 @@ export const projectsFilter = (projects: Project[], tag: string) => {
   return projects?.filter((project) => project.tag === tag);
 }
 
-// export function scrollToViewMethod(id: string) {
-//   scroller.scrollTo(id, {
-//     duration: 1500,
-//     delay: 100,
-//     smooth: 'easeOutCubic',
-//     offset: 50,
-//   })
-// }
-
 export const resumeTabs: TabArray = [
   {
     label: 'Education',

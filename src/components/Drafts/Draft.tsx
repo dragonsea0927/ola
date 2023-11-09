@@ -9,36 +9,6 @@ type Props = {
   project: Project
 }
 
-// const StyledDraft = styled('div')(({ theme }) => ({
-//   cursor: 'pointer',
-//   padding: '20px',
-//   borderRadius: '5px',
-//   boxShadow: 'rgb(209, 217, 230) 5px 5px 15px 0px, rgb(255, 255, 255) -5px -5px 15px 0px',
-//   img: {
-//     width: '100%',
-//     objectFit: 'fill',
-//     borderRadius: '5px',
-//   },
-
-//   div: {
-//     display: 'flex',
-//     ailgnItems: 'center',
-//     justifyContent: 'space-between',
-
-//     p: {
-//       textTransform: 'capitalize'
-//     }
-//   },
-
-//   '&:hover': {
-//     transform: 'scale(1)',
-
-//     img: {
-//       transform: 'scale(1.1)',
-//     }
-//   }
-// }))
-
 function Draft({ project }: Props) {
   const { navigate } = useNavigation()
   const [published, setPublished] = React.useState(project?.published)

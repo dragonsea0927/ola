@@ -1,46 +1,9 @@
 import React from 'react'
-import { Drafts, Status } from '@/components'
+import { Drafts } from '@/components'
 import prisma from '@/lib/prisma';
-import { Project } from '@/types';
-import Link from 'next/link';
 import { getAuthSession } from '@/utils/auth';
 import CreateButton from '@/components/Button/CreateProjectBtn';
 import Noprojects from '@/components/Projects/NoProject';
-
-
-// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-//   const session = await getSession({ req })
-
-//   if (!session) {
-//     res.statusCode = 403
-//     return {
-//        { projects: [] }
-//     }
-//   }
-
-//   const projects = await prisma.project.findMany({
-//     where: {
-//       author: {
-//         email: session?.user?.email
-//       },
-//     },
-//     include: {
-//       author: {
-//         select: {
-//           name: true,
-//         }
-//       }
-//     }
-//   })
-
-//   return {
-//     props: { projects: JSON.parse(JSON.stringify(projects)) }
-//   }
-// }
-
-type Props = {
-  projects: Project[]
-}
 
 const getProjects = async (email: string) => {
   const res = await prisma.project.findMany({

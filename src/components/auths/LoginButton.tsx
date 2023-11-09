@@ -12,10 +12,11 @@ export default function LoginButton() {
   const handleLogin = async (provider: string) => {
     try {
       const res = await signIn(provider, {
-        callbackUrl: `${process.env.NEXT_PUBLIC_URL}/admin/dashboard`
+        callbackUrl: `${process.env.NEXT_PUBLIC_URL}`
       });
 
       if (res?.error) {
+        console.log(res.error);
         throw new Error(res.error);
       } else {
         router.push('/admin/dashboard');

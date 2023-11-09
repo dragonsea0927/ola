@@ -22,7 +22,6 @@ export default function AdminRoutes() {
       <Link href='/auth/signin' className='cursor-pointer hidden'>Login</Link>
     ) : (
       <React.Fragment>
-        <Link href='/create' className='cursor-pointer'>New Project</Link>
         <span className='cursor-pointer' onClick={handleLogout}>Logout</span>
       </React.Fragment>
     )}

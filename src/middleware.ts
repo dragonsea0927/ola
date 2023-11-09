@@ -1,10 +1,10 @@
 import { NextResponse, NextRequest } from "next/server"
 
 export default function middleware(req: NextRequest) {
-  const isLoggedIn = !!req.cookies.get('token')
-  console.log(isLoggedIn);
-  const isOnAdminPage = req.nextUrl?.pathname.startsWith('/admin');
-  console.log(isOnAdminPage);
+  // const isLoggedIn = !!req.cookies.get('token')
+  // console.log(isLoggedIn, 'isLoggedIn');
+  // const isOnAdminPage = req.nextUrl?.pathname.startsWith('/admin');
+  // console.log(isOnAdminPage, 'isOnAdminPage');
 
   // if (isOnAdminPage) {
   //   if (isLoggedIn) return NextResponse.next()

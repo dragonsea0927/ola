@@ -11,7 +11,9 @@ export default function LoginButton() {
 
   const handleLogin = async (provider: string) => {
     try {
-      const res = await signIn(provider, { callbackUrl: 'http://localhost:8000/admin/dashboard' });
+      const res = await signIn(provider, {
+        callbackUrl: `${process.env.NEXT_PUBLIC_URL}/admin/dashboard`
+      });
 
       if (res?.error) {
         throw new Error(res.error);

@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { getAuthSession } from '@/utils/auth';
 import DashBoardSidebar from './DashBoardSidebar';
 
@@ -21,7 +20,6 @@ export default async function DashboardLayout({ children }: Props) {
         <p className='absolute right-2 top-2'>Welcome {session?.user?.name}</p>
         {children}
       </section>
-
     </div>
   )
 }

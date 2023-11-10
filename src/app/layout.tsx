@@ -5,6 +5,7 @@ import './global.scss'
 import AnimationProvider from '@/providers/AnimationProvider';
 import AppThemeProvider from '@/providers/AppThemeProvider';
 import App from '@/components/app/App'
+import { Toaster } from 'react-hot-toast';
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 
@@ -29,6 +30,7 @@ export default function RootLayout({
                 <div className='wrapper'>
                   <App>
                     {children}
+                    <Toaster />
                   </App>
                 </div>
               </main>

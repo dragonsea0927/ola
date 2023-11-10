@@ -32,6 +32,7 @@
     "react-chrono": "^2.1.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
     "react-scroll": "^1.8.9",
     "react-type-animation": "^3.0.1",

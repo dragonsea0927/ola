@@ -2,6 +2,7 @@ import React from 'react'
 import { CustomCard } from '..'
 import { Project } from '@/types'
 import ProjectsContainer from './ProjectsContainer'
+import EmptyProject from './EmptyProject';
 
 type props = {
   data: any;
@@ -11,7 +12,7 @@ type props = {
 const AllProjects = ({ data, handleOpenModal }: props) => {
 
   if (data.length === 0) {
-    return <div>Cooking up something! :)</div>
+    return <EmptyProject />
   }
   return (
     <div className='h-full'>
@@ -19,7 +20,7 @@ const AllProjects = ({ data, handleOpenModal }: props) => {
         {data?.map((item: Project) => (
           <CustomCard
             key={item.id}
-            image={item.modalImgUrl}
+            image={item.coverImgUrl}
             overlayText='View Project'
             name={item.name}
             role={item.tag}

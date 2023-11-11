@@ -10,7 +10,7 @@ const getProjects = async (email: string) => {
     where: {
       author: {
         email: email
-      }
+      },
     },
     include: {
       author: {

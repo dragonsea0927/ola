@@ -48,7 +48,7 @@ const ProjectSection = ({ data, handleOpenModal }: props) => {
           {data?.map((project: any) => (
             <CustomCard
               key={project.id}
-              image={project.modalImgUrl}
+              image={project.coverImgUrl}
               overlayText="View Project"
               name={project.name}
               role={project.tag}

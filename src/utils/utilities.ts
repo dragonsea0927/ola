@@ -136,6 +136,7 @@ export const sendDataToBackend = async (data: Project) => {
     })
     return res;
   } catch (error: any) {
+    // console.log(error)
     return error?.response?.data?.message
   }
 }

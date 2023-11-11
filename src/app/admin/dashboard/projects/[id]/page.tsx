@@ -1,7 +1,6 @@
 import React from 'react'
 import { CustomButton } from '@/components'
 import prisma from '@/lib/prisma';
-import { Project } from '@/types';
 import { BsGithub as GitHubIcon } from 'react-icons/bs';
 import { BiLinkExternal as LinkIcon } from 'react-icons/bi';
 import Image from 'next/image'
@@ -16,122 +15,7 @@ interface Props {
   }
 }
 
-// const ProjsctContent = styled(Grid)(({ theme }) => ({
-//   width: '85%',
-//   height: '100%',
-//   display: 'grid',
-//   gridTemplateColumns: 'repeat(2, 1fr)',
-//   gap: '20px',
-//   padding: 20,
-//   margin: '100px auto',
-//   backgroundColor: 'white',
-//   borderRadius: '8px',
-//   [theme.breakpoints.down('sm')]: {
-//     gridTemplateColumns: 'repeat(1, 1fr)',
-//   },
-
-//   [theme.breakpoints.up('md')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-//   [theme.breakpoints.up('lg')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-// }))
-
-// const ProjectImage = styled('div')(({ theme }) => ({
-//   img: {
-//     width: 545,
-//     height: 408,
-//     borderRadius: '10px',
-//   },
-//   [theme.breakpoints.down('sm')]: {
-//     padding: '16px',
-//   },
-
-//   [theme.breakpoints.up('md')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-//   [theme.breakpoints.up('lg')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-// }))
-
-// const ProjectDetails = styled('div')(({ theme }) => ({
-//   display: 'flex',
-//   flexDirection: 'column',
-//   padding: '10px',
-
-//   h4: {
-//     fontSize: '35px',
-//     fontWeight: 600,
-//     marginBottom: '18px',
-//   },
-//   button: {
-//     '&:hover': {
-//       transition: '0.4s',
-//       transform: 'scale(1.04)',
-//       zIndex: 1,
-//       boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
-//     },
-//   },
-
-//   p: {
-//     fontSize: '18px',
-//     lineHeight: '25px',
-//     fontWeight: 400,
-//     marginBottom: '18px',
-//   },
-
-//   '.btn-container': {
-//     display: 'flex',
-//     flexDirection: 'row',
-//     gap: '20px',
-//   },
-
-//   [theme.breakpoints.down('sm')]: {
-//     padding: '16px',
-//   },
-
-//   [theme.breakpoints.up('md')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-//   [theme.breakpoints.up('lg')]: {
-//     display: { xs: 'none', sm: 'none', md: 'block' },
-//   },
-
-// }))
-
-// const BtnContainer = styled('div')(({ theme }) => ({
-//   width: '500px',
-//   display: 'flex',
-//   flexDirection: 'row',
-//   gap: '20px',
-//   margin: '0 auto',
-
-//   button: {
-//     width: '180px',
-//     padding: '10px 20px',
-//     fontSize: '18px',
-//     borderRadius: '8px',
-//     border: 'none',
-//     outline: 'none',
-//     cursor: 'pointer',
-//     color: theme.palette.secondary.main,
-//     backgroundColor: theme.white.main,
-//     '&:hover': {
-//       transition: '0.4s',
-//       transform: 'scale(1.04)',
-//       zIndex: 1,
-//       boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
-//     },
-
-//   }
-// }))
+export const revalidate = 20;
 
 const getProject = async (id: string) => {
   const res = await prisma.project.findUnique({

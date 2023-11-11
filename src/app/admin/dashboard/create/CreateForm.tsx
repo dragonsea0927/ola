@@ -1,13 +1,13 @@
+
 'use client';
 
-import React, { ReactNode } from 'react'
-import { useForm } from 'react-hook-form'
-import { ControllInput } from '@/components'
-import { Project } from '@/types'
-import { updateProject } from '@/utils'
-import { redirect } from 'next/navigation'
-import EditBottom from '../EditBottom'
-import { errorToast, successToast } from '@/components/Toast/Toast';
+import React, { ReactNode, useCallback, useState } from 'react'
+import { sendDataToBackend } from '@/utils';
+import { useForm } from 'react-hook-form';
+import { ControllInput } from '@/components';
+import { Project } from '@/types';
+import { tailwindToast } from '@/components/Toast/Toast';
+
 
 const InputBoxStyles = ({ children }: { children: ReactNode }) => (
   <div className='flex gap-3'>
@@ -15,32 +15,51 @@ const InputBoxStyles = ({ children }: { children: ReactNode }) => (
   </div>
 )
 
-export default function EditForm({ project }: { project: Project }) {
+export default function CreateForm() {
+  const [responseOk, setResponseOk] = useState<boolean>(false);
   const { register, handleSubmit, control, reset, formState: { isSubmitting } } = useForm<Project>({
     mode: 'onBlur',
-    defaultValues: project,
+    defaultValues: {
+      name: '',
+      description: '',
+      githubUrl: '',
+      liveUrl: '',
+      stacks: [],
+      coverImgUrl: '',
+      modalImgUrl: '',
+      tag: '',
+    },
   })
 
+  const handleReset = useCallback(() => {
+    tailwindToast('info', 'Resetting form...', '', '')
+    reset();
+  }, [reset])
+
   const onSubmit = async (data: Project) => {
-    const newStacks = data.stacks.toString().split(',').map((item) => item.trim())
-    const updatedData: Project = {
+    const newData: Project = {
       ...data,
-      stacks: newStacks,
+      stacks: data?.stacks?.toString().split(',').map((item: string) => item.trim()),
     }
-    const res = await updateProject(project?.id, updatedData)
-    if (res?.status === 200 || res?.status === 'success') {
-      console.log(res);
-      successToast(res?.message)
-      redirect(`/admin/dashboard/projects/${project.id}`)
+    const res = await sendDataToBackend(newData)
+    if (res?.status === 201) {
+      tailwindToast('success', `${res?.data.message}`, '', '')
+      setResponseOk(!responseOk)
     } else {
-      console.log(res)
-      errorToast(res?.message)
+      tailwindToast('error', `Oops! ${res}`, '', '')
     }
   }
+
+  React.useEffect(() => {
+    if (responseOk) {
+      handleReset();
+    }
+  }, [responseOk, reset, handleReset]);
+
   return (
     <>
       <form
-        className='w-11/12 my-[100px] mx-auto flex flex-col gap-3'
+        className='w-full my-[50px] p-3 bg-[var(--bg)] mx-auto flex flex-col gap-3'
         onSubmit={handleSubmit(onSubmit)}
       >
         <InputBoxStyles>
@@ -49,7 +68,6 @@ export default function EditForm({ project }: { project: Project }) {
             name='name'
             placeholder='Project Name'
             width={'100%'}
-            size='small'
             inputprops={register('name')}
           />
           <ControllInput
@@ -66,18 +84,18 @@ export default function EditForm({ project }: { project: Project }) {
             control={control}
             name='githubUrl'
             placeholder='Github URL'
-            size='small'
             width={'100%'}
             inputprops={register('githubUrl')}
+            required={false}
           />
 
           <ControllInput
             control={control}
             name='liveUrl'
             placeholder='Live URL'
-            size='small'
             width={'100%'}
             inputprops={register('liveUrl')}
+            required={false}
           />
 
         </InputBoxStyles>
@@ -86,7 +104,7 @@ export default function EditForm({ project }: { project: Project }) {
           <ControllInput
             control={control}
             name='coverImgUrl'
-            placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
+            placeholder='cover image url'
             size='small'
             width={'100%'}
             inputprops={register('coverImgUrl')}
@@ -95,7 +113,7 @@ export default function EditForm({ project }: { project: Project }) {
           <ControllInput
             control={control}
             name='modalImgUrl'
-            placeholder='e.g https://images.unsplash.com/photo-1626120000000-0000'
+            placeholder='modal image url'
             size='small'
             width={'100%'}
             inputprops={register('modalImgUrl')}
@@ -111,13 +129,27 @@ export default function EditForm({ project }: { project: Project }) {
 
         <ControllInput
           control={control}
-          placeholder={`${project?.name} is an app for ...`}
+          placeholder='e.g Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
           size='small'
           name='description'
           type='textarea'
         />
 
-        <EditBottom project={project} reset={reset} register={register} isSubmitting={isSubmitting} />
+        <div className='w-full flex gap-4 justify-center mt-3'>
+          <button
+            type="submit"
+            disabled={!register}
+            className='w-[30%] p-2 bg-[var(--cta)] text-[var(--ctaText)] rounded-md self-center text-lg hover:cursor-pointer'
+          >
+            {isSubmitting ? 'Submitting...' : 'Create'}
+          </button>
+
+          <button
+            type='button'
+            className='w-[30%] p-2 bg-white text-[var(--primary)] rounded-md self-center text-lg border border-[var(--primary)] hover:cursor-pointer cancel'
+            onClick={() => handleReset()}
+          >Cancel</button>
+        </div>
       </form>
     </>
   )

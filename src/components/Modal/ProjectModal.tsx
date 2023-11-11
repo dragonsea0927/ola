@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { BsGithub as GitHubIcon } from 'react-icons/bs';
 import { BiLinkExternal as LinkIcon } from 'react-icons/bi';
 import { useMediaQuery } from '@/hooks';
+import Link from 'next/link';
 
 interface ProjectModalProps {
   open: boolean
@@ -23,7 +24,7 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
       height={isMobile ? '96vh' : '512px'}
     >
       <div className="grid grid-cols-1 overflow-y-auto md:overflow-hidden lg:grid-cols-2 gap-3 md:gap-8 bg-[var(--bg)] px-5 py-5 lg:px-8 lg:py-10 rounded-lg w-full h-full">
-        <div className="w-full h-40 md:hidden lg:block lg:h-96 relative rounded-lg lg:mt-0">
+        <div className="w-full h-40 md:hidden lg:block lg:h-[350px] relative rounded-lg lg:mt-0">
           <Image
             src={project.modalImgUrl}
             alt="modal"
@@ -45,22 +46,29 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
             Tech Stacks: {project.stacks.join(', ')}
           </p>
           <div className="flex gap-4 items-center">
-            <CustomButton
-              variant="outlined"
-              color="primary"
-              width="w-40 md:w-44"
-              onClick={() => { }}
-            >
-              Live Demo <LinkIcon />
-            </CustomButton>
-            <CustomButton
-              variant="outlined"
-              color="primary"
-              width="w-40 md:w-44"
-              onClick={() => { }}
-            >
-              Source Code <GitHubIcon />
-            </CustomButton>
+            {project?.liveUrl && (
+              <CustomButton
+                variant='contained'
+                color='primary'
+                width='180px'
+              >
+                <Link className='flex gap-3 items-center' href={project?.liveUrl} target='_blank'>
+                  Live Demo <LinkIcon />
+                </Link>
+              </CustomButton>
+            )}
+
+            {project?.githubUrl && (
+              <CustomButton
+                variant='outlined'
+                color='primary'
+                width='180px'
+              >
+                <Link className='flex gap-3 items-center' href={project?.githubUrl} target='_black'>
+                  Source Code <GitHubIcon />
+                </Link>
+              </CustomButton>
+            )}
           </div>
         </div>
       </div>

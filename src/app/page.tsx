@@ -9,7 +9,11 @@ export const metadata: Metadata = {
 }
 
 const getProjects = async () => {
-  const res = await fetch(`${process.env.API_URL}/projects`)
+  const res = await fetch(`${process.env.API_URL}/projects`, {
+    next: {
+      revalidate: 20,
+    }
+  })
   if (!res.ok) {
     throw new Error('Something went wrong')
   }
@@ -28,6 +32,7 @@ export default async function Home() {
   const projectsData = getProjects()
   const postsData = getMediumPosts()
   const [projects, posts] = await Promise.all([projectsData, postsData])
+  console.log(projects);
 
   return (
     <main className="mt-4">

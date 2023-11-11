@@ -3,6 +3,8 @@
 import React from 'react'
 import { useTogglePublish, useNavigation } from '@/hooks';
 import { deleteProject } from '@/utils';
+import { tailwindToast } from '@/components/Toast/Toast';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   project: any;
@@ -10,8 +12,6 @@ type Props = {
 }
 
 export default function DeleteProject({ project, session }: Props) {
-  const [showDelete, setShowDelete] = React.useState(false);
-  const [deleteMsg, setDeleteMsg] = React.useState('');
   const { router, navigate } = useNavigation();
 
   const userHasValidSession = Boolean(session);
@@ -23,8 +23,9 @@ export default function DeleteProject({ project, session }: Props) {
   const handleProjectDelete = async (id: string) => {
     const response = await deleteProject(id);
     if (response.status === 'success') {
-      setDeleteMsg(response.message);
-      setShowDelete(!showDelete);
+      // setDeleteMsg(response.message);
+      // setShowDelete(!showDelete);
+      tailwindToast('success', response.message, session?.user?.image, session?.user?.name);
       setTimeout(() => {
         router.back();
       }, 4000);

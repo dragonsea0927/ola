@@ -16,7 +16,7 @@ export default async function DashboardLayout({ children }: Props) {
           <DashBoardSidebar />
         </div>
       </section>
-      <section className='w-full h-full bg-white relative'>
+      <section className='w-full h-screen bg-white relative'>
         <p className='absolute right-2 top-2'>Welcome {session?.user?.name}</p>
         {children}
       </section>

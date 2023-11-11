@@ -12,14 +12,15 @@ interface Props {
   inputprops?: any;
   size?: any;
   error?: string;
+  required?: boolean;
 }
 
-const ControlInput = ({ name, control, width, placeholder, error, type, ...otherProps }: Props) => {
+const ControlInput = ({ name, required, control, width, placeholder, error, type, ...otherProps }: Props) => {
   return (
     <Controller
       control={control}
       name={name}
-      rules={{ required: true }}
+      rules={{ required: required || true }}
       render={({ field: { onChange, onBlur, value }, fieldState, formState }) => (
         <>
           {type === 'textarea' ? (

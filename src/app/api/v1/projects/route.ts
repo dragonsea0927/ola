@@ -58,6 +58,9 @@ export async function GET(
         { updatedAt: 'desc' },
       ],
 
+      where: {
+        published: true,
+      },
       select: {
         id: true,
         name: true,

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { ControllInput } from '@/components'
 import { Project } from '@/types'
 import { updateProject } from '@/utils'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import EditBottom from '../EditBottom'
 import { errorToast, successToast } from '@/components/Toast/Toast';
 
@@ -20,6 +20,7 @@ export default function EditForm({ project }: { project: Project }) {
     mode: 'onBlur',
     defaultValues: project,
   })
+  const router = useRouter()
 
   const onSubmit = async (data: Project) => {
     const newStacks = data.stacks.toString().split(',').map((item) => item.trim())
@@ -27,11 +28,10 @@ export default function EditForm({ project }: { project: Project }) {
       ...data,
       stacks: newStacks,
     }
-    const res = await updateProject(project?.id, updatedData)
+    const res = await updateProject(project?.id, updatedData, `${process.env.NEXT_PUBLIC_API_URL}`)
     if (res?.status === 200 || res?.status === 'success') {
-      console.log(res);
       successToast(res?.message)
-      redirect(`/admin/dashboard/projects/${project.id}`)
+      router.push(`/admin/dashboard/projects/${project.id}`)
     } else {
       console.log(res)
       errorToast(res?.message)
@@ -40,7 +40,7 @@ export default function EditForm({ project }: { project: Project }) {
   return (
     <>
       <form
-        className='w-11/12 my-[100px] mx-auto flex flex-col gap-3'
+        className='w-11/12 my-[100px] mx-auto flex flex-col gap-5 p-6 bg-[var(--bg)]'
         onSubmit={handleSubmit(onSubmit)}
       >
         <InputBoxStyles>

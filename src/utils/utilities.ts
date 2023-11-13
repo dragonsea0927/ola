@@ -122,17 +122,15 @@ export const sendDataToBackend = async (data: Project, url: string) => {
         'Content-Type': 'application/json',
       }
     })
-    console.log(res)
     return res;
   } catch (error: any) {
-    console.log(error)
     return error?.response?.data?.message
   }
 }
 
-export async function publishProject(id: string) {
+export async function publishProject(id: string, url: string) {
   try {
-    const response = await axios.patch(`${process.env.API_URL}/publish/${id}`);
+    const response = await axios.patch(`${url}/projects/publish/${id}`);
     return response.data;
   } catch (error: any) {
     return error?.response?.data?.message;
@@ -148,9 +146,9 @@ export async function deleteProject(id: string) {
   }
 }
 
-export async function updateProject(id: string, data: Project) {
+export async function updateProject(id: string, data: Project, url: string) {
   try {
-    const response = await axios.patch(`${process.env.API_URL}/${id}`, data, {
+    const response = await axios.patch(`${url}/projects/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

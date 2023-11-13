@@ -22,7 +22,8 @@ export default function AdminRoutes() {
       <Link href='/auth/signin' className='cursor-pointer hidden'>Login</Link>
     ) : (
       <React.Fragment>
-        <span className='cursor-pointer' onClick={handleLogout}>Logout</span>
+        <Link href='/admin/dashboard' className='text-lg capitalize'>Dashboard</Link>
+        <span className='cursor-pointer text-lg capitalize' onClick={handleLogout}>Logout</span>
       </React.Fragment>
     )}
 
@@ -44,8 +45,7 @@ export default function AdminRoutes() {
             <Link href='/auth/signin'>Login</Link>
           ) : (
             <React.Fragment>
-              <Link href='/write'>New Project</Link>
-              <Link href='/projects'>Projects</Link>
+              <Link href='/projects'>Dashboard</Link>
               <span onClick={handleLogout}>Logout</span>
             </React.Fragment>
           )}

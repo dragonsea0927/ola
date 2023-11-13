@@ -46,7 +46,7 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
             Tech Stacks: {project.stacks.join(', ')}
           </p>
           <div className="flex gap-4 items-center">
-            {project?.liveUrl && (
+            {project?.liveUrl.startsWith('https') && (
               <CustomButton
                 variant='contained'
                 color='primary'
@@ -58,7 +58,7 @@ const ProjectModal = ({ open, handleClose, project }: ProjectModalProps) => {
               </CustomButton>
             )}
 
-            {project?.githubUrl && (
+            {project?.githubUrl.startsWith('https') && (
               <CustomButton
                 variant='outlined'
                 color='primary'

@@ -37,7 +37,7 @@ export const tailwindToast = (severity: Severity, message: string, photo?: strin
               </span>
             )}
           </p>
-          <p className={`${severity === 'success' ? 'text-green-400' : severity === 'error' ? 'text-red-400' : 'mt-1 text-sm text-[var(--textColor)]'}`}>
+          <p className={`${severity === 'success' ? 'text-green-400' : severity === 'error' ? 'text-red-400' : 'mt-1 text-base font-light text-[var(--textColor)]'}`}>
             {message}
           </p>
         </div>

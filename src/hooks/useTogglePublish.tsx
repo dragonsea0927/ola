@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react'
 import { publishProject } from '@/utils';
+import { tailwindToast } from '@/components/Toast/Toast';
 
 type Props = {
   id: string;
@@ -7,21 +10,22 @@ type Props = {
 }
 
 const useTogglePublish = ({ id, initialState }: Props) => {
-  const [showToast, setShowToast] = React.useState<boolean>(false);
   const [published, setPublished] = React.useState<boolean>(initialState);
-  const [message, setMessage] = React.useState<string>('');
 
   const togglePublish = async () => {
-    const res = await publishProject(id);
+    const res = await publishProject(id, `${process.env.NEXT_PUBLIC_API_URL}`);
     if (res?.status === 'success') {
       const msg = published ? 'Project unpublished' : 'Project published';
       setPublished(!published);
-      setMessage(msg);
-      setShowToast(!showToast);
+      tailwindToast('success', msg);
+    }
+
+    if (!res) {
+      tailwindToast('error', res?.message);
     }
   };
 
-  return { published, togglePublish, showToast, message, setShowToast };
+  return { published, togglePublish };
 }
 
 export default useTogglePublish

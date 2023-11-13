@@ -137,9 +137,9 @@ export async function publishProject(id: string, url: string) {
   }
 }
 
-export async function deleteProject(id: string) {
+export async function deleteProject(id: string, url: string) {
   try {
-    const response = await axios.delete(`${process.env.API_URL}/${id}`);
+    const response = await axios.delete(`${url}/projects/${id}`);
     return response.data;
   } catch (error: any) {
     return error?.response?.data?.message;

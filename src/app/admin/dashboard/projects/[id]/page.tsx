@@ -15,7 +15,7 @@ interface Props {
   }
 }
 
-export const revalidate = 20;
+export const revalidate = 0;
 
 const getProject = async (id: string) => {
   const res = await prisma.project.findUnique({
@@ -31,9 +31,10 @@ const getProject = async (id: string) => {
       }
     }
   });
-
   if (!res) {
-    throw new Error('Something went wrong')
+    // throw new Error('Something went wrong')
+    return null
+
   }
   return JSON.parse(JSON.stringify(res))
 }
@@ -42,6 +43,14 @@ const ProjectPage = async ({ params }: Props) => {
   const { id } = params
   const session = await getAuthSession();
   const project = await getProject(id);
+
+  if (!project || project === null) {
+    return (
+      <div className='w-full h-screen flex justify-center items-center'>
+        <h1 className='text-2xl font-semibold text-[var(--textColor)]'>Project not found</h1>
+      </div>
+    )
+  }
 
   return (
     <>

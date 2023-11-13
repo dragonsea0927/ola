@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server'
 import { getAuthSession } from '@/utils/auth';
 import { responseReturn } from '@/app/api/route';
 
-export default async function PATCH(
+export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {

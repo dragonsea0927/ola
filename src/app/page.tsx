@@ -32,7 +32,6 @@ export default async function Home() {
   const projectsData = getProjects()
   const postsData = getMediumPosts()
   const [projects, posts] = await Promise.all([projectsData, postsData])
-  console.log(projects);
 
   return (
     <main className="mt-4">

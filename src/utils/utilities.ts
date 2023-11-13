@@ -115,35 +115,24 @@ export const tabs: TabArray = [
   },
 ]
 
-// export const adminNavItems: NavItems = [
-//   {
-//     id: 1,
-//     title: 'projects',
-//     path: '/admin/projects',
-//     icon: WorkIcon
-//   },
-
-//   { id: 2, title: 'blogs', path: '/admin/blogs', icon: RssFeedIcon },
-//   { id: 3, title: 'contact', path: '/admin/contact', icon: ContactEmergencyIcon }
-// ];
-
-export const sendDataToBackend = async (data: Project) => {
+export const sendDataToBackend = async (data: Project, url: string) => {
   try {
-    const res = await axios.post('/api/v1/projects', data, {
+    const res = await axios.post(`${url}/projects`, data, {
       headers: {
         'Content-Type': 'application/json',
       }
     })
+    console.log(res)
     return res;
   } catch (error: any) {
-    // console.log(error)
+    console.log(error)
     return error?.response?.data?.message
   }
 }
 
 export async function publishProject(id: string) {
   try {
-    const response = await axios.put(`/api/v1/projects/publish/${id}`);
+    const response = await axios.patch(`${process.env.API_URL}/publish/${id}`);
     return response.data;
   } catch (error: any) {
     return error?.response?.data?.message;
@@ -152,7 +141,7 @@ export async function publishProject(id: string) {
 
 export async function deleteProject(id: string) {
   try {
-    const response = await axios.delete(`/api/v1/projects/${id}`);
+    const response = await axios.delete(`${process.env.API_URL}/${id}`);
     return response.data;
   } catch (error: any) {
     return error?.response?.data?.message;
@@ -161,7 +150,7 @@ export async function deleteProject(id: string) {
 
 export async function updateProject(id: string, data: Project) {
   try {
-    const response = await axios.put(`/api/v1/projects/${id}`, data, {
+    const response = await axios.patch(`${process.env.API_URL}/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       }
@@ -199,7 +188,7 @@ export const resumeTabs: TabArray = [
 
 export const updateAboutInfo = async (id: string, data: About) => {
   try {
-    const response = await axios.put(`/api/v1/about/${id}`, data, {
+    const response = await axios.patch(`${process.env.API_URL}id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

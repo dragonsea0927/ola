@@ -41,7 +41,7 @@ export default function CreateForm() {
       ...data,
       stacks: data?.stacks?.toString().split(',').map((item: string) => item.trim()),
     }
-    const res = await sendDataToBackend(newData)
+    const res = await sendDataToBackend(newData, `${process.env.NEXT_PUBLIC_API_URL}`)
     if (res?.status === 201) {
       tailwindToast('success', `${res?.data.message}`, '', '')
       setResponseOk(!responseOk)

@@ -10,31 +10,39 @@ enum tagEnum {
   backend,
 }
 
-export async function GET(
-  req: NextRequest,
-) {
+enum publishedEnum {
+  true,
+  false,
+}
+
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.nextUrl.toString());
   const tag = searchParams.get('tag');
+  const isPublished = searchParams.get('published');
 
   if (tag && !Object.values(tagEnum).includes(tag as any)) {
-    return responseReturn(400, "Invalid tag", 'error')
+    return responseReturn(400, "Invalid tag", 'error');
+  }
+
+  if (isPublished && !Object.values(publishedEnum).includes(isPublished as any)) {
+    return responseReturn(400, "Invalid published value", 'error');
   }
 
   try {
     let result;
+
     if (tag) {
       result = await prisma.project.findMany({
         orderBy: [
           { createdAt: 'desc' },
           { updatedAt: 'desc' },
         ],
-
         where: {
           tag: {
             contains: tag as string,
           },
+          ...(isPublished && { published: Boolean(isPublished) }),
         },
-
         select: {
           id: true,
           name: true,
@@ -49,38 +57,61 @@ export async function GET(
           createdAt: true,
           updatedAt: true,
         },
-      })
+      });
+    } else if (isPublished) {
+      result = await prisma.project.findMany({
+        orderBy: [
+          { createdAt: 'desc' },
+          { updatedAt: 'desc' },
+        ],
+        where: {
+          published: Boolean(isPublished),
+        },
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          stacks: true,
+          githubUrl: true,
+          liveUrl: true,
+          coverImgUrl: true,
+          modalImgUrl: true,
+          tag: true,
+          published: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      });
+    } else {
+      // If neither tag nor isPublished is provided, fetch all projects
+      result = await prisma.project.findMany({
+        orderBy: [
+          { createdAt: 'desc' },
+          { updatedAt: 'desc' },
+        ],
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          stacks: true,
+          githubUrl: true,
+          liveUrl: true,
+          coverImgUrl: true,
+          modalImgUrl: true,
+          tag: true,
+          published: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      });
     }
 
-    result = await prisma.project.findMany({
-      orderBy: [
-        { createdAt: 'desc' },
-        { updatedAt: 'desc' },
-      ],
-
-      where: {
-        published: true,
-      },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        stacks: true,
-        githubUrl: true,
-        liveUrl: true,
-        coverImgUrl: true,
-        modalImgUrl: true,
-        tag: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    })
-
-    return responseReturn(200, "Projects fetched successfully", 'success', result)
+    return responseReturn(200, "Projects fetched successfully", 'success', result);
   } catch (error: any) {
-    return responseReturn(500, 'Error fetching projects from database', 'error', null, error?.message)
+    return responseReturn(500, 'Error fetching projects from the database', 'error', null, error?.message);
   }
 }
+
 
 export async function POST(
   req: NextRequest,

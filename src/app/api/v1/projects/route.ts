@@ -19,6 +19,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.nextUrl.toString());
   const tag = searchParams.get('tag');
   const isPublished = searchParams.get('published');
+  const session = await getAuthSession();
 
   if (tag && !Object.values(tagEnum).includes(tag as any)) {
     return responseReturn(400, "Invalid tag", 'error');
@@ -83,12 +84,16 @@ export async function GET(req: NextRequest) {
         },
       });
     } else {
-      // If neither tag nor isPublished is provided, fetch all projects
       result = await prisma.project.findMany({
         orderBy: [
           { createdAt: 'desc' },
           { updatedAt: 'desc' },
         ],
+        where: {
+          author: {
+            email: session?.user?.email as string
+          }
+        },
         select: {
           id: true,
           name: true,

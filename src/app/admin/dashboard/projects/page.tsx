@@ -5,7 +5,10 @@ import Noprojects from '@/components/Projects/NoProject';
 
 const getProjects = async () => {
   const res = await fetch(`${process.env.API_URL}/projects`, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 1,
+      tags: ['projects'],
+    }
   })
   if (!res.ok) {
     throw new Error('Something went wrong')

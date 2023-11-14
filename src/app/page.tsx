@@ -8,11 +8,9 @@ export const metadata: Metadata = {
   viewport: 'width=device-width, initial-scale=1',
 }
 
-const getProjects = async () => {
-  const res = await fetch(`${process.env.API_URL}/projects`, {
-    next: {
-      revalidate: 20,
-    }
+const getProjects = async (state: boolean) => {
+  const res = await fetch(`${process.env.API_URL}/projects?published=${state}`, {
+    cache: 'no-cache',
   })
   if (!res.ok) {
     throw new Error('Something went wrong')
@@ -29,7 +27,7 @@ const getMediumPosts = async () => {
 }
 
 export default async function Home() {
-  const projectsData = getProjects()
+  const projectsData = getProjects(true)
   const postsData = getMediumPosts()
   const [projects, posts] = await Promise.all([projectsData, postsData])
 

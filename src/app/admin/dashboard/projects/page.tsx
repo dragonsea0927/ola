@@ -1,42 +1,26 @@
 import React from 'react'
 import { Drafts } from '@/components'
-import prisma from '@/lib/prisma';
-import { getAuthSession } from '@/utils/auth';
 import CreateButton from '@/components/Button/CreateProjectBtn';
 import Noprojects from '@/components/Projects/NoProject';
 
-const getProjects = async (email: string) => {
-  const res = await prisma.project.findMany({
-    where: {
-      author: {
-        email: email
-      },
-    },
-    include: {
-      author: {
-        select: {
-          name: true,
-        }
-      }
-    }
+const getProjects = async () => {
+  const res = await fetch(`${process.env.API_URL}/projects`, {
+    cache: 'no-cache',
   })
-
-  if (!res) {
+  if (!res.ok) {
     throw new Error('Something went wrong')
   }
-
-  return JSON.parse(JSON.stringify(res))
+  return res.json()
 }
 
 async function Projects() {
-  const session = await getAuthSession()
-  const projects = await getProjects(session?.user?.email!)
+  const projects = await getProjects()
   return (
     <>
       <div
         className='my-0 mx-auto'
       >
-        {projects.length > 0 && (
+        {projects?.data.length > 0 && (
           <div
             className='flex justify-end mt-5'
           >
@@ -46,8 +30,8 @@ async function Projects() {
         <h1
           className='text-4xl font-bold text-center text-[var(--textColor)] mt-5'
         >Project Drafts</h1>
-        {projects.length === 0 && <Noprojects />}
-        {projects.length > 0 && <Drafts projects={projects} />}
+        {projects?.data.length === 0 && <Noprojects />}
+        {projects?.data.length > 0 && <Drafts projects={projects?.data} />}
       </div>
     </>
   )

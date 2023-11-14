@@ -3,18 +3,13 @@
 import React, { useState } from 'react'
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 
 export default function AdminRoutes() {
   const [open, setOpen] = useState(false)
   const { data: session, status } = useSession()
-  const router = useRouter()
 
   const handleLogout = async () => {
-    const res = await signOut({ redirect: false, callbackUrl: '/' })
-    if (!res?.url) {
-      router.push('/signin')
-    }
+    await signOut({ redirect: true, callbackUrl: '/' })
   }
 
   return (

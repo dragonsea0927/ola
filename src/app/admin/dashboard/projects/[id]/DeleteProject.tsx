@@ -4,7 +4,6 @@ import React from 'react'
 import { useTogglePublish, useNavigation } from '@/hooks';
 import { deleteProject } from '@/utils';
 import { tailwindToast } from '@/components/Toast/Toast';
-import { useSession } from 'next-auth/react';
 
 type Props = {
   project: any;

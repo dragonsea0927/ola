@@ -1,63 +1,31 @@
 import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
-import Link from '@mui/material/Link';
+import Link from 'next/link';
 import { socialLinks } from '@/utils';
 import { Icons } from '@/components';
 
-
-const IconContainer = styled('div')(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  gap: '8px',
-  marginBottom: '10px',
-  [theme.breakpoints.down('sm')]: {
-    gap: '5px',
-    flexDirection: 'column-reverse',
-
-    p: {
-      gap: '5px',
-      margin: '5px'
-    },
-
-  },
-}));
-
-const SocialIcons = styled('div')(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  [theme.breakpoints.down('sm')]: {
-    gap: '2px',
-  }
-}));
-
 export default function Copyright() {
   return (
-    <IconContainer>
-      <Typography variant="body2" align="center">
+    <div className='flex flex-col-reverse gap-2 mb-1 md:flex-row md:items-center md:justify-center md:mb-3 md:gap-3'>
+      <p className='flex items-center justify-center text-center gap-1 m-1 md:text-base'>
         {'Copyright © '}
-        <Link href="https://www.linkedin.com/in/ola-ishola/"
+        <Link href="https://github.com/olaishola05"
           color="inherit"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ textDecoration: 'none' }}
         >
           Ola Ishola
         </Link>{' '}
         {new Date().getFullYear()}
-      </Typography>
-      <Typography variant="body2" align="center" sx={{ display: { xs: 'none', md: 'block' } }}>
+      </p>
+      <p className='text-center hidden md:block'>
         |
-      </Typography>
+      </p>
 
-      <SocialIcons>
+      <div className='flex justify-center items-center gap-2'>
         {socialLinks.map((link) => (
           <Icons link={link} key={link.id} />
         ))}
-      </SocialIcons>
-    </IconContainer>
+      </div>
+    </div>
   );
 }

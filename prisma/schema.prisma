@@ -32,6 +32,7 @@ type currentWork {
   description String
   imageUrl    String
   date        String
+  link        String
 }
 
 model About {

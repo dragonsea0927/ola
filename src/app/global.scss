@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #ecf3f3;
+  --textColor: #404756;
+  --textColorDark: #23272f;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+  --primary: #087ea4;
+  --contactBg: #fff;
+  --cta: #087ea4;
+  --ctaText: #fff;
+  --formText: #fff;
+  --btnMode: #087ea4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg);
+
+  @media screen and (max-width: 768px) {
+    background-color: var(--bg);
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  height: 0;
+}
+
+.progressbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1;
+}
+
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--textColor);
+}
+
+.wrapper {
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.light {
+  --bg: #ecf3f3;
+  --textColor: #404756;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+  --primary: #087ea4;
+  --contactBg: #fff;
+  --cta: #087ea4;
+  --ctaText: #fff;
+  --formText: #fff;
+}
+
+.dark {
+  --bg: #0f172a;
+  --textColor: #ddd;
+  --softBg: #1f273a;
+  --softTextColor: #a6a6a6;
+  --primary: #fff;
+  --contactBg: #1f273a;
+  --cta: #fff;
+  --ctaText: #087ea4;
+  --formText: #0f172a;
+  --btnMode: #1f273a;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  color: var(--textColor);
+  background-color: var(--bg);
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    margin-bottom: 18px;
+    margin-top: 10px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    margin-bottom: 18px;
+  }
+
+  h3 {
+    font-size: 25px;
+    line-height: 40px;
+    font-weight: 700;
+    color: var(--textColor);
+  }
+
+  pre {
+    width: 100% !important;
+    padding: 10px;
+    background-color: var(--contactBg);
+    color: var(--softTextColor);
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-size: 15px;
+    border-radius: 8px;
+    margin: 0 auto;
+    overflow: auto;
+  }
+}
+
+@for $i from 1 through 30 {
+  @keyframes particle-animation-#{$i} {
+    100% {
+      transform: translate3d(
+        (random(90) * 1vw),
+        (random(90) * 1vh),
+        (random(100) * 1px)
+      );
+    }
+  }
+
+  .particle:nth-child(#{$i}) {
+    animation: particle-animation-#{$i} 60s infinite;
+    $size: random(5) + 5 + px;
+    opacity: random(100) / 100;
+    height: $size;
+    width: $size;
+    animation-delay: -$i * 0.2s;
+    transform: translate3d(
+      (random(90) * 1vw),
+      (random(90) * 1vh),
+      (random(100) * 1px)
+    );
+    background: hsl(random(360), 70%, 50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .particle {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1536px) {
+  .container {
+    max-width: 100%;
+  }
+  .wrapper {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid red;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    max-width: 768px;
+    padding-left: 20px;
+    padding-right: 10px;
+    border: 1px solid dodgerblue;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    max-width: 700px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border: 1px solid green;
+  }
+
+  .contents {
+    width: 100%;
+    margin: 0 auto;
+
+    img {
+      height: 100%;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    li {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    pre {
+      width: 100% !important;
+      padding: 10px;
+      background-color: var(--contactBg);
+      color: var(--softTextColor);
+      word-break: break-all;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      font-size: 13px;
+      border-radius: 8px;
+      margin: 0 auto;
+      overflow: auto;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      margin-bottom: 18px;
+      color: var(--TextColor);
+      text-align: justify;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid yellow;
+  }
+}

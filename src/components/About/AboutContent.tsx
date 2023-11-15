@@ -1,66 +1,36 @@
 import React from 'react'
-import { styled } from '@mui/material'
-import Typography from '@mui/material/Typography'
 import { About } from '@/types'
 
 interface Props {
-  content: About[]
+  content: any
 }
 
-const StyledAboutContent = styled('div')(({ theme }) => ({
-  width: '100%',
-
-  h2: {
-    margin: '1rem auto',
-  },
-
-  p: {
-    textAlign: 'justify',
-    marginBottom: '1rem',
-  },
-  
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-
-    h2: {
-      fontSize: '1.3rem',
-      margin: '1rem auto',
-    },
-
-    p: {
-      textAlign: 'justify',
-      marginBottom: '1rem',
-    },
-  },
-}))
-
-const AboutContent = (props: Props) => {
-  const { content } = props
-  const { intro, title, transitionOne, transitionTwo, focused, hobbies } = content[0]
+const AboutContent = ({ content }: Props) => {
+  const { intro, title, transitionOne, transitionTwo, focused, hobbies } = content?.data[0]
   return (
-    <StyledAboutContent>
-      <Typography variant='h2'>{title}</Typography>
-      <Typography variant='body1'>
+    <main className='w-full'>
+      <h2 className='font-bold text-3xl md:text-6xl my-4 text-center mb-8'>{title}</h2>
+      <p className='text-justify text-base mb-4'>
         {intro}
-      </Typography>
+      </p>
 
-      <Typography variant='body1'>
+      <p className='text-justify text-base mb-4'>
         {focused}
-      </Typography>
+      </p>
 
-      <Typography variant='body1'>
+      <p className='text-justify text-base mb-4'>
         {transitionOne}
-      </Typography>
+      </p>
 
-      <Typography variant='body1' data-aos="zoom-in-up">
+      <p className='text-justify text-base mb-4' data-aos="zoom-in-up">
         {transitionTwo}
-      </Typography>
+      </p>
 
-      <Typography variant='body1' data-aos="zoom-in-up">
+      <p className='text-justify text-base mb-4' data-aos="zoom-in-up">
         {hobbies}
-      </Typography>
+      </p>
 
-    </StyledAboutContent>
+    </main>
   )
 }
 

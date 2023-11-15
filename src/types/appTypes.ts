@@ -1,4 +1,5 @@
 import { Session } from "next-auth";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 export type Project = {
   [x: string]: any;
@@ -27,22 +28,15 @@ export type LayoutProps = {
   children: React.ReactNode,
 }
 
-export type ButtonProps = {
+export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "text" | "outlined" | "contained";
+  variant: "text" | "outlined" | "contained";
   color?: "inherit" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
   size?: "small" | "medium" | "large";
   onClick?: () => void;
   width?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-}
-
-export type StyledButtonProps = {
-  theme?: any;
-  width?: string;
-  variant?: "text" | "outlined" | "contained";
-  color?: "inherit" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
 }
 
 export type NavItem = {
@@ -102,6 +96,7 @@ export type currentWork = {
   role: string,
   description: string,
   imageUrl: string,
+  link: string,
   date: string,
 }
 

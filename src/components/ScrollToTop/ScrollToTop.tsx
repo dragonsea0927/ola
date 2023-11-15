@@ -1,54 +1,47 @@
-import React from 'react';
-import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
-import { IconButton, styled } from '@mui/material';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { MdOutlineArrowCircleUp as ArrowCircleUpIcon } from 'react-icons/md';
 import { animateScroll as scroll } from 'react-scroll';
 
-const ScrollToTopContainer = styled('div')(({ theme }) => ({
-  position: 'fixed',
-  bottom: theme.spacing(2),
-  right: theme.spacing(2),
-  zIndex: 1000,
-
-  '& svg': {
-    transition: 'all 0.3s ease-in-out',
-    fontSize: '3rem',
-    color: theme.palette.secondary.main,
-    '&:hover': {
-      color: theme.palette.secondary.dark,
-      border: `1px solid ${theme.palette.secondary.dark}`,
-      borderRadius: '50%',
-      transform: 'scale(1.2)',
-    }
-  },
-}));
-
 const ScrollToTop = () => {
-  const [showScroll, setShowScroll] = React.useState(false);
+  const [showScroll, setShowScroll] = useState(false);
+  const [atTop, setAtTop] = useState(true);
 
-  const checkScrollTop = React.useCallback(() => {
-    if (!showScroll && window.pageYOffset > 400) {
-      setShowScroll(true);
-    } else if (showScroll && window.pageYOffset <= 400) {
-      setShowScroll(false);
-    }
+  const scrollTop = React.useCallback(() => {
+    showScroll ? scroll.scrollToTop() : atTop ? scroll.scrollToBottom() : scroll.scrollToTop();
+  }, [atTop, showScroll]);
+
+  useEffect(() => {
+    const checkScrollTop = () => {
+      if (!showScroll && window.pageYOffset > 400) {
+        setShowScroll(true);
+        setAtTop(false);
+      } else if (showScroll && window.pageYOffset <= 400) {
+        setShowScroll(false);
+        setAtTop(true);
+      }
+    };
+
+    window.addEventListener('scroll', checkScrollTop);
+    return () => window.removeEventListener('scroll', checkScrollTop);
   }, [showScroll]);
 
 
-  const scrollTop = () => {
-    scroll.scrollToTop();
-  };
-
-  React.useEffect(() => {
-    window.addEventListener('scroll', checkScrollTop);
-    return () => window.removeEventListener('scroll', checkScrollTop);
-  }, [checkScrollTop]);
-
   return (
-    <ScrollToTopContainer>
-      <IconButton onClick={scrollTop} style={{ display: showScroll ? 'flex' : 'none' }}>
-        <ArrowCircleUpIcon />
-      </IconButton>
-    </ScrollToTopContainer>
+    <div
+      style={{ position: 'fixed', bottom: '2rem', right: '4rem', zIndex: 10 }}
+    >
+      <ArrowCircleUpIcon
+        onClick={scrollTop}
+        style={{
+          display: showScroll ? 'flex' : atTop ? 'flex' : 'none',
+          transform: atTop ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.3s ease-in-out',
+        }}
+        className='transition-all duration-300 ease-in-out text-5xl text-[var(--cta)] hover:bg-[var(--primary)] hover:text-[var(--ctaText)] cursor-pointer rounded-full'
+      />
+    </div>
   );
 };
 

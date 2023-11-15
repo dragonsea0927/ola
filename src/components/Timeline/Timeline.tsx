@@ -1,7 +1,7 @@
+'use client'
+
 import React from 'react';
-import { styled } from '@mui/material/styles';
 import { Chrono } from 'react-chrono';
-import { useAppTheme, useMediaQuery } from '@/hooks';
 
 interface TimelineItem {
   title?: string;
@@ -17,21 +17,9 @@ interface TimelineProps {
   mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING';
 }
 
-const StyledTimelineContainer = styled('div')(({ theme }) => ({
-  width: "90%",
-  height: "",
-  margin: '0 auto',
-
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-  },
-}));
-
 const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  const theme = useAppTheme()
   return (
-    <StyledTimelineContainer>
+    <div className='w-full md:w-[90%] my-0 md:mx-auto'>
       <Chrono
         items={items.map((item) => ({
           title: '',
@@ -48,21 +36,22 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
         enableOutline={false}
         enableBreakPoint={true}
         verticalBreakPoint={400}
+        hideControls={true}
         theme={{
-          primary: '#253E66',
-          secondary: 'white',
-          cardBgColor: 'white',
-          cardSubtitleColor: theme.palette.secondary.main,
-          cardTitleColor: theme.text.primary,
-          titleColor: theme.text.primary,
-          titleColorActive: theme.palette.secondary.main,
-          nestedCardBgColor: theme.palette.background.default,
+          primary: 'var(--primary)',
+          secondary: 'var(--bg)',
+          cardBgColor: 'var(--contactBg)',
+          cardSubtitleColor: 'var(--primary)',
+          cardTitleColor: 'var(--primary)',
+          titleColor: 'var(--primary)',
+          titleColorActive: 'var(--primary)',
+          nestedCardBgColor: 'var(--contactBg)',
+          detailsColor: 'var(--textColor)',
         }}
-        cardWidth={600}
+        cardWidth={700}
         useReadMore={true}
         borderLessCards={true}
         activeItemIndex={0}
-        darkMode={theme.palette.mode === 'dark'}
         nestedCardHeight={200}
         fontSizes={{
           cardSubtitle: '0.9rem',
@@ -71,7 +60,7 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
           title: '1rem',
         }}
       />
-    </StyledTimelineContainer>
+    </div>
   );
 };
 

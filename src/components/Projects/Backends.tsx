@@ -1,17 +1,23 @@
 import React from 'react'
-import { Projects } from './AllProjects'
 import { ProjectProps } from '@/types'
 import { projectsFilter } from '@/utils'
 import { CustomCard } from '@/components'
+import ProjectsContainer from './ProjectsContainer'
+import EmptyProject from './EmptyProject'
 
 const BackendProjects: React.FC<ProjectProps> = ({ projects, handleOpenModal }) => {
   const backendProjects = projectsFilter(projects, 'backend')
+
+  if (backendProjects.length === 0) {
+    return <EmptyProject />
+  }
+
   return (
-    <Projects>
+    <ProjectsContainer>
       {backendProjects?.map((item) => (
         <CustomCard
           key={item.id}
-          image={item.modalImgUrl}
+          image={item.coverImgUrl}
           overlayText='View Project'
           name={item.name}
           role={item.tag}
@@ -19,7 +25,7 @@ const BackendProjects: React.FC<ProjectProps> = ({ projects, handleOpenModal }) 
           onClick={() => handleOpenModal(item.id)}
         />
       ))}
-    </Projects>
+    </ProjectsContainer>
 
   )
 }

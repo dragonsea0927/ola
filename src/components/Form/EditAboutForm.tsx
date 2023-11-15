@@ -1,79 +1,60 @@
+'use client';
+
 import React from 'react'
-import { styled } from '@mui/material/styles';
 import { About, currentWork } from '@/types';
 import { useForm } from 'react-hook-form';
 import { ControllInput, Toast } from '@/components';
 import { updateAboutInfo } from '@/utils'
 
-const FormContainer = styled('div')(({ theme }) => ({
-  width: '100%',
-  height: '100%',
-  padding: '2rem',
-  marging: '5rem auto',
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  [theme.breakpoints.up('md')]: {
-    height: '100%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    height: '100%',
-  },
+// const StyledForm = styled('form')(({ theme }) => ({
+//   width: '60%',
+//   height: '100%',
+//   margin: '0 auto',
+//   display: 'flex',
+//   flexDirection: 'column',
+//   justifyContent: 'space-between',
+//   alignItems: 'center',
+//   gap: '2rem',
 
-}));
+//   div: {
+//     width: '100%',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     gap: '2rem',
 
-const StyledForm = styled('form')(({ theme }) => ({
-  width: '60%',
-  height: '100%',
-  margin: '0 auto',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  gap: '2rem',
+//   },
 
-  div: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '2rem',
+//   button: {
+//     width: '40%',
+//     height: '3rem',
+//     backgroundColor: theme.palette.secondary.main,
+//     color: theme.white.main,
+//     border: 'none',
+//     borderRadius: '5px',
+//     cursor: 'pointer',
+//     transition: 'all .3s ease-in-out',
+//     fontSize: '1.2rem',
+//     '&:hover': {
+//       backgroundColor: theme.white.main,
+//       color: theme.palette.secondary.main,
+//       border: `1px solid ${theme.palette.secondary.main}`,
+//     }
+//   },
+//   [theme.breakpoints.down('sm')]: {
+//     width: '100%',
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   [theme.breakpoints.up('md')]: {
+//     height: '100%',
+//   },
+//   [theme.breakpoints.up('lg')]: {
+//     height: '100%',
+//   },
 
-  },
-
-  button: {
-    width: '40%',
-    height: '3rem',
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.white.main,
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    transition: 'all .3s ease-in-out',
-    fontSize: '1.2rem',
-    '&:hover': {
-      backgroundColor: theme.white.main,
-      color: theme.palette.secondary.main,
-      border: `1px solid ${theme.palette.secondary.main}`,
-    }
-  },
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  [theme.breakpoints.up('md')]: {
-    height: '100%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    height: '100%',
-  },
-
-}));
+// }));
 
 interface AboutPageProps {
   about: About[],
@@ -100,7 +81,7 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
       profileImgUrl: data.profileImgUrl,
       currentWorks: data.currentWorks
     }
-    const res = await updateAboutInfo(props.about[0].id, updateData)
+    const res = await updateAboutInfo(props?.about[0]?.id, updateData)
     if (res?.status === 200 || res?.status === 'success') {
       setSuccess(!success)
     } else {
@@ -113,142 +94,120 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
   }
 
   return (
-    <FormContainer>
+    <main className='w-full h-full p-8 my-20 mx-auto flex justify-center items-center md:block'>
 
-      {success && <Toast severity='success' message='Update Success' open={success} onClose={() => setSuccess(!success)} />}
-      {error && <Toast severity='error' message='Update Failed' open={error} onClose={() => setError(!error)} />}
+      {/* {success && <Toast severity='success' message='Update Success' open={success} onClose={() => setSuccess(!success)} />}
+      {error && <Toast severity='error' message='Update Failed' open={error} onClose={() => setError(!error)} />} */}
 
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}
+        className='flex w-full justify-center items-center md:w-2/3 md:my-0 md:mx-auto md:flex-col md:justify-between md:items-center md:gap-8'
+      >
         <ControllInput
-          label="About Title"
           name="title"
           control={control}
-          size='small'
           inputProps={register('title')}
-          sx={{ width: '100%' }}
+          width={'100%'}
         />
         <ControllInput
-          label="Intro"
           name="intro"
           control={control}
-          size='small'
           inputProps={register('intro')}
-          sx={{ width: '100%' }}
-          multiline
-          rows={4}
+          width={'100%'}
+          type='textarea'
+        // rows={4}
         />
         <ControllInput
-          label="Focused"
           name="focused"
           control={control}
-          size='small'
           inputProps={register('focused')}
-          sx={{ width: '100%' }}
-          multiline
-          rows={2}
+          width={'100%'}
+          type='textarea'
+        // rows={2}
         />
 
         <ControllInput
-          label="Transition One"
           name="transitionOne"
           control={control}
-          size='small'
           inputProps={register('transitionOne')}
-          sx={{ width: '100%' }}
-          multiline
-          rows={8}
+          width={'100%'}
+          type='textarea'
+        // rows={8}
         />
 
         <ControllInput
-          label="Transition Two"
           name="transitionTwo"
           control={control}
-          size='small'
           inputProps={register('transitionTwo')}
-          sx={{ width: '100%' }}
-          multiline
-          rows={4}
+          width={'100%'}
+          type='textarea'
+        // rows={4}
         />
 
         <ControllInput
-          label="Hobbies"
           name="hobbies"
           control={control}
-          size='small'
           inputProps={register('hobbies')}
-          sx={{ width: '100%' }}
-          multiline
-          rows={3}
+          width={'100%'}
+          type='textarea'
         />
 
         <ControllInput
-          label="Profile Image Url"
           name="profileImgUrl"
           control={control}
-          size='small'
           inputProps={register('profileImgUrl')}
-          sx={{ width: '100%' }}
+          width={'100%'}
         />
 
         {data?.about[0].currentWorks?.map((work: currentWork, index: number) => (
-          <div key={index}>
+          <div key={index} className='w-full flex flex-col items-center gap-8'>
             <h2>{work.name}</h2>
             <ControllInput
-              label='name'
               name={`currentWorks.${index}.name`}
               control={control}
-              size='small'
               inputProps={register(`currentWorks.${index}.name`)}
-              sx={{ width: '100%' }}
+              width={'100%'}
 
             />
 
             <ControllInput
-              label='role'
               name={`currentWorks.${index}.role`}
               control={control}
-              size='small'
               inputProps={register(`currentWorks.${index}.role`)}
-              sx={{ width: '100%' }}
+              width={'100%'}
             />
 
             <ControllInput
-              label='description'
               name={`currentWorks.${index}.description`}
               control={control}
-              size='small'
               inputProps={register(`currentWorks.${index}.description`)}
-              sx={{ width: '100%' }}
+              width={'100%'}
             />
 
             <ControllInput
-              label='imageUrl'
               name={`currentWorks.${index}.imageUrl`}
               control={control}
-              size='small'
               inputProps={register(`currentWorks.${index}.imageUrl`)}
-              sx={{ width: '100%' }}
+              width={'100%'}
             />
 
             <ControllInput
-              label='date'
               name={`currentWorks.${index}.date`}
               control={control}
-              size='small'
               inputProps={register(`currentWorks.${index}.date`)}
-              sx={{ width: '100%' }}
+              width={'100%'}
             />
           </div>
         ))}
         <button type="submit"
           disabled={isSubmitting}
+          className='w-[40%] h-12 bg-[var(--cta)] rounded-md border-none cursor-pointer text-lg text-[var(--ctaText)] hover:border hover:border-[var(--primary)] hover:bg-[var(--cta)]'
         >
           {isSubmitting ? 'Loading...' : 'Update'}
         </button>
 
         <button type="button" onClick={() => handleCancel()}>Close Edit</button>
-      </StyledForm>
-    </FormContainer>
+      </form>
+    </main>
   )
 }
 

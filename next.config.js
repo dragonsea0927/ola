@@ -46,6 +46,16 @@ const nextConfig = {
         hostname: 'asset.cloudinary.com',
         port: '',
         pathname: '/**',
+      }, {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+        pathname: '/**',
+      }, {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

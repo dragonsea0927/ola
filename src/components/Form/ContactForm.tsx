@@ -1,57 +1,12 @@
+'use client';
+
 import React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import { CustomButton } from '@/components';
 import { useForm } from 'react-hook-form';
-import CircularProgress from '@mui/material/CircularProgress';
 import { yupResolver } from "@hookform/resolvers/yup";
 import ControlInput from './ControlInput';
 import { contactSchema as schema } from '@/utils';
 import { FormValues } from '@/types';
-
-
-const FormContainer = styled('div')(({ theme }) => ({
-  width: '100%',
-  height: '100%',
-
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  [theme.breakpoints.up('md')]: {
-    height: '100%',
-  },
-
-  [theme.breakpoints.up('lg')]: {
-    height: '100%',
-  },
-}));
-
-const Form = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  small: {
-    color: 'red',
-  },
-  '& > :not(style)': {
-    width: '100%',
-    margin: theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
-
-    [theme.breakpoints.up('md')]: {
-      width: '100%',
-    },
-
-    [theme.breakpoints.up('lg')]: {
-      width: '100%',
-    },
-  },
-}));
 
 const formValidation = yupResolver(schema);
 
@@ -81,75 +36,90 @@ const ContactForm = () => {
 
 
   return (
-    <FormContainer data-aos="fade-up">
-      <Form
-        component="form"
-        sx={{
-          '& > :not(style)': { m: 1, width: { xs: '38ch', md: '60ch', } },
-        }}
+    <main data-aos="fade-up" className='w-full h-full flex flex-col items-center justify-center md:h-full lg:h-full'>
+      <h2 className='hidden lg:block lg:self-start text-3xl font-medium'>
+        Contact Me:
+      </h2>
+      <form
+        className='m-1 w-full flex flex-col gap-3'
       >
-        <Box>
-          <Box sx={{ display: 'flex', gap: '5px' }}>
-            <ControlInput
-              control={control}
-              name="name"
-              label="Name"
-              placeholder="e.g John Doe"
-              inputProps={register('name')}
-              width={{ xs: '38ch', md: '30ch' }}
-            />
-            <ControlInput
-              control={control}
-              name="number"
-              label="Number"
-              placeholder="e.g +2348012345678"
-              inputProps={register('number')}
-              width={{ xs: '38ch', md: '30ch' }}
-            />
-          </Box>
-          {errors.name?.message ? <small>{`${errors.name.message}`}</small> : null}
-          {errors.number?.message ? <small>{`${errors.number.message}`}</small> : null}
-        </Box>
+        <div>
+          <div className='flex flex-col gap-3 lg:flex-row'>
+            <div className='w-full'>
+              <ControlInput
+                control={control}
+                name="name"
+                placeholder="e.g John Doe"
+                inputprops={register('name')}
+                width={'100%'}
+                error={errors.name?.message}
+              />
+              {errors.name?.message && (<small className={errors && 'text-red-700 text-sm'}>{`${errors.name.message}`}</small>)}
+            </div>
 
-        <ControlInput
-          control={control}
-          name="email"
-          label="Email"
-          placeholder="e.g youremail@something.com"
-          inputProps={register('email')}
-        />
-        {errors.email?.message && <small>{`${errors.email.message}`}</small>}
+            <div className='w-full'>
+              <ControlInput
+                control={control}
+                name="number"
+                placeholder="e.g +2348012345678"
+                inputprops={register('number')}
+                width={'100%'}
+                error={errors.number?.message}
+              />
+              {errors.number?.message && (<small className={errors && 'text-red-700 text-sm'}>{`${errors.number.message}`}</small>)}
+            </div>
+          </div>
+        </div>
+
+        <div className='w-full'>
+          <ControlInput
+            control={control}
+            name="email"
+            placeholder="e.g youremail@something.com"
+            inputprops={register('email')}
+            width={'100%'}
+            error={errors.email?.message}
+          />
+          {errors.email?.message && <small className={errors && 'text-red-700 text-sm'}>{`${errors.email.message}`}</small>}
+        </div>
 
 
-        <ControlInput
-          control={control}
-          name="subject"
-          label="Subject"
-          placeholder="e.g I want to hire you"
-          inputProps={register('subject')}
-        />
-        {errors.subject?.message && <small>{`${errors.subject.message}`}</small>}
+        <div className='full'>
+          <ControlInput
+            control={control}
+            name="subject"
+            placeholder="e.g I want to hire you"
+            inputprops={register('subject')}
+            width={'100%'}
+            error={errors.subject?.message}
+          />
+          {errors.subject?.message && <small className={errors && 'text-red-700 text-sm'}>{`${errors.subject.message}`}</small>}
+        </div>
 
-        <ControlInput
-          control={control}
-          name="message"
-          label="Message"
-          placeholder='Say hello!'
-          inputProps={register('message')}
-          multiline
-          rows={8}
-        />
-        {errors.message?.message && <small>{`${errors.message.message}`}</small>}
+        <div className='w-full'>
+          <ControlInput
+            control={control}
+            name="message"
+            type='textarea'
+            placeholder='Say hello!'
+            inputprops={register('message')}
+            width={'100%'}
+            error={errors.message?.message}
+          />
+          {errors.message?.message && <small className={errors && 'text-red-700 text-sm'}>{`${errors.message.message}*`}</small>}
+        </div>
         <CustomButton
           variant='contained'
-          width='50%'
+          width='25%'
           type='submit'
           onClick={handleSubmit(onSubmit)}
+          disabled={isSubmitting}
+          size='large'
         >
-          {isSubmitting ? <CircularProgress size={24} /> : 'Send'}
+          {isSubmitting ? 'Loading' : 'Send'}
         </CustomButton>
-      </Form>
-    </FormContainer>
+      </form>
+    </main>
   );
 };
 

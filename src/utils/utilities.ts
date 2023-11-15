@@ -1,14 +1,13 @@
 import { NavItems, SocialLinks, TabArray, Project, About } from "@/types";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InfoIcon from '@mui/icons-material/Info';
-import WorkIcon from '@mui/icons-material/Work';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import RssFeedIcon from '@mui/icons-material/RssFeed';
-import { FaMedium, FaAngellist } from 'react-icons/fa'
+import { FaLinkedinIn } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { FaMediumM } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
+import { FaHashnode } from 'react-icons/fa6';
+import { FaThreads } from 'react-icons/fa6';
+import { BsGithub } from 'react-icons/bs';
 import axios from 'axios';
-import { animateScroll as scroll, scroller } from 'react-scroll';
+// import { animateScroll as scroll, scroller } from 'react-scroll';
 const readingTime = require('reading-time/lib/reading-time');
 
 export const getFormattedDate = (date: Date) => {
@@ -39,11 +38,12 @@ export const navItems: NavItems = [
     id: 1,
     title: 'home',
     path: '/',
-    icon: WorkIcon
+
   },
-  { id: 2, title: 'about', path: '/about', icon: InfoIcon },
-  { id: 4, title: 'blogs', path: '/#blogs-section', icon: RssFeedIcon, link: 'blogs' },
-  { id: 5, title: 'contact', path: '/#contact-section', icon: ContactEmergencyIcon, link: 'contact-form' }
+  { id: 3, title: 'portfolios', path: '/#portfolio' },
+  { id: 4, title: 'blogs', path: '/blogs' },
+  { id: 2, title: 'about', path: '/about', },
+  { id: 5, title: 'contact', path: '/#contact' }
 ];
 
 export const socialLinks: SocialLinks = [
@@ -51,33 +51,46 @@ export const socialLinks: SocialLinks = [
     id: 1,
     title: 'github',
     path: 'https://github.com/olaishola05',
-    icon: GitHubIcon
+    icon: BsGithub
   },
   {
     id: 2,
     title: 'linkedin',
     path: 'https://www.linkedin.com/in/ola-ishola/',
-    icon: LinkedInIcon
+    icon: FaLinkedinIn
   },
 
   {
     id: 3,
     title: 'twitter',
     path: 'https://twitter.com/olaishola05',
-    icon: TwitterIcon
+    icon: FaXTwitter
   },
   {
     id: 4,
     title: 'Medium',
     path: 'https://medium.com/@olaishola',
-    icon: FaMedium
+    icon: FaMediumM
+  },
+
+  {
+    id: 6,
+    title: 'Instagram',
+    path: 'https://www.instagram.com/olaishola05/',
+    icon: FaInstagram
   },
   {
-    id: 5,
-    title: 'AngelList',
-    path: 'https://angel.co/u/ola-ishola',
-    icon: FaAngellist
-  }
+    id: 7,
+    title: 'Hashnode',
+    path: 'https://olaishola.hashnode.dev/',
+    icon: FaHashnode
+  },
+  {
+    id: 8,
+    title: 'Dev.to',
+    path: 'https://www.threads.net/@olaishola05',
+    icon: FaThreads
+  },
 ];
 
 export const tabs: TabArray = [
@@ -102,73 +115,52 @@ export const tabs: TabArray = [
   },
 ]
 
-export const adminNavItems: NavItems = [
-  {
-    id: 1,
-    title: 'projects',
-    path: '/admin/projects',
-    icon: WorkIcon
-  },
-
-  { id: 2, title: 'blogs', path: '/admin/blogs', icon: RssFeedIcon },
-  { id: 3, title: 'contact', path: '/admin/contact', icon: ContactEmergencyIcon }
-];
-
-export const sendDataToBackend = async (data: Project) => {
+export const sendDataToBackend = async (data: Project, url: string) => {
   try {
-    const res = await axios.post('/api/v1/projects/create', data, {
+    const res = await axios.post(`${url}/projects`, data, {
       headers: {
         'Content-Type': 'application/json',
       }
     })
     return res;
-  } catch (error) {
+  } catch (error: any) {
     return error?.response?.data?.message
   }
 }
 
-export async function publishProject(id: string) {
+export async function publishProject(id: string, url: string) {
   try {
-    const response = await axios.put(`/api/v1/projects/publish/${id}`);
+    const response = await axios.patch(`${url}/projects/publish/${id}`);
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     return error?.response?.data?.message;
   }
 }
 
-export async function deleteProject(id: string) {
+export async function deleteProject(id: string, url: string) {
   try {
-    const response = await axios.delete(`/api/v1/projects/delete/${id}`);
+    const response = await axios.delete(`${url}/projects/${id}`);
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     return error?.response?.data?.message;
   }
 }
 
-export async function updateProject(id: string, data: Project) {
+export async function updateProject(id: string, data: Project, url: string) {
   try {
-    const response = await axios.put(`/api/v1/projects/update/${id}`, data, {
+    const response = await axios.patch(`${url}/projects/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       }
     });
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     return error?.response?.data?.message;
   }
 }
 
 export const projectsFilter = (projects: Project[], tag: string) => {
-  return projects.filter((project) => project.tag === tag);
-}
-
-export function scrollToViewMethod(id: string) {
-  scroller.scrollTo(id, {
-    duration: 1500,
-    delay: 100,
-    smooth: 'easeOutCubic',
-    offset: 50,
-  })
+  return projects?.filter((project) => project.tag === tag);
 }
 
 export const resumeTabs: TabArray = [
@@ -194,14 +186,13 @@ export const resumeTabs: TabArray = [
 
 export const updateAboutInfo = async (id: string, data: About) => {
   try {
-    const response = await axios.put(`/api/v1/about/${id}`, data, {
+    const response = await axios.patch(`${process.env.API_URL}id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       }
     });
     return response.data;
-    // console.log(id)
-  } catch (error) {
+  } catch (error: any) {
     return error?.response?.data?.message;
   }
 }

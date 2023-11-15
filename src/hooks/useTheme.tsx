@@ -1,8 +1,10 @@
-import { useTheme } from '@mui/material/styles';
+// 'use client';
 
-const useAppTheme = () => {
-  const theme = useTheme();
-  return theme;
-}
+// import { useTheme } from '@mui/material/styles';
 
-export default useAppTheme;
+// const useAppTheme = () => {
+//   const theme = useTheme();
+//   return theme;
+// }
+
+// export default useAppTheme;

@@ -1,6 +1,5 @@
 import React from 'react'
 import { CustomButton } from '@/components'
-import prisma from '@/lib/prisma';
 import { BsGithub as GitHubIcon } from 'react-icons/bs';
 import { BiLinkExternal as LinkIcon } from 'react-icons/bi';
 import Image from 'next/image'
@@ -8,6 +7,7 @@ import { getAuthSession } from '@/utils/auth';
 import ConditionalHeader from './ConditionalHeader';
 import DeleteProject from './DeleteProject';
 import Link from 'next/link';
+import prisma from '@/lib/prisma';
 
 interface Props {
   params: {
@@ -15,9 +15,20 @@ interface Props {
   }
 }
 
-export const revalidate = 0;
+export async function generateStaticParams() {
+  const projects = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`).then(res => res.json())
 
-const getProject = async (id: string) => {
+  if (!projects) {
+    return null
+  }
+  return projects?.data?.map((project: any) => ({
+    params: {
+      id: project.id
+    }
+  }))
+}
+
+const getProjectWithGeneratedParams = async (id: string) => {
   const res = await prisma.project.findUnique({
     where: {
       id: id
@@ -32,9 +43,7 @@ const getProject = async (id: string) => {
     }
   });
   if (!res) {
-    // throw new Error('Something went wrong')
     return null
-
   }
   return JSON.parse(JSON.stringify(res))
 }
@@ -42,7 +51,7 @@ const getProject = async (id: string) => {
 const ProjectPage = async ({ params }: Props) => {
   const { id } = params
   const session = await getAuthSession();
-  const project = await getProject(id);
+  const project = await getProjectWithGeneratedParams(id)
 
   if (!project || project === null) {
     return (

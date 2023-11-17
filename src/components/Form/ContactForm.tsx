@@ -7,14 +7,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ControlInput from './ControlInput';
 import { contactSchema as schema } from '@/utils';
 import { FormValues } from '@/types';
-import { successToast } from '../Toast/Toast';
 import { toast } from 'react-hot-toast';
 
 const formValidation = yupResolver(schema);
 
 const ContactForm = () => {
-  const [isSubmitSuccessful, setIsSubmitSuccessful] = React.useState(false);
-  const { register, handleSubmit, control, reset, formState: { errors, isSubmitting } } = useForm<FormValues>({
+  const { register, handleSubmit, control, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<FormValues>({
     mode: 'onBlur',
     defaultValues: {
       name: '',
@@ -38,7 +36,6 @@ const ContactForm = () => {
       });
       const result = await response.json();
       if (response.ok && result?.status === 'success') {
-        setIsSubmitSuccessful(true);
         toast.success('Thank you! I will get back to you shortly.', {
           duration: 5000,
           position: 'top-center',

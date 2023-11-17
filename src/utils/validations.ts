@@ -24,7 +24,7 @@ export const contactSchema = yup.object().shape({
     .string()
     .required('Subject is required')
     .min(3, 'Subject should be at least 3 characters long')
-    .max(20, 'Subject should be less than 20 characters long')
+    .max(100, 'Subject should be less than 20 characters long')
     .matches(/^[a-zA-Z]/, 'Subject should be alphanumeric'),
 
   message: yup

@@ -55,7 +55,7 @@ const Timeline: React.FC<TimelineProps> = ({ items, mode }) => {
         nestedCardHeight={200}
         fontSizes={{
           cardSubtitle: '0.9rem',
-          cardText: '0.85rem',
+          cardText: '1rem',
           cardTitle: '1.1rem',
           title: '1rem',
         }}

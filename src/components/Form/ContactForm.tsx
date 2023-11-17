@@ -13,7 +13,8 @@ import { toast } from 'react-hot-toast';
 const formValidation = yupResolver(schema);
 
 const ContactForm = () => {
-  const { register, handleSubmit, control, reset, formState: { errors, isSubmitSuccessful, isSubmitting } } = useForm<FormValues>({
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = React.useState(false);
+  const { register, handleSubmit, control, reset, formState: { errors, isSubmitting } } = useForm<FormValues>({
     mode: 'onBlur',
     defaultValues: {
       name: '',
@@ -36,16 +37,15 @@ const ContactForm = () => {
         body: JSON.stringify(data)
       });
       const result = await response.json();
-      console.log(result, 'result');
-      if (response.ok) {
-        toast.success('Thank you for reaching out! I will get back to you shortly.', {
+      if (response.ok && result?.status === 'success') {
+        setIsSubmitSuccessful(true);
+        toast.success('Thank you! I will get back to you shortly.', {
           duration: 5000,
-          position: 'bottom-center',
+          position: 'top-center',
           className: 'w-full h-12 flex items-center justify-center bg-green-500 text-white',
         });
       }
     } catch (error) {
-      // console.log(error, 'error');
       toast.error('Something went wrong. Please try again later.', {
         duration: 5000,
         position: 'bottom-center',
@@ -54,11 +54,11 @@ const ContactForm = () => {
     }
   };
 
-  // React.useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [isSubmitSuccessful, reset]);
+  React.useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
 
   return (

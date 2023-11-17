@@ -9,7 +9,7 @@ export function GET(
 }
 
 export const responseReturn =
-  (status: number, message: string, statusText: string, data?: any, error?: any) => {
+  (status: number, message: any, statusText: string, data?: any, error?: any) => {
     return NextResponse.json({
       status: statusText,
       message: message,

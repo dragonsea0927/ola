@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
-import Email from '../../../../../react-email-starter/emails/Email';
 import { responseReturn } from '../../route';
 import { Resend } from 'resend';
+import EmailTemplate from '@/components/Email/email-template';
 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -19,7 +19,7 @@ export async function sendEmail({ name, email, number, subject, message }: Conta
     from: process.env.RESEND_FROM_EMAIL!,
     to: process.env.NEXT_PUBLIC_EMAIL!,
     subject: `New message from ${name} via your website`,
-    react: Email({ name, email, number, subject, message }),
+    react: EmailTemplate({ name, email, number, subject, message }),
   };
   const { data, error } = await resend.emails.send(options);
 

@@ -1,7 +1,7 @@
-'use client';
+// 'use client';
 
 import React from 'react'
-import { CustomButton, Icons } from '..'
+import { Icons } from '..'
 import { socialLinks } from '../../utils'
 import Link from 'next/link'
 import { TypeAnimation } from 'react-type-animation';

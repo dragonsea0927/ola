@@ -32,15 +32,14 @@ const Hero = () => {
 
         </p>
         <div className='self-center flex justify-center gap-5 w-full mt-6'>
-          <CustomButton
-            variant='outlined'
-            onClick={() => { console.log('clicked') }}
-          >My works</CustomButton>
+          <Link href='/#portfolio'
+            className='w-[200px] h-[45px] px-3 py-5 rounded-full leading-4 tracking-tighter shadow-lg flex items-center justify-center gap-10 text-base md:text-lg text-[var(--cta)] bg-inherit border border-[var(--primary)] hover:bg-[var(--cta)] hover:text-[var(--ctaText)] hover:border hover:border-[var(--cta)]'
+          >My works</Link>
           <Link
             href={`${process.env.NEXT_PUBLIC_RESUME_URL}`}
             target='_blank'
             rel='noopener noreferrer'
-            className='w-[200px] h-[45px] px-3 py-5 rounded-full leading-4 tracking-tighter shadow-lg flex items-center justify-center gap-10 text-base md:text-lg text-[var(--ctaText)] bg-[var(--cta)] border border-[var(--primary)] hover:bg-[var(--cta)] hover:text-[var(--ctaText)] hover:border hover:border-[var(--cta)]'
+            className='w-[200px] h-[45px] px-3 py-5 rounded-full leading-4 tracking-tighter shadow-lg flex items-center justify-center gap-10 text-base md:text-lg text-[var(--ctaText)] bg-[var(--cta)] border border-[var(--primary)] hover:bg-inherit hover:text-[var(--cta)] hover:border hover:border-[var(--cta)]'
           >Hire me</Link>
         </div>
       </div>

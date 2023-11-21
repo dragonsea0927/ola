@@ -3,61 +3,11 @@
 import React from 'react'
 import { About, currentWork } from '@/types';
 import { useForm } from 'react-hook-form';
-import { ControllInput, Toast } from '@/components';
+import { ControllInput } from '@/components';
 import { updateAboutInfo } from '@/utils'
 
-// const StyledForm = styled('form')(({ theme }) => ({
-//   width: '60%',
-//   height: '100%',
-//   margin: '0 auto',
-//   display: 'flex',
-//   flexDirection: 'column',
-//   justifyContent: 'space-between',
-//   alignItems: 'center',
-//   gap: '2rem',
-
-//   div: {
-//     width: '100%',
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//     gap: '2rem',
-
-//   },
-
-//   button: {
-//     width: '40%',
-//     height: '3rem',
-//     backgroundColor: theme.palette.secondary.main,
-//     color: theme.white.main,
-//     border: 'none',
-//     borderRadius: '5px',
-//     cursor: 'pointer',
-//     transition: 'all .3s ease-in-out',
-//     fontSize: '1.2rem',
-//     '&:hover': {
-//       backgroundColor: theme.white.main,
-//       color: theme.palette.secondary.main,
-//       border: `1px solid ${theme.palette.secondary.main}`,
-//     }
-//   },
-//   [theme.breakpoints.down('sm')]: {
-//     width: '100%',
-//     display: 'flex',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   [theme.breakpoints.up('md')]: {
-//     height: '100%',
-//   },
-//   [theme.breakpoints.up('lg')]: {
-//     height: '100%',
-//   },
-
-// }));
-
 interface AboutPageProps {
-  about: About[],
+  about: any,
   toggleEdit: (value: boolean) => void,
 }
 
@@ -95,58 +45,50 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
 
   return (
     <main className='w-full h-full p-8 my-20 mx-auto flex justify-center items-center md:block'>
-
-      {/* {success && <Toast severity='success' message='Update Success' open={success} onClose={() => setSuccess(!success)} />}
-      {error && <Toast severity='error' message='Update Failed' open={error} onClose={() => setError(!error)} />} */}
-
       <form onSubmit={handleSubmit(onSubmit)}
         className='flex w-full justify-center items-center md:w-2/3 md:my-0 md:mx-auto md:flex-col md:justify-between md:items-center md:gap-8'
       >
         <ControllInput
           name="title"
           control={control}
-          inputProps={register('title')}
+          inputprops={register('title')}
           width={'100%'}
         />
         <ControllInput
           name="intro"
           control={control}
-          inputProps={register('intro')}
+          inputprops={register('intro')}
           width={'100%'}
           type='textarea'
-        // rows={4}
         />
         <ControllInput
           name="focused"
           control={control}
-          inputProps={register('focused')}
+          inputprops={register('focused')}
           width={'100%'}
           type='textarea'
-        // rows={2}
         />
 
         <ControllInput
           name="transitionOne"
           control={control}
-          inputProps={register('transitionOne')}
+          inputprops={register('transitionOne')}
           width={'100%'}
           type='textarea'
-        // rows={8}
         />
 
         <ControllInput
           name="transitionTwo"
           control={control}
-          inputProps={register('transitionTwo')}
+          inputprops={register('transitionTwo')}
           width={'100%'}
           type='textarea'
-        // rows={4}
         />
 
         <ControllInput
           name="hobbies"
           control={control}
-          inputProps={register('hobbies')}
+          inputprops={register('hobbies')}
           width={'100%'}
           type='textarea'
         />
@@ -154,7 +96,7 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
         <ControllInput
           name="profileImgUrl"
           control={control}
-          inputProps={register('profileImgUrl')}
+          inputprops={register('profileImgUrl')}
           width={'100%'}
         />
 
@@ -164,7 +106,7 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
             <ControllInput
               name={`currentWorks.${index}.name`}
               control={control}
-              inputProps={register(`currentWorks.${index}.name`)}
+              inputprops={register(`currentWorks.${index}.name`)}
               width={'100%'}
 
             />
@@ -172,28 +114,28 @@ const EditAboutForm: React.FC<AboutPageProps> = (props) => {
             <ControllInput
               name={`currentWorks.${index}.role`}
               control={control}
-              inputProps={register(`currentWorks.${index}.role`)}
+              inputprops={register(`currentWorks.${index}.role`)}
               width={'100%'}
             />
 
             <ControllInput
               name={`currentWorks.${index}.description`}
               control={control}
-              inputProps={register(`currentWorks.${index}.description`)}
+              inputprops={register(`currentWorks.${index}.description`)}
               width={'100%'}
             />
 
             <ControllInput
               name={`currentWorks.${index}.imageUrl`}
               control={control}
-              inputProps={register(`currentWorks.${index}.imageUrl`)}
+              inputprops={register(`currentWorks.${index}.imageUrl`)}
               width={'100%'}
             />
 
             <ControllInput
               name={`currentWorks.${index}.date`}
               control={control}
-              inputProps={register(`currentWorks.${index}.date`)}
+              inputprops={register(`currentWorks.${index}.date`)}
               width={'100%'}
             />
           </div>

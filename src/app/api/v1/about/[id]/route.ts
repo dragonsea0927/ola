@@ -1,9 +1,9 @@
 import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
 import { getAuthSession } from "@/utils/auth";
-import { responseReturn } from '@/app/api/route';
+import { responseReturn } from '@/app/api/utils';
 
-export default async function GET
+export async function GET
   (req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getAuthSession();
   const { id } = params

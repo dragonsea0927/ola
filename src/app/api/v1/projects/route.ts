@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
 import { getAuthSession } from '@/utils/auth';
 import { Project } from '@/types'
-import { responseReturn } from '../../route';
+import { responseReturn } from '../../utils';
 
 enum tagEnum {
   fullstack,

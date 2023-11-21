@@ -36,7 +36,7 @@ export default function LoginPage() {
               <hr className='w-34 text-[#D6DDEC] md:w-36' />
             </div>
             <LoginButton />
-            <p className='text-center text-gray-500 text-sm md:text-base'>Don't have an account? <Link href="/auths/register" className='text-blue-500 pl-2'>Sign Up</Link></p>
+            <p className='text-center text-gray-500 text-sm md:text-base'>{"Don't"} have an account? <Link href="/auths/register" className='text-blue-500 pl-2'>Sign Up</Link></p>
           </div>
         </section>
       </div>

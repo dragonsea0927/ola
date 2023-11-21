@@ -1,30 +1,5 @@
 import { NextRequest } from 'next/server'
-import { responseReturn } from '../../route';
-import { Resend } from 'resend';
-import EmailTemplate from '@/components/Email/email-template';
-
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-interface Contact {
-  name: string;
-  email: string;
-  number: string;
-  subject: string;
-  message: string;
-}
-
-export async function sendEmail({ name, email, number, subject, message }: Contact) {
-
-  const options = {
-    from: process.env.RESEND_FROM_EMAIL!,
-    to: process.env.NEXT_PUBLIC_EMAIL!,
-    subject: `New message from ${name} via your website`,
-    react: EmailTemplate({ name, email, number, subject, message }),
-  };
-  const { data, error } = await resend.emails.send(options);
-
-  return { data, error };
-}
+import { responseReturn, Contact, sendEmail } from '../../utils';
 
 export async function POST(req: NextRequest) {
   const { name, email, number, subject, message }: Contact = await req.json()

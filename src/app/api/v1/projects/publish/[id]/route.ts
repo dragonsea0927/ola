@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import { NextRequest } from 'next/server'
 import { getAuthSession } from '@/utils/auth';
-import { responseReturn } from '@/app/api/route';
+import { responseReturn } from '../../../../utils';
 
 export async function PATCH(
   req: NextRequest,

@@ -34,7 +34,7 @@ export default function TopNav() {
             {title}
           </Link>
         ))}
-        <AdminRoutes />
+        <AdminRoutes isActive={isActive} />
       </div>
     </div>
   )

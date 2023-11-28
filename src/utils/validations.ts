@@ -5,13 +5,12 @@ export const contactSchema = yup.object().shape({
     .string()
     .required('Name is required')
     .min(3, 'Name should be at least 3 characters long')
-    .max(20, 'Name should be less than 20 characters long')
-    .matches(/^[a-zA-Z]+$/, 'Name should be alphabetic'),
+    .max(20, 'Name should be less than 20 characters long'),
 
   number: yup
     .string()
     .required('Phone number is required')
-    .min(13, 'Number should be at least 13 characters long')
+    .min(13, 'Number should be at least 13 characters long (including country code)')
     .max(15, 'Number should be less than 15 characters long')
     .matches(/^\+?[1-9][0-9]{7,14}$/, 'Number should be numeric'),
 
@@ -25,7 +24,7 @@ export const contactSchema = yup.object().shape({
     .string()
     .required('Subject is required')
     .min(3, 'Subject should be at least 3 characters long')
-    .max(20, 'Subject should be less than 20 characters long')
+    .max(100, 'Subject should be less than 20 characters long')
     .matches(/^[a-zA-Z]/, 'Subject should be alphanumeric'),
 
   message: yup

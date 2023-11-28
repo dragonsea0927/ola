@@ -13,6 +13,7 @@ const getProjects = async (state: boolean) => {
     cache: 'no-cache',
   })
   if (!res.ok) {
+    console.log(res, 'res')
     throw new Error('Something went wrong')
   }
   return res.json()
@@ -21,6 +22,7 @@ const getProjects = async (state: boolean) => {
 const getMediumPosts = async () => {
   const res = await fetch(`${process.env.MEDIUM_API_URL}`)
   if (!res.ok) {
+    console.log(res, 'res')
     throw new Error('Something went wrong')
   }
   return res.json()

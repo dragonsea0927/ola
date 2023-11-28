@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ControlInput from './ControlInput';
 import { contactSchema as schema } from '@/utils';
 import { FormValues } from '@/types';
+import { toast } from 'react-hot-toast';
 
 const formValidation = yupResolver(schema);
 
@@ -24,8 +25,30 @@ const ContactForm = () => {
   });
 
 
-  const onSubmit = (data: FormValues) => {
-    // console.log(data);
+  const onSubmit = async (data: FormValues) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      if (response.ok && result?.status === 'success') {
+        toast.success('Thank you! I will get back to you shortly.', {
+          duration: 5000,
+          position: 'top-center',
+          className: 'w-full h-12 flex items-center justify-center bg-green-500 text-white',
+        });
+      }
+    } catch (error) {
+      toast.error('Something went wrong. Please try again later.', {
+        duration: 5000,
+        position: 'bottom-center',
+        className: 'w-full h-12 flex items-center justify-center bg-red-500 text-white',
+      });
+    }
   };
 
   React.useEffect(() => {
@@ -42,6 +65,7 @@ const ContactForm = () => {
       </h2>
       <form
         className='m-1 w-full flex flex-col gap-3'
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div>
           <div className='flex flex-col gap-3 lg:flex-row'>
@@ -112,7 +136,6 @@ const ContactForm = () => {
           variant='contained'
           width='25%'
           type='submit'
-          onClick={handleSubmit(onSubmit)}
           disabled={isSubmitting}
           size='large'
         >

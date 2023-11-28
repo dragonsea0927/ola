@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
 import { getAuthSession } from '@/utils/auth'
-import { responseReturn } from '../../route'
+import { responseReturn } from '../../utils'
 
 
 export async function GET(

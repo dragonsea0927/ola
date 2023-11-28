@@ -11,6 +11,14 @@ export async function GET(
     const project = await prisma.project.findUnique({
       where: {
         id: id as string
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+            email: true
+          }
+        }
       }
     })
 
